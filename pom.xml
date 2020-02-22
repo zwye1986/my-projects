@@ -494,7 +494,7 @@
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
-			<version>1.4.3</version>
+			<version>1.4.6</version>
 		</dependency>
 		<!-- xml解析 -->
 		<dependency>
