@@ -1,0 +1,23 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/*礼品弹出框***/
+#lp_container {
+	width: 535px;
+	height: 405px;
+	
+}
+#lp_close {
+	position: absolute;
+	right: 10px;
+	top: 375px;
+	width: 56px;
+	height: 29px;
+	background: url(../images/tc/del02.png) no-repeat;
+	cursor: hand;
+	cursor: pointer;
+	z-index: 4;
+	
+}

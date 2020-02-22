@@ -1,0 +1,22 @@
+/*content*/
+body{
+	width: 100%;
+	background: #fff;}
+
+.content {
+	margin:0 auto;
+	position: relative;
+	width: 1257px;
+	z-index: 2;
+	margin-top:20px;
+	margin-bottom:10px;
+}
+.content_t{ width:1257px; height:62px; background:url(../images/help/map_t.png) no-repeat;}
+.content_t span{ width:40px; height:62px; line-height:62px; font-size:18px; color:#2397f9; margin-right:40px;}
+.content_c{width:1254px; min-height:500px; height:auto; background:#fff; border:1px solid #d1d1d1; border-top:none; border-bottom:none;}
+.content_c ul{padding:30px; margin-left:40px;}
+.content_c ul li{ display:inline-block;width:270px; height:60px;  position:relative; margin-right:10px; margin-bottom:15px;}
+.content_c ul li dt{ width:60px; height:60px;}
+dd.title a{ font-size:18px; color:#054ac9; text-decoration:underline;}
+dd.cnt_c{ width:205px;}
+.content_b{width:1257px; height:8px;background:url(../images/help/fel_b.png) no-repeat;}

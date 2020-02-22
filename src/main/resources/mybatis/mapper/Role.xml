@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.Role">
+
+	<resultMap type="Role" id="roleMap">
+		<result column="id" property="id" />
+		<result column="RoleName" property="roleName"/>
+		<result column="DESCRIPTION" property="DESCRIPTION"/>
+		<result column="createTime" property="createTime"/>
+		<result column="createBy" property="createBy"/>
+		<result column="lastUpdateTime" property="lastUpdateTime"/>
+		<result column="lastUpdateBy" property="lastUpdateBy"/>
+	</resultMap>
+
+	<resultMap type="Role" id="RoleUserMap" extends="roleMap">
+		<collection property="roleUsesrs" ofType="User">
+			<id property="id" column="userId" />
+			<result property="name" column="name" />
+			<result column="id" property="id" />
+			<result column="mobileNumber" property="mobileNumber" />
+			<result column="name" property="name" />
+			<result column="nickName" property="nickName" />
+			<result column="password" property="password" />
+			<result column="createBy" property="createBy" />
+			<result column="createTime" property="createTime" />
+			<result column="modifyTime" property="modifyTime" />
+			<result column="modifyBy" property="modifyBy" />
+			<result column="status" property="status" />
+			<result column="securityStatus" property="securityStatus" />
+			<result column="level" property="level" />
+			<result column="wealth" property="wealth" />
+			<result column="income" property="income" />
+		</collection>
+	</resultMap>
+
+	<resultMap type="Role" id="RoleResourceMap" extends="roleMap">
+	 <collection property="roleResources" ofType="java.util.List" select="getResourceByRoleId" column="id"/> 
+	</resultMap>
+	
+	<select id="getAllRoleResource" resultMap="RoleResourceMap">
+		SELECT * FROM ec_role_resource rr,ec_role r WHERE r.id=rr.role_id 	
+	</select>
+	
+     <!--  获取Resource对象  -->  
+    <select id="getResourceByRoleId" parameterType="Integer" resultMap="com.venada.efinance.pojo.Resource.ResourceMap">
+	SELECT
+		res.id,
+		res.MODEL_NAME,
+		res.VALUE
+		FROM ec_resource res,
+		ec_role_resource rr
+	WHERE rr.RESOURCE_ID = res.id
+	AND rr.ROLE_ID = #{id}  order by res.id asc
+    </select> 
+
+<!-- 根据user表中的id查询用户和组信息 -->
+	<select id="selectRoleUser" parameterType="long" resultMap="RoleUserMap">
+		SELECT u.id,
+		u.name,
+		r.id AS rid,
+		r.RoleName AS roleName FROM ec_user_role ur,ec_user u,ec_role r WHERE
+		r.id=ur.ROLE_ID AND ur.USER_ID=u.id AND r.id =#{id}
+	</select>
+
+
+
+<insert id="addRole" parameterType="Resource" useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		insert into ec_role (RoleName,DESCRIPTION,createTime,createBy)
+		values (
+		      #{roleName},#{DESCRIPTION},now(),#{createBy}
+		)]]>
+	</insert>
+	
+
+<select id="getRoleResouces" parameterType="long" resultMap="RoleResourceMap">
+	  SELECT r.id,r.RoleName,r.DESCRIPTION FROM ec_role r WHERE r.id=#{id}
+	
+</select>  
+
+
+   <select id="findRoleListByName" parameterType="String"
+		resultMap="roleMap">
+		<![CDATA[ 
+		select * from ec_role where RoleName = #{roleName}
+		]]>
+	</select>
+
+
+
+
+
+	<select id="queryRole" resultMap="RoleResourceMap">
+		select * from ec_role where 1=1
+		<if test="roleName!=null and ''!=roleName">
+			and RoleName like "%"#{roleName}"%"
+		</if>
+		<if test="id!=null and ''!=id">
+			and id =#{id}
+		</if>
+		
+		
+	</select>
+
+	<select id="getRoleByRoleId" parameterType="Integer" resultMap="roleMap">
+		select * from ec_role where 1=1
+		and id =#{id}
+	</select>
+
+
+	<select id="getRoleDetailsCount" resultType="int"
+		parameterType="java.util.Map">
+		select count(*) from ec_role w where 1=1
+		<if test="roleName!=null and ''!=roleName">
+			and RoleName like "%"#{roleName}"%"
+		</if>
+		<if test="id!=null and ''!=id">
+			and id =#{id}
+		</if>
+		
+	</select>
+
+	<delete id="deleteRoleById" parameterType="String">
+		delete
+		from ec_role where id = #{id};
+	</delete>
+	
+	
+	<update id="updateRole" parameterType="Role">
+
+		update ec_role u set u.RoleName=#{roleName}, 
+		u.DESCRIPTION=#{DESCRIPTION},u.lastUpdateBy=#{lastUpdateBy},u.lastUpdateTime=#{lastUpdateTime}
+		where u.id=#{id}
+	</update>
+
+
+	
+
+
+</mapper>

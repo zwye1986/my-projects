@@ -1,0 +1,67 @@
+/***********************分页插件样式***************************/
+
+a.page:link {
+	display: block;
+	background: #fff;
+	float: left;
+	margin-right: 4px;
+	height: 18px;
+	line-height: 18px;
+	padding: 0 5px;
+	border: 1px solid #C0C0C0;
+    color: #D7D7D7;
+}
+a.page:visited {
+	display: block;
+	border: 1px solid #C0C0C0;
+    color: #D7D7D7;
+	background: #fff;
+	float: left;
+	margin-right: 4px;
+	height: 18px;
+	line-height: 18px;
+	padding: 0 5px;
+}
+a.page:hover {
+	border: 1px solid orange;
+    color: #D7D7D7;
+	background: #FFFFE9;
+	text-decoration: none
+}
+
+
+a.page,.page {
+	display: block;
+	border: 1px solid #C0C0C0;
+    color: #D7D7D7;
+	background: #fff;
+	float: left;
+	margin-right: 4px;
+	height: 18px;
+	line-height: 18px;
+	padding: 0 5px;
+}
+
+
+.page input {
+	border: 0px;
+	background: none;
+	height: 18px;
+	line-height: 18px;
+	width: 20px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+#on {
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid orange;
+    color: #303030;
+    font-weight: bold;
+}
+.currentRank_now{
+	background-color:#e8e7e7;
+}
+.currentRank_now a{
+	color:#f16244;
+}

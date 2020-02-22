@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="ProjectType">
+
+	<select id="getProjectTypeById" parameterType="java.lang.String"
+		resultType="ProjectType">
+<![CDATA[
+select * from ec_project_type where id = #{value}
+]]>
+	</select>
+
+	<insert id="insertProjectType" parameterType="ProjectType">
+<![CDATA[
+insert into ec_project_type (id,name) values (#{id},#{name})
+]]>
+	</insert>
+
+	<update id="updateProjectType" parameterType="ProjectType">
+<![CDATA[
+update ec_project_type set name = #{name} where id =#{id}
+]]>
+	</update>
+
+	<select id="getProjectTypeCounts" resultType="int"
+		parameterType="java.util.Map">
+		<![CDATA[ 
+		select count(1) from ec_project_type where 1=1
+		]]>
+	</select>
+
+	<select id="queryProjectType" parameterType="java.util.Map"
+		resultType="ProjectType">
+	   <![CDATA[ 
+		select * from ec_project_type where 1=1
+		]]>
+	</select>
+	
+	<delete id="delProjectTypeById" parameterType="java.lang.String">
+	   <![CDATA[ 
+		delete from ec_project_type where id = #{value}
+		]]>
+	</delete>
+
+
+</mapper>

@@ -1,0 +1,8 @@
+@charset "UTF-8";
+/* CSS Document */
+.content{ margin-bottom:30px;}
+.error503{ width:700px; height:440px; margin:0 auto; position:relative;}
+.back{ position:absolute;bottom:13px; right:45px;}
+.error500{ width:800px; height:550px; margin:0 auto; position:relative;}
+.error404{ width:765px; height:500px; margin:0 auto; position:relative;}
+.error403{width:730px; height:500px; margin:0 auto; position:relative;}

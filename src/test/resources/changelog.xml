@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="2" author="xupei">
+		<createTable tableName="ec_game">
+			<column name="id" type="varchar(255)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="developer" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="type" type="varchar(255)" />
+			<column name="language" type="varchar(255)" />
+			<column name="theme" type="varchar(255)" />
+			<column name="addtime" type="datetime" />
+			<column name="gamedescrip" type="varchar(1000)" />
+			<column name="gameurl" type="varchar(255)" />
+			<column name="playcounts" type="int(11)" defaultValueNumeric="1" />
+			<column name="orderBy" type="int(11)" defaultValueNumeric="999" />
+			<column name="createBy" type="varchar(255)" />
+			<column name="createTime" type="datetime" />
+			<column name="modifyBy" type="varchar(255)" />
+			<column name="modifyTime" type="datetime" />
+			<column name="category" type="int(11)" defaultValueNumeric="1" />
+			<column name="gamepic_url" type="varchar(255)" />
+			<column name="gamename" type="varchar(255)" />
+			<column name="clicknum" type="bigint(20)" />
+			<column name="stars" type="varchar(5)" />
+		</createTable>
+		
+		<createIndex tableName="ec_game" indexName="ec_game_id" unique="true">
+		<column name="id" type="varchar(255)" ></column>
+		</createIndex>
+		
+		<createIndex tableName="ec_game" indexName="ec_game_type">
+		<column name="type" type="varchar(255)" ></column>
+		</createIndex>
+		
+		 
+		
+		<createIndex tableName="ec_game" indexName="ec_game_gamename">
+		<column name="gamename" type="varchar(255)" ></column>
+		</createIndex>
+
+		<createTable tableName="ec_game_rank">
+			<column name="id" type="varchar(255)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="developer" type="varchar(255)" />
+			<column name="type" type="varchar(255)" />
+			<column name="language" type="varchar(255)" />
+			<column name="theme" type="varchar(255)" />
+			<column name="addtime" type="datetime" />
+			<column name="gamedescrip" type="varchar(1000)" />
+			<column name="gameurl" type="varchar(255)" />
+			<column name="playcounts" type="int(11)" defaultValueNumeric="1" />
+			<column name="orderBy" type="int(11)" defaultValueNumeric="999" />
+			<column name="createBy" type="varchar(255)" />
+			<column name="createTime" type="datetime" />
+			<column name="modifyBy" type="varchar(255)" />
+			<column name="modifyTime" type="datetime" />
+			<column name="category" type="int(11)" defaultValueNumeric="1" />
+			<column name="gamepic_url" type="varchar(255)" />
+			<column name="gamename" type="varchar(255)" />
+		</createTable>
+		
+		<createIndex tableName="ec_game_rank" indexName="ec_game_rank_id" unique="true">
+		<column name="id" type="varchar(255)" ></column>
+		</createIndex>
+		
+		<createIndex tableName="ec_game_rank" indexName="ec_game_rank_type">
+		<column name="type" type="varchar(255)" ></column>
+		</createIndex>
+		
+		<createIndex tableName="ec_game_rank" indexName="ec_game_rank_gamename">
+		<column name="gamename" type="varchar(255)" ></column>
+		</createIndex>
+
+		<createTable tableName="ec_game_recommend">
+			<column name="id" type="varchar(255)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="developer" type="varchar(255)" />
+			<column name="type" type="varchar(255)" />
+			<column name="language" type="varchar(255)" />
+			<column name="theme" type="varchar(255)" />
+			<column name="addtime" type="datetime" />
+			<column name="gamedescrip" type="varchar(1000)" />
+			<column name="gameurl" type="varchar(255)" />
+			<column name="playcounts" type="int(11)" defaultValueNumeric="1" />
+			<column name="orderBy" type="int(11)" defaultValueNumeric="999" />
+			<column name="createBy" type="varchar(255)" />
+			<column name="createTime" type="datetime" />
+			<column name="modifyBy" type="varchar(255)" />
+			<column name="modifyTime" type="datetime" />
+			<column name="category" type="int(11)" defaultValueNumeric="1" />
+			<column name="gamepic_url" type="varchar(255)" />
+			<column name="gamename" type="varchar(255)" />
+		</createTable>
+		
+		<createIndex tableName="ec_game_recommend" indexName="ec_game_recommend_id" unique="true">
+		<column name="id" type="varchar(255)" ></column>
+		</createIndex>
+		
+		<createIndex tableName="ec_game_recommend" indexName="ec_game_recommend_type">
+		<column name="type" type="varchar(255)" ></column>
+		</createIndex>
+		
+		<createIndex tableName="ec_game_recommend" indexName="ec_game_recommend_gamename">
+		<column name="gamename" type="varchar(255)" ></column>
+		</createIndex>
+
+		<createTable tableName="ec_game_type">
+			<column name="id" type="varchar(255)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="typename" type="varchar(255)" />
+			<column name="createTime" type="datetime" />
+			<column name="orderBy" type="int(11)" defaultValueNumeric="999" />
+			<column name="category" type="int" />
+		</createTable>
+		
+		<createTable tableName="ec_event_log">
+		
+			<column name="starttime" type="datetime" />
+
+		</createTable>
+		
+
+		<createTable tableName="ec_game_policy">
+			<column name="id" type="varchar(255)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="gameid" type="varchar(255)" />
+			<column name="clicks" type="bigint(20)" defaultValueNumeric="0" />
+			<column name="reward" type="bigint(20)" defaultValueNumeric="0" />
+			<column name="punish" type="bigint(20)" defaultValueNumeric="0" />
+			<column name="createTime" type="datetime" />
+			<column name="orderBy" type="int(11)" defaultValueNumeric="999" />
+			<column name="deposit" type="bigint(20)" />
+		</createTable>
+		
+		<createIndex tableName="ec_game_policy" indexName="ec_game_policy_gameid">
+		<column name="gameid" type="varchar(255)"></column>
+		</createIndex>
+
+		<createTable tableName="ec_user_game_relation">
+			<column name="id" type="varchar(255)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="gameid" type="varchar(255)" />
+			<column name="userid" type="varchar(255)" />
+			<column name="createTime" type="datetime" />
+			<column name="punish" type="int" />
+			<column name="reward" type="int" />
+			<column name="status" type="int" />
+			<column name="banance" type="decimal(16,4)" />
+			<column name="invalidtime" type="datetime" />
+		</createTable>
+		
+		<createTable tableName="ec_game_pic">
+			<column name="id" type="varchar(255)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="gameid" type="varchar(255)" />
+			<column name="gamepic" type="mediumblob" />
+			<column name="createTime" type="datetime" />
+			<column name="orderby" type="int" />
+			<column name="type" type="int" />
+		</createTable>
+		
+		<createTable tableName="ec_game_log">
+			<column name="id" type="varchar(255)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="relationid" type="varchar(255)" />
+			<column name="createTime" type="datetime" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="3" author="yma">
+		<createTable tableName="ec_security_center">
+			<column name="id" type="varchar(128)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="password" type="varchar(32)" />
+			<column name="mail" type="varchar(64)" />
+			<column name="mobile" type="varchar(11)" />
+			<column name="question" type="varchar(64)" />
+			<column name="answer" type="varchar(64)" />
+			<column name="userid" type="varchar(128)" />
+			<column name="expiryDate" type="datetime" remarks="失效日期" />
+			<column name="isAutoRenew" type="int(1)" remarks="是否自动续费；0=是，1=否" />
+			<column name="isOpen" type="int(1)" remarks="是否开启；0=是，1=否" />
+			<column name="createBy" type="varchar(128)" />
+			<column name="createTime" type="datetime" />
+			<column name="modifyBy" type="varchar(128)" />
+			<column name="modifyTime" type="datetime" />
+			<column name="orderBy" type="bigint(20)" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="4" author="yma">
+		<createTable tableName="ec_security_question">
+			<column name="id" type="varchar(128)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="name" type="varchar(64)" />
+			<column name="isOpen" type="char(1)" />
+
+			<column name="createBy" type="varchar(128)" />
+			<column name="createTime" type="datetime" />
+			<column name="modifyBy" type="varchar(128)" />
+			<column name="modifyTime" type="datetime" />
+			<column name="orderBy" type="bigint(20)" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="5" author="yma">
+		<createTable tableName="ec_recharge_record" remarks="充值记录表">
+			<column name="id" type="varchar(128)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="serialNumber" type="varchar(128)" />
+			<column name="datetime" type="datetime" />
+			<column name="status" type="char(1)" />
+			<column name="ipAddress" type="varchar(128)" />
+			<column name="amount" type="decimal(16,4)" />
+			<!-- 余额 -->
+			<column name="balance" type="decimal(16,4)"  remarks="余额"/>
+			<column name="userid" type="varchar(128)" />
+			<column name="ack" type="varchar(20)" />
+			<column name="correlationId" type="varchar(20)" />
+			<column name="timeStamp" type="varchar(50)" />
+			<column name="payKey" type="varchar(50)" />
+			<column name="payStatus" type="varchar(20)" />
+			<!-- 交易描述 -->
+			<column name="description" type="varchar(40)" remarks="交易描述"></column>
+			<column name="createBy" type="varchar(128)" />
+			<column name="createTime" type="datetime" />
+			<column name="modifyBy" type="varchar(128)" />
+			<column name="modifyTime" type="datetime" />
+			<column name="orderBy" type="bigint(20)" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="6" author="yma">
+		<createTable tableName="ec_withdrawal_record">
+			<column name="id" type="varchar(128)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="serialNumber" type="varchar(128)" />
+			<column name="datetime" type="datetime" />
+			<column name="status" type="char(1)" />
+			<column name="ipAddress" type="varchar(128)" />
+			
+			<column name="amount" type="decimal(16,4)" />
+			<!-- 余额 -->
+			<column name="balance" type="decimal(16,4)" remarks="余额" />
+			<column name="userid" type="varchar(128)" />
+			<!-- 交易描述 -->
+			<column name="description" type="varchar(40)" remarks="交易描述"></column>
+			<column name="createBy" type="varchar(128)" />
+			<column name="createTime" type="datetime" />
+			<column name="modifyBy" type="varchar(128)" />
+			<column name="modifyTime" type="datetime" />
+			<column name="orderBy" type="bigint(20)" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="7" author="yma">
+		<createTable tableName="ec_deal_detail">
+			<column name="id" type="varchar(128)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="serialNumber" type="varchar(128)" />
+			<column name="datetime" type="datetime" />
+			<column name="status" type="char(1)" />
+			<column name="ipAddress" type="varchar(128)" />
+			<column name="amount" type="decimal(16,4)" />
+			<!-- 余额 -->
+			<column name="balance" type="decimal(16,4)"  remarks="余额" />
+			<column name="userid" type="varchar(128)" />
+			<!-- 交易描述 -->
+			<column name="description" type="varchar(40)" remarks="交易描述"></column>
+			
+			<column name="detailType" type="char(1)" remarks="帐单类型 1：收益"></column>
+			<column name="type" type="char(1)" remarks="收入还是支出  0:支出 1:收入"></column>
+			
+			
+			<column name="createBy" type="varchar(128)" />
+			<column name="createTime" type="datetime" />
+			<column name="modifyBy" type="varchar(128)" />
+			<column name="modifyTime" type="datetime" />
+			<column name="orderBy" type="bigint(20)" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="9" author="yma">
+		<createTable tableName="ec_user_wallet">
+			<column name="id" type="varchar(128)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="amount" type="decimal(16,4)" />
+			<column name="status" type="char(1)" />
+			<column name="userid" type="varchar(128)" />
+			<column name="createBy" type="varchar(128)" />
+			<column name="createTime" type="datetime" />
+			<column name="modifyBy" type="varchar(128)" />
+			<column name="modifyTime" type="datetime" />
+			<column name="orderBy" type="bigint(20)" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="10" author="yma">
+		<createTable tableName="ec_system_config">
+			<column name="id" type="varchar(128)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="paramName" type="varchar(64)" />
+			<column name="paramValue" type="varchar(32)" />
+			<column name="paramDesc" type="varchar(128)" />
+		</createTable>
+		
+		<createTable tableName="ec_amount_option">
+			<column name="id" type="varchar(128)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="value" type="int(4)" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="11" author="zhangwenyun">
+		<createTable tableName="ec_login_log">
+			<column name="id" type="varchar(128)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="userid" type="varchar(128)">
+			</column>
+			<column name="mobileNumber" type="varchar(11)"></column>
+			<column name="loginTime" type="datetime"></column>
+			<column name="ip" type="varchar(25)"></column>
+		</createTable>
+
+		<createTable tableName="ec_bankCard">
+			<column name="id" type="varchar(128)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="cardNumber" type="varchar(20)"></column>
+			<column name="bankProvinceid" type="int(11)"></column>
+			<column name="bankCityid" type="int(11)"></column>
+			<column name="bankid" type="int(11)"></column>
+			<column name="cardType" type="int(11)"></column>
+			<column name="subBank" type="int(11)" remarks="开户支行"></column>
+			<column name="bindTime" type="datetime"></column>
+			<column name="bindUserId" type="varchar(128)"></column>
+			<column name="isDefault" type="int(11)" defaultValue="0" remarks="是否是默认的银行卡。1:是，0:否" ></column>
+		</createTable>
+		
+		<createTable tableName="ec_validate_code">
+			<column name="id" type="varchar(128)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="mobileNumber" type="varchar(11)">
+			</column>
+			<column name="code" type="varchar(8)"></column>
+			<column name="sendTime" type="datetime">
+			</column>
+			<column name="invalidTime" type="datetime" >
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+
+		<createTable tableName="ec_user_his">
+			<column name="id" type="varchar(128)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="userid" type="varchar(128)">
+			</column>
+			<column name="mobileNumber" type="varchar(11)">
+			</column>
+			<column name="name" type="varchar(50)">
+			</column>
+			<column name="nickName" type="varchar(50)">
+			</column>
+			<column name="password" type="varchar(32)">
+			</column>
+			<column name="createBy" type="varchar(255)">
+			</column>
+			<column name="createTime" type="datetime">
+			</column>
+			<column name="modifyBy" type="varchar(255)">
+			</column>
+			<column name="modifyTime" type="datetime">
+			<constraints nullable="true" />
+			</column>
+			<column name="orderBy" type="int(11)">
+			</column>
+			<column name="status" type="char(1)">
+			</column>
+			<column name="securityStatus" type="char(1)">
+			</column>
+			<column name="level" type="int(11)">
+			</column>
+			<column name="role" type="varchar(50)" >
+			</column>
+			<column name="distroyTime" type="datetime">
+			<constraints nullable="true" />
+			</column>
+			<column name="reason" type="varchar(255)">
+			</column>
+		</createTable>
+
+		<createTable tableName="ec_user_detail">
+			<column name="id" type="varchar(128)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="userid" type="varchar(128)">
+			</column>
+			<column name="mobileNumber" type="varchar(11)">
+			</column>
+			<column name="email" type="varchar(40)">
+			</column>
+			<column name="idCard" type="varchar(19)">
+			</column>
+			<column name="gender" type="int(11)">
+			</column>
+			<column name="photo" type="MEDIUMBLOB"></column>
+			<column name="birthday" type="datetime"></column>
+			<column name="isMarried" type="int(11)"></column>
+			<column name="incomeScope" type="varchar(20)"></column>
+			<column name="liveProvince" type="int(6)"></column>
+			<column name="liveCity" type="int(6)"></column>
+			<column name="liveArea" type="int(6)"></column>
+			<column name="hometownProvince" type="int(6)"></column>
+			<column name="hometownCity" type="int(6)"></column>
+			<column name="eduLevel" type="int(11)"></column>
+			<column name="graduated" type="int(100)"></column>
+			<column name="profession" type="varchar(255)"></column>
+			<column name="hobbies" type="varchar(255)"></column>
+			<column name="createBy" type="varchar(255)">
+			</column>
+			<column name="createTime" type="datetime"><constraints nullable="true" />
+			</column>
+			<column name="modifyBy" type="varchar(255)" >
+			</column>
+			<column name="modifyTime" type="datetime"><constraints nullable="true" />
+			</column>
+			<column name="remark" type="varchar(255)">
+			</column>
+		</createTable>
+
+		<createTable tableName="ec_user">
+			<column name="id" type="varchar(128)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="mobileNumber" type="varchar(11)">
+			</column>
+			<column name="name" type="varchar(50)">
+			</column>
+			<column name="nickName" type="varchar(50)">
+			</column>
+			<column name="password" type="varchar(32)">
+			</column>
+			<column name="createBy" type="varchar(255)">
+			</column>
+			<column name="createTime" type="datetime"><constraints nullable="true" />
+			</column>
+			<column name="modifyBy" type="varchar(255)">
+			</column>
+			<column name="modifyTime" type="datetime"><constraints nullable="true" />
+			</column>
+			<column name="orderBy" type="int(11)">
+			</column>
+			<column name="status" type="char(1)" defaultValue="0">
+			</column>
+			<column name="securityStatus" type="char(1)" defaultValue="0">
+			</column>
+			<column name="level" type="int(11)">
+			</column>
+			<column name="role" type="varchar(50)" defaultValue="ROLE_USER">
+			</column>
+			
+		</createTable>
+
+		<createTable tableName="ec_area" remarks="行政区域县区信息表">
+			<column name="areaid" type="int(6)">
+			</column>
+			<column name="area" type="varchar(50)"></column>
+			<column name="cityid" type="int(6)"></column>
+		</createTable>
+
+		<createTable tableName="ec_city" remarks="行政区域地州市信息表">
+			<column name="cityid" type="int(6)"></column>
+			<column name="city" type="varchar(50)"></column>
+			<column name="provinceid" type="int(6)"></column>
+		</createTable>
+
+		<createTable tableName="ec_province" remarks="行政区域省份信息表">
+			<column name="provinceid" type="int(6)"></column>
+			<column name="province" type="varchar(50)"></column>
+			<column name="bankProvinceId" type="int(11)"></column>
+		</createTable>
+		
+		<createTable tableName="ec_top_active">
+			<column name="userid" type="varchar(128)"></column>
+			<column name="mobileNumber" type="varchar(12)"></column>
+			<column name="nickName" type="varchar(50)"></column>
+			<column name="loginCount" type="int(11)"></column>
+			<column name="genTime" type="datetime"></column>
+		</createTable>
+		
+		<createTable tableName="ec_top_level">
+			<column name="userid" type="varchar(128)"></column>
+			<column name="mobileNumber" type="varchar(12)"></column>
+			<column name="nickName" type="varchar(50)"></column>
+			<column name="level" type="int(11)"></column>
+			<column name="genTime" type="datetime"></column>
+		</createTable>
+		
+		<createTable tableName="ec_top_wealth">
+			<column name="userid" type="varchar(128)"></column>
+			<column name="mobileNumber" type="varchar(12)"></column>
+			<column name="nickName" type="varchar(50)"></column>
+			<column name="wealth" type="int(11)"></column>
+			<column name="genTime" type="datetime"></column>
+		</createTable>
+		
+		<createTable tableName="ec_top_income">
+			<column name="userid" type="varchar(128)"></column>
+			<column name="mobileNumber" type="varchar(12)"></column>
+			<column name="nickName" type="varchar(50)"></column>
+			<column name="income" type="int(11)"></column>
+			<column name="genTime" type="datetime"></column>
+		</createTable>
+		
+		<createTable tableName="ec_news">
+			<column name="id" type="bigint(20)" autoIncrement="true" >
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="addtime" type="datetime" ></column>
+			<column name="content" type="mediumtext"></column>
+			<column name="newsref" type="varchar(255)"></column>
+			<column name="newslink" type="varchar(255)"></column>
+			<column name="readcount" type="int(11)"></column>
+			<column name="newstitle" type="varchar(255)"></column>
+			<column name="type" type="varchar(255)"></column>
+			<column name="summary" type="varchar(1000)"></column>
+			<column name="author" type="varchar(255)"></column>
+		</createTable>
+		
+		<createTable tableName="ec_news_category">
+			<column name="id" type="bigint(20)" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="name" type="varchar(255)"></column>
+		</createTable>
+		
+		<createTable tableName="ec_bank">
+			<column name="bankId" type="int(11)"></column>
+			<column name="bankName" type="varchar(100)"></column>
+			<column name="shortName" type="varchar(20)" remarks="英文缩写"></column>
+		</createTable>
+		
+		<createTable tableName="ec_advertising">
+			<column name="id" type="varchar(128)" >
+				<constraints primaryKey="true" />
+			</column>
+			<column name="name" type="varchar(100)"></column>
+			<column name="width" type="int(6)"></column>
+			<column name="height" type="int(6)"></column>
+			<column name="location" type="varchar(255)"></column>
+			<column name="href" type="varchar(255)"></column>
+			<column name="remark" type="varchar(255)"></column>
+		</createTable>
+		
+		<createTable tableName="ec_advertising_imag">
+			<column name="id" type="varchar(128)" >
+				<constraints primaryKey="true" />
+			</column>
+			<column name="file" type="mediumblob"></column>
+			<column name="advertiseId" type="varchar(128)"></column>
+		</createTable>
+		
+		<createTable tableName="ec_operation_log" remarks="操作日志表">
+			<column name="id" type="varchar(128)" >
+				<constraints primaryKey="true" />
+			</column>
+			<column name="log_type" type="int" remarks="日志类型" />
+			<column name="data_old" type="varchar(1000)" />
+			<column name="data_new" type="varchar(1000)" />
+			<column name="remark" type="varchar(128)" />
+			<column name="createBy" type="varchar(128)" />
+			<column name="createTime" type="datetime" />
+			<column name="modifyBy" type="varchar(128)" />
+			<column name="modifyTime" type="datetime" />
+			<column name="orderBy" type="bigint(20)" />
+		</createTable>
+		
+		<createTable tableName="ec_bank_branch">
+			<column name="id" type="int(11)" ><constraints primaryKey="true" /></column>
+			<column name="name" type="varchar(255)"></column>
+			<column name="bankid" type="int(11)"></column>
+			<column name="cityid" type="int(11)"></column>
+		</createTable>
+		
+		<createTable tableName="ec_bank_city">
+			<column name="id" type="int(11)"><constraints primaryKey="true" /></column>
+			<column name="name" type="varchar(100)"></column>
+			<column name="provinceId" type="int(11)"></column>
+		</createTable>
+		
+		<createTable tableName="ec_bank_city_map">
+			<column name="cityid" type="int(11)"></column>
+			<column name="bankid" type="int(11)"></column>
+		</createTable>
+		
+		<createTable tableName="ec_user_advice">
+			<column name="id" type="varchar(128)"><constraints primaryKey="true" /></column>
+			<column name="name" type="varchar(100)"></column>
+			<column name="contact" type="varchar(20)"></column>
+			<column name="advice" type="varchar(255)"></column>
+			<column name="createBy" type="varchar(128)" />
+			<column name="createTime" type="datetime" />
+			<column name="modifyBy" type="varchar(128)" />
+			<column name="modifyTime" type="datetime" />
+			<column name="orderBy" type="bigint(20)" />
+		</createTable>
+		
+		<createTable tableName="ec_user_question">
+			<column name="id" type="varchar(128)"><constraints primaryKey="true" /></column>
+			<column name="userid" type="varchar(128)"></column>
+			<column name="questionId" type="varchar(128)"></column>
+			<column name="answer" type="varchar(100)"></column>
+			<column name="createBy" type="varchar(128)" />
+			<column name="createTime" type="datetime" />
+			<column name="modifyBy" type="varchar(128)" />
+			<column name="modifyTime" type="datetime" />
+			<column name="orderBy" type="bigint(20)" />
+		</createTable>
+	</changeSet>
+	<include file="/Users/zhangwenyun/Documents/efinance/src/test/resources/init_data.xml"/>
+	<include file="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_area_data.xml"/>
+	<include file="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_city_data.xml"/>
+	<include file="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_province_data.xml"/>
+	<include file="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_bank.xml"/>
+	<include file="/Users/zhangwenyun/Documents/efinance/src/test/resources/index_zhangwenyun.xml"/>
+	<include file="/Users/zhangwenyun/Documents/efinance/src/test/resources/events_zhangwenyun.xml"/>
+	<include file="/Users/zhangwenyun/Documents/efinance/src/test/resources/yma.xml"/>
+	<include file="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_bank_branch.xml"/>
+	<include file="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_bank_city_map.xml"/>
+	<include file="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_bank_city.xml"/>
+</databaseChangeLog>

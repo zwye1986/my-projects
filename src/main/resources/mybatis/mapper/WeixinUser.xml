@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.WeixinUser">
+
+	<resultMap type="WeixinUser" id="WeixinUserMap">
+		<id column="id" property="id" />
+		<result column="userid" property="userid" />
+		<result column="openid" property="openid" />
+		<result column="createtime" property="createtime"/>
+	</resultMap>
+	
+	
+
+
+
+	<insert id="addWeixinUser" parameterType="WeixinUser">
+	<![CDATA[ 
+		INSERT INTO ec_user_weixin (id,openid,userid,createtime)
+		VALUES(#{id},#{openid},#{userid},#{createtime})
+     ]]>
+	</insert>
+
+
+
+	
+	<update id="updateWeixinUser" parameterType="WeixinUser">
+
+		update ec_user_weixin u set u.createtime=#{createtime},u.openid=#{openid},u.userid=#{userid}
+		where u.id=#{id}
+	</update>
+
+	<select id="getWeixinUserOpenidCount" parameterType="String" resultType="int">
+		<![CDATA[ 
+		SELECT count(*) FROM ec_user_weixin where openid=#{openid}
+		]]>
+	</select>
+	
+	
+	<select id="getWeixinUserIdCount" parameterType="String" resultType="int">
+		<![CDATA[ 
+		SELECT count(*) FROM ec_user_weixin where userid=#{userid}
+		]]>
+	</select>
+	
+	
+	
+	<select id="getWeixinUserOpenid" parameterType="String" resultType="WeixinUser">
+		<![CDATA[ 
+		SELECT * FROM ec_user_weixin where openid=#{openid}
+		]]>
+	</select>
+	
+	<select id="getWeixinUserByUserId" parameterType="String" resultType="WeixinUser">
+		<![CDATA[ 
+		SELECT * FROM ec_user_weixin where userid=#{userid}
+		]]>
+	</select>
+	
+	
+	<delete id="delWeixinUser" parameterType="String">
+		delete
+		from ec_user_weixin where id = #{id};
+	</delete>
+	
+	<delete id="delWeixinUserByOpenId" parameterType="String">
+		delete
+		from ec_user_weixin where openid = #{openid};
+	</delete>
+	
+
+</mapper>

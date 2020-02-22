@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.SignIn">
+
+	<resultMap type="SignIn" id="SignInMap">
+		<id column="id" property="id" />
+		<result column="mobilePhone" property="mobilePhone" />
+		<result column="signdatetime" property="signdatetime" />
+		<result column="signbenefit" property="signbenefit" />
+		<result column="newSignCount" property="newSignCount" />
+		<result column="signday" property="signday" />
+		<result column="content" property="content"/>
+		<result column="signDate" property="signDate"/>
+	</resultMap>
+	
+	
+
+
+
+	<insert id="addSignIn" parameterType="SignIn">
+	<![CDATA[ 
+		INSERT INTO ec_user_sign (id,mobilePhone,signdatetime,signbenefit,newSignCount,content,signDate)
+		VALUES(#{id},#{mobilePhone},#{signdatetime},#{signbenefit},#{newSignCount},#{content},#{signDate})
+     ]]>
+	</insert>
+
+
+
+	<select id="listSignInBySelf"  parameterType="String" resultMap="SignInMap">
+		<![CDATA[ 
+		SELECT * from ec_user_sign where mobilePhone=#{mobilePhone}
+		]]>
+	</select>
+
+	<select id="getSignInBySelfCount" parameterType="String" resultType="int">
+		<![CDATA[ 
+		SELECT count(*) FROM ec_user_sign where mobilePhone=#{mobilePhone}
+		]]>
+	</select>
+	
+	
+	<select id="getSignInByAllCount"  resultType="int">
+		<![CDATA[ 
+		SELECT count(*) FROM ec_user_sign where signdatetime <DATE_ADD(CURRENT_DATE,INTERVAL 1 DAY) 
+		and signdatetime>=CURRENT_DATE
+		]]>
+	</select>
+	
+	<select id="listSignInBySelfBefore" parameterType="java.util.Map"
+	resultMap="SignInMap">
+	SELECT * from ec_user_sign where mobilePhone=#{mobilePhone}
+	<if test="signStartTime != null">
+		and signdatetime > #{signStartTime}
+	</if>
+	<if test="signEndTime != null">
+				<![CDATA[
+					and signdatetime < #{signEndTime} 
+					]]>
+	</if>
+	 order by signdatetime desc
+	<if test="limitCount != null and ''!=limitCount">
+		<![CDATA[ 
+		 limit #{limitIndex},#{limitCount}
+		 ]]>
+	</if>
+</select>
+	
+	<select id="listSignByYearAndMonth" parameterType="java.util.Map"
+	resultMap="SignInMap">
+	SELECT * from ec_user_sign where mobilePhone=#{mobilePhone}
+	and
+	DATE_FORMAT(signdatetime,'%Y-%m')=DATE_FORMAT(#{queryTime},'%Y-%m') ORDER BY signdatetime desc
+    </select>
+
+    <select id="listSignByMobileNumber" parameterType="java.util.Map"
+	resultMap="SignInMap">
+	SELECT * from ec_user_sign where mobilePhone=#{mobilePhone} ORDER BY signdatetime desc
+    </select>
+    
+    <select id="listSignByMobilePhone" parameterType="java.util.Map" resultMap="SignInMap">
+		SELECT * from ec_user_sign where mobilePhone=#{mobilePhone} 
+		 <if test="searchTime != null and ''!=searchTime">
+		   and  DATE_FORMAT(signdatetime,'%Y-%m')=DATE_FORMAT(#{searchTime},'%Y-%m')
+		 </if>
+		 ORDER BY signdatetime desc
+		 <if test="limitCount != null and ''!=limitCount">
+		<![CDATA[ 
+		 limit #{limitIndex},#{limitCount}
+		 ]]>
+		</if>
+	</select>
+    
+    <select id="sumSignBenefitByMobileNumber" resultType="BigDecimal">
+    SELECT  CASE WHEN SUM(signbenefit) IS NULL THEN 0 ELSE  TRUNCATE(SUM(signbenefit),2)  END signbenefit FROM ec_user_sign where mobilePhone=#{mobilePhone}
+    </select>
+    
+    <select id="listSignInByMonth" parameterType="java.util.Map"  resultMap="SignInMap">
+		SELECT  DAY( signdatetime) signday  from ec_user_sign where mobilePhone=#{mobilePhone} 
+				 <if test="searchTime != null">
+					and signdatetime >= DATE_ADD(DATE_ADD(LAST_DAY(${searchTime}),INTERVAL 1 DAY),INTERVAL -1 MONTH)
+					<![CDATA[
+					and signdatetime < DATE_ADD(LAST_DAY(${searchTime}),INTERVAL 1 DAY)
+					]]>
+				</if>
+				<if test="searchTime == null">
+					and signdatetime >= DATE_ADD(DATE_ADD(LAST_DAY(now()),INTERVAL 1 DAY),INTERVAL -1 MONTH)
+					<![CDATA[
+					and signdatetime <= DATE_ADD(LAST_DAY(now()),INTERVAL 1 DAY)
+					]]>
+				</if>
+				
+				group by DATE_FORMAT( signdatetime, '%Y~%m~%d' ) 
+				 
+				
+	</select>
+	
+	<select id="getCustomerSignInMonthCount" parameterType="java.util.Map"  resultType="int">
+		SELECT  count(*)  from ec_user_sign where mobilePhone=#{mobilePhone} 
+				 
+					and signdatetime >= DATE_ADD(DATE_ADD(LAST_DAY(now()),INTERVAL 1 DAY),INTERVAL -1 MONTH)
+					<![CDATA[
+					and signdatetime <= DATE_ADD(LAST_DAY(now()),INTERVAL 1 DAY)
+					]]>
+				
+	</select>
+	
+	<select id="getCustomerSignInMonthSeriesCount" parameterType="java.util.Map" resultMap="SignInMap">
+	SELECT * FROM ec_user_sign t1
+	WHERE t1.mobilePhone = #{mobilePhone} 
+		AND t1.signdatetime = (SELECT MAX(t.signdatetime) FROM ec_user_sign t 
+		WHERE t.mobilePhone = #{mobilePhone} 
+	    AND t.signdatetime >=DATE_ADD(DATE_ADD(LAST_DAY(NOW()),INTERVAL 1 DAY),INTERVAL - 2 MONTH)
+                               <![CDATA[
+                               AND t.signdatetime <= DATE_ADD(LAST_DAY(NOW()),INTERVAL 1 DAY))
+                               ]]>
+
+    </select>
+
+
+</mapper>

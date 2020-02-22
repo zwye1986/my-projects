@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.ProjectInvestRate">
+
+	<resultMap type="projectInvestRate" id="projectInvestRateResult">
+		<result column="id" property="id" />
+		<result column="rate_interval" property="interval" />
+		<result column="success_rate" property="successRate" />
+		<result column="miss_rate" property="missRate" />
+		<result column="rate_name" property="rate_name"/>
+	    <result column="content" property="content"/>
+	</resultMap>
+	
+	<select id="selectprojectInvestRateAll" resultMap="projectInvestRateResult" parameterType="java.util.Map">
+		select * from ec_project_invest_rate where 1 = 1 
+	</select>
+	
+	<select id="getProjectInvestRateAllCount" resultType="int" parameterType="java.util.Map">
+		select count(*) from ec_project_invest_rate 
+	</select>
+
+	<select id="selectprojectInvestRateById" resultMap="projectInvestRateResult"
+		parameterType="java.lang.String">
+		select * from
+		ec_project_invest_rate
+		where id = #{id}
+	</select>
+	
+
+	<insert id="addprojectInvestRate" parameterType="projectInvestRate">
+		insert into
+		ec_project_invest_rate (
+		id,
+		rate_interval,
+		success_rate,
+		miss_rate,
+		rate_name,
+		content
+		)
+		values (
+		#{id},
+		#{interval},
+		#{successRate},
+		#{missRate},
+		#{rate_name},
+		#{content}
+		)
+	</insert>
+
+	<update id="updateprojectInvestRateById" parameterType="projectInvestRate">
+		update ec_project_invest_rate
+		<set>
+			<if test="interval != null">
+				rate_interval = #{interval},
+			</if>
+			<if test="successRate != null">
+				success_rate = #{successRate},
+			</if>
+			<if test="missRate != null">
+				miss_rate = #{missRate},
+			</if>
+			<if test="rate_name != null">
+				rate_name = #{rate_name},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+		</set>
+		where id = #{id} 
+	</update>
+	
+	<delete id="deleteprojectInvestRate" parameterType="java.lang.String">
+		delete from ec_project_invest_rate where id = #{id};
+	</delete>
+
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Lottery">
+
+<insert id="insertLottery" parameterType="Lottery">
+insert into ec_lottery (prizeid)  values ( #{prizeId} )
+</insert>
+
+<update id="updateLotteryByList" parameterType="Lottery">
+update ec_lottery set prizeid = #{prizeId} where id = #{id}
+</update>
+
+<select id="queryLottery" resultType="Lottery">
+select * from ec_lottery
+</select>
+
+<select id="getLotteryNum" resultType="int">
+select count(1)  from ec_lottery
+</select>
+
+<select id="getEmptyLottery" resultType="Lottery">
+select * from ec_lottery where prizeid = 0 limit 1
+</select>
+
+<delete id="deleteLotteryById" parameterType="int">
+delete from ec_lottery where id = #{value}
+</delete>
+
+<delete id="deleteLottery">
+truncate ec_lottery;
+</delete>
+	
+</mapper>

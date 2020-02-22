@@ -1,0 +1,108 @@
+/* CSS Document */
+/*content*/
+#cntwrapper {
+	width: 100%;
+	background: #fff;
+	background-position: center 0;
+	min-height:830px;
+	height:auto;
+	 
+}
+#content {
+	margin: 15px auto;
+	padding: 0 5px;
+	position: relative;
+	width: 1257px;
+	z-index: 2;
+}
+  <!--contentL -->
+.contentL {
+	height: 624px;
+	width: 205px;
+	margin-top: 10px;
+	display: inline-block;
+}
+#contentL_C{width: 204px; border-left:1px  solid #d1d1d1;border-right:1px  solid #d1d1d1;}
+#contentL_Top{
+	background-image: url("../images/border-radiusLTop.png");
+    height: 8px;
+    width: 206px;}
+#contentL_Title{background-color: #F6F6F6;
+    border-bottom: 1px solid #D1D1D1;
+    border-left: 1px solid #D1D1D1;
+    border-right: 1px solid #D1D1D1;
+    font-size: 18px;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 10px;
+    width: 194px;}
+
+.about_Title{
+	width: 194px;
+	font-size: 18px;
+	padding-left: 10px;
+	line-height: 36px;
+	text-align: left;
+	height: 36px;
+	display: inline-block;
+	background-color: #fff;
+	
+	
+	cursor: pointer;
+	
+	
+}
+.about_List{
+	background-color: #fff;
+	width: 204px;
+	
+}
+.about_List li {
+	display: inline-block;
+	width: 190px;
+	height: 36px;
+	line-height: 36px;
+	padding-left: 3px;
+	padding-right: 10px;
+	text-align:left;
+	
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.about_List li a{ color:#000;}
+.about_List  li:hover {
+	background: url(../images/user/Lbg.png) no-repeat;
+}
+
+.about_Title a{ color: #f16244;}
+
+#contentL_Bottom{background: url("../images/user/Lbottom.png") no-repeat scroll 0 0 transparent;
+    height: 8px;
+    width: 206px;}
+<!--contentR-->
+.contentR {
+	margin-top: 10px;
+	
+	display:inline-block;
+	
+	
+	
+}
+.contentR p{
+	width: 1030px;
+	height:44px; 
+	line-height:44px; 
+	font-size:18px;
+	 color:#f16244;
+	 }
+.contentR span{
+	display:block;
+	width: 1030px;
+	
+	line-height:24px; 
+	font-size:14px;
+	 color:#000;
+	
+	 }
+.contentR .zd{color:#18c1ff; text-decoration:underline; cursor:pointer; padding-right:20px;}

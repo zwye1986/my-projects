@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.User">
+
+
+
+	<resultMap type="User" id="userMap">
+		<result column="id" property="id" />
+		<result column="mobileNumber" property="mobileNumber" />
+		<result column="name" property="name" />
+		<result column="nickName" property="nickName" />
+		<result column="password" property="password" />
+		<result column="createBy" property="createBy" />
+		<result column="createTime" property="createTime" />
+		<result column="modifyTime" property="modifyTime" />
+		<result column="modifyBy" property="modifyBy" />
+		<result column="status" property="status" />
+		<result column="securityStatus" property="securityStatus" />
+		<result column="level" property="level" />
+		<result column="credits" property="credits" />
+		<result column="wealth" property="wealth" />
+		<result column="income" property="income" />
+		<result column="role" property="role" />
+		<result column="gender" property="gender" />
+		<!-- 登录次数 -->
+		<result column="loginCount" property="loginCount" />
+		<result column="email" property="email" />
+		<result column="idCard" property="idCard" />
+		<result column="inviteCodeFromOther" property="inviteCodeFromOther" />
+		<result column="inviteCodeSelf" property="inviteCodeSelf" />
+		<result column="isMarried" property="isMarried" />
+		<result column="balance" property="balance" />
+		<result column="type" property="type" />
+		<result column="fatherid" property="fatherid" />
+		<result column="svipRate" property="svipRate" />
+		<result column="vipInitPassword" property="vipInitPassword" />
+		<result column="myRate" property="myRate" />
+	</resultMap>
+
+	<resultMap type="User" id="userMapTop">
+		<result column="userid" property="id" />
+		<result column="mobileNumber" property="mobileNumber" />
+		<result column="name" property="name" />
+		<result column="nickName" property="nickName" />
+		<result column="password" property="password" />
+		<result column="createBy" property="createBy" />
+		<result column="createTime" property="createTime" />
+		<result column="modifyTime" property="modifyTime" />
+		<result column="modifyBy" property="modifyBy" />
+		<result column="status" property="status" />
+		<result column="securityStatus" property="securityStatus" />
+		<result column="level" property="level" />
+		<result column="wealth" property="wealth" />
+		<result column="income" property="income" />
+		<result column="photo" property="photo" />
+		<result column="role" property="role" />
+		<!-- 登录次数 -->
+		<result column="loginCount" property="loginCount" />
+
+		<result column="credits" property="credits" />
+		<result column="birthday" property="birthday" />
+
+		<result column="graduated" property="graduated" />
+
+		<result column="liveProvince" property="liveProvince" />
+
+		<result column="liveCity" property="liveCity" />
+
+		<result column="liveArea" property="liveArea" />
+
+		<result column="eduLevel" property="eduLevel" />
+
+		<result column="province" property="province" />
+		<result column="city" property="city" />
+		<result column="area" property="area" />
+		<result column="qq" property="qq" />
+	</resultMap>
+
+	<resultMap type="User" id="TopLevelUserMap" extends="userMap">
+		<result column="vipTag" property="vipTag" />
+	</resultMap>
+
+	<resultMap type="User" id="TopInviteUserMap" extends="userMapTop">
+		<result column="sumBenfit" property="sumBenfit" />
+	</resultMap>
+
+	<resultMap type="User" id="TopInviteUserNumMap" extends="userMapTop">
+		<result column="num" property="num" />
+	</resultMap>
+
+
+
+	<resultMap type="User" id="userRoleMap" extends="userMap">
+		<collection property="userRoles" ofType="Role">
+			<id property="id" column="roleId" />
+			<result property="roleName" column="RoleName" />
+		</collection>
+	</resultMap>
+
+	<resultMap type="User" id="UserRolesMap" extends="userMap">
+		<collection property="userRoles" ofType="java.util.List"
+			select="getRoleByUserId" column="id" />
+	</resultMap>
+
+	<!-- 获取role对象 -->
+	<select id="getRoleByUserId" parameterType="String"
+		resultMap="com.venada.efinance.pojo.Role.roleMap">
+		SELECT
+		res.id,
+		res.RoleName,
+		res.DESCRIPTION
+		FROM ec_role res,
+		ec_user_role rr
+		WHERE rr.role_id = res.id
+		AND rr.user_id = #{id}
+	</select>
+
+
+	<resultMap type="User" id="userRoleResoucesMap" extends="userRoleMap">
+		<collection property="roleResources" ofType="Resource">
+			<result column="id" property="id" />
+			<result column="type" property="type" />
+			<result column="value" property="type" />
+			<result column="MODEL_NAME" property="modelName" />
+			<result column="PARENT_ID" property="parentId" />
+		</collection>
+
+	</resultMap>
+
+	<select id="getUserRole" parameterType="String" resultMap="UserRolesMap">
+		SELECT r.id,r.mobileNumber,r.name,r.nickName FROM ec_user r WHERE
+		r.id=#{id}
+
+	</select>
+
+	<!-- 根据user表中的id查询用户和组信息 -->
+	<select id="selectUserRole" parameterType="String" resultMap="userRoleMap">
+		SELECT
+		u.id,
+		u.name,
+		r.id AS rid,
+		r.RoleName AS roleName,
+		re.VALUE,
+		re.MODEL_NAME
+		FROM ec_user_role ur,
+		ec_user u,
+		ec_role r,
+		ec_role_resource rr,
+		ec_resource re
+		WHERE r.id = ur.ROLE_ID
+		AND
+		ur.USER_ID = u.id
+		AND
+		rr.RESOURCE_ID=re.id
+		AND rr.ROLE_ID=r.id
+	</select>
+
+	<resultMap type="User" id="UserRoleResourceMap" extends="userRoleMap">
+		<collection property="userRoles" ofType="java.util.List"
+			select="getRoleById" column="id" />
+	</resultMap>
+
+
+	<select id="findUserByMoblieNumberByLogin" parameterType="String"
+		resultMap="UserRoleResourceMap">
+		<![CDATA[ 
+		select * from ec_user where mobileNumber = #{mobileNumber}
+		]]>
+	</select>
+
+	<select id="findUserByInviteCode" parameterType="String"
+		resultMap="userMap">
+		<![CDATA[ 
+		select * from ec_user where inviteCodeSelf = #{inviteCodeFromOther}
+		]]>
+	</select>
+
+
+	<select id="listUserByInviteCodeFromOther" parameterType="String"
+		resultMap="TopLevelUserMap">
+		<![CDATA[ 
+		    SELECT a.*, CASE WHEN scs.isOpen=0 THEN 1 ELSE 0 END vipTag 
+      		 FROM (SELECT * FROM ec_user ec WHERE ec.inviteCodeFromOther=#{inviteCodeFromOther})a LEFT JOIN ec_security_center scs ON 
+      		 a.id=scs.userid
+		]]>
+	</select>
+
+	<select id="listUserByInviteCodeFromOtherMobilePhone"
+		parameterType="String" resultMap="TopLevelUserMap">
+		SELECT a.*, CASE WHEN scs.isOpen=0 THEN 1 ELSE 0 END vipTag
+		FROM (SELECT * FROM ec_user ec WHERE
+		ec.inviteCodeFromOther=#{inviteCodeFromOther})a LEFT JOIN
+		ec_security_center scs ON
+		a.id=scs.userid
+		<if test="limitCount != null and ''!=limitCount">
+			<![CDATA[ 
+			 limit #{limitIndex},#{limitCount}
+			 ]]>
+		</if>
+	</select>
+
+
+	<select id="getUsersCountByInviteCodeFromOther" parameterType="String"
+		resultType="int">
+		<![CDATA[ 
+		select count(*) from ec_user where inviteCodeFromOther = #{inviteCodeFromOther}
+		]]>
+	</select>
+
+
+
+	<!-- 获取Role对象 -->
+	<select id="getRoleById" parameterType="String"
+		resultMap="com.venada.efinance.pojo.Role.roleMap">
+		SELECT r.id,r.RoleName,r.DESCRIPTION FROM ec_role
+		r,ec_user_role ur
+		WHERE r.id=ur.ROLE_ID AND ur.USER_ID= #{id}
+	</select>
+
+
+
+	<select id="findUserById" parameterType="String" resultType="User">
+		<![CDATA[ 
+		select * from ec_user where id = #{id}
+		]]>
+	</select>
+
+	<select id="findUserByMoblieNumber" parameterType="String"
+		resultType="User">
+		<![CDATA[ 
+		select * from ec_user where mobileNumber = #{mobileNumber}
+		]]>
+	</select>
+
+	<select id="findUserByMoblieNumberAndPassword" parameterType="java.util.Map"
+		resultType="User">
+		<![CDATA[ 
+		SELECT
+	a.*,p.province,c.city,t.area from  (
+		SELECT
+			u.*, ud.gender,
+			ud.email,
+			ud.idCard,
+			ud.isMarried,
+			ud.birthday,
+			ud.liveProvince,
+			ud.liveCity,
+			ud.liveArea,
+			ud.eduLevel,
+			ud.graduated,
+			ud.address,
+			ud.qq
+		FROM
+			ec_user u,
+			ec_user_detail ud
+		WHERE
+			u.id = ud.userid and u.mobileNumber = #{mobileNumber} and u.password = #{password}
+	) a
+LEFT JOIN ec_province p ON a.liveProvince = p.provinceid
+LEFT JOIN ec_city c ON a.liveCity = c.cityid
+LEFT JOIN ec_area t on a.liveArea = t.areaid;
+		]]>
+	</select>
+
+	<insert id="addUser" parameterType="User">
+	<![CDATA[ 
+		insert into ec_user 
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="mobileNumber != null">
+				mobileNumber,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="createTime != null">
+				createTime,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="nickName != null">
+				nickName,
+			</if>
+			<if test="inviteCodeFromOther != null">
+				inviteCodeFromOther,
+			</if>
+			<if test="inviteCodeSelf != null">
+				inviteCodeSelf,
+			</if>
+			<if test="credits != null">
+				credits,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="fatherid != null">
+				fatherid,
+			</if>
+			<if test="svipRate != null">
+				svipRate,
+			</if>
+			<if test="vipInitPassword != null">
+				vipInitPassword,
+			</if>
+			<if test="myRate != null">
+				myRate,
+			</if>
+		</trim>
+		<![CDATA[
+		values 
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				 #{id},
+			</if>
+			<if test="mobileNumber != null">
+				 #{mobileNumber},
+			</if>
+			<if test="password != null">
+				 #{password},
+			</if>
+			<if test="createTime != null">
+				 #{createTime},
+			</if>
+			<if test="status != null">
+				#{status},
+			</if>
+			<if test="nickName != null">
+				 #{nickName},
+			</if>
+			<if test="inviteCodeFromOther != null">
+				 #{inviteCodeFromOther},
+			</if>
+			<if test="inviteCodeSelf != null">
+				 #{inviteCodeSelf},
+			</if>
+			<if test="credits != null">
+				 #{credits},
+			</if>
+			<if test="type != null">
+				 #{type},
+			</if>
+			<if test="fatherid != null">
+				 #{fatherid},
+			</if>
+			<if test="svipRate != null">
+				 #{svipRate},
+			</if>
+			<if test="vipInitPassword != null">
+				#{vipInitPassword} ,
+			</if>
+			<if test="myRate != null">
+				#{myRate},
+			</if>
+		</trim>
+		<![CDATA[
+		]]>
+	</insert>
+	<delete id="deleteUserByMobileNumber" parameterType="String">
+	<![CDATA[  
+	delete from ec_user where mobileNumber = #{mobileNumber}
+	  ]]>
+	</delete>
+
+	<update id="updateUserByID" parameterType="User">
+	<![CDATA[ 
+		update ec_user
+		 ]]>
+		<trim prefix="set" suffixOverrides=",">
+			<if test="name != null">
+				name = #{name},
+			</if>
+
+			<if test="nickName != null">
+				nickName = #{nickName},
+			</if>
+
+			<if test="password != null">
+				password = #{password},
+			</if>
+
+			<if test="modifyBy != null">
+				modifyBy =#{ modifyBy},
+			</if>
+			<if test="modifyTime != null">
+				modifyTime = now(),
+			</if>
+
+			<if test="status != null">
+				status = #{ status},
+			</if>
+			<if test="level != null">
+				level = #{level},
+			</if>
+			<if test="securityStatus != null">
+				securityStatus =#{ securityStatus},
+			</if>
+
+			<if test="type != null">
+				type =#{ type},
+			</if>
+
+			<if test="fatherid != null">
+				fatherid =#{ fatherid},
+			</if>
+
+			<if test="svipRate != null">
+				svipRate =#{ svipRate},
+			</if>
+
+			<if test="credits != null">
+				credits =#{ credits},
+			</if>
+			<if test="vipInitPassword != null">
+				vipInitPassword = #{vipInitPassword},
+			</if>
+			
+			<if test="myRate != null">
+				myRate = #{myRate},
+			</if>
+
+		</trim>
+		 <![CDATA[
+		 where id = #{id}
+		 ]]>
+	</update>
+
+	<update id="updateUserByMobileNumber" parameterType="User">
+	<![CDATA[ 
+		update ec_user
+	 ]]>
+		<trim prefix="set" suffixOverrides=",">
+			<if test="name != null">
+				name = #{name},
+			</if>
+
+			<if test="nickName != null">
+				nickName = #{nickName},
+			</if>
+
+			<if test="password != null">
+				password = #{password},
+			</if>
+
+			<if test="modifyBy != null">
+				modifyBy =#{ modifyBy},
+			</if>
+			<if test="modifyTime != null">
+				modifyTime = now(),
+			</if>
+
+			<if test="status != null">
+				status = #{ status},
+			</if>
+			<if test="level != null">
+				level = #{level},
+			</if>
+			<if test="securityStatus != null">
+				securityStatus =#{ securityStatus},
+			</if>
+			<if test="credits != null">
+				credits =#{ credits},
+			</if>
+			<if test="type != null">
+				type =#{ type},
+			</if>
+
+			<if test="fatherid != null">
+				fatherid =#{ fatherid},
+			</if>
+
+			<if test="svipRate != null">
+				svipRate =#{ svipRate},
+			</if>
+			<if test="vipInitPassword != null">
+				vipInitPassword = #{vipInitPassword},
+			</if>
+			<if test="myRate != null">
+				myRate = #{myRate},
+			</if>
+		</trim>
+		<![CDATA[
+		 	where mobileNumber = #{mobileNumber}
+		 ]]>
+	</update>
+
+	<update id="updateUserByMobileNumberAndPassword" parameterType="User">
+	<![CDATA[ 
+		update ec_user
+	 ]]>
+		<trim prefix="set" suffixOverrides=",">
+			<if test="name != null">
+				name = #{name},
+			</if>
+
+			<if test="nickName != null">
+				nickName = #{nickName},
+			</if>
+
+			<if test="password != null">
+				password = #{password},
+			</if>
+
+			<if test="modifyBy != null">
+				modifyBy =#{ modifyBy},
+			</if>
+			<if test="modifyTime != null">
+				modifyTime = now(),
+			</if>
+
+			<if test="status != null">
+				status = #{ status},
+			</if>
+			<if test="level != null">
+				level = #{level},
+			</if>
+			<if test="securityStatus != null">
+				securityStatus =#{ securityStatus},
+			</if>
+
+			<if test="credits != null">
+				credits =#{ credits},
+			</if>
+
+			<if test="type != null">
+				type =#{ type},
+			</if>
+
+			<if test="fatherid != null">
+				fatherid =#{ fatherid},
+			</if>
+
+			<if test="svipRate != null">
+				svipRate =#{ svipRate},
+			</if>
+			<if test="vipInitPassword != null">
+				vipInitPassword = #{vipInitPassword},
+			</if>
+			<if test="myRate != null">
+				myRate = #{myRate},
+			</if>
+		</trim>
+		<![CDATA[
+		 	where mobileNumber = #{mobileNumber} and password = #{password}
+		 ]]>
+	</update>
+
+	<select id="queryWealthTopList" parameterType="int" resultMap="userMap">
+		<![CDATA[ 
+		select u.id,u.nickName,u.mobileNumber,w.amount as wealth from ec_user u , ec_user_wallet w where u.id = w.userid  order by w.amount desc lmint 0, #{t}
+		 ]]>
+	</select>
+
+	<select id="queryActiveTopList" parameterType="int" resultMap="userMap">
+	<![CDATA[
+	select u.id,u.nickName,u.mobileNumber,count(*) loginCount from ec_user u,ec_login_log g where u.id = g.userid group by g.userid order by count(*) desc limit 0,#{t}
+	]]>
+	</select>
+
+	<select id="queryLevelTopList" parameterType="int" resultMap="userMap">
+	<![CDATA[
+	select u.id,u.nickName,u.mobileNumber,u.level  from ec_user u where  order by level desc limit 0,#{t}
+	]]>
+	</select>
+
+	<select id="queryIncomeTopList" parameterType="int" resultMap="userMap">
+	<![CDATA[
+	select u.id,u.nickName,u.mobileNumber,sum(d.amount) income from ec_user u,ec_deal_detail d where u.id = d.userid and d.detailType = 1 group by d.userid  order by level desc limit 0,#{t}
+	]]>
+	</select>
+
+
+	<insert id="addTopWealth" parameterType="User">
+	<![CDATA[
+		insert into ec_top_wealth values (#{id},#{mobileNumber},#{nickName},#{wealth},now());
+	]]>
+	</insert>
+
+	<insert id="batchAddTopWealth" parameterType="User">
+	<![CDATA[
+		insert into ec_top_wealth values (#{id},#{mobileNumber},#{nickName},#{wealth},now());
+	]]>
+	</insert>
+
+	<insert id="batchAddTopActive" parameterType="User">
+	<![CDATA[
+		insert into ec_top_active values (#{id},#{mobileNumber},#{nickName},#{loginCount},now());
+	]]>
+	</insert>
+
+	<insert id="batchAddTopLevel" parameterType="User">
+	<![CDATA[
+		insert into ec_top_level values (#{id},#{mobileNumber},#{nickName},#{level},now());
+	]]>
+	</insert>
+
+	<insert id="batchAddTopIncome" parameterType="User">
+	<![CDATA[
+		insert into ec_top_income values (#{id},#{mobileNumber},#{nickName},#{income},now());
+	]]>
+	</insert>
+
+	<select id="getTopWealth" resultMap="userMapTop" parameterType="java.util.Map">
+		select * from ec_top_wealth t  order by wealth desc limit #{begin},#{end};
+	</select>
+
+	<select id="getTopActive" resultMap="userMapTop" parameterType="java.util.Map">
+		select * from ec_top_active t  order by loginCount desc limit #{begin},#{end};
+	</select>
+
+	<select id="getTopLevel" resultMap="TopLevelUserMap"
+		parameterType="java.util.Map">
+	SELECT a.userid
+	id,a.mobileNumber,a.nickName,a.level, CASE WHEN scs.isOpen=0
+	THEN 1 ELSE 0 END vipTag
+	FROM ec_top_level a LEFT JOIN
+	ec_security_center scs ON
+	a.userid=scs.userid
+	ORDER BY LEVEL DESC limit
+	#{begin},#{end};
+	</select>
+
+	<select id="getTopIncome" resultMap="userMapTop" parameterType="java.util.Map">
+		select * from ec_top_income t order by income desc limit #{begin},#{end};
+	</select>
+
+
+	<select id="getTopInvite" resultMap="TopInviteUserMap"
+		parameterType="java.util.Map">
+		SELECT eud.*,ec.nickName,a.sumBenfit FROM (SELECT
+		ROUND(SUM(benefit),2) sumBenfit,inviteUserId FROM ec_invite_benefit
+		GROUP BY inviteUserId) a,
+		ec_user_detail eud,ec_user ec WHERE
+		eud.userid = a.inviteUserId AND ec.id=eud.userid
+		ORDER BY a.sumBenfit
+		desc limit #{begin},#{end};
+	</select>
+
+	<select id="getTopInviteUser" resultMap="TopInviteUserNumMap"
+		parameterType="java.util.Map">
+		SELECT a.num,eu.nickName,eud.* FROM (
+		SELECT
+		ec.inviteCodeFromOther invitecode, COUNT(1) num FROM ec_user ec
+		WHERE
+		ec.inviteCodeFromOther IS NOT NULL
+		GROUP BY ec.inviteCodeFromOther) a
+		,ec_user eu,ec_user_detail eud
+		WHERE eu.inviteCodeSelf=a.invitecode AND
+		eud.userid=eu.id
+		ORDER BY a.num
+		desc limit #{begin},#{end};
+	</select>
+	<update id="updateUserStatus" parameterType="java.util.Map">
+		update ec_user set
+		status = #{status} where id = #{id};
+	</update>
+
+	<update id="updateUserPassword" parameterType="java.util.Map">
+		update ec_user set
+		password = #{password} where id = #{id};
+	</update>
+
+	<select id="queryUserListByNumber" parameterType="java.util.List"
+		resultMap="userMap">
+		Select * from ec_user where mobilenumber in
+
+
+
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+
+		limit 26
+	</select>
+
+
+	<select id="getUsersCount" resultType="int">
+		select count(*) from ec_user u , ec_user_wallet w where u.id =
+		w.userid
+
+		<if test="id != null">
+			and u.id = #{id}
+		</if>
+
+		<if test="mobileNumber != null">
+			and u.mobileNumber = #{mobileNumber}
+		</if>
+		<if test="nickName != null">
+			and u.nickName like CONCAT('%', #{nickName}, '%')
+		</if>
+		<if test="name != null">
+			and u.name like CONCAT('%', #{name}, '%')
+		</if>
+		<if test="startTime != null">
+		<![CDATA[ 
+			and u.createTime >= #{startTime}
+			]]>
+		</if>
+		<if test="endTime != null">
+			<![CDATA[ 
+			and u.createTime <= #{endTime}
+			]]>
+		</if>
+		<if test="startAmount != null">
+			and w.amount >=#{startAmount}
+		</if>
+		<if test="endAmount != null">
+			<![CDATA[ 
+			and w.amount <=#{endAmount}
+			]]>
+		</if>
+	</select>
+
+
+	<select id="listAllUser" resultMap="userMap" parameterType="java.util.Map">
+		select u.*, truncate(w.amount,2) as balance from ec_user u ,
+		ec_user_wallet w where u.id = w.userid
+
+		<if test="id != null">
+			and u.id = #{id}
+		</if>
+		<if test="mobileNumber != null">
+			and u.mobileNumber = #{mobileNumber}
+		</if>
+		<if test="nickName != null">
+			and u.nickName like CONCAT('%', #{nickName}, '%')
+		</if>
+		<if test="name != null">
+			and u.name like CONCAT('%', #{name}, '%')
+		</if>
+		<if test="startTime != null">
+		<![CDATA[ 
+			and u.createTime >= #{startTime}
+			]]>
+		</if>
+		<if test="endTime != null">
+			<![CDATA[ 
+			and u.createTime <= #{endTime}
+			]]>
+		</if>
+
+		<if test="startAmount != null">
+			and w.amount >=#{startAmount}
+		</if>
+		<if test="endAmount != null">
+			<![CDATA[ 
+			and w.amount <=#{endAmount}
+			]]>
+		</if>
+		order by
+		<choose>
+			<when test="sort != null and '' != sort ">
+				${sort}
+			</when>
+			<otherwise>
+				u.createTime
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="sortseq !=null and '' != sortseq">
+				${sortseq}
+			</when>
+			<otherwise>
+				desc
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="findUserByNickName" parameterType="String"
+		resultType="int">
+		select count(1) from ec_user where nickName = #{nickName}
+	</select>
+	
+	<select id="findUserByCondition" parameterType="java.util.Map"
+		resultType="int">
+		select count(1) from ec_user where nickName = #{nickName} and id != #{userid}
+	</select>
+
+	<delete id="deleteUserAllInfo" parameterType="java.util.Map"
+		statementType="CALLABLE">
+		{call clearUserInfo(#{mobileNumber})}
+	</delete>
+	
+	<select id="getSubsCount" parameterType="String" resultType="int">
+		select count(1) from ec_user where fatherid = #{fatherid}
+	</select>
+	<select id="getSubsList" parameterType="java.util.Map" resultMap="userMap">
+		select * from ec_user where fatherid = #{fatherid} order by createTime desc
+	</select>
+	
+	<select id="getVipList" parameterType="java.util.Map" resultMap="userMap">
+		select * from ec_user where fatherid = #{fatherid} order by createTime desc
+	</select>
+	
+	<select id="getVipListCount" parameterType="String" resultType="int">
+		select count(1) from ec_user where fatherid = #{fatherid}
+	</select>
+	
+	<select id="getSvipUserList" parameterType="String" resultMap="userMap">
+		select * from ec_user where fatherid = #{userid} or id = #{userid}
+	</select>
+	
+	<select id="queryCashUser" parameterType="java.util.Map" resultMap="userMap">
+	select a.*, truncate(w.amount,2) as balance from ec_user a,ec_user_wallet w where a.id = w.userid and 
+    EXISTS (select 1 from ec_recharge_record b where a.id = b.userid and b.status = 0 
+    <if test="actionStartTime !=null and '' != actionStartTime">
+		  and b.datetime >= #{actionStartTime}
+	</if>
+	<if test="actionEndTime !=null and '' != actionEndTime">
+		<![CDATA[ 
+		  and b.datetime <= #{actionEndTime}
+		]]>
+	</if>
+    ) and
+  not EXISTS (select 1 from ec_user_game_relation c where a.mobilenumber = c.userid 
+     <if test="actionStartTime !=null and '' != actionStartTime">
+		  and c.createtime >= #{actionStartTime}
+	</if>
+	<if test="actionEndTime !=null and '' != actionEndTime">
+		<![CDATA[ 
+		  and c.createtime <= #{actionEndTime}
+		]]>
+	</if>
+    )
+     <if test="userId !=null and '' != userId">
+			and a.mobilenumber = #{userId}
+		</if>
+	</select>
+	
+	<select id="getCashUserCount" resultType="int" parameterType="java.util.Map">
+		select count(1) from ec_user a where 
+    EXISTS (select 1 from ec_recharge_record b where a.id = b.userid and b.status = 0 
+    <if test="actionStartTime !=null and '' != actionStartTime">
+		  and b.datetime >= #{actionStartTime}
+	</if>
+	<if test="actionEndTime !=null and '' != actionEndTime">
+		<![CDATA[ 
+		  and b.datetime <= #{actionEndTime}
+		]]>
+	</if>
+    ) and
+   not EXISTS (select 1 from ec_user_game_relation c where a.mobilenumber = c.userid 
+     <if test="actionStartTime !=null and '' != actionStartTime">
+		  and c.createtime >= #{actionStartTime}
+	</if>
+	<if test="actionEndTime !=null and '' != actionEndTime">
+		<![CDATA[ 
+		  and c.createtime <= #{actionEndTime}
+		]]>
+	</if>
+    )
+   <if test="userId !=null and '' != userId">
+			and a.mobilenumber = #{userId}
+		</if>
+	</select>
+	
+	<select id="querySvipUserList" parameterType="String" resultMap="userMap" > 
+	    SELECT * FROM ec_user t WHERE t.type=2 AND t.inviteCodeSelf IS null
+	</select>
+	
+	<update id="updateSvipUserForInviteCode">
+	    update ec_user set
+		inviteCodeSelf = #{inviteCodeSelf} where id = #{id};
+	</update>
+	
+	<select id="getUserTotalRecharge" parameterType="java.util.Map" resultType="java.math.BigDecimal">
+	<![CDATA[ 
+		SELECT SUM(t.amount) FROM ec_recharge_record t WHERE t.`status` = 0 AND t.createTime <= STR_TO_DATE( #{time}, '%Y-%m-%d %H:%i:%s' ) and t.userid = #{userid} GROUP BY t.userid]]>
+	</select>
+	
+	<update id="freedomUserById" parameterType="java.util.Map" >
+	    update ec_user set status = #{status} where id = #{id};
+	</update>
+	
+	<select id="queryOtherUsers" parameterType="java.lang.String" resultMap="userMap">
+	SELECT
+	*
+FROM
+	ec_user t
+RIGHT JOIN(
+	SELECT
+		*
+	FROM
+		(
+			SELECT DISTINCT
+				a.userid
+			FROM
+				ec_user_game_relation a
+			WHERE
+				a.gameid = #{value}
+			LIMIT 20
+		) g
+)f ON f.userid = t.mobilenumber
+	</select>
+</mapper>

@@ -1,0 +1,167 @@
+
+.gamelist_t{
+    background:url(../images/rank/gamelist_t.png) no-repeat scroll 0 0 transparent;
+    height: 8px;
+    width: 206px;
+}
+.gamerank_pic{ widows:208px; height:355px; background:url(../images/rank/rank_pic.png) no-repeat; margin-top:10px;}
+.contentR{ margin-bottom:20px;}
+.gameRank {
+	margin-top: 10px;
+}
+.gameRank_t {
+	width: 206px;
+	height: 8px;
+	background: url(../images/border-radiusLTop.png) no-repeat;
+}
+.gameR_t {
+	width: 1042px;
+	height: 42px;
+	background: url(../images/rank/gamerank_t.png) no-repeat;
+	margin-top: 10px;
+	color: #f16244;
+}
+.gameR_t label {
+	font-size: 16px;
+	font-weight: bold;
+	height: 42px;
+	line-height: 42px;
+	margin-left: 20px;
+	display: inline-block;
+	width: 150px;
+	text-align: center;
+}
+ul.gameR_list {
+	width: 206px;
+	background: #fff;
+}
+
+ul.gameR_list li {
+	line-height: 42px;
+	text-align:left;
+	border-bottom: 1px solid #d1d1d1;
+	width: 164px;
+	padding-left:40px;
+	border-left:1px solid #d1d1d1;
+	border-right:1px solid #d1d1d1;
+}
+ul.gameR_list img{ display:inline-block; width:30px; height:30px; float:left; line-height:42px; margin-top:5px;}
+ul.gameR_list li a {
+	display: inline-block;
+	
+	height: 42px;
+	color: #555;
+	
+}
+ul.gameR_list li:last-child {
+	border-bottom: none;
+}
+ul.gameR_list li:hover {
+	background-color:#e8e7e7;
+	color: #f16244;
+}
+.gameRank_b {
+	width: 206px;
+	height: 8px;
+	background: url(../images//border-radiusLBottom.png) no-repeat;
+}
+.wealth_c {
+	width: 1040px;
+	border-left: 1px solid #d1d1d1;
+	border-right: 1px solid #d1d1d1;
+	background-color: #FFF;
+	min-height: 1424px;
+	height: auto;
+}
+.wealth_c_list {
+	width: 1020px;
+	margin: 0 auto;
+}
+.wealth_c_list li {
+	width: 1020px;
+	height: 42px;
+	border-bottom: 1px dashed #d1d1d1;
+	text-align: center;
+}
+.wealth_c_list li:last-child{ border-bottom:none;}
+.wealth_c_list li dl {
+	width: 280px;
+	margin: 0 30px;
+}
+.Riches_list01 {
+	width: 30px;
+	height: 40px;
+	background: url(../images/jin.png) no-repeat;
+	line-height: 60px;
+	margin-left:15px;
+}
+.Riches_list02 {
+	width: 30px;
+	height: 40px;
+	background: url(../images/yin.png) no-repeat;
+	line-height: 60px;
+	margin-left:15px;
+}
+.Riches_list {
+	background: url("../images/rank/tong.png") no-repeat scroll 0 0 transparent;
+	height: 24px;
+	line-height: 24px;
+	width: 32px;
+	text-align: center;
+	display: inline-block;
+	margin-left: 15px;
+	margin-top: 5px;
+}
+.Riches_list01 label{ color:#fff;}
+.Riches_list02{color:#b8b9ba;}
+.Riches_list label {
+	padding-top: 5px;
+	line-height: 28px;
+	color: #b8b9ba;
+}
+.Riches_name {
+	display: inline-block;
+	height:40px;
+	line-height: 40px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 120px;
+	margin: 0 10px;
+	text-aline:left;
+	
+}
+.Riches_pic {
+	background: url("../images/%20people.png") no-repeat scroll 0 0 transparent;
+	height: 32px;
+	line-height: 32px;
+	width: 32px;
+	margin-top:5px;
+}
+.login_c{ width:100px;}
+
+
+.xgame_list01,.xgame_list02,.xgame_list03{width:24px; height:24px; line-height:24px; background-color:#f16244; margin-top:5px; color:#fff;}
+.xgame_list{ width:24px; height:24px; line-height:24px; background-color:#f6f6f6; border:1px solid #64BF0D; margin-top:5px;}
+.xgame_list label {
+	padding-top: 5px;
+	line-height: 28px;
+	color: #b8b9ba;
+}
+.game_c_list {
+	width: 1020px;
+	margin: 0 auto;
+}
+.game_c_list li {
+    border-bottom: 1px dashed #D1D1D1;
+    height: 41px;
+    text-align:center;
+    width: 1020px;
+}
+.game_c_list li:last-child{ border-bottom:none;}
+.game_c_list li dl {
+	width: 200px;
+	margin: 0 30px;
+	margin-left:100px;
+	
+}

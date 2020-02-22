@@ -1,0 +1,49 @@
+
+body {
+    background-color: #FFFFFF;
+}
+.pay_list {
+    background-color: #F4F6FD;
+    margin: 15px 0 0 15px;
+    padding: 10px 0 10px 10px;
+    width: 220px;
+	
+}
+.pay_list:hover {
+    background-color: #EBEFF8;
+}
+.pay_list ul {
+	
+    height: 336px;
+    overflow-y: scroll;
+}
+.pay_list ul li {
+    display: inline-block;
+    float: none;
+    margin-right: 0;
+    width: 200px;
+}
+.pay_list ul li input {
+}
+.pay_list ul li label {
+    background-color: #FFFFFF;
+    position: relative;
+    width: 165px;
+}
+.pay_list ul li label span {
+    color: #333333;
+    line-height: 14px;
+    position: absolute;
+    right: 5px;
+    text-align: right;
+    top: 5px;
+    width: 70px;
+}
+.pay_list ul li label span i {
+    color: #FF0000;
+    display: block;
+    font-family: impact;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: bolder;
+}

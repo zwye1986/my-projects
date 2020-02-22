@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.Bank">
+	<resultMap type="bank" id="bankResult">
+		<result column="bankId" property="bankId" />
+		<result column="bankName" property="bankName" />
+		<result column="shortName" property="shortName" />
+	</resultMap>
+	
+	<select id="queryBank" resultMap="bankResult" >
+		select * from ec_bank;
+	</select>
+	<select id="findBankListByCityid" parameterType="int" resultMap="bankResult" >
+		<![CDATA[ 
+		select b.* from ec_bank_city_map bcm,ec_bank b where bcm.cityid = #{cityid} and bcm.bankid = b.bankid
+		]]>
+	</select>
+</mapper>

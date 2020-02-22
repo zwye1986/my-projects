@@ -1,0 +1,9 @@
+.user_hy_enter{ width:900px; height:450px; background:#e43f00; position:relative;margin-left: 55px}
+.hy_top{ position:absolute; width:130px; height:105px; top:0px; left:0px; background:url(../images/user/hy_top.png) no-repeat;}
+.hy_banner{ position:absolute; width:840px; height:210px;top:0px; left:0px; background:url(../images/user/hy_banner.png) no-repeat; left:30px; top:70px;}
+ul.hy_list{ width:840px; position:absolute; left:0px; top:280px; text-align:center;}
+ul.hy_list li{ line-height:36px; border-bottom:none;}
+.hy_txt{ color:#ffd54d; font-size:24px;}
+li.hy_btn{ width:285px; height:75px; background:url(../images/user/user_vip_btn_n.png) no-repeat; cursor:pointer; margin-left:307px; margin-top:20px;}
+li.hy_btn:hover{ width:285px; height:75px; background:url(../images/user/user_vip_btn_h.png) no-repeat; cursor:pointer;}
+

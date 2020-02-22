@@ -1,0 +1,368 @@
+@charset "UTF-8";
+/* CSS Document */
+/* CSS Document */
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0 }
+body {
+	background-color: #fff;
+	color: #3c3c3c;
+	font: 13px/1.5 Microsoft YaHei, Helvetica, Tahoma;
+}
+#header .inner, #footer .inner {
+    height: inherit;
+    position: relative;
+    z-index: 5;
+}
+#wrapper, #wrap, #header .inner, #footer .inner, .yol-top {
+    margin: 0 auto;
+    width: 1000px;
+}
+a{ text-decoration:none;}
+
+/*header*/
+#header {
+	background:#fff;
+	height: 140px;
+	margin-bottom: 10px;
+	position: relative;
+	z-index: 101;
+}
+#header .inner, #footer .inner {
+	height: inherit;
+	position: relative;
+	z-index: 5;
+}
+#wrapper {
+	background: none repeat scroll 0 0 #FFFFFF;
+	
+}
+#wrapper, #wrap {
+	margin: 0 auto 30px;
+	overflow: hidden;
+}
+
+#main {
+	margin: 0 20px 0 190px;
+	overflow: hidden;
+}
+#sidesub {
+	border-left: 1px solid #E8ECEF;
+	float: right;
+	margin-right: 30px;
+	padding: 30px 0 0 30px;
+	width: 250px;
+}
+#mainsub {
+	margin: 0 340px 0 30px;
+	overflow: hidden;
+	padding-top: 30px;
+}
+#sidebar, #main, #sidesub, #mainsub {
+	height: auto !important;
+	margin-bottom: -29999px;
+	min-height: 750px;
+	padding-bottom: 29999px;
+}
+#footer {
+	height: 230px;
+	position: relative;
+}
+#header .b {
+	
+	height: 42px;
+	left: 0;
+	min-width: 1000px;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+	background:url(../images/common/comm_new_rep_imgs.png) repeat-x;
+}
+#header .service {
+	color: #fff;
+	height: 40px;
+	
+	line-height: 40px;
+	
+	top: 0;
+}
+#header .service b {
+	display: inline;
+	float: left;
+	color: #475058;
+}
+#header .service li {
+	display: inline;
+	float: left;
+	height: 40px;
+	padding-left: 20px;
+	position: relative;
+}
+#header .hotline .icons {
+	background-position: -191px -146px;
+	height: 14px;
+	left: 0;
+	position: absolute;
+	top: 14px;
+	width: 14px;
+}
+#header .hotline em {
+	display: inline;
+	float: left;
+	font-family: Tahoma;
+	font-size: 20px;
+	line-height: normal;
+	margin-top: 6px;
+	padding-left: 5px;
+}
+
+.icons {
+	
+	background: url(../images/common/sprites.png) no-repeat;
+	display: inline-block;
+	font-size: 0;
+	height: 16px;
+	line-height: 0;
+	overflow: hidden;
+	text-indent: -9999px;
+	width: 16px;
+}
+#header .twitter{
+	background-position: -393px -315px;
+    display: inline;
+	float: left;
+	margin-left:3px;
+	height: 20px;
+	margin-top: 11px;
+	width:5px;}
+#header .facebook{
+	background-position: -417px -315px;
+    display: inline;
+	float: left;
+	margin-left:3px;
+	height: 20px;
+	margin-top: 11px;
+	width:5px;
+	}
+#header .tengxun {
+	background-position: -441px -315px;
+    display: inline;
+	float: left;
+	margin-left:3px;
+	height:20px;
+	margin-top: 11px;
+	width:5px;
+}
+#header .sina {
+	background-position: -465px -315px;
+    display: inline;
+	float: left;
+	margin-left:3px;
+	height: 20px;
+	margin-top: 11px;
+	width:5px;
+}
+
+
+
+.loginbar {
+	height: 42px;
+	line-height: 42px;
+	position: absolute;
+	right: 10px;
+	top: 0;
+}
+.loginbar .for {
+	float: left;
+}
+.loginbar .for ul li{ float:left; display:inline-block;}
+.loginbar .for a {
+	display: inline-block;
+	position: relative;
+	padding:0 10px;
+	color: #475058;
+}
+.loginbar .for a:hover {
+	text-decoration: underline;
+}
+.loginbar .for .new-tag {
+	position: absolute;
+	right: 0;
+	top: 2px;
+}
+#header .logo {
+	height:70px;
+	left: 0;
+	overflow: hidden;
+	position: absolute;
+	top: 55px;
+	width:211px;
+	z-index:99;
+}
+#header .logo img {
+	display: block;
+}
+#header .logo h2 {
+	display: inline;
+	float: left;
+	height:70px;
+	overflow: hidden;
+	width: 350px;
+}
+#header .logo h1 {
+	display: none;
+	float: left;
+	height: 46px;
+	margin: 4px 0 0 10px;
+	overflow: hidden;
+	text-indent: -9999em;
+	width: 193px;
+}
+.userbar {
+	font-size: 16px;
+	height: 40px;
+	line-height: 40px;
+	position: absolute;
+	right: 10px;
+	top: 80px;
+}
+.userbar a, .userbar a:visited {
+	color: #475058;
+}
+.userbar a:hover {
+	 color: #349CD8;
+	 text-decoration:none;
+}
+.userbar .nav {
+	
+	display: inline;
+	float: left;
+	height: 40px;
+}
+.userbar .nav li {
+	display: inline;
+	float: left;
+	padding: 0 10px;
+}
+.userbar .nav li.current a {
+	color: #349CD8;
+}
+.userbar .nav li.current a:visited {
+	color: #349CD8;
+}
+.userbar .nav li.current a:hover {
+}
+.userbar .use {
+	
+	display: inline;
+	float: left;
+	height: 40px;
+}
+.userbar .use a.btn_xm {
+	
+	display: inline;
+	float: left;
+	height:50px;
+	margin-left: 20px;
+	text-align: center;
+	width:155px;
+	background:url(../img/common/btn_xm.png) no-repeat;
+	color:#fff;
+	line-height:50px;
+	margin-top:-6px;
+}
+.userbar .use a.btn_zh {
+	display: inline;
+	float: left;
+	height:50px;
+	margin-left:10px;
+	text-align: center;
+	width:155px;
+	background:url(../img/common/btn_zh.png) no-repeat;
+	color:#fff;
+	line-height:50px;
+	margin-top:-6px;
+}
+
+
+/*new_footer*/
+.new_footer_wrapper{ width:100%; height:210px; background:#fff; display:block}
+
+.new_footer_wrapper{ height:160px;  display:block;}
+.new_top_w{ width:100%; height:30px; line-height:30px; margin-bottom:20px; border-top:1px solid #ccc;border-bottom:1px solid #ccc; border-left:none; border-right:none;  }
+.new_top{ width:1000px; margin:0 auto;border-top:1px solid #ccc; height:30px; line-height:30px;border-bottom:1px solid #ccc; margin-top:-1px}
+.new_center{ width:1000px; margin:0 auto; height:120px;}
+ul.new_center_l{}
+ul.new_center_l li{margin-bottom:10px;}
+ul.new_center_l dd{ float:left; display:inline-block; margin-right:20px;}
+.new_center_r{ width:330px;}
+.new_btm_w{ width:100%; height:30px; background:#ebebeb;}
+.new_btm{ width:1000px; height:30px; background:#ebebeb; margin:0 auto; line-height:30px;}
+#site-nav-bg {Z-INDEX: 9999; LEFT: 0px; width: 100%; BORDER-BOTTOM: #d2d2d2 1px solid; position: absolute; TOP: 0px; HEIGHT: 25px}
+#site-nav {Z-INDEX: 10000; MARGIN: 2px auto; COLOR: #000; LINE-HEIGHT: 19px; position: relative; HEIGHT: 22px}
+#site-nav A {COLOR: #666}
+#site-nav A:hover { color: #349CD8;}
+#site-nav .login-info {FLOAT: left; PADDING-TOP: 1px}
+#site-nav .login-info A {MARGIN-RIGHT: 8px}
+#site-nav .login-info A.user-nick {MARGIN-RIGHT: 0px}
+#site-nav .quick-menu {left: 0px; position: absolute; TOP: 0px}
+#site-nav .quick-menu LI {padding-right: 10px; background-position: right 6px; padding-left: 10px; FLOAT: left; padding-bottom: 0px; MARGIN-LEFT: -1px; PADDING-TOP: 2px}
+#site-nav .quick-menu LI.last {background: none transparent scroll repeat 0% 0%}
+#site-nav .quick-menu LI.menu-item {padding-right: 0px; padding-left: 0px; padding-bottom: 0px; PADDING-TOP: 0px; position: relative}
+#site-nav .quick-menu .cart {PADDING-TOP: 1px; position: relative; _padding-top: 2px}
+#site-nav .quick-menu .cart A {padding-left: 16px}
+#site-nav .quick-menu .cart S {background-position: -83px -21px; LEFT: 8px; width: 14px; position: absolute; TOP: 6px; HEIGHT: 11px}
+#site-nav .menu-hd {padding-right: 22px; DISPLAY: block; padding-left: 10px; Z-INDEX: 10002; padding-bottom: 0px; MARGIN: 1px 1px 0px; CURSOR: pointer; PADDING-TOP: 0px; position: relative; HEIGHT: 20px}
+#site-nav .mytaobao .menu-hd {width:78px; PADDING-TOP: 1px; _padding-top: 1px;}
+#site-nav .search .menu-hd {width: 24px; PADDING-TOP: 1px; _padding-top: 1px}
+#site-nav .services .menu-hd {width: 48px; PADDING-TOP: 1px; _padding-top: 1px}
+#site-nav .menu-hd B {BORDER-RIGHT: #fff 4px solid; border-top: #666 4px solid; FONT-SIZE: 0px; RIGHT: 10px; BORDER-LEFT: #fff 4px solid; width: 0px; LINE-HEIGHT: 0; BORDER-BOTTOM: #fff 4px solid; position: absolute; TOP: 7px; HEIGHT: 0px; -webkit-transition: -webkit-transform .2s ease-in; -moz-transition: -webkit-transform .2s ease-in; -o-transition: -webkit-transform .2s ease-in; transition: -webkit-transform .2s ease-in}
+#site-nav .search .menu-hd {padding-left: 25px; COLOR: #666}
+#site-nav .search .menu-hd S {background-position: -67px -20px; LEFT: 9px; width: 14px; position: absolute; TOP: 4px; HEIGHT: 13px}
+#site-nav .menu-bd {BORDER-RIGHT: #bfbfbf 1px solid; border-top: #bfbfbf 1px solid; DISPLAY: none; Z-INDEX: 10001; RIGHT: 0px; background: #fff; BORDER-LEFT: #bfbfbf 1px solid; BORDER-BOTTOM: #bfbfbf 1px solid; position: absolute; TOP: 21px}
+#site-nav .search .menu-bd {_right: -1px}
+#site-nav IFRAME.menu-bd {border-top-width: 0px; BORDER-LEFT-width: 0px; Z-INDEX: -1; background: none transparent scroll repeat 0% 0%; FILTER: alpha(opacity=0); FLOAT: left; BORDER-BOTTOM-width: 0px; BORDER-RIGHT-width: 0px}
+#site-nav .menu-bd-panel {padding-right: 10px; padding-left: 10px; padding-bottom: 6px; PADDING-TOP: 10px}
+#site-nav .menu-item-opp .menu-bd {LEFT: 0px}
+#site-nav .menu-item-opp .menu-bd S.rt {LEFT: 0px}
+#site-nav .menu-item-opp .menu-bd S.lt {background-position: -87px -55px; RIGHT: -2px; LEFT: auto}
+#site-nav .menu {position: relative}
+#site-nav .menu:hover .menu-hd {BORDER-RIGHT: #bfbfbf 1px solid; border-top: #bfbfbf 1px solid; background: white; MARGIN: 0px; BORDER-LEFT: #bfbfbf 1px solid; BORDER-BOTTOM: #bfbfbf 1px; background:#eee}
+#site-nav .hover .menu-hd {BORDER-RIGHT: #bfbfbf 1px solid; border-top: #bfbfbf 1px solid; background: white; MARGIN: 0px; BORDER-LEFT: #bfbfbf 1px solid; BORDER-BOTTOM: #bfbfbf 1px}
+#site-nav .menu:hover .menu-bd {DISPLAY: block}
+#site-nav .hover .menu-bd {DISPLAY: block}
+#site-nav .menu:hover .menu-hd B {BORDER-LEFT-COLOR: #eee; FILTER: progid:DXImageTransform.Microsoft.BasicImage(rotation=2); BORDER-BOTTOM-COLOR: #eee; border-top-COLOR: #666; TOP: 5px; BORDER-RIGHT-COLOR: #eee; -moz-transform: rotate(180deg); -moz-transform-origin: 50% 30%; -webkit-transform: rotate(180deg); -webkit-transform-origin: 50% 30%; -o-transform: rotate(180deg); -o-transform-origin: 50% 30%; transform: rotate(180deg); transform-origin: 50% 30%}
+#site-nav .hover .menu-hd B {BORDER-LEFT-COLOR: #fff; FILTER: progid:DXImageTransform.Microsoft.BasicImage(rotation=2); BORDER-BOTTOM-COLOR: #fff; border-top-COLOR: #666; TOP: 5px; BORDER-RIGHT-COLOR: #fff; -moz-transform: rotate(180deg); -moz-transform-origin: 50% 30%; -webkit-transform: rotate(180deg); -webkit-transform-origin: 50% 30%; -o-transform: rotate(180deg); -o-transform-origin: 50% 30%; transform: rotate(180deg); transform-origin: 50% 30%}
+#site-nav .mytaobao .menu-bd {width:110px; LINE-HEIGHT: 1.7; TOP: 21px; HEIGHT:100px}
+#site-nav .mytaobao .menu-bd-panel {padding-right: 10px; padding-left: 10px; padding-bottom: 8px; PADDING-TOP: 8px}
+#site-nav .mytaobao .menu-bd-panel a{ width:100%; display:block; text-align:center; line-height:28px;}
+
+/**.left{ width:90px; height:790px;position:fixed; left:10px; top:150px; z-index:9999}**/
+.left{top:150px;position: fixed; width: 54px; z-index: 998;}
+ul.road_list{ width:78px; margin-left:5px; border:1px solid #cbcbcb}
+ul.road_list li{ width:78px; height:80px; display:inline-block; background:#fff; border-bottom:1px solid #ccc; position:relative}
+i.cz_icons{background-position: -110px 5px;display: inline-block;height: 80px;position: absolute;  width:78px; left:15px}
+ul.road_list li.road_list1:hover{ background:#a2e6ff}
+ul.road_list li.road_list2 i.tx_icons{background-position: -110px -75px;display: inline-block;height: 80px;position: absolute;  width:78px; left:15px}
+ul.road_list li.road_list2:hover{ background:#d0f06c}
+ul.road_list li.road_list3 i.qb_icons{background-position: -110px -155px;display: inline-block;height: 80px;position: absolute;  width:78px; left:15px}
+ul.road_list li.road_list3:hover{ background:#ffc93b}
+ul.road_list li.road_list4 i.zx_icons{background-position: -110px -235px;display: inline-block;height: 80px;position: absolute;  width:78px; left:15px}
+ul.road_list li.road_list4:hover{ background:#7cf0cb}
+ul.road_list li:last-child{ border-bottom:none;}
+.app_down{ width:78px; margin-left:5px; height:420px;}
+.app_title{height:207px;width:92px; position:relative; margin-top:10px; }
+i.apptitle_icons{background-position:-210px 0px;display: inline-block;height:207px;position: absolute; width:92px; left:-8px; }
+
+/**.right{ width:90px; height:305px;position:fixed; right:10px; top:147px; z-index:9999}**/
+.right{top:147px;
+    
+    position: fixed;
+    width: 54px;
+    z-index: 998;}
+.sign_btn,.sign_btn_h{ cursor:pointer}
+.sign_c{ width:79px; height:135px; background:#fff; border:1px solid #ccc; margin-left:5px}
+.today_sign{ border-bottom:1px solid #ccc; height:60px;}
+.today_sign span{ text-align:center; display:inline-block; width:100%; height:26px; line-height:26px; }
+.sign_detail a{font-size:12px; text-align:center; display:inline-block; width:100%; line-height:36px;color:#64c7ee}
+
+.cf_rank img,.sr_rank img{background:#fff}

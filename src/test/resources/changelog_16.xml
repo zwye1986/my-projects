@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet id="withdrawal_modify" author="zhangwenyun">
+	<addColumn tableName="ec_withdrawal_record">
+		<column name="withdrawal_success_time" type="datetime" >
+		</column>
+	</addColumn>
+	<addColumn tableName="ec_news">
+		<column name="isImp" type="int" defaultValue="0" >
+			<constraints nullable="false"  />
+		</column>
+	</addColumn>
+	<sql>
+		update ec_withdrawal_record t set t.withdrawal_success_time = t.cashDay where t.cashDay is not null and t.status = 0;
+	</sql>
+	<sql>
+		update ec_withdrawal_record t set t.withdrawal_success_time = t.vipCashDay where t.vipCashDay is not null and t.status = 0;
+	</sql>
+</changeSet>
+</databaseChangeLog>

@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="EC_WithdrawalRecord">
+
+	<resultMap type="com.venada.efinance.pojo.WithdrawalRecord" id="withdrawalRecordResult" extends="base.BaseEntity.baseEntityResult">
+		<result column="serialNumber" property="serialNumber" />
+		<result column="dateTime" property="dateTime" />
+		<result column="status" property="status" />
+		<result column="ipAddress" property="ipAddress" />
+		<result column="amount" property="amount" />
+		<result column="balance" property="balance" />
+		<result column="description" property="description" />
+		<result column="userid" property="userId" />
+		<result column="bankCardId" property="bankCardId" />
+	</resultMap>
+	
+	<resultMap type="com.venada.efinance.pojo.WithdrawalRecord" id="withdrawalRecordResultExtra" extends="base.BaseEntity.baseEntityResult">
+		<result column="dateTime" property="dateTime" />
+		<result column="status" property="status" />
+		<result column="amount" property="amount" />
+		<result column="userid" property="userId" />
+		<result column="mobileNumber" property="mobileNumber" />
+		<result column="cardNumber" property="cardNumber"/>
+		<result column="userName" property="userName"/>
+		<result column="bankProvinceid"  property="bankProvinceid"/>
+		<result column="bankCityid" property="bankCityid"/>
+		<result column="bankid" property="bankid"/>
+		<result column="subBank" property="subBank"/>
+		<result column="bankName" property="bankName"/>
+		<result column="province" property="province" />
+		<result column="cityName" property="cityName"/> 
+		<result column="subBankName" property="subBankName"/>
+		<result column="serialNumber" property="serialNumber"/>
+		<result column="cardStatus" property="cardStatus"/>
+		<result column="cashDay" property="cashDay"/>
+		<result column="vipCashDay" property="vipCashDay"/>
+		<result column="bankCardId" property="bankCardId" />
+		<result column="withdrawal_success_time" property="withdrawalSuccessTime"/>
+	</resultMap>
+	
+	<resultMap type="com.venada.efinance.pojo.WithdrawalRecord" id="withdrawalRecordForApi"  extends="base.BaseEntity.baseEntityResult">
+		<result column="datetime" property="dateTime" />
+		<result column="status" property="status" />
+		<result column="amount" property="amount" />
+		<result column="cardNumber" property="cardNumber"/>
+		<result column="serialNumber" property="serialNumber"/>
+	</resultMap>
+	
+
+	<sql id="Base_Column_List">
+		id, serialNumber, datetime, status, ipAddress, amount,
+		createBy,
+		createTime, modifyBy,
+		modifyTime, orderBy,
+		userid,balance,description
+	</sql>
+
+    <select id="getWithDrawalRecordBySerialNumber" parameterType="java.lang.String" resultType="com.venada.efinance.pojo.WithdrawalRecord">
+        select <include refid="Base_Column_List" />
+        from `ec_withdrawal_record` where serialNumber = #{serialNumber};
+    </select>
+	
+	<select id="queryWithDrawalRecord" parameterType="java.util.Map" resultMap="withdrawalRecordResultExtra">
+<![CDATA[
+select t5.*,t6.`bankName`,t7.`province`,t8.`name` cityName,t9.`name` subBankName from `ec_bank` t6,`ec_province` t7, `ec_bank_city` t8, `ec_bank_branch` t9,
+
+(select t3.* ,t4.`bankProvinceid`,t4.`bankCityid`,t4.`bankid`,t4.`subBank` ,t4.`status` cardStatus
+	from `ec_bankCard` t4 ,
+
+		(select t1.`amount`,
+				t1.`cardNumber`,
+				t1.`userid`,
+				t1.`datetime`,
+				t1.`status`,
+				t2.`mobileNumber`,
+				t2.`name` userName,
+				t1.`serialNumber`,
+				t1.`cashDay`,
+				t1.`vipCashDay`,
+				t1.`bankCardId`,
+				t1.`withdrawal_success_time`
+		from `ec_withdrawal_record` t1 ,`ec_user` t2 
+		where t2.`type` = #{type} and t1.`userid` = t2.`id` 
+		]]>
+	 <if test="withdrawalSuccessTime != null">
+	 <![CDATA[
+	 and SUBSTR(t1.`withdrawal_success_time`, 1,10) = DATE_FORMAT(#{withdrawalSuccessTime}, '%Y-%m-%d')
+	  ]]>
+	 </if>
+	 <if test="dateTimeBegin != null">
+	 <![CDATA[
+	  and t1.datetime >= #{dateTimeBegin}]]>
+	 </if>
+	 
+	 <if test="dateTimeEnd != null">
+	 	<![CDATA[
+	 		and t1.datetime <= #{dateTimeEnd}
+	 	]]>
+	 </if>
+	 
+	 <if test="cashDayBegin != null">
+	 <![CDATA[
+	  and (t1.cashDay >= #{cashDayBegin} or t1.vipCashDay >= #{cashDayBegin} )
+	  ]]>
+	 </if>
+	 
+	 <if test="cashDayEnd != null">
+	 	<![CDATA[
+	 		and (t1.cashDay <= #{cashDayEnd} or t1.vipCashDay <= #{cashDayEnd} )
+	 	]]>
+	 </if>
+	 
+	 <if test="mobileNumber != null">
+	 	<![CDATA[
+	 		and t2.mobileNumber = #{mobileNumber}
+	 	]]>
+	 </if>
+	 
+	 <if test="name != null">
+	 	<![CDATA[
+	 		and t2.name = #{name}
+	 	]]>
+	 </if>
+	 
+	 <if test="status != null">
+	 	<![CDATA[
+	 		and t1.status = #{status}
+	 	]]>
+	 </if>
+	 
+	 <if test="serialNumber != null">
+	 	<![CDATA[
+	 		and t1.serialNumber = #{serialNumber}
+	 	]]>
+	 </if>
+	 
+	  <if test="cashDay != null">
+	 	<![CDATA[
+	 		and ( SUBSTR(t1.cashDay, 1,10) = DATE_FORMAT(now(), '%Y-%m-%d')
+	OR SUBSTR(t1.vipCashDay,1,10) = DATE_FORMAT(now(), '%Y-%m-%d'))
+	 	]]>
+	 </if>
+	  <![CDATA[
+		 ) t3 
+		
+	where t4.`id` = t3.`bankCardId` ) t5 
+	
+	 where t6.`bankId` = t5.`bankId` and t7.`bankProvinceid` = t5.`bankProvinceid` and t8.`id` = t5.`bankCityid` and t9.`id` = t5.`subBank` 
+	 ]]>
+	 
+	 <![CDATA[
+	 order by t5.datetime desc;]]>
+	</select>
+	
+	<select id="queryWithDrawalRecordCount" parameterType="java.util.Map" resultType="int">
+<![CDATA[
+select count(1) from `ec_bank` t6,`ec_province` t7, `ec_bank_city` t8, `ec_bank_branch` t9,
+
+(select t3.* ,t4.`bankProvinceid`,t4.`bankCityid`,t4.`bankid`,t4.`subBank` ,t4.`status` cardStatus
+	from `ec_bankCard` t4 ,
+
+		(select t1.`amount`,t1.`cardNumber` ,t1.`userid`,t1.`datetime`,t1.`status` ,t2.`mobileNumber`,t2.`name` userName,t1.`serialNumber`,t1.`cashDay`, t1.`vipCashDay`,t1.`bankCardId`
+		from `ec_withdrawal_record` t1 ,`ec_user` t2 
+		where t2.`type` = #{type} and t1.`userid` = t2.`id`
+		]]>
+	 <if test="withdrawalSuccessTime != null">
+	 <![CDATA[
+	 and SUBSTR(t1.`withdrawal_success_time`, 1,10) = DATE_FORMAT(#{withdrawalSuccessTime}, '%Y-%m-%d')
+	  ]]>
+	 </if>
+	 
+	 <if test="dateTimeBegin != null">
+	 <![CDATA[
+	  and t1.datetime >= #{dateTimeBegin}]]>
+	 </if>
+	 
+	 <if test="dateTimeEnd != null">
+	 	<![CDATA[
+	 		and t1.datetime <= #{dateTimeEnd}
+	 	]]>
+	 </if>
+	 
+	  <if test="cashDayBegin != null">
+	 <![CDATA[
+	  and (t1.cashDay >= #{cashDayBegin} or t1.vipCashDay >= #{cashDayBegin} )
+	  ]]>
+	 </if>
+	 
+	 <if test="cashDayEnd != null">
+	 	<![CDATA[
+	 		and (t1.cashDay <= #{cashDayEnd} or t1.vipCashDay <= #{cashDayEnd} )
+	 	]]>
+	 </if>
+	 
+	 <if test="mobileNumber != null">
+	 	<![CDATA[
+	 		and t2.mobileNumber = #{mobileNumber}
+	 	]]>
+	 </if>
+	 
+	 <if test="name != null">
+	 	<![CDATA[
+	 		and t2.name = #{name}
+	 	]]>
+	 </if>
+	 
+	 <if test="status != null">
+	 	<![CDATA[
+	 		and t1.status = #{status}
+	 	]]>
+	 </if>
+	 
+	 <if test="serialNumber != null">
+	 	<![CDATA[
+	 		and t1.serialNumber = #{serialNumber}
+	 	]]>
+	 </if>
+	
+	<if test="cashDay != null">
+	 	<![CDATA[
+	 		and ( SUBSTR(t1.cashDay, 1,10) = DATE_FORMAT(now(), '%Y-%m-%d')
+	OR SUBSTR(t1.vipCashDay,1,10) = DATE_FORMAT(now(), '%Y-%m-%d'))
+	 	]]>
+	 </if>
+	 
+	  <![CDATA[
+		 ) t3 
+		
+	where t4.`id` = t3.`bankCardId`) t5 
+	
+	 where t6.`bankId` = t5.`bankId` and t7.`bankProvinceid` = t5.`bankProvinceid` and t8.`id` = t5.`bankCityid` and t9.`id` = t5.`subBank` 
+	 ]]>
+	 
+	
+	</select>
+	
+
+	<insert id="addWithdrawalRecord" parameterType="withdrawalRecord">
+		insert into ec_withdrawal_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="serialNumber != null">
+				serialNumber,
+			</if>
+			<if test="dateTime != null">
+				dateTime,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="ipAddress != null">
+				ipAddress,
+			</if>
+			<if test="amount != null">
+				amount,
+			</if>
+			<if test="createBy != null">
+				createBy,
+			</if>
+			<if test="createTime != null">
+				createTime,
+			</if>
+			<if test="modifyBy != null">
+				modifyBy,
+			</if>
+			<if test="modifyTime != null">
+				modifyTime,
+			</if>
+			<if test="orderBy != null">
+				orderBy,
+			</if>
+			<if test="userId != null">
+				userid,
+			</if>
+			<if test="balance != null">
+				balance,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="cardNumber != null">
+				cardNumber,
+			</if>
+			<if test="cashDay != null">
+				cashDay,
+			</if>
+			<if test="vipCashDay != null">
+				vipCashDay,
+			</if>
+			
+			<if test="bankCardId != null">
+				bankCardId,
+			</if>
+			
+			
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id},
+			</if>
+			<if test="serialNumber != null">
+				#{serialNumber},
+			</if>
+			<if test="dateTime != null">
+				#{dateTime},
+			</if>
+			<if test="status != null">
+				#{status},
+			</if>
+			<if test="ipAddress != null">
+				#{ipAddress},
+			</if>
+			<if test="amount != null">
+				#{amount},
+			</if>
+			<if test="createBy != null">
+				#{createBy},
+			</if>
+			<if test="createTime != null">
+				#{createTime},
+			</if>
+			<if test="modifyBy != null">
+				#{modifyBy},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime},
+			</if>
+			<if test="orderBy != null">
+				#{orderBy},
+			</if>
+			<if test="userId != null">
+				#{userId},
+			</if>
+			<if test="balance != null">
+				#{balance},
+			</if>
+			<if test="description != null">
+				#{description},
+			</if>
+			<if test="cardNumber != null">
+				#{cardNumber},
+			</if>
+			<if test="cashDay != null">
+				#{cashDay},
+			</if>
+			<if test="vipCashDay != null">
+				#{vipCashDay},
+			</if>
+			<if test="bankCardId != null">
+				#{bankCardId},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="setDealStatus" parameterType="String">
+		update ec_withdrawal_record set status = 0 , withdrawal_success_time = now() where serialNumber = #{serialNumber}
+	</update>
+	
+	<update id="setDealStatusFreeze" parameterType="String">
+		update ec_withdrawal_record set status = 3 , withdrawal_success_time = now() where serialNumber = #{serialNumber}
+	</update>
+	
+	<update id="setDealStatusThaw" parameterType="String">
+		update ec_withdrawal_record set status = 2 , withdrawal_success_time = now() where serialNumber = #{serialNumber}
+	</update>
+	
+	<update id="setDealStatusFail" parameterType="String">
+		update ec_withdrawal_record set status = 1 , withdrawal_success_time = now() where serialNumber = #{serialNumber}
+	</update>
+	
+	<select id="queryWithdrawalForApi" parameterType="java.util.Map" resultMap="withdrawalRecordForApi">
+		<![CDATA[
+		 select ewr.serialNumber,ewr.datetime,ewr.cardNumber,ewr.amount,ewr.status 
+		      from ec_withdrawal_record ewr where ewr.userid=#{userId}  limit #{limitIndex},#{limitCount}
+		]]>
+	</select>
+	
+	<select id="getWithdrawalAmountByUserId" parameterType="String" resultType="java.math.BigDecimal">
+		select sum(amount) amount from ec_withdrawal_record where
+		userid = #{userid} and status='0';
+	</select>
+
+	<select id="countTotalWithdrawalForSvip" parameterType="String" resultType="java.math.BigDecimal">
+		SELECT CASE  WHEN SUM(t1.`amount`) IS  NULL THEN 0 ELSE SUM(t1.`amount`) END 
+FROM   `ec_withdrawal_record` t1,
+       `ec_user` t2
+WHERE  t1.`status` = 0
+   AND t2.`type` = 2
+   AND ( t2.`id` = #{userid}
+          OR t2.`fatherid` = #{userid})
+   AND t1.`userid` = t2.`id`
+	</select>
+	
+	<select id="queryWithdrawalRecordForAndriod" parameterType="java.util.Map" resultMap="withdrawalRecordResult" >
+		SELECT t2.`id`,
+       t2.`datetime`,
+       t2.`status`,
+       t2.`description`,
+       t2.`amount`
+FROM   `ec_user` t1,
+       `ec_withdrawal_record` t2
+WHERE  
+ t1.`id` = #{userid} AND t1.`password` = #{password} and
+t2.`userid` = t1.`id` order by t2.`datetime` desc limit #{begin} , #{end}
+		
+	</select>
+	
+	<select id="queryWithDrawalRecordByConditions" parameterType="java.util.Map" resultMap="withdrawalRecordResultExtra">
+<![CDATA[
+select t5.*,t6.`bankName`,t7.`province`,t8.`name` cityName,t9.`name` subBankName from `ec_bank` t6,`ec_province` t7, `ec_bank_city` t8, `ec_bank_branch` t9,
+
+(select t3.* ,t4.`bankProvinceid`,t4.`bankCityid`,t4.`bankid`,t4.`subBank` ,t4.`status` cardStatus
+	from `ec_bankCard` t4 ,
+
+		(select t1.`amount`,
+				t1.`cardNumber`,
+				t1.`userid`,
+				t1.`datetime`,
+				t1.`status`,
+				t2.`mobileNumber`,
+				t2.`name` userName,
+				t1.`serialNumber`,
+				t1.`cashDay`,
+				t1.`vipCashDay`,
+				t1.`bankCardId`
+		from `ec_withdrawal_record` t1 ,`ec_user` t2 
+		where  t1.`userid` = t2.`id` ) t3 
+		
+	where t4.`id` = t3.`bankCardId` ) t5 
+	
+	 where t6.`bankId` = t5.`bankId` and t7.`bankProvinceid` = t5.`bankProvinceid` and t8.`id` = t5.`bankCityid` and t9.`id` = t5.`subBank` 
+	 ]]>
+	 <if test="dateTimeBegin != null">
+	 <![CDATA[
+	  and t5.datetime >= #{dateTimeBegin}]]>
+	 </if>
+	 
+	 <if test="dateTimeEnd != null">
+	 	<![CDATA[
+	 		and t5.datetime <= #{dateTimeEnd}
+	 	]]>
+	 </if>
+	 
+	 <if test="mobileNumber != null">
+	 	<![CDATA[
+	 		and t5.mobileNumber = #{mobileNumber}
+	 	]]>
+	 </if>
+	 
+	 <if test="name != null">
+	 	<![CDATA[
+	 		and t5.userName = #{name}
+	 	]]>
+	 </if>
+	 
+	 <if test="status != null">
+	 	<![CDATA[
+	 		and t5.status = #{status}
+	 	]]>
+	 </if>
+	 
+	 <if test="serialNumber != null">
+	 	<![CDATA[
+	 		and t5.serialNumber = #{serialNumber}
+	 	]]>
+	 </if>
+	 
+	  <if test="cashDay != null">
+	 	<![CDATA[
+	 		and ( SUBSTR(t5.cashDay, 1,10) = DATE_FORMAT(now(), '%Y-%m-%d')
+	OR SUBSTR(t5.vipCashDay,1,10) = DATE_FORMAT(now(), '%Y-%m-%d'))
+	 	]]>
+	 </if>
+	 
+	 <![CDATA[
+	 order by t5.datetime desc;]]>
+	</select>
+	
+</mapper>

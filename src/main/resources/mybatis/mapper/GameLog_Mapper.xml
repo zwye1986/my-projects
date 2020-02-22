@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="GameLog">
+
+	<resultMap type="gameLog" id="gameLogResult">
+		<result column="id" property="id" />
+		<result column="relationid" property="relationId" />
+		<result column="createTime" property="createTime" />
+	</resultMap>
+
+	<select id="queryGameLog" parameterType="java.util.Map"
+		resultMap="gameLogResult">
+		select * from ec_game_log where 1 = 1
+		<if test="relationId != null and ''!=relationId">
+			and relationId = #{relationId}
+		</if>
+		<if test="createTime != null and ''!=createTime">
+		 and createtime = #{createTime}
+		</if>
+		<if test="onetime != null and ''!=onetime">
+		 and createtime like #{onetime}
+		</if>
+	</select>
+	
+	<select id="queryGameLogNum" parameterType="java.lang.String" resultType="int">
+		select count(1) from ec_game_log where relationid = #{value}
+	</select>
+
+
+	<insert id="addGameLog" parameterType="gameLog">
+		insert into ec_game_log (
+		id,
+		relationid,
+		createTime
+		)
+		values (
+		#{id},
+		#{relationId},
+		#{createTime}
+		)
+	</insert>
+
+	<insert id="addGameLogList" parameterType="java.util.List">
+		insert into ec_game_log (
+		id,
+		relationid,
+		createTime
+		)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.id},
+			#{item.relationId},
+			#{item.createTime}
+			)
+		</foreach>
+
+	</insert>
+
+
+
+</mapper>

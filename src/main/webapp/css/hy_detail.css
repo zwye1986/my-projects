@@ -1,0 +1,118 @@
+.txt1 {
+	color: #5ea0db;
+	font-size: 24px;
+}
+.wrapper {
+	width: 100%;
+}
+.content_t_wrapper {
+	width: 100%;
+	background: url(../images/vip/hy_detail_bg.jpg);
+}
+.content_t {
+	width: 1257px;
+	height: 830px;
+	margin: 0 auto;
+	background: url(../images/vip/hy_detail_top.png) no-repeat;
+	position: relative;
+}
+.detail_share {
+	width: 335px;
+	height: 45px;
+	position: absolute;
+	top: 60px;
+	left: 90px;
+}
+.detail_collect {
+	width: 130px;
+	height: 130px;
+	background: url(../images/vip/detail_collect_n.png) no-repeat;
+	cursor: pointer;
+	position: absolute;
+	top: 40px;
+	right: 70px;
+}
+.detail_collect:hover {
+	width: 130px;
+	height: 130px;
+	background: url(../images/vip/detail_collect_h.png) no-repeat;
+}
+.detail_hy {
+	width: 365px;
+	height: 75px;
+	background: url(../images/vip/detail_hy_btn_n.png) no-repeat;
+	cursor: pointer;
+	position: absolute;
+	left: 230px;
+	bottom: 30px;
+}
+.detail_hy:hover {
+	width: 365px;
+	height: 75px;
+	background: url(../images/vip/detail_hy_btn_h.png) no-repeat;
+}
+.content_c_wrapper {
+	width: 100%;
+	background: url(../images/vip/hy_detail_c_bg.jpg) no-repeat;
+}
+.content_c {
+	width: 1257px;
+	height: 200px;
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 150px;
+}
+.content_c_banner {
+	width: 1140px;
+	height: 65px;
+	background: url(../images/vip/hy_detail_b_banner.png) no-repeat;
+}
+.list_banner {
+	width: 1205px;
+	height: 155px;
+	background: url(../images/vip/list_banner.png) no-repeat;
+}
+.content_b_wrapper {
+	width: 100%;
+}
+.content_b {
+	width: 1257px;
+	height: 630px;
+	margin: 0 auto;
+}
+.content_b_l {
+	width: 620px;
+	height: 630px;
+}
+.content_b_ll {
+	width: 125px;
+	height: 630px;
+	background: url(../images/vip/detail_left_list.png) no-repeat;
+}
+.content_b_lr ul {
+	margin-top: 10px;
+}
+.content_b_lr li {
+	line-height: 120px;
+	font-size: 24px;
+	color: #6d6d6d;
+}
+.content_b_r {
+	width: 620px;
+	height: 630px;
+}
+.content_b_rl {
+	width: 125px;
+	height: 630px;
+	background: url(../images/vip/detail_right_list.png.png) no-repeat;
+}
+.content_b_rr {
+}
+.content_b_rr ul {
+	margin-top: 10px;
+}
+.content_b_rr li {
+	line-height: 120px;
+	font-size: 24px;
+	color: #6d6d6d;
+}

@@ -1,0 +1,30 @@
+@charset "UTF-8";
+/* CSS Document */
+#wrapper{ width:1000px; margin:0 auto; margin-bottom:15px;}
+#sidebar-list {border-right: 1px solid #ccc;border-top: 2px solid #7F7F7F;display: inline-block;float: left;min-height: 800px;               height:auto;margin-right: 10px;padding-right: 10px;width: 190px;}
+#main-c {width: 780px;float:right;border-top: 2px solid #349CD8;}
+#sidebar-list ul {margin-top:5px; display:inline-block;}
+#sidebar-list ul li { position: relative;}
+#sidebar-list  ul li a { color: #181818;display: inline-block;height: 24px;line-height: 24px;overflow: hidden; padding-left: 20px;
+    white-space: nowrap;width: 170px;}
+.dian-icons{ width:10px; height:10px;top:7px; position:absolute;}
+/* -- 公告内容-- */
+.notice_pd h1 {font-size: 16px;margin-bottom: 5px;text-align:center;}
+.notice_rt{ position:relative; float:right; right:0; height:20px; line-height:20px; }
+.notice_pd{ padding:20px 50px;}
+.notice_note{ width:100%; height:24px; line-height:24px; border:1px solid #ccc;}
+.notice_note h2{ font-style:normal;}
+.notice_line{ height:5px}
+.notice_con,.media_text{ padding:0 10px}
+.notice_con p{ padding-bottom: 25px;}
+.notice_con p img{ width:765px;}
+.news_ts_ly { color: #29557C;font-size: 12px;line-height: 36px;margin: 0 auto;text-align:left;width: 800px;}
+.notice_pd {border-bottom: 1px dashed #E7ECEE;padding-bottom:35px;margin-bottom: 20px;position: relative;text-align: center;}
+
+ul.an-list{ width:998px; margin-top:20px; min-height:500px; height:auto; border:1px solid #ccc; padding-top:15px;}
+ul.an-list li{border-bottom: 1px dashed #E7ECEE; display:inline-block; width:100%;}
+ul.an-list li a{ height:32px; line-height:32px;color: #3c3c3c;}
+ul.an-list li a dl { width:1000px; position:relative;height:32px; line-height:32px;display:inline-block} 
+ul.an-list li a dl i.dian-icons{ position:absolute; margin-top:5px; margin-left:-12px;}
+ul.an-list li a dl dt.an-title{ width:600px; float:left; text-align:left; margin-left:15px; overflow:hidden}
+ul.an-list li a dl dd.date{ width:280px; float:right; text-align:right;margin-right:15px;}

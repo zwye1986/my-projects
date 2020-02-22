@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet id="ec_user_initData" author="zhangwenyun">
+	<sql>
+	INSERT INTO `ec_user` (`id`, `mobileNumber`, `name`, `nickName`, `password`, `createBy`, `createTime`, `modifyBy`, `modifyTime`, `orderBy`, `status`, `securityStatus`, `level`, `role`)
+VALUES
+	('7A48260D-6274-4D81-B749-0771E8DA8373','11111111111',NULL,'管理员','e10adc3949ba59abbe56e057f20f883e',NULL,'2013-07-31 16:42:23','7A48260D-6274-4D81-B749-0771E8DA8373','2013-07-31 16:47:30',NULL,'1','0',10,'ROLE_USER,ROLE_ADMIN');
+	
+	</sql>
+	<sql>
+		INSERT INTO `ec_user_detail` (`id`, `userid`, `mobileNumber`, `email`, `idCard`, `gender`, `photo`, `birthday`, `isMarried`, `incomeScope`, `liveProvince`, `liveCity`, `liveArea`, `hometownProvince`, `hometownCity`, `eduLevel`, `graduated`, `profession`, `hobbies`, `createBy`, `createTime`, `modifyBy`, `modifyTime`, `remark`)
+VALUES
+	('4CDDE151-0B2C-49AC-A48A-85F63D196E57','7A48260D-6274-4D81-B749-0771E8DA8373','11111111111',NULL,NULL,0,NULL,NULL,0,NULL,0,0,0,0,0,0,NULL,NULL,NULL,'2D699EBA-1096-4420-AD1F-FE1177CFC9DB','2013-07-31 16:42:23',NULL,NULL,NULL);
+		
+	</sql>
+	<sql>
+		INSERT INTO `ec_user_question` (`id`, `userid`, `questionId`, `answer`, `createBy`, `createTime`, `modifyBy`, `modifyTime`, `orderBy`)
+VALUES
+	('34bd50fc-81c2-4faf-a124-bdbe13a0519e','7A48260D-6274-4D81-B749-0771E8DA8373','101','123','7A48260D-6274-4D81-B749-0771E8DA8373','2013-07-31 16:43:08',NULL,NULL,NULL);
+		
+	</sql>
+	<sql>
+	INSERT INTO `ec_user_wallet` (`id`, `amount`, `status`, `userid`, `createBy`, `createTime`, `modifyBy`, `modifyTime`, `orderBy`)
+VALUES
+	('6c2e2d81-4e2b-4620-8194-5910e38ea05e',0.0000,'0','7A48260D-6274-4D81-B749-0771E8DA8373','2D699EBA-1096-4420-AD1F-FE1177CFC9DB','2013-07-31 16:42:02',NULL,NULL,NULL);
+	</sql>
+	
+</changeSet></databaseChangeLog>

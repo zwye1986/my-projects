@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="UserLottery">
+
+<insert id="createUserLotteryData">
+<![CDATA[
+
+insert into ec_user_lottery (
+
+SELECT
+	a.userid mobilenumber,
+	sum(a.policy_deposit) allsum,
+
+IF(
+	floor(sum(a.policy_deposit) / 10000)< 1,
+	1,
+	floor(sum(a.policy_deposit) / 10000)
+) times
+FROM
+	ec_user_game_relation a
+WHERE
+	a.createTime >= '2013-12-25 00:00:00'
+AND a.createtime < '2014-01-02 00:00:00'
+GROUP BY
+	a.userid
+
+
+)
+
+]]>
+
+</insert>
+
+<select id="getAllNum" resultType="int">
+ select sum(times) from ec_user_lottery
+</select>
+
+<select id="getAllsum" resultType="double">
+<![CDATA[
+select sum(allsum) from ec_user_lottery
+]]>
+
+</select>
+
+<select id="getUserLottery" resultType="UserLottery" parameterType="java.lang.String">
+select * from ec_user_lottery where mobilenumber = #{value}
+</select>
+
+<update id="updateUserLottery" parameterType="UserLottery">
+update ec_user_lottery set times = #{times} where mobilenumber = #{mobileNumber}
+</update>
+
+<delete id="deleteUserLotteryData">
+truncate ec_user_lottery
+</delete>
+	
+</mapper>

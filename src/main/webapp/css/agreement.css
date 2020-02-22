@@ -1,0 +1,32 @@
+/* CSS Document */
+ul li{ list-style-type:none;}
+/*content*/
+#cntwrapper {
+	width: 100%;
+	background: #fff;
+	background-position: center 0;
+	height:933px;
+	 
+}
+#content {
+	margin: 15px auto;
+	padding: 0 5px;
+	position: relative;
+	width: 1257px;
+	
+}
+.fl{ float:left;}
+.fr{ float:right;}
+a{ text-decoration:none;}
+#header{ width: 1257px;height:110px; border-bottom:1px solid #cbcbcb;margin:0 auto;}
+
+#agreement{ width:900px; margin:0 auto; margin-top:20px; text-align:justify;padding:20px 0;
+   
+    font-size: 14px;
+    letter-spacing: 1px;
+    line-height: 25px;
+    overflow: hidden;}
+#agreement h2{width:900px; text-align:center;}
+#agreement h4{width:900px; text-align:center;}
+.agreement_btn{text-align:center;}
+ #agreement_btn{ width:300px; height:50px; border:none; background:url(../images/agreement_btn.png) no-repeat; margin:0 auto; cursor:pointer;  }

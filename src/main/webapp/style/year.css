@@ -1,0 +1,21 @@
+@charset "UTF-8";
+/* CSS Document */
+.wrapper{width:100%; height:1145px; background:url(../images/year/yearbg.jpg) center 0; margin-top:-23px;}
+.content{ width:895px; margin:0 auto;}
+.top{height:165px; padding:43px 0 23px;}
+.content-c{ height:860px; background:url(../images/year/cnc_bg.png) no-repeat; }
+.title1{ height:65px; margin-top:20px;}
+.title1 img{ margin-top:20px;}
+.title{ width:150px; height:40px; background:url(../images/year/cnt_title.png) no-repeat; margin:25px 85px 10px;}
+.gf,.sign,.zs{ width:730px;margin-left:80px; margin-bottom:25px; }
+.gf{  height:160px;  background:url(../images/year/cnt1.png) no-repeat; position:relative;}
+.btn-task1{ width:185px; height:52px; line-height:120px; overflow:hidden; background:url(../images/year/btn_task1.png) no-repeat; position:absolute; margin-top:50px;  cursor:pointer; }
+.btn-task2{width:185px; height:52px; line-height:120px; overflow:hidden; background:url(../images/year/btn_task2.png) no-repeat; position:absolute; margin-top:100px;cursor:pointer;}
+.btn-task3{width:185px; height:52px; line-height:120px; overflow:hidden; background:url(../images/year/btn_task3.png) no-repeat; position:absolute; margin-top:30px;cursor:pointer; margin-left:370px}
+.btn-total1{width:98px; height:52px; line-height:52px; text-align:center; background:url(../images/year/btn_total.png) no-repeat; position:absolute; margin-top:50px; margin-left:225px; color:#000; font-size:22px; cursor:pointer;}
+.btn-total2{width:98px; height:52px; line-height:52px; text-align:center; background:url(../images/year/btn_total.png) no-repeat; position:absolute; margin-top:100px; margin-left:225px; color:#000; font-size:22px; cursor:pointer;}
+.btn-total3{width:98px; height:52px; line-height:52px; text-align:center; background:url(../images/year/btn_total.png) no-repeat; position:absolute; margin-top:30px; margin-left:590px; color:#000; font-size:22px; cursor:pointer;}
+.sign{  height:45px; background:url(../images/year/cnt2.png) no-repeat; position:relative;}
+.btn-detail{width:118px; height:52px; line-height:140px; overflow:hidden;background:url(../images/year/btn_detail.png) no-repeat; position:absolute; margin-left:310px; color:#4bc1d2; font-size:24px; cursor:pointer;}
+.zs{  height:110px; background:url(../images/year/cnt3.png) no-repeat;}
+

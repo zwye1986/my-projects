@@ -1,0 +1,137 @@
+.hidden {
+	display: none;
+}
+a.hidden {
+	display: none;
+}
+.vip_level_txt {
+	color: #d3aa00;
+	position: absolute;
+	margin-top: -35px;
+	margin-left: 48px;
+	font-size: 10px;
+	font-weight: bold;
+}
+.level_txt {
+	color: #fff;
+	position: absolute;
+	width:222px; 
+	height:21px;
+	display:inline-block;
+	margin-top: -38px;
+	margin-left:7px;
+	font-size:10px;
+	
+}
+.level_txt_1{
+	color: #f00;
+	position: absolute;
+	width:22px; 
+	height:21px;
+	display:inline-block;
+	margin-top: -38px;
+	margin-left:4px;
+	font-size:10px;
+	
+	}
+.vip_level1_n, .vip_level2_n, .vip_level3_n, .vip_level4_n, .vip_level5_n, .vip_level6_n, .vip_level7_n, .vip_level8_n, .vip_level9_n, .vip_level10_n {
+	background-image: url(../images/vip/vip_level_icon.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+	height: 30px;
+	line-height: 100px;
+	overflow: hidden;
+	width: 60px;
+	margin-top: 3px;
+
+}
+.vip_level1, .vip_level2, .vip_level3, .vip_level4, .vip_level5, .vip_level6, .vip_level7, .vip_level8, .vip_level9, .vip_level10 {
+	background-image: url(../images/vip/vip_level_icon.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+	height: 22px;
+	line-height: 100px;
+	overflow: hidden;
+	width: 22px;
+	margin-top:5px;
+	float:left;
+}
+.vip_level1 {
+	background-position: -2px -61px;
+}
+.vip_level2 {
+	background-position: -77px -61px;
+}
+.vip_level3 {
+	background-position: -152px -61px;
+}
+.vip_level4 {
+	background-position: -226px -61px;
+}
+.vip_level5 {
+	background-position: -301px -61px;
+}
+.vip_level6 {
+	background-position: -2px -89px;
+}
+.vip_level7 {
+	background-position: -77px -89px;
+}
+.vip_level8 {
+	background-position: -152px -89px;
+}
+.vip_level9 {
+	background-position: -227px -89px;
+}
+.vip_level10 {
+	background-position: -301px -89px;
+	;
+}
+.vip_level0_n {
+	background-position: -390px -30px;
+	width: 16px;
+}
+.vip_level1_n {
+	background-position: 0 0px;
+}
+.vip_level2_n {
+	background-position: -77px 0;
+}
+.vip_level3_n {
+	background-position: -152px 0;
+}
+.vip_level4_n {
+	background-position: -226px 0;
+}
+.vip_level5_n {
+	background-position: -301px 0px;
+}
+.vip_level6_n {
+	background-position: 0px -29px;
+}
+.vip_level7_n {
+	background-position: -77px -29px;
+}
+.vip_level8_n {
+	background-position: -152px -29px;
+}
+.vip_level9_n {
+	background-position: -226px -29px;
+}
+.vip_level10_n {
+	background-position: -301px -29px;
+}
+.col_3 li {
+	position:relative;
+	line-height: 28px;
+	height: 28px;
+	color: #fff;
+	font-size: 13px;
+}
+ul.col_ff{ float:left; margin-left:65px;}
+.ranking-post li.col_c{ text-align:left;}
+a.col_vip{ margin-top:0px;}
+.stats-ff dd{position:relative;
+	line-height: 28px;
+	height: 28px;}
+dd.stats-flo{ text-align:left;}

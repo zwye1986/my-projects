@@ -1,0 +1,13 @@
+@charset "utf-8";
+.wrap{ width:815px; height:400px; background:#333; border:1px solid #f16244; margin:0 auto; color:#fff; }
+ul{ width:815px;height:200px; padding-top:30px; padding-left:30px;display:inline-block; text-align:center; }
+ul li{ display:inline-block; width:815px; height:55px;  font-size:28px;}
+ul li em{ color:#f16244; font-size:28px; margin:0 10px;}
+
+.game_btn{ display:inline-block;width:800px; height:44px; text-align:center; margin:0 auto;  }
+a{ color:#fff;}
+a.qr{ width:175px; height:44px; display:inline-block; background-color:#f16244; line-height:44px;  margin-right:15px; cursor:pointer; }
+a.tc{cursor:pointer;width:175px; height:44px; display:inline-block;line-height:44px;}
+a:hover.tc{ background-color:#f16244; }
+/*yebz*/
+.yebz{ width:800px; height:280px; text-align:center; line-height:280px; font-size:34px;color:#f16244;}

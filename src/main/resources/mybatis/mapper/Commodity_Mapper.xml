@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Commodity">
+<select id="getCommodityCounts" parameterType="java.util.Map" resultType="int">
+		<![CDATA[ 
+		select count(1) from ec_commodity a ,ec_commodity_category b where a.category = b.id  
+		 ]]>
+	     <if test="keyword !=null and '' != keyword">
+			<![CDATA[ 
+		   and (a.name like #{keyword} or b.name like #{keyword}) 
+		   ]]>
+		</if>
+		 <if test="minIntegral !=null and '' != minIntegral">
+			<![CDATA[ 
+		   and a.integral >= #{minIntegral} 
+		   ]]>
+		</if>
+		
+		 <if test="maxIntegral !=null and '' != maxIntegral">
+			<![CDATA[ 
+		   and a.integral <= #{maxIntegral} 
+		   ]]>
+		</if>
+		
+		<if test="category !=null and '' != category">
+			<![CDATA[ 
+		   and a.category = #{category} 
+		   ]]>
+		</if>
+</select>
+
+<select id="queryCommodityByAdmin" parameterType="java.util.Map" resultType="Commodity">
+		<![CDATA[ 
+		select a.*,b.name categoryname from ec_commodity a,ec_commodity_category b where a.category = b.id  
+		 ]]>
+	     <if test="keyword !=null and '' != keyword">
+			<![CDATA[ 
+		   and (a.name like #{keyword} or b.name like #{keyword}) 
+		   ]]>
+		</if>
+		 <if test="minIntegral !=null and '' != minIntegral">
+			<![CDATA[ 
+		   and a.integral >= #{minIntegral} 
+		   ]]>
+		</if>
+		
+		 <if test="maxIntegral !=null and '' != maxIntegral">
+			<![CDATA[ 
+		   and a.integral <= #{maxIntegral} 
+		   ]]>
+		</if>
+		
+		<if test="category !=null and '' != category">
+			<![CDATA[ 
+		   and a.category = #{category} 
+		   ]]>
+		</if>
+		
+		order by a.addtime desc
+</select>
+
+<select id="getCommodity" parameterType="java.lang.String" resultType="Commodity">
+<![CDATA[
+select * from ec_commodity where id = #{value}
+]]>
+</select>
+
+<select id="addCommodity" parameterType="Commodity">
+<![CDATA[
+
+
+insert into ec_commodity (id,name,category,commoditydesc,addTime,integral,num,price,model,remark,coverpic) values(#{id},#{name},#{category},#{commodityDesc},#{addTime},#{integral},#{num},#{price},#{model},#{remark},#{coverPic})
+]]>
+</select>
+
+<select id="updateCommodity" parameterType="Commodity">
+<![CDATA[
+update ec_commodity set name=#{name},category=#{category},commoditydesc=#{commodityDesc},addTime=#{addTime},integral=#{integral},num=#{num},price=#{price},model=#{model},remark=#{remark},coverpic=#{coverPic} where id = #{id}
+]]>
+</select>
+
+<delete id="delCommodity" parameterType="java.lang.String">
+<![CDATA[
+delete from ec_commodity where id = #{value}
+]]>
+</delete>
+	
+</mapper>

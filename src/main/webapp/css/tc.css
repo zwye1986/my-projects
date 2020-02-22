@@ -1,0 +1,35 @@
+@charset "utf-8";
+.wrap{ width:815px; height:400px; background:#333; border:1px solid #f16244; margin:0 auto; color:#fff; }
+ul{ width:350px;height:360px; padding-top:30px; padding-left:30px;display:inline-block;  }
+ul li{ display:inline-block; width:350px; height:55px; float:left; font-size:18px;}
+ul li em{ color:#f16244; font-size:22px;}
+.game_c{margin-top:30px; margin-right:30px; border:2px solid #8e493b; width:350px; height:270px; padding:5px; overflow:hidden; line-height:25px; display:inline-block;}
+.game_btn{ display:inline-block;width:200px; height:60px; float:right; margin-top:15px; margin-right:40px; }
+a{ color:#fff;}
+a.qr{ width:76px; height:38px; display:inline-block;  background-color:#f16244; line-height:38px; text-align:center; margin-right:15px; cursor:pointer;}
+a.tc{cursor:pointer;width:76px; height:38px; display:inline-block;line-height:38px; text-align:center; }
+a:hover.tc{ background-color:#f16244; }
+a.tb-stock, .tb-increase {
+	display: inline-block;
+	width: 28px;
+	height: 27px;
+	line-height: 27px;
+	text-align: center;
+	background-color: #d7d7d7;
+	cursor: pointer;
+}
+a.tb-stock{ color:#000;}
+a:hover.tb-stock, a:hover.tb-increase {
+	background: #f2f2f2;
+	color: #f16244;
+}
+.tb-text {
+	width: 69px;
+	height: 27px;
+	line-height:27px; 
+	text-aline:center;
+	
+	border: 1px solid #d1d1d1;
+	border-top: 2px solid #d1d1d1;
+}
+li span{ width:150px; height:30px; background-color:#d7d7d7; display:inline-block; border:1px solid #fff;}

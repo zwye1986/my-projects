@@ -1,0 +1,49 @@
+/* CSS Document */
+ul li{ list-style-type:none;}
+/*content*/
+#cntwrapper {
+	width: 100%;
+	background: #fff;
+	background-position: center 0;
+	height:933px;
+	 
+}
+#content {
+	margin: 15px auto;
+	padding: 0 5px;
+	position: relative;
+	width: 1257px;
+	
+}
+.fl{ float:left;}
+.fr{ float:right;}
+a{ text-decoration:none;}
+#header{ width: 1257px;height:110px; border-bottom:1px solid #cbcbcb;margin:0 auto;}
+#logo{ }
+#reset_pwd{ width:1257px; height:350px; text-align:center; margin-top:60px;}
+.xgmm{ width:500px; margin:0 auto;}
+ul.xgmm li{ height:65px; line-height:65px; font-size:16px; color:#444; }
+#xg_reset{ width:297px; height:28px; border:1px solid #026EAD #d1d1d1;}
+#xgmm_tj{ width:300px; height:45px; background:url(../images/user/tj_btn.png); border:none; cursor:pointer; }
+ .ftx04{ color:#f00;}
+/*footerwrapper*/
+.footwrapper {
+	width: 100%;
+	background-color: #e1e1e1;
+	border-top: 5px solid #f16244;
+}
+.footer {
+	width: 1257px;
+	height: 211px;
+	margin:0 auto;
+}
+.footerL{ width:330px; height:130px; }
+.footerR{ width:220px;height:113px;}
+.footerR P{ height:80px; margin-top:20px; cursor:pointer;}
+.footerB{width: 1257px; height:98px; margin:0 auto;}
+.footerB_T p{ text-align:center;border-bottom:1px dashed #979797; line-height:36px;}
+.footerB_T p a{ color:#979797; font-size:16px; }
+.footerB_T p a:hover{ color:#f16244;}
+.footerB_B{ text-align:center; line-height:36px;color:#979797;}
+.footerB_B a{ color:#979797; font-size:16px; }
+.footerB_B a:hover{ color:#f16244;}

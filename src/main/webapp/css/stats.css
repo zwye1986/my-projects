@@ -1,0 +1,133 @@
+﻿/*!
+ * CSS - ivest
+ * Version - 1.0.0
+ * Modify By Wang Ping
+ * Date: 07-03-2013 15:34:48 (GMT Time)
+ */
+ #wrapper{ width:1000px; margin:0 auto; padding-bottom:0; }
+.rank-content{ width:105%; overflow:hidden; padding-bottom:0;}
+#sidesub{ width:313px; float:left; padding:30px 0 0 0; border:0; }
+.sidesub_second{ margin-top:-105px;}
+.sidesub_third{ margin-left:0;margin-top:-105px;}
+#mainsub{ margin:0 370px 0 0px}
+#sidesub,#mainsub{margin-bottom: -29999px; padding-bottom: 29999px}
+.tit_pad {
+    padding-top: 40px;
+}
+.rank_icon{
+    height:28px;
+    left:-20px;
+    position: absolute;
+    top:1px;
+    width:28px;
+	background-position:-63px -300px;
+}
+
+.title-items{ position:relative; height:38px; overflow:hidden; clear:both}
+.title-items .line{ height:1px; font-size:0; line-height:0; overflow:hidden; float:left; background:#e7ecee; width:100%; position:absolute; left:0; top:25px}
+.title-items h2,.title-items .more{ font-size:16px;  position:absolute; left:0; z-index:3; padding-right:15px;}
+.title-items .more{ font-size:13px; left:auto; right:0; padding:0; padding-left:15px}
+
+.yol-info{ height:80px; padding:50px 0 10px; position:relative; margin:0 30px; overflow:hidden}
+.yol-info .ystatis{ height:80px; width:200px; float:left; display:inline; text-align:right; border-left:1px solid #e7ecee; margin-left:-1px}
+.yol-info .ystatis h3{ padding:13px 30px 10px 0; height:35px; font-size:26px; overflow:hidden; line-height:normal; font-weight:normal; text-align:right; font-family:Tahoma, Geneva, sans-serif; color:#335c7d}
+.yol-info .ystatis h3 b{ font-size:20px; font-style:normal; font-weight:normal; font-family: Microsoft YaHei}
+.yol-info .ystatis p{padding-right:30px}
+.yol-info .first{ width:175px}
+.yol-info .first p{padding-right:0; margin-right:30px; text-align:right}
+.yol-info .sec{ width:225px}
+.yol-info .three h3{padding:13px 0 10px 0}
+.yol-info .three p{padding-right:0}
+
+.yol-info .intro{ height:80px; width:310px; float:right; text-align:center}
+.yol-info .intro .gbtn{ font-size:18px; width:200px; height:50px; text-align:center; line-height:50px; padding:0}
+.yol-info .intro .p{height:60px}
+
+
+
+
+.ranking-top{ overflow:hidden; zoom:1; margin-bottom:30px}
+.ranking-top .title-items{ margin:0 15px}
+.ranking-items{ padding-bottom:1px; overflow:hidden; zoom:1; margin-top:3px;}
+.ranking-items li{ height:32px; line-height:30px; overflow:hidden; width:100%; float:left}
+.ranking-items li.load{ height:60px; position:relative}
+.ranking-items li.load .load32{ position:absolute; left:50%; top:50%; margin:-25px 0 0 -25px}
+.ranking-items span{ float:left; display:inline}
+.ranking-items .rank{ width:35px; padding-left:20px}
+.ranking-items .rank-w{ width:55px; padding-left:20px}
+.ranking-items .rank-ww{width:110px; float:right; text-align:right; margin-right:20px;height:32px; line-height:36px; }
+.ranking-items .rank-ww img{ width:24px; height:24px; border-radius:12px;vertical-align: middle;}
+.ranking-items .name{ width:60px}
+.ranking-items .name-w{ width:80px;}
+.ranking-items .money{ width:100px; text-align:right; color:#fc822b}
+.ranking-items .vary{ width:60px; text-align:right; float:right; padding-right:20px}
+.ranking-items .vary .icons{ margin-left:3px}
+.ranking-items .rank b{ width:16px; height:16px; line-height:16px; margin:6px 0 0 3px; color:#fff; display:block; font-size:12px; overflow:hidden; font-weight:normal; text-align:center; background:#366792}
+.ranking-items .ago b{ width:21px; height:17px; line-height:22px; margin:5px 0 0 0; background:url(../../local/img/common/sprites.png) no-repeat -246px -221px}
+
+.ranking-items li.title{ height:25px; line-height:25px; margin-bottom:6px; background:#f0f5f7; color:#8A949D}
+.ranking-items li.title .money{ color:#8A949D}
+
+
+.ad-banner{ height:130px; overflow:hidden; margin-bottom:20px; overflow:hidden}
+.time-items{height:300px; margin-bottom:30px; position:relative}
+.time-items .icons{ background-color:#fff; background-position:-523px -80px; width:39px; height:39px; position:absolute; left:50%; top:50%; margin:-20px 0 0 -20px}
+.time-items .time{ height:148px; line-height:148px; font-size:14px; border-bottom:2px solid #e8ecef; text-align:center}
+.time-items .time em{ font-family:Tahoma, Geneva, sans-serif; color:#fc8936; font-size:36px; margin-top:-10px}
+
+.download-post{height:150px; margin-bottom:30px; padding:0 58px; font-size:14px}
+.download-post h2{ font-size:16px; padding:15px 0; text-align:center}
+.download-post p{ padding-bottom:20px; color:#8A949D; line-height:22px}
+.download-post .b{ font-size:12px; text-align:center}
+.download-post .gbtn{ height:50px; padding:0; line-height:50px; position:relative; width:100%; text-align:center; font-size:16px; margin-bottom:5px}
+.download-post .gbtn .icons{ width:13px; height:14px; background-position:-465px -203px; position:absolute; left:auto; top:19px}
+
+.chart-items{ height:300px; margin-bottom:30px}
+.chart-items .head{ height:39px; line-height:39px; background:#f0f4f7; border-bottom:1px solid #d3d8dc}
+.chart-items .head h2{ font-size:16px; padding-left:20px}
+.chart-items .chart-post{width:95%; height:260px; margin:0 auto}
+.chart-items .load{ height:120px; position:relative}
+.chart-items .load .load32{ position:absolute; left:50%; top:50%; margin:-25px 0 0 -25px}
+.chart-items .error{ height:120px; text-align:center; line-height:120px}
+
+/*ranking*/
+/*.ranking-post li.col_1{ background:#000}
+.ranking-post li.col_2{ background:#333}
+.ranking-post li.col_3{ background:#666}
+.ranking-post li.col_4{ background:#999}
+.ranking-post li.col_5{ background:#eee}
+.ranking-post li.col_6{ background:#ccc}
+.ranking-post li.col_7{ background:#ddd}*/
+.ranking-chart{ overflow:hidden; zoom:1; margin-bottom:30px; padding-top:5px}
+.ranking-chart .head{ height:40px; line-height:40px; font-size:16px; padding:0 30px}
+.ranking-chart .head em{ font-family:Tahoma, Geneva, sans-serif; color:#fc8936; padding-left:5px}
+
+.ranking-post{ height:49px; border-bottom:1px solid #fff; padding:0 25px 0 30px}
+.ranking-post li{ float:left; display:inline; height:49px; line-height:49px; overflow:hidden}
+.ranking-post li.col_1{ width:6%}
+.ranking-post li.col_2{ width:12%; color:#15456f}
+.ranking-post li.col_3{ width:18%; text-align:right; color:#fc8936}
+.ranking-post li.col_4{ width:18%; text-align:center}
+.ranking-post li.col_5{ width:14%; text-align:right}
+.ranking-post li.col_6{ width:18%; text-align:right}
+.ranking-post li.col_7{ width:13%; text-align:right}
+.ranking-post .num{ width:16px; height:16px; line-height:16px; margin-top:17px; color:#fff; display:block; font-size:12px; overflow:hidden; font-weight:normal; text-align:center; background:#349cd8}
+.ranking-post li.col_7 .icons{ margin-left:3px}
+
+
+
+.ranking-weeky li.col_1{ width:18%}
+.ranking-weeky li.col_2{ width:30%}
+.ranking-weeky li.col_3{ width:51%}
+
+.ranking-title{ height:25px; background:#f0f5f7; border-bottom:1px solid #fff}
+.ranking-title li{ height:25px; line-height:25px}
+.ranking-title li.col_2{ color:#475058}
+.ranking-title li.col_3{ color:#475058}
+.ranking-title li.col_6{ text-align:center; text-indent:15px}
+
+.ranking-chart .double{ background:#fafbfc}
+
+
+
+

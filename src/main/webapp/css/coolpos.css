@@ -1,0 +1,248 @@
+/* CSS Document */
+
+body {
+	width: 100%;
+}
+#content {
+	margin: 0 auto;
+	position: relative;
+	width: 1257px;
+	z-index: 2;
+}
+.content_Titlewrapper {
+	width: 100%;
+	height: 53px;
+	border-bottom: 3px solid #EF634A;
+	margin-bottom: 20px;
+}
+.content_Title {
+	width: 1257px;
+	margin: 0 auto;
+	line-height: 53px;
+	height: 53px;
+	border-bottom: 3px solid #EF634A;
+}
+.content_Title h5 {
+	color: #EF634A;
+	font-size: 18px;
+	font-weight: bold;
+	float: left;
+	line-height: 53px;
+}
+.content_top {
+	width: 1257px;
+	height: 415px;
+}
+.content_top_l {
+	width: 420px;
+	height: 415px;
+}
+.content_top_r {
+	width: 830px;
+	height: 415px;
+}
+.cool_top {
+	width: 200px;
+	height: 90px;
+	margin-top: 80px;
+}
+.cool_cnt {
+	width: 830px;
+	height: 67px;
+	line-height: 80px;
+	font-size: 36px;
+	background: url(${ctx }/images/coolpos/pos_bg.png) no-repeat;
+	padding-left: 10px;
+}
+.cool_btm {
+	width: 655px;
+	height: 80px;
+	font-size: 14px;
+	color: #444;
+	margin-left: 15px;
+	line-height: 22px;
+	margin-top: 15px;
+}
+.content_c {
+	width: 1257px;
+	margin: 0 auto;
+	
+	background-color: #fff;
+	border: 1px solid #d1d1d1;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+}
+ul.doit_bd {
+	width: 1165px;
+	height: 50px;
+	margin: 15px auto;
+}
+ul.doit_bd li {
+	float: left;
+	text-align: center;
+	line-height: 50px;
+	font-size: 20px;
+}
+ul.doit_bd li a.order_tj {
+	width: 391px;
+	height: 48px;
+	display: inline-block;
+	background: url(${ctx }/images/coolpos/order01_tj.png) no-repeat;
+	cursor: pointer;
+	color: #444;
+}
+
+ul.doit_bd li a.order_tj:hover {
+	
+	background: url(${ctx }/images/coolpos/order02_tj.png) no-repeat;
+	color: #fff;
+}
+
+ul.doit_bd li a.order_money {
+	width: 400px;
+	height: 48px;
+	display: inline-block;
+	background: url(${ctx }/images/coolpos/order_money01.png) no-repeat;
+	cursor: pointer;
+	color: #444;
+}
+ul.doit_bd li a:hover.order_money {
+	background: url(${ctx }/images/coolpos/order_money02.png) no-repeat;
+	color: #fff;
+}
+ul.doit_bd li a.order_sucess {
+	width: 371px;
+	height: 48px;
+	display: inline-block;
+	background: url(${ctx }/images/coolpos/order_sucess01.png) no-repeat;
+	cursor: pointer;
+	color: #444;
+}
+ul.doit_bd li a:hover.order_sucess {
+	background: url(${ctx }/images/coolpos/order_sucess02.png) no-repeat;
+	color: #fff;
+}
+/*content_1*/
+
+table {
+	width: 1163px;
+	margin: 0px auto;
+	font: Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	color: #333333;
+	text-align: center;
+	border-collapse: collapse;
+	margin-top: 15px;
+}
+table td {
+	border: 1px solid #d7d7d7;
+	height: 45px;
+}
+caption {
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+	margin: 0 auto;
+}
+th, tfoot tr td {
+	font-weight: bold;
+	text-align: center;
+	background: #f6f6f6;
+}
+th {
+	line-height: 50px;
+	height: 50px;
+}
+tfoot tr td {
+	background: #fff;
+	line-height: 26px;
+	height: 26px;
+}
+thead {
+	border: 1px solid #999;
+}
+thead tr td {
+	text-align: center;
+}
+a.tb-stock, .tb-increase {
+	display: inline-block;
+	width: 28px;
+	height: 27px;
+	line-height: 27px;
+	text-align: center;
+	background-color: #d7d7d7;
+	cursor: pointer;
+}
+a:hover.tb-stock, a:hover.tb-increase {
+	background: #f2f2f2;
+	color: #f16244;
+}
+.tb-text {
+	width: 69px;
+	height: 27px;
+	border: 1px solid #d1d1d1;
+	border-top: 2px solid #d1d1d1;
+}
+p.tj_btn{ width:1163px; height:60px; line-height:60px; margin:0 auto; margin-top:30px;}
+p.tj_btn input{ width:105px; height:35px; cursor:pointer;background: url(${ctx}/images/coolpos/order_btn.jpg) no-repeat; border:none; float:right; }
+/*content_2*/
+#content_2 {
+	width: 1163px;
+	margin: 0px auto;
+	font: Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	color: #333333;
+}
+#content_2 p {
+	font-size: 16px;
+	line-height: 32px;
+	word-spacing: 0.4em;
+}
+#content_2 p a {
+	color: #f68067;
+}
+#content_2 p a:hover {
+	color: #f16244;
+}
+.money_c {
+	width: 1163px;
+	margin:20px  auto 0;
+	display:inline-block;
+	border:1px solid #d1d1d1;
+	height:250px;
+	
+}
+.money_tab td{ border:none; font-size:18px;}
+.order_bottom{ width:1163px; height:60px; margin:0  auto;}
+.order_bottom .order_btn{ width:105px; height:35px;background: url(${ctx}/images/coolpos/order_btn02.jpg) no-repeat; cursor:pointer; border:none; float:right; margin-top:25px;}
+
+/*content_3*/
+#content_3{ margin-top:60px;}
+#content_3 p { text-align:center;
+line-height:100px;
+}
+#content_3 p a {
+	color: #f68067;
+}
+#content_3 p a:hover {
+	color: #f16244;
+}
+p.content_t{ width:391px; height:48px; background: url(${ctx }/images/coolpos/order02_tj.png) no-repeat; line-height:48px; font-size:20px; color:#fff; margin-top:20px; margin-left:40px; padding-left:120px; margin-bottom:40px;}
+p.content_nb,p.content_yf,p.content_pwd{ width:1100px; height:40px; line-height:80px; font-size:18px; margin:0 auto; text-align:center; color:#444;}
+p.content_yf{ padding-left:70px; padding-bottom:60px; border-bottom:1px dashed #d1d1d1; }
+p.content_nb em,p.content_yf em{ color:#f16244; font-size:24px;}
+.txt{ height:28px;}
+.btn{ width:105px; height:35px; cursor:pointer;background: url(${ctx }/images/coolpos/zf_btn.jpg) no-repeat; border:none; margin-left:5px;}
+p.content_pwd{ padding: 50px 0;}
+/* CSS Document */
+.order_c {
+	width: 1040px;
+	border-left: 1px solid #d1d1d1;
+	border-right: 1px solid #d1d1d1;
+    height:1010px; 
+}
+.order_c h5 {
+	font-size: 20px;
+	margin-left: 60px;
+	line-height: 48px;
+}

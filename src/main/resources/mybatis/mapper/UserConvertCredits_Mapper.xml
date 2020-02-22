@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.ConvertCredits">
+
+	<resultMap type="convertCredits" id="convertCreditsMap" extends="base.BaseEntity.baseEntityResult">
+		<result column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="action_time" property="actionTime" />
+		<result column="expend_credits" property="expendCredits" />
+		<result column="credits_goods_id" property="creditsGoodsId" />
+	    <result column="num" property="num" />
+		<result column="status" property="status" />
+		<result column="content" property="content"/>
+		<result column="credits_goods_name" property="creditsGoodsName"/>
+		<result column="remark" property="remark"/>
+		<result column="mobileNumber" property="mobileNumber"/>
+	</resultMap>
+	
+	
+	
+	<resultMap type="convertCredits" id="userConvertCreditsMap" extends="convertCreditsMap">
+	   <collection property="user" ofType="com.venada.efinance.pojo.User.User" select="getUserByUserId" column="user_id"/> 
+	</resultMap>
+	
+	<!--  获取user对象  -->  
+    <select id="getUserByUserId" parameterType="String" resultMap="com.venada.efinance.pojo.User.userMap">
+	SELECT
+		eu.id,
+		eu.mobileNumber,
+		eu.nickName,
+		eu.name
+		FROM ec_user eu
+	WHERE eu.id  = #{id}  
+    </select> 
+	
+	
+	
+	
+	<select id="queryConvertCreditsById" resultMap="userConvertCreditsMap" parameterType="String">
+	select * from ec_user_convert_credits where id = #{Id};
+	</select>
+
+	<select id="queryAllConvertCredits" resultMap="userConvertCreditsMap" parameterType="java.util.Map">
+		select * from ec_user_convert_credits 
+		<trim prefix="where " prefixOverrides="and ">
+		
+				<if test="id != null">
+					and id = #{id}
+				</if>
+				
+				<if test="actionStartTime != null">
+					and action_time > #{actionStartTime}
+				</if>
+				<if test="actionEndTime != null">
+				<![CDATA[
+					and action_time < #{actionEndTime} 
+					]]>
+				</if>
+				<if test="status != null">
+					and status  = #{status}
+				</if>
+				<if test="userId != null">
+					and user_id = #{userId}
+				</if>
+				
+			</trim>
+		order by action_time desc;
+	</select>
+	
+	
+	<select id="queryConvertCreditsByMobilePhone" resultMap="convertCreditsMap" parameterType="java.util.Map">
+		select * from ec_user_convert_credits 
+		<trim prefix="where " prefixOverrides="and ">
+				<if test="userid != null">
+					and user_id = #{userid}
+				</if>
+				
+			</trim>
+		order by action_time desc
+		<if test="limitCount != null and ''!=limitCount">
+		<![CDATA[ 
+		 limit #{limitIndex},#{limitCount}
+		 ]]>
+		</if>
+		
+	</select>
+	
+	<select id="queryAllConvertCreditsCount" resultType="int" parameterType="java.util.Map">
+		select count(*) from ec_user_convert_credits 
+		<trim prefix="where " prefixOverrides="and ">
+				<if test="id != null">
+					and id = #{id}
+				</if>
+				
+				<if test="actionStartTime != null">
+					and action_time > #{actionStartTime}
+				</if>
+				<if test="actionEndTime != null">
+				<![CDATA[
+					and action_time < #{actionEndTime} 
+					]]>
+				</if>
+				<if test="status != null">
+					and status  = #{status}
+				</if>
+				<if test="userId != null">
+					and user_id = #{userId}
+				</if>
+				
+			</trim>
+	</select>
+
+	<select id="queryConvertCredits" resultMap="convertCreditsMap" >
+		<![CDATA[ 
+		select * from ec_user_convert_credits where 1=1 
+		      and user_id = #{user.userId} 	order by action_time desc;
+		]]>
+	</select>
+
+	<insert id="addConvertCredits" parameterType="ConvertCredits" >
+	<![CDATA[ 
+		insert into ec_user_convert_credits  (id,user_id,action_time,expend_credits,status,credits_goods_id,num,credits_goods_name, createTime,mobileNumber)
+		values (
+		#{id},
+		#{userId},now(),#{expendCredits},#{status},#{creditsGoodsId},#{num},#{creditsGoodsName},now(),#{mobileNumber}
+		)]]>
+	</insert>
+	
+	
+	<update id="updateConvertCreditsById" parameterType="ConvertCredits">
+	update ec_user_convert_credits
+	<trim  prefixOverrides=",">
+		<set>
+			<if test="status != null">status=#{status},</if>
+			<if test="remark != null">remark=#{remark},</if>
+			<if test="modifyBy != null">modifyBy=#{modifyBy},</if>
+			<if test="modifyTime != null">modifyTime=#{modifyTime},</if>
+			<if test="mobileNumber != null">mobileNumber=#{mobileNumber},</if>
+		</set>
+		where id=#{id}
+	</trim>
+</update>
+	
+	<delete id="deleteConvertCredits" parameterType="String">
+		delete from ec_user_convert_credits where id = #{id}
+	</delete>
+	
+
+</mapper>

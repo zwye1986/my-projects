@@ -1,0 +1,188 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body {
+	font-size: 12px;
+	background:#D4F0F2;
+}
+.wrapper{ width:100%;}
+.top_wrapper{ width:100%; background:#f34314;}
+.top_c{ width:1290px; height:635px; margin:0 auto; background: url(../images/festival/top_c_bg.png) no-repeat #f34314; }
+.hls_list{ width:1225px; height:300px;margin-left:30px; position:relative;}
+.hls_first a{ width:226px; height:168px; line-height:400px; overflow:hidden; position:absolute; margin-top:120px; background:url(../images/festival/hls_first_n.png) no-repeat;}
+.hls_first a:hover{background:url(../images/festival/hls_first_h.png) no-repeat;cursor:pointer;}
+.hls_second a{ width:245px; height:152px;line-height:400px; overflow:hidden; position:absolute;margin-left:205px; background:url(../images/festival/hls_second_n.png) no-repeat;}
+.hls_second a:hover{background:url(../images/festival/hls_second_h.png) no-repeat;cursor:pointer;}
+.hls_third a{ width:210px; height:135px; line-height:400px; overflow:hidden;position:absolute;  margin-left:712px; background:url(../images/festival/hls_third_n.png) no-repeat;}
+.hls_third a:hover{background:url(../images/festival/hls_third_h.png) no-repeat;cursor:pointer;}
+.hls_fourth a{ width:240px; height:162px;line-height:400px; overflow:hidden; position:absolute; margin-left:980px; background:url(../images/festival/hls_fourth_n.png) no-repeat;}
+.hls_fourth a:hover{background:url(../images/festival/hls_fourth_h.png) no-repeat;cursor:pointer;}
+.hls_five a{ width:240px; height:135px; line-height:400px; overflow:hidden;position:absolute;  margin-left:980px;margin-top:161px; background:url(../images/festival/hls_five_n.png) no-repeat;}
+.hls_five a:hover{background:url(../images/festival/hls_five_h.png) no-repeat;cursor:pointer;}
+.hls_dzp a{ width:263px; height:263px; line-height:600px; overflow:hidden; position:absolute; margin-top:290px; margin-left:20px;background:url(../images/festival/hls_dzp.png) no-repeat;cursor:pointer;}
+.hls_dzp a:hover{ opacity:0.8;filter: alpha(opacity=70);}
+.jsq_wowpower{ color:#ff7e5b; position:absolute; margin-top:640px; margin-left:1000px;}
+.prize_wrapper{width:100%; background:#00b592; }
+.prize_c{width:1290px; height:147px; margin:0 auto;background:url(../images/festival/prize_c_bg.png) no-repeat #00b592; }
+.activity_date{width:1215px; height:70px; line-height:160px; overflow:hidden;margin:0 auto;}
+.name_list{ width:1215px; height:65px;margin:0 auto;background:url(../images/festival/name_list_bg.png) no-repeat; padding-top:12px; }
+#div1{ width:860px; height:40px; line-height:40px;position:relative; margin-left:90px; background:#0B6B33; overflow:hidden; color:#fff;}
+#div1 ul{ position:absolute;}
+#div1 ul li{ float:left; width:220px; height:212px; list-style-type:none;}
+.center_wrapper{width:100%; background:url(../images/festival/center_wrapper_bg.png) no-repeat center 0;}
+.center_inner{width:1257px; margin:0 auto;background:url(../images/festival/center_c_bg.png) no-repeat;}
+.center_c{width:1225px; min-height:1150px; height:auto;margin:0 auto;}
+.lp_c{width:1225px; }
+.lp_title{ width:260px; height:50px; text-align:left; background:url(../images/festival/lp_title.png) no-repeat;}
+.jpff_date{ float:right; width:800px;color:#fff;height:25px; line-height:25px; margin-top:-35px; margin-right:150px;}
+/* section */
+.section{width:1225px;margin:40px auto 0 auto;overflow:hidden;}
+.section ul{width:1225px; margin-left:25px;}
+.section ul li{float:left;margin-right:45px;margin-bottom:33px;display:inline;width:200px;height:200px;overflow:hidden;position:relative;}
+.section ul li .photo{width:200px;height:200px;overflow:hidden;}
+.section .rsp{width:200px;height:200px;overflow:hidden;position: absolute; background:url(../images/festival/li_bg.png) no-repeat;top:0px;left:0px;}
+.section .text{position:absolute;width:200px;height:200px;left:-200px;top:0px;overflow:hidden;}
+.section .text h3{width:180px;margin-top:75px;height:55px;line-height:55px;text-align:center;color:#FFFFFF;background:#F34314;font-family:"microsoft yahei";font-size:16px; margin-left:10px;}
+/* turntable */
+.turntable{ width:1225px;height:592px; margin:0 auto;}
+.turntable_l{ width:700px; height:590px;position:relative;}
+.turntable_r{ width:400px;height:590px;margin-right:40px;}
+.turntable_title{ width:155px; height:27px;background:url(../images/festival/dzp_title.png) no-repeat; margin:0 auto; margin-top:185px;}
+.turntable_list{ width:273px; height:355px; background:url(../images/festival/dzp_bg.png) no-repeat; margin:0 auto; padding-top:40px; }
+
+/* bottom_wrapper */
+.bottom_wrapper{ width:100%; background:#d3f0f2;}
+.bottom_c{width:1215px; min-height:1520px; height:auto; background:#d3f0f2; margin:0 auto;}
+.bottom_wrapper h4{ font-size:14px; font-weight:bold;}
+/*bottom_list_a1 */
+.bottom_list_a1_title{ width:1215px; height:54px; line-height:140px; overflow:hidden; margin:0 auto; background:url(../images/festival/title_a1.png) no-repeat;}
+.bottom_list_a1_c_w{ width:1110px;margin-top:-1px; padding-bottom:30px;background:#00b592; margin:0 auto;}
+.bottom_list_a1_c{ width:1017px; display:inline-block; min-height:245px; height:auto; background:#fff; margin:0 auto; border:1px solid #0172af; border-top:none; padding:0 40px 15px; margin-left:5px;}
+.bottom_list_a1_c li{ list-style-type:decimal; margin-left:20px; line-height:22px;}
+.a1_c_left{ width:500px; display:inline-block; float:left;}
+.a1_c_right{ width:500px; display:inline-block;float:right;}
+/*bottom_list_a2 */
+.bottom_list_a2_title{ width:1215px; height:54px; line-height:140px; overflow:hidden; margin:0 auto; background:url(../images/festival/title_a2.png) no-repeat;}
+.bottom_list_a2_c_w{ width:1110px;min-height:230px; height:auto; margin-top:-1px; padding-bottom:30px;background:#00b592; margin:0 auto;}
+.bottom_list_a2_c{ width:1017px; display:inline-block; min-height:230px; height:auto; background:#fff; margin:0 auto; border:1px solid #0172af; border-top:none; padding-left:40px; padding-right:40px; margin-left:5px;}
+.bottom_list_a2_c li{ list-style-type:decimal; margin-left:20px; line-height:22px;}
+.a2_c_left{ width:500px; display:inline-block; float:left;}
+.a2_c_right{ width:500px; display:inline-block; float:right; position:relative;}
+.a2_c_right ul{ margin-top:50px; margin-left:-30px; }
+.a2_c_right li{ display:inline-block; float:left; width:135px; height:135px; margin-right:10px;}
+p.sina_share{ width:90px; height:90px; line-height:230px; overflow:hidden; position:absolute;background:url(../images/festival/sina_icon.png) no-repeat; margin-left:440px; margin-top:90px; cursor:pointer;}
+p.sina_share:hover{ opacity:0.8;filter: alpha(opacity=70);}
+/*bottom_list_a3 */
+.bottom_list_a3_title{ width:1215px; height:54px; line-height:140px; overflow:hidden; margin:0 auto; background:url(../images/festival/title_a3.png) no-repeat;}
+.bottom_list_a3_c_w{ width:1110px;min-height:230px; height:auto; margin-top:-1px; padding-bottom:30px;background:#00b592; margin:0 auto;}
+.bottom_list_a3_c{ width:1017px; display:inline-block; min-height:240px; height:auto; background:#fff; margin:0 auto; border:1px solid #0172af; border-top:none; padding-left:40px; padding-right:40px; margin-left:5px;}
+.bottom_list_a3_c li{ list-style-type:decimal; margin-left:20px; line-height:22px;}
+.a3_c_left{ width:330px; display:inline-block; float:left;}
+.a3_c_right{ width:600px; float:right; display:inline-block;}
+.a3_c_right_l{width:285px; height:250px;margin-top:-40px; margin-left:25px; }
+.a3_c_right_l_tit{ width:172px; height:27px; line-height:80px; overflow:hidden;margin:0 auto; background:url(../images/festival/tjyh_btn.png) no-repeat;}
+.a3_c_right_l_cnt{ width:285px; height:240px; background:url(../images/festival/tjyh_bg.png) no-repeat;}
+.a3_c_right_l_cnt ul{ margin-top:10px;width:210px; margin-left:15px;}
+.a3_c_right_l_cnt li{  list-style-type:none; margin-left:20px;}
+.a3_c_right_l_cnt li dl{ width:210px; display:inline-block; margin:0 auto;}
+.a3_c_right_l_cnt li dt.list_01{ width:25px; height:20px; float:left; background:url(../images/festival/tjyh_t.png)  no-repeat; margin-right:10px;}
+.a3_c_right_l_cnt li dt.list_01 span{ width:25px; height:20px; margin-left:10px;}
+.a3_c_right_l_cnt li dt.list{ width:25px; height:20px; float:left; background:#83e302; margin-right:10px;}
+.a3_c_right_l_cnt li dt.list span{ width:25px; height:20px; margin-left:10px;}
+.a3_c_right_l_cnt li dd.name{  margin-right:10px; width:95px; text-align:left;}
+.date{ color:#f7ae00; font-size:14px; width:120px; margin:0 auto; margin-top:10px; height:40px; line-height:40px;}
+.a3_c_right_r{width:270px; height:250px; margin-top:-40px;}
+.a3_c_right_r_tit{ width:95px; height:27px;line-height:80px; overflow:hidden;margin:0 auto; background:url(../images/festival/hjqk_btn.png) no-repeat;}
+.a3_c_right_r_cnt{width:270px; height:220px; background:url(../images/festival/hjqk_bg.png) no-repeat;}
+.a3_c_right_r_cnt li{ width:200px; margin:0 auto; margin-top:15px;list-style-type:none;}
+.hj_name dl{ width:250px; display:inline-block; margin:0 auto; margin-left:-10px;}
+.hj_name  dd.name{ margin-right:5px; width:72px; display:inline-block;overflow: hidden;text-align: left;white-space: nowrap;}
+.hj_name  dd.jp{ margin-right:5px; width:112px;display:inline-block;overflow: hidden;text-align: left;white-space: nowrap; color:#70c102;}
+/*bottom_list_a4 */
+.bottom_list_a4_title{ width:1215px; height:54px; line-height:140px; overflow:hidden; margin:0 auto; background:url(../images/festival/title_a4.png) no-repeat;}
+.bottom_list_a4_c_w{ width:1110px;min-height:230px; height:auto; margin-top:-1px; padding-bottom:30px;background:#00b592; margin:0 auto;}
+.bottom_list_a4_c{ width:1017px; display:inline-block; min-height:230px; height:auto; background:#fff; margin:0 auto; border:1px solid #0172af; border-top:none; padding:0 40px 15px; margin-left:5px;}
+.bottom_list_a4_c li{ list-style-type:decimal; margin-left:20px; line-height:22px;}
+.a4_c_left{ width:350px; display:inline-block; float:left;}
+.a4_c_center{ width:210px; height:170px; float:left; margin-top:35px;}
+.a4_c_right{ width:400px; float:left; display:inline-block;}
+.a4_c_right li{ list-style-type:none; position:relative;}
+.a4_c_right li dt.fes_game{ position:absolute; margin-top:70px;}
+.a4_c_right li dd.fes_name{ font-size:14px; font-weight:bold; color:#8f185b; position:absolute; margin-left:60px;  margin-top:35px;}
+.a4_c_right li dd.game_icon{ position:absolute; margin-left:175px; margin-top:25px; }
+
+.game_input{position:absolute;  width:250px; margin-left:230px; margin-top:100px;}
+
+a.tb-stock, .tb-increase {
+	display: inline-block;
+	width: 28px;
+	height: 27px;
+	line-height: 27px;
+	text-align: center;
+	background-color: #d7d7d7;
+	cursor: pointer;
+	font-size:16px;
+	font-weight:bold;
+}
+a:hover.tb-stock, a:hover.tb-increase {
+	background: #f2f2f2;
+	color: #f16244;
+	font-size:16px;
+	font-weight:bold;
+	
+}
+.tb-text {
+	width:40px;
+	height: 27px;
+	border: 1px solid #d1d1d1;
+	border-top: 2px solid #d1d1d1;
+	text-align:center;
+	
+}
+.game_fl{position:absolute; margin-left:230px; margin-top:60px; width:135px; height:28px; line-height:28px; padding-left:15px; color:#eaff03;background:url(../images/festival/game_fl_bg.png) no-repeat;}
+.game_btn{position:absolute; margin-left:230px; margin-top:135px; width:195px; height:35px; font-size:14px; text-align:center; line-height:30px; color:#fff;background:url(../images/festival/btn-primary.jpg) no-repeat; cursor:pointer;}
+.game_btn:hover{background:url(../images/festival/btn-primary-h.png) no-repeat;}
+.lqyx_total{ width:210px; height:40px; line-height:40px; padding-left:155px; color:#fff; font-size:18px; overflow:hidden; position:absolute;margin-left:230px; margin-top:175px;background:url(../images/festival/lqyx_total.png) no-repeat;  }
+/*bottom_list_a5 */
+.bottom_list_a5_title{ width:1215px; height:54px; line-height:140px; overflow:hidden; margin:0 auto; background:url(../images/festival/title_a5.png) no-repeat;}
+.bottom_list_a5_c_w{ width:1110px;min-height:230px; height:auto; margin-top:-1px; padding-bottom:30px;background:#00b592; margin:0 auto;}
+.bottom_list_a5_c{ width:1017px; display:inline-block; min-height:280px; height:auto; background:#fff; margin:0 auto; border:1px solid #0172af; border-top:none; padding-left:40px; padding-right:40px; margin-left:5px;}
+.bottom_list_a5_c li{ list-style-type:decimal; margin-left:20px; line-height:22px;}
+.a5_c_left{ width:330px; display:inline-block; float:left;}
+.a5_c_right{ width:650px; float:right;display:inline-block;}
+.a5_c_right_l{width:285px; height:250px;margin-top:-40px; margin-left:25px; }
+.a5_c_right_l_tit{ width:172px; height:27px; line-height:80px; overflow:hidden;margin:0 auto; background:url(../images/festival/lqyx_btn.png) no-repeat;}
+.a5_c_right_l_cnt{ width:285px; height:400px; background:url(../images/festival/lqyx_bg.png) no-repeat; margin-top:10px;}
+.a5_c_right_l_cnt ul{ margin-top:10px;width:210px; margin-left:15px;}
+.a5_c_right_l_cnt li{  list-style-type:none; margin-left:20px;}
+.a5_c_right_l_cnt li dl{ width:210px; display:inline-block; margin:0 auto;}
+.a5_c_right_l_cnt li dt.list_01{ width:25px; height:20px; float:left; background:url(../images/festival/tjyh_t.png)  no-repeat; margin-right:10px;}
+.a5_c_right_l_cnt li dt.list_01 span{ width:25px; height:20px; margin-left:10px;}
+.a5_c_right_l_cnt li dt.list{ width:25px; height:20px; float:left; background:#83e302; margin-right:10px;}
+.a5_c_right_l_cnt li dt.list span{ width:25px; height:20px; margin-left:10px;}
+.a5_c_right_l_cnt li dd.name{  margin-right:10px; width:95px; text-align:left;}
+.a5_title{ width:180px;height:40px; line-height:40px; margin:0 auto; text-align:center;}
+.pre{width:16px; height:16px;background:url(../images/festival/pre.png)  no-repeat;  cursor:pointer; margin-top:20px;}
+.next{ width:16px; height:16px;background:url(../images/festival/next.png)  no-repeat;  cursor:pointer;margin-top:20px;}
+.a5_c_right_l_cnt .date{ color:#427200; font-size:14px; width:140px; margin:0 auto; margin-top:10px; height:36px; line-height:36px; margin-top:10px;}
+.a5_c_right_r_cnt .date{color:#427200; height:40px; line-height:100px; overflow:hidden; }
+.a5_c_right_r{width:270px; height:250px; margin-top:-40px; margin-left:20px;}
+
+.a5_c_right_r_tit{ width:95px; height:27px;line-height:80px; overflow:hidden;margin:0 auto; background:url(../images/festival/hjqk_a_btn.png) no-repeat; margin-left:103px;}
+.a5_c_right_r_cnt{width:300px; height:400px; background:url(../images/festival/hjqk_a_bg.png) no-repeat;}
+.a5_c_right_r_cnt li{ width:280px; margin:0 auto;list-style-type:none;}
+.hjmd{width:280px;height:230px;overflow: hidden;margin-top:10px;}
+.hjmd ul{ margin-left:15px; }
+.hjmd li {
+	height:28px;
+	line-height:28px;
+}
+.hjmd  dd.name{ margin-right:5px; width:72px; display:inline-block;overflow: hidden;text-align: left;white-space: nowrap;}
+.hjmd  dd.jp{ margin-right:5px; width:112px;display:inline-block;overflow: hidden;text-align: left;white-space: nowrap; color:#70c102;}
+/*btn*/
+.btm_wrapper{ width:100%; height:155px;background:url(../images/festival/bottom_wrapper.png) no-repeat; }
+.btm_inner{ width:1225px; height:155px;background:url(../images/festival/bottom_c.png) no-repeat; margin:0 auto;}
+.footwrapper{ margin-top:-10px; height:242px;}
+/*top_nav_wrapper*/
+.top_nav_wrapper{ width:100%;height:34px;background:#333232; }
+.top_nav{ width:1257px; height:34px; margin:0 auto; background:#333232; line-height:34px; text-align:center; color:#fff;}

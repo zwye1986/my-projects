@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.UserQuestion">
+
+	<resultMap type="UserQuestion" id="UserQuestionMap" extends="base.BaseEntity.baseEntityResult">
+		<result column="userid" property="userid" />
+		<result column="questionId" property="questionId" />
+		<result column="name" property="name" />
+		<result column="answer" property="answer" />
+	</resultMap>
+	
+	<insert id="saveUserQuestion" parameterType="UserQuestion">
+		insert into ec_user_question (id,userid,questionId,answer,createBy,createTime,modifyBy,modifyTime,orderBy) values (#{id},#{userid},#{questionId},#{answer},#{createBy},#{createTime},#{modifyBy},#{modifyTime},#{orderBy});
+	</insert>
+	<select id="getAnswerByUserid" parameterType="String" resultType="UserQuestion" >
+		select uq.*,sq.name from ec_user_question uq,ec_security_question sq where userid = #{userid} and uq.questionId = sq.id;
+	</select>
+</mapper>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="EC_SystemConfig">
+
+	<resultMap type="systemConfig" id="systemConfigResult">
+		<result column="id" property="paramId" />
+		<result column="paramName" property="paramName" />
+		<result column="paramValue" property="paramValue" />
+		<result column="paramDesc" property="paramDesc" />
+	</resultMap>
+	
+	<select id="selectSystemConfigAll" resultMap="systemConfigResult" parameterType="java.util.Map">
+		select id,paramName,paramValue,paramDesc from ec_system_config where 1 = 1
+		<if test="paramDesc != null">
+			paramDesc like #{paramDesc},
+		</if>
+	</select>
+	
+	<select id="selectSystemConfigAllCount" resultType="int" parameterType="java.util.Map">
+		select count(*) from ec_system_config where 1 = 1
+		<if test="paramDesc != null">
+			paramDesc like #{paramDesc},
+		</if>
+	</select>
+
+	<select id="selectSystemConfigById" resultMap="systemConfigResult"
+		parameterType="java.lang.String">
+		select
+		id, paramName, paramValue, paramDesc
+		from
+		ec_system_config
+		where id = #{paramId}
+	</select>
+
+	<insert id="addSystemConfig" parameterType="systemConfig">
+		insert into
+		ec_system_config (
+		id,
+		paramName,
+		paramValue,
+		paramDesc
+		)
+		values (
+		#{paramId},
+		#{paramName},
+		#{paramValue},
+		#{paramDesc}
+		)
+	</insert>
+
+	<update id="updateSystemConfigById" parameterType="systemConfig">
+		update ec_system_config
+		<set>
+			<if test="paramName != null">
+				paramName = #{paramName},
+			</if>
+			<if test="paramValue != null">
+				paramValue = #{paramValue},
+			</if>
+			<if test="paramDesc != null">
+				paramDesc = #{paramDesc},
+			</if>
+		</set>
+		where id = #{paramId}
+	</update>
+	
+	<delete id="deleteSystemConfig" parameterType="java.lang.String">
+		delete from ec_system_config where id = #{paramId}
+	</delete>
+
+</mapper>

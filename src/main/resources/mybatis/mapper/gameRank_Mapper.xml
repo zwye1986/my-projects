@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="GameRank">
+
+	<resultMap type="gameRank" id="gameRankResult">
+		<result column="id" property="id" />
+		<result column="developer" property="developer" />
+		<result column="type" property="type" />
+		<result column="language" property="language" />
+		<result column="theme" property="theme" />
+		<result column="gameDescrip" property="gameDescrip" />
+		<result column="gameUrl" property="gameUrl" />
+		<result column="playCounts" property="playCounts" />
+		<result column="createTime" property="createTime" />
+		<result column="createBy" property="createBy" />
+		<result column="modifyTime" property="modifyTime" />
+		<result column="modifyBy" property="modifyBy" />
+		<result column="orderBy" property="orderBy" />
+		<result column="category" property="category" />
+		<result column="gamepic_url" property="gamePicUrl" />
+		<result column="gamename" property="gameName" />
+	</resultMap>
+	
+	<resultMap type="gameRank" id="gameRankComplexResult">
+		<result column="id" property="id" />
+		<result column="developer" property="developer" />
+		<result column="type" property="type" />
+		<result column="language" property="language" />
+		<result column="theme" property="theme" />
+		<result column="gameDescrip" property="gameDescrip" />
+		<result column="gameUrl" property="gameUrl" />
+		<result column="playCounts" property="playCounts" />
+		<result column="createTime" property="createTime" />
+		<result column="createBy" property="createBy" />
+		<result column="modifyTime" property="modifyTime" />
+		<result column="modifyBy" property="modifyBy" />
+		<result column="orderBy" property="orderBy" />
+		<result column="category" property="category" />
+		<result column="gamepic_url" property="gamePicUrl" />
+		<result column="gamename" property="gameName" />
+		<result column="reward" property="reward" />
+		<result column="gameid" property="gameId" />
+		<result column="square" property="square" />
+		<result column="rectangle" property="rectangle" />
+		<result column="deposit" property="deposit" />
+		<result column="clicks" property="clicks" />
+		<result column="typename" property="typeName" />
+	</resultMap>
+
+	<select id="queryGameRanks" resultMap="gameRankComplexResult" parameterType="java.util.Map">
+		<![CDATA[ 
+		select d.*,c.*,e.id square,f.id rectangle,b.typename from ec_game_rank a  left join ec_game d on a.gamename = d.gamename left join ec_game_policy c on d.id = c.gameid left join ec_game_pic e on d.id = e.gameid  and e.type = 1 left join ec_game_pic f on d.id = f.gameid  and f.type = 2 left join ec_game_type b on a.type = b.id where 1=1
+		
+		]]>
+		
+		<if test="category != null and ''!=category">
+		<![CDATA[   and a.category = #{category} ]]>
+		</if>
+		
+		<![CDATA[ order by a.orderby asc ]]>
+		
+		<if test="count != null and ''!=count">
+		<![CDATA[  limit  #{count} ]]>
+		</if>
+	</select>
+	
+	<select id="getGameRankByName" parameterType="java.lang.String" resultType="gameRank">
+		<![CDATA[ 
+		select * from ec_game_rank where gamename = #{value};
+		]]>
+	</select>
+	
+	
+
+	<insert id="addGameRank" parameterType="gameRank">
+	<![CDATA[ 
+		insert into ec_game_rank (
+		id,
+		developer,
+		type,
+		language,
+		theme,
+		gameDescrip,
+		gameUrl,
+		playCounts,
+		createTime,
+		createBy,
+		modifyTime,
+		modifyBy,
+		orderBy,
+		gamepic_url,
+		gamename,
+		category
+		)
+		values (
+		#{id},
+		#{developer},
+		#{type},
+		#{language},
+		#{theme},
+		#{gameDescrip},
+		#{gameUrl},
+		#{playCounts},
+		#{createTime},
+		#{createBy},
+		#{modifyTime},
+		#{modifyBy},
+		#{orderBy},
+		#{gamePicUrl},
+		#{gameName},
+		#{category}
+		)
+		]]>
+	</insert>
+	
+	<delete id="deleteGameRank" parameterType="java.util.Map" >
+	 <![CDATA[ 
+	 delete from ec_game_rank where 1=1 
+	 ]]>
+	 <if test="category != null and ''!=category">
+	  <![CDATA[ 
+	 and category = #{category}
+	 ]]>
+	 </if>
+	</delete>
+
+</mapper>

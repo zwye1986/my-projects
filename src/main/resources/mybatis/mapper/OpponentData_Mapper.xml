@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.OpponentData">
+
+	<resultMap type="OpponentData" id="OpponentDataMap">
+		<result column="id" property="id" />
+		<result column="actiontime" property="actiontime" />
+		<result column="telephone" property="telephone" />
+		<result column="money" property="money" />
+		<result column="dotype" property="dotype" />
+	</resultMap>
+	
+
+	<insert id="addOpponentData" parameterType="OpponentData" >
+	<![CDATA[ 
+		insert into ec_getdata_opponent (id,actiontime,telephone,money,dotype)
+		values (#{id},#{actiontime},#{telephone},#{money},#{dotype})]]>
+	</insert>
+
+
+	<select id="getOpponentDataById" parameterType="Integer" resultMap="OpponentDataMap">
+		select * from ec_getdata_opponent where 1=1
+		and id =#{id} and dotype=#{dotype}
+	</select>
+
+
+</mapper>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.Resource">
+
+	<resultMap type="Resource" id="ResourceMap">
+		<result column="id" property="id" />
+		<result column="type" property="type" />
+		<result column="value" property="value" />
+		<result column="MODEL_NAME" property="modelName" />
+		<result column="PARENT_ID" property="parentId" />
+		<result column="createTime" property="createTime" />
+		<result column="createBy" property="createBy" />
+		<result column="lastUpdateTime" property="lastUpdateTime" />
+		<result column="lastUpdateBy" property="lastUpdateBy" />
+
+	</resultMap>
+
+	<resultMap type="Resource" id="ResourceRoleMap" extends="ResourceMap">
+		<collection property="ResourceRoles" ofType="Role">
+			<result column="id" property="id" />
+			<result column="RoleName" property="roleName" />
+			<result column="DESCRIPTION" property="DESCRIPTION" />
+		</collection>
+	</resultMap>
+
+ <resultMap id="TreeResultMap" type="Resource" >
+      	<result column="id" property="id" />
+        <result column="type" property="type" />
+		<result column="value" property="value" />
+		<result column="MODEL_NAME" property="modelName" />
+		<result column="PARENT_ID" property="parentId" />
+   <!-- 查询父组织 -->  
+    <association property="parentMenu" column="PARENT_ID" select="selectOne" />  
+     <!-- 查询子组织 -->  
+    <collection property="children" column="id" select="getChildrenMenus" />  
+  </resultMap>
+  
+   <select id="queryResourceByList" resultMap="TreeResultMap">
+		select id, type,value,MODEL_NAME,PARENT_ID
+		from ec_resource t where PARENT_ID=0
+	</select>
+  
+  <select id="selectOne" parameterType="int" resultMap="TreeResultMap">  
+        select * from ec_resource where 1= 0  
+    </select>  
+      
+    <select id="getChildrenMenus" parameterType="int" resultMap="TreeResultMap">  
+        select * from ec_resource where PARENT_ID = #{id}  
+    </select>  
+    
+
+	<select id="getResoucesByRoleId" parameterType="long" resultMap="ResourceMap">
+
+		SELECT re.id,re.MODEL_NAME,re.VALUE FROM ec_role r,ec_role_resource  rr,
+		ec_resource re WHERE rr.ROLE_ID=r.id
+		AND rr.RESOURCE_ID=re.id 
+		AND r.id=#{id}
+	</select>
+
+	<insert id="addResource" parameterType="Resource" useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		insert into ec_resource (type,value,MODEL_NAME,PARENT_ID,createTime,createBy)
+		values (
+		      #{type},#{value},#{modelName},#{parentId},now(),#{createBy}
+		)]]>
+	</insert>
+
+
+	<select id="findResourceListByValue" parameterType="String"
+		resultMap="ResourceMap">
+		<![CDATA[ 
+		select * from ec_resource where value = #{value}
+		]]>
+	</select>
+
+
+	<select id="findResourceListByName" parameterType="String"
+		resultMap="ResourceMap">
+		<![CDATA[ 
+		select * from ec_resource where MODEL_NAME = #{modelName}
+		]]>
+	</select>
+
+
+
+
+	<select id="queryResource" resultMap="ResourceMap">
+		select * from ec_resource where 1=1
+		<if test="value!=null and ''!=value">
+			and value like "%"#{value}"%"
+		</if>
+		<if test="id!=null and ''!=id">
+			and id =#{id}
+		</if>
+		<if test="modelName!=null and ''!=modelName">
+			and MODEL_NAME like "%"#{modelName}"%"
+		</if>
+		<if test="startTime != null">
+		<![CDATA[ 
+			and createTime > #{startTime}
+			]]>
+		</if>
+		<if test="endTime != null">
+			<![CDATA[ 
+			and createTime < #{endTime}
+			]]>
+		</if>
+	</select>
+
+	<select id="getResById" parameterType="Integer" resultMap="ResourceMap">
+		select * from ec_resource where 1=1
+		and id =#{id}
+	</select>
+
+
+	<select id="getResourceDetailsCount" resultType="int"
+		parameterType="java.util.Map">
+		select count(*) from ec_resource w where 1=1
+		<if test="value!=null and ''!=value">
+			and w.value like "%"#{value}"%"
+		</if>
+		<if test="modelName!=null and ''!=modelName">
+			and MODEL_NAME like "%"#{modelName}"%"
+		</if>
+		<if test="startTime != null">
+		<![CDATA[ 
+			and createTime > #{startTime}
+			]]>
+		</if>
+		<if test="endTime != null">
+			<![CDATA[ 
+			and createTime < #{endTime}
+			]]>
+		</if>
+	</select>
+
+	<delete id="deleteResourceById" parameterType="String">
+		delete
+		from ec_resource where id = #{id};
+	</delete>
+	
+	
+	<update id="updateResource" parameterType="Resource">
+
+		update ec_resource u set u.value=#{value}, u.type=#{type},u.PARENT_ID=#{parentId},
+		u.MODEL_NAME=#{modelName},u.lastUpdateBy=#{lastUpdateBy},u.lastUpdateTime=#{lastUpdateTime}
+		where u.id=#{id}
+	</update>
+
+
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet author="zhangwenyun" id="createIndex-zhangwenyun">
+		<createIndex indexName="idx_ec_bank_cardNumber" tableName="ec_bankCard" unique="true">
+			<column name="cardNumber" type="varchar(20)" />
+		</createIndex>
+		<createIndex indexName="idx_ec_bank_bindUserId" tableName="ec_bankCard" unique="false">
+			<column name="bindUserId" type="varchar(128)" />
+		</createIndex>
+		<createIndex indexName="idx_ec_login_log_userid" tableName="ec_login_log" unique="false">
+			<column name="userid" type="varchar(128)" />
+		</createIndex>
+		<createIndex indexName="idx_ec_login_log_mobileNumber" tableName="ec_login_log" unique="false">
+			<column name="mobileNumber" type="varchar(11)" />
+		</createIndex>
+		<createIndex indexName="idx_ec_user_mobileNumber" tableName="ec_user" unique="true">
+			<column name="mobileNumber" type="varchar(11)" />
+		</createIndex>
+		<createIndex indexName="idx_ec_user_detail_mobileNumber" tableName="ec_user_detail" unique="true">
+			<column name="mobileNumber" type="varchar(11)" />
+		</createIndex>
+		<createIndex indexName="idx_ec_user_detail_userid" tableName="ec_user_detail" unique="true">
+			<column name="userid" type="varchar(128)" />
+		</createIndex>
+		<createIndex indexName="idx_ec_user_detail_idCard" tableName="ec_user_detail" unique="true">
+			<column name="idCard" type="varchar(19)" />
+		</createIndex>
+		
+		<createIndex indexName="idx_ec_user_his_mobileNumber" tableName="ec_user_his" unique="false">
+			<column name="mobileNumber" type="varchar(11)" />
+		</createIndex>
+		<createIndex indexName="idx_ec_user_question_userid" tableName="ec_user_question" unique="true">
+			<column name="userid" type="varchar(128)" />
+		</createIndex>
+		
+		<createIndex indexName="idx_ec_user_his_userid" tableName="ec_user_his" unique="true">
+			<column name="userid" type="varchar(128)" />
+		</createIndex>
+	</changeSet>
+</databaseChangeLog>

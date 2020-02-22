@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="index_advertise_new" author="zhangwenyun">
+        <!--
+        <createTable tableName="ec_advertise_position">
+            <column name="id" type="int(3)" autoIncrement="true">
+                <constraints primaryKey="true" ></constraints>
+            </column>
+            <column name="adv_position" type="varchar(100)">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+        <sql>
+            INSERT INTO `ec_advertise_position` VALUES ('1', '首页顶部大幅轮播'), ('2', '首页中部，排行版上方轮播banner');
+        </sql>
+        <addColumn tableName="ec_advertising">
+            <column name="index" type="int(3)" defaultValue="0">
+                <constraints nullable="false"></constraints>
+            </column>
+        </addColumn>
+        <sql>
+            update ec_advertising set location = null;
+        </sql>
+        <modifyDataType tableName="ec_advertising" columnName="location" newDataType="int(3)"></modifyDataType>
+        -->
+        <sqlFile path="/Users/zhangwenyun/Documents/efinance/src/test/resources/advertise3.sql"></sqlFile>
+    </changeSet>
+</databaseChangeLog>

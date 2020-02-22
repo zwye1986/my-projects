@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.SignSysConfig">
+
+	<resultMap type="SignSysConfig" id="SignSysConfigMap">
+		<id column="id" property="id" />
+		<result column="benefit" property="benefit" />
+		<result column="assetBegin" property="assetBegin" />
+		<result column="assetEnd" property="assetEnd" />
+		<result column="type" property="type"/>
+	</resultMap>
+	
+	
+
+
+
+	<insert id="addSignSysConfig" parameterType="SignSysConfig">
+	<![CDATA[ 
+		INSERT INTO ec_sign_sysconfig (benefit,assetBegin,assetEnd,type)
+		VALUES(#{benefit},#{assetBegin},#{assetEnd},0)
+     ]]>
+	</insert>
+
+
+
+	<select id="listSignSysConfig" parameterType="int" resultMap="SignSysConfigMap">
+		<![CDATA[ 
+		SELECT * from ec_sign_sysconfig where type=#{type}
+		]]>
+	</select>
+
+	
+
+
+</mapper>

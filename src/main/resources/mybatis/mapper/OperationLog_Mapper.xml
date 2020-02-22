@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.OperationLogMapper">
+	<resultMap id="operationLogResult" type="operationLog"
+		extends="base.BaseEntity.baseEntityResult">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="log_type" property="logType" jdbcType="INTEGER" />
+		<result column="data_old" property="dataOld" jdbcType="VARCHAR" />
+		<result column="data_new" property="dataNew" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insertOperationLog" parameterType="operationLog">
+		insert into ec_operation_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="logType != null">
+				log_type,
+			</if>
+			<if test="dataOld != null">
+				data_old,
+			</if>
+			<if test="dataNew != null">
+				data_new,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="createBy != null">
+				createBy,
+			</if>
+			<if test="createTime != null">
+				createTime,
+			</if>
+			<if test="modifyBy != null">
+				modifyBy,
+			</if>
+			<if test="modifyTime != null">
+				modifyTime,
+			</if>
+			<if test="orderBy != null">
+				orderBy,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id},
+			</if>
+			<if test="logType != null">
+				#{logType},
+			</if>
+			<if test="dataOld != null">
+				#{dataOld},
+			</if>
+			<if test="dataNew != null">
+				#{dataNew},
+			</if>
+			<if test="remark != null">
+				#{remark},
+			</if>
+			<if test="createBy != null">
+				#{createBy},
+			</if>
+			<if test="createTime != null">
+				#{createTime},
+			</if>
+			<if test="modifyBy != null">
+				#{modifyBy},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime},
+			</if>
+			<if test="orderBy != null">
+				#{orderBy},
+			</if>
+		</trim>
+	</insert>
+</mapper>

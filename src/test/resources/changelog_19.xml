@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="create_orderid_record_table" author="xupei">
+		<createTable tableName="ec_orderid_record">
+			<column name="orderid" type="varchar(255)">
+			<constraints primaryKey="true" />
+			</column>
+			<column name="amount" type="decimal(10,2)"></column>
+			<column name="createtime" type="datetime"></column>
+			<column name="userid" type="varchar(255)"></column>
+		</createTable>
+	</changeSet>  
+	
+	
+	 <changeSet id="create_ec_user_weixin_table" author="hepei">
+		<createTable tableName="ec_user_weixin">
+			<column name="id" type="varchar(255)">
+			<constraints primaryKey="true" />
+			</column>
+			<column name="userid" type="varchar(255)"></column>
+			<column name="createtime" type="datetime"></column>
+			<column name="openid" type="varchar(255)">
+				<constraints nullable="true" unique="true" />
+			</column>
+		</createTable>
+	</changeSet>    
+</databaseChangeLog>

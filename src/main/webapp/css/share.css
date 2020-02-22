@@ -1,0 +1,103 @@
+/* CSS Document */
+
+.share_C {
+	width: 1040px;
+	border-left: 1px solid #d1d1d1;
+	border-right: 1px solid #d1d1d1;
+	padding-bottom:20px;
+
+}
+.share_C h5 {
+	font-size: 20px;
+	margin-left: 20px;
+	line-height: 48px;
+}
+.invite_way{ margin-left:35px; padding-top:20px;}
+.invite_way .icon {
+    background-image:url(../images/share/invite_bg.png);
+    background-repeat: no-repeat;
+    border: 1px solid #CCCCCC;
+    float: left;
+    height: 49px;
+    width: 49px;
+	margin-right:20px;
+}
+.invite_way .w1, .invite_way .w2, .invite_way .w3,.invite_way .w4,.invite_way .w5{
+
+    margin-bottom: 30px;
+    width: 1000px;
+	display:inline-block;
+	
+}
+.invite_way .w1 .icon {
+    background-position: 6px 4px;
+}
+.invite_way .w2 .icon {
+    background-position: 4px -49px;
+}
+.invite_way .w3 .icon {
+    background-position: 8px -144px;
+}
+.invite_way .w4 .icon {
+    background-position: 8px -95px;
+}
+.invite_way .w5 .icon {
+    background-position: 7px -196px;
+}
+.invite_way .link h4 {
+    color: #f16244;
+    font-family: "Microsoft Yahei",Arial;
+    font-size: 14px;
+	
+}
+.invite_way .link .ls {
+    border: 1px solid #E3E3E3;
+    color: #666666;
+    float: left;
+    font-size: 12px;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 5px;
+    width:800px;
+	display:inline-block;
+}
+.invite_way .link .get {
+    background: url(../images/share/invite_bg.png)  no-repeat scroll 0 -250px rgba(0, 0, 0, 0);
+    border: 0 none;
+    cursor: pointer;
+    float: left;
+    height: 26px;
+    margin-left: 10px;
+    width: 66px;
+}
+.invite_way .link .get:hover {
+    background: url(../images/share/invite_bg.png) no-repeat scroll 0 -278px rgba(0, 0, 0, 0);
+    border: 0 none;
+    cursor: pointer;
+    float: left;
+    height: 26px;
+    margin-left: 10px;
+    width: 66px;
+}
+
+.invite_way .link .ls2 {
+    border: 1px solid #E3E3E3;
+    color: #666666;
+    float: left;
+    font-size: 12px;
+    height: 25px;
+    line-height: 18px;
+    overflow: hidden;
+    padding: 5px;
+    width: 800px;
+}
+.invite_way .w5 .content {
+    border: 1px solid #E3E3E3;
+    height: 35px;
+	line-height:35px;
+    padding:0 5px;
+    width:800px;
+	margin-left:70px;
+	font-family:"微软雅黑";
+}
+.invite_tip{ width:900px; padding:10px 30px; border:1px solid #d1d1d1; margin:0 auto; }

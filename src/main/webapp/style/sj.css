@@ -1,0 +1,10 @@
+/*content*/
+body{ background:#dc382f;color:#fff;  font-family: "微软雅黑",sans-serif;
+     font-size:12px;}
+.content{ width:998px; height:680px; background:url(../images/sj/sj_bg.png) no-repeat; margin:0 auto; position:relative;}
+.top{ width:260px; height:13px; background:url(../images/sj/sj.gif)  no-repeat; position:absolute; top:380px; left:350px;}
+.ewm{ width:180px; height:120px;position:absolute; top:430px; left:720px;}
+.title{ width:100%; line-height:24px; float:right;  }
+.ewm_pic{ margin-left:-30px;}
+.ewm_pic img{ margin-right:10px; width:80px; height:80px;}
+.sj_c{ width:370px; height:130px; float:left; line-height:24px; position:absolute;top:520px; left:500px; text-align:justify;}

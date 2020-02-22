@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet id="remodify_proc_charge_security_center_fee" author="zhangwenyun">
+		<sql>
+			DROP PROCEDURE IF EXISTS proc_charge_security_center_fee;
+		</sql>
+		
+		<createProcedure>
+		<![CDATA[ 
+		CREATE PROCEDURE `proc_charge_security_center_fee`()
+			BEGIN
+				declare iv_userid varchar(128) default '' ; /*用户ID*/
+				declare iv_isAutoRenew int(1) ; /*用户ID*/
+				declare iv_month_cost	DECIMAL ;	/*安全中心月功能费*/
+				DECLARE	iv_user_blance 	DECIMAL ;  /*查询用户余额*/ 
+				DECLARE iv_uuid VARCHAR(128) ;
+				DECLARE cur_security_centers CURSOR FOR SELECT t.userid,t.isAutoRenew from ec_security_center t WHERE t.isOpen = 0  and DATE_FORMAT(t.expiryDate,'%Y~%m~%d') < DATE_FORMAT(NOW(),'%Y~%m~%d');
+				declare CONTINUE HANDLER FOR SQLSTATE '02000' set iv_userid = NULL;
+			
+				SET autocommit=0;
+				
+				SELECT t.paramValue into iv_month_cost FROM ec_system_config t where t.id = 104 ;
+				
+				/*打开游标*/
+			    OPEN cur_security_centers;
+					/*游标向下走一步*/ 
+			        FETCH cur_security_centers INTO iv_userid,iv_isAutoRenew;
+					
+					WHILE ( iv_userid is not null) DO
+					
+						select t.amount into iv_user_blance from ec_user_wallet t where t.userid = iv_userid FOR UPDATE;
+						/*余额不足，关闭安全中心功能*/
+						if  iv_user_blance < iv_month_cost || iv_isAutoRenew = 1 THEN
+							update ec_security_center t set t.isOpen = 1 where t.userid = iv_userid;
+						else/*反之增加用户开启安全中心的时间、等级积分，扣除功能费,增加流水记录*/
+							UPDATE ec_security_center t set t.expiryDate = date_add(now(), interval 1 MONTH) where t.userid = iv_userid;
+							UPDATE ec_user t set t.level = t.level + (iv_month_cost*10) , t.credits = t.credits + (iv_month_cost*10) where t.id = iv_userid;
+							UPDATE ec_user_wallet t set t.amount = t.amount - iv_month_cost where t.userid = iv_userid ;
+							select uuid() INTO iv_uuid ;
+							insert into ec_deal_detail(id,serialNumber,dateTime,status,amount,userid,balance,description,detailType,type)					
+												values(iv_uuid,'XTKF',now(),'0',iv_month_cost,iv_userid,(iv_user_blance-iv_month_cost),'系统自动扣除安全中心月功能费','4','0');
+							
+						end if ;
+						COMMIT;
+						/*游标向下走一步*/ 
+						FETCH cur_security_centers INTO iv_userid,iv_isAutoRenew;
+					END WHILE;	
+				/*关闭游标*/
+				CLOSE cur_security_centers;	
+			END
+			]]>
+		</createProcedure>
+		
+		<sql>
+	INSERT INTO `ec_resource` (`id`, `TYPE`, `VALUE`, `MODEL_NAME`, `PARENT_ID`,
+	`createTime`, `createBy`, `lastUpdateTime`, `lastUpdateBy`)
+	VALUES
+	(26, NULL, '/manager/userWalletCheckList', '用户余额异常', 0, '2014-02-13 16:54:15',
+	'13951885586', '2014-02-13 16:56:54', '13951885586');
+</sql>
+	</changeSet> 
+	
+   <changeSet id="addActivity" author="xupei">
+   <createTable tableName="ec_activity">
+   <column name="id" type="varchar(255)">
+   <constraints primaryKey="true"/>
+   </column>
+   <column name="name" type="varchar(255)">
+   <constraints nullable="true"/>
+   </column>
+    <column name="descrip" type="varchar(255)">
+   <constraints nullable="true"/>
+   </column>
+   <column name="pic" type="mediumblob">
+   <constraints nullable="true"/>
+   </column>
+    <column name="starttime" type="datetime">
+   <constraints nullable="true"/>
+   </column>
+   <column name="endtime" type="datetime">
+   <constraints nullable="true"/>
+   </column>
+   <column name="url" type="varchar(255)">
+   <constraints nullable="true"/>
+   </column>
+   </createTable>
+   
+   <sqlFile path="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_activity.sql"/>
+   </changeSet>
+	
+	</databaseChangeLog>

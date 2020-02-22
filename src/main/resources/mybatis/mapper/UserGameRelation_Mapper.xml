@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="UserGameRelation">
+
+	<resultMap type="userGameRelation" id="userGameRelationResult">
+		<result column="id" property="id" />
+		<result column="gameid" property="gameId" />
+		<result column="userId" property="userId" />
+		<result column="createTime" property="createTime" />
+		<result column="punish" property="punish" />
+		<result column="reward" property="reward" />
+		<result column="status" property="status" />
+		<result column="banance" property="banance" />
+		<result column="invalidtime" property="invalidTime" />
+	</resultMap>
+
+	<resultMap type="userGameRelation" id="userGameRelationResultMap">
+	<result column="id" property="id" />
+		<result column="userid" property="userId" />
+		<result column="gameid" property="gameId" />
+		<result column="gamename" property="gameName" />
+		<result column="createTime" property="createTime" />
+		<result column="punish" property="punish" />
+		<result column="reward" property="reward" />
+		<result column="status" property="status" />
+		<result column="banance" property="banance" />
+		<result column="realreward" property="realReward" />
+		<result column="relationid" property="relationId" />
+		<result column="playnum" property="playnum" />
+		<result column="clicks" property="clicks" />
+		<result column="gameurl" property="gameUrl" />
+		<result column="invalidtime" property="invalidTime" />
+		<result column="deposit" property="deposit" />
+		<result column="clickdate" property="clickDate" />
+	</resultMap>
+	
+	
+
+	
+	<resultMap type="userGameRelation" id="userGameRelationRecordMap" extends="userGameRelationResult">
+	   <collection property="ecGame" ofType="com.venada.efinance.pojo.Game" select="getGameRelationById" column="gameid"/> 
+	</resultMap>
+	
+	
+	<select id="getGameRelationById" parameterType="String" resultMap="Game.gameResult">
+		select * from ec_game a WHERE a.id  = #{id}  
+    </select> 
+    
+
+	<select id="getGamePlayCounts" parameterType="java.lang.String"
+		resultType="int">
+<![CDATA[
+select count(1) from ec_user_game_relation where gameId = #{value}
+]]>
+	</select>
+
+
+	<insert id="addUserGameRelation" parameterType="userGameRelation">
+		insert into
+		ec_user_game_relation (
+		id,
+		gameid,
+		userId,
+		createTime,
+		status
+		)
+		values (
+		#{id},
+		#{gameId},
+		#{userId},
+		#{createTime},
+		#{status}
+		)
+	</insert>
+
+	<insert id="addUserGameRelationList" parameterType="java.util.List">
+		insert into ec_user_game_relation (
+		id,
+		gameid,
+		userId,
+		createTime,
+		punish,
+		reward,
+		status,
+		banance,
+		invalidtime,
+		policy_reward,
+		policy_clicks,
+		policy_punish,
+		policy_deposit
+		)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.id},
+			#{item.gameId},
+			#{item.userId},
+			#{item.createTime},
+			#{item.punish},
+			#{item.reward},
+			#{item.status},
+			#{item.banance},
+			#{item.invalidTime},
+			#{item.policyReward},
+			#{item.policyClicks},
+			#{item.policyPunish},
+			#{item.policyDeposit}
+			)
+		</foreach>
+
+	</insert>
+	
+	<update id="updateUserGameRelation" parameterType="userGameRelation">
+	update ec_user_game_relation set gameId=#{gameId},userId=#{userId},createTime=#{createTime},punish=#{punish},reward=#{reward},status=#{status},banance=#{banance},invalidTime=#{invalidTime},clickdate=#{clickDate} where id=#{id}
+	
+	</update>
+	
+	<select id="getUserGameRelationById" parameterType="java.lang.String"
+		resultMap="userGameRelationResult">
+		    select a.id,a.userid,a.gameid,e.gamename,a.punish,a.reward
+		reward,a.status,a.banance,a.createtime,a.invalidtime,a.policy_reward policy_reward,d.*,a.policy_clicks clicks,a.policy_deposit deposit,e.gameurl,a.clickdate from ec_user_game_relation a
+		left join (select
+		c.relationid,count(1) playnum from ec_game_log c group by relationid) d on a.id =
+		d.relationid left join ec_game e on a.gameid = e.id where a.id=#{value}
+		
+	</select>
+
+	<select id="queryUserGameRelationList" parameterType="java.util.Map"
+		resultMap="userGameRelationResult">
+		select * from ec_user_game_relation where 1=1
+		<if test="gameId !=null and '' != gameId">
+			and gameId = #{gameId}
+		</if>
+		<if test="userId !=null and '' != userId">
+			and userId = #{userId}
+		</if>
+	</select>
+
+	<select id="queryAllGameTaskDetails" parameterType="java.util.Map"
+		resultMap="userGameRelationResultMap">
+		    select a.id,a.userid,a.gameid,e.gamename,a.punish,a.reward
+		realreward,a.status,a.banance,a.createtime,a.invalidtime,a.policy_reward reward,a.policy_clicks clicks,a.policy_deposit deposit,e.gameurl,a.clickdate from ec_user_game_relation a
+		  left join ec_game e on a.gameid = e.id where 1=1
+		<if test="userId !=null and '' != userId">
+			and a.userid = #{userId}
+		</if>
+		<if test="status !=null and '' != status">
+		  and a.status = #{status}
+		</if>
+		<if test="punishRecord !=null and '' != punishRecord">
+		  and a.punish > 0
+		</if>
+		<if test="id !=null and '' != id">
+		  and a.id = #{id}
+		</if>
+		<if test="actionStartTime !=null and '' != actionStartTime">
+		  and a.createTime >= #{actionStartTime}
+		</if>
+		<if test="actionEndTime !=null and '' != actionEndTime">
+		<![CDATA[ 
+		  and a.createTime <= #{actionEndTime}
+		  ]]>
+		</if>
+		
+		<choose>
+	
+		<when test="sort2 == 'reward' and sortseq == 'down'"> order by reward desc, e.gamename asc </when>
+		<when test="sort2 == 'deposit' and sortseq == 'down'"> order by deposit desc, e.gamename asc </when>
+		<when test="sort2 == 'clicks' and sortseq == 'down'"> order by clicks desc, e.gamename asc </when>
+		<when test="sort2 == 'clickNum' and sortseq == 'down'"> order by players desc, e.gamename asc </when>
+		<when test="sort2 == 'punish' and sortseq == 'down'"> order by punish desc, e.gamename asc </when>
+		<when test="sort2 == 'punish' and sortseq == 'up'"> order by punish asc, e.gamename asc </when>
+		<when test="sort2 == 'reward' and sortseq == 'up'"> order by reward asc, e.gamename asc </when>
+		<when test="sort2 == 'deposit' and sortseq == 'up'"> order by deposit asc, e.gamename asc </when>
+		<when test="sort2 == 'clicks' and sortseq == 'up'"> order by  clicks asc, e.gamename asc </when>
+
+		<otherwise>
+		<![CDATA[
+		 order by a.createtime desc,a.banance asc
+		]]>
+		</otherwise>
+		</choose>
+		
+		
+		<if test="limitCount != null and ''!=limitCount">
+		<![CDATA[ 
+		  limit #{limitIndex},#{limitCount}
+		 ]]>
+		</if>
+		 
+	</select>
+	
+	
+	
+
+	<select id="getAllGameTaskDetailsCount" resultType="int"
+		parameterType="java.util.Map">
+
+	
+		select
+		count(1) from ec_user_game_relation a
+		left join ec_game_policy b on a.gameid = b.gameid  left join ec_game e on a.gameid = e.id where 1=1
+		<if test="userId !=null and '' != userId">
+			and a.userid = #{userId}
+		</if>
+			<if test="status !=null and '' != status">
+		  and a.status = #{status}
+		</if>
+		<if test="punishRecord !=null and '' != punishRecord">
+		  and a.punish > 0
+		</if>
+		<if test="actionStartTime !=null and '' != actionStartTime">
+		  and a.createTime >= #{actionStartTime}
+		</if>
+		<if test="actionEndTime !=null and '' != actionEndTime">
+		<![CDATA[ 
+		  and a.createTime <= #{actionEndTime}
+		  ]]>
+		</if>
+
+	</select>
+	
+	<select id="queryUserGameRelationByIds" parameterType="java.util.List" resultMap="userGameRelationResult" >
+	  select a.id,a.userid,a.gameid,e.gamename,a.punish,a.reward
+		realreward,a.status,a.banance,a.createtime,a.invalidtime,a.policy_reward reward,a.policy_clicks clicks,a.policy_deposit deposit,e.gameurl,a.clickdate from ec_user_game_relation a
+		  left join ec_game e on a.gameid = e.id where a.id in (
+	
+	<foreach collection="list" item="item" index="index"
+			separator=",">			
+			#{item}
+		</foreach>
+	)
+	
+	</select>
+	
+	
+	<select id="getGameAmountTotalByUserid" parameterType="java.util.Map" resultType="java.math.BigDecimal">
+	<![CDATA[ 
+		select SUM(policy_deposit) FROM ec_user_game_relation t WHERE userid = #{mobilePhone} and  t.status = #{status} 
+		]]>
+	</select>
+	
+	<select id="getGameRewardTotalByUserid" parameterType="java.util.Map" resultType="java.math.BigDecimal">
+		 SELECT SUM(reward)  FROM ec_user_game_relation t WHERE  userid = #{mobilePhone} and t.status=#{status}
+	</select>
+	
+	
+		
+	<select id="queryAllGameTaskDetailsOptimize" parameterType="java.util.Map"
+		resultMap="userGameRelationRecordMap">
+		    select a.id,a.userid,a.gameid,a.punish,a.reward
+		realreward,a.status,a.banance,a.createtime,a.invalidtime,a.policy_reward reward,a.policy_clicks clicks,a.policy_deposit deposit,a.clickdate
+		 from ec_user_game_relation a
+		 where 1=1
+		<if test="userId !=null and '' != userId">
+			and a.userid = #{userId}
+		</if>
+		<if test="status !=null and '' != status">
+		  and a.status = #{status}
+		</if>
+		<if test="punishRecord !=null and '' != punishRecord">
+		  and a.punish > 0
+		</if>
+		<if test="id !=null and '' != id">
+		  and a.id = #{id}
+		</if>
+		<if test="actionStartTime !=null and '' != actionStartTime">
+		  and a.createTime >= #{actionStartTime}
+		</if>
+		<if test="actionEndTime !=null and '' != actionEndTime">
+		<![CDATA[ 
+		  and a.createTime <= #{actionEndTime}
+		  ]]>
+		</if>
+		
+		<choose>
+	
+		<when test="sort2 == 'reward' and sortseq == 'down'"> order by reward desc, e.gamename asc </when>
+		<when test="sort2 == 'deposit' and sortseq == 'down'"> order by deposit desc, e.gamename asc </when>
+		<when test="sort2 == 'clicks' and sortseq == 'down'"> order by clicks desc, e.gamename asc </when>
+		<when test="sort2 == 'clickNum' and sortseq == 'down'"> order by players desc, e.gamename asc </when>
+		<when test="sort2 == 'punish' and sortseq == 'down'"> order by punish desc, e.gamename asc </when>
+		<when test="sort2 == 'punish' and sortseq == 'up'"> order by punish asc, e.gamename asc </when>
+		<when test="sort2 == 'reward' and sortseq == 'up'"> order by reward asc, e.gamename asc </when>
+		<when test="sort2 == 'deposit' and sortseq == 'up'"> order by deposit asc, e.gamename asc </when>
+		<when test="sort2 == 'clicks' and sortseq == 'up'"> order by  clicks asc, e.gamename asc </when>
+
+		<otherwise>
+		<![CDATA[
+		 order by a.createtime desc,a.banance asc
+		]]>
+		</otherwise>
+		</choose>
+		
+		<if test="limitCount != null and ''!=limitCount">
+		<![CDATA[ 
+		  limit #{limitIndex},#{limitCount}
+		 ]]>
+		</if>
+		 
+	</select>
+	
+		
+	<select id="getUserGameBenefitInfo"  parameterType="java.util.Map" resultMap="userGameRelationResultMap">
+        SELECT   COALESCE(SUM(policy_deposit),0)   deposit  ,
+		 COALESCE(SUM(policy_reward),0)   reward  FROM ec_user_game_relation  t WHERE t.status=1 
+		AND t.userid= #{userid};
+ 	</select>
+ 	
+ 	<select id="getInstallmentsMoney" parameterType="java.util.Map" resultType="int">
+ 	select COALESCE(sum(num) * 100,0) from ec_record_reward where userid = (select id from ec_user where mobilenumber = #{userid}) and num > 0
+ 	</select>
+ 	
+ 	<select id="getInstallmentsReward" parameterType="java.util.Map" resultType="int">
+ 	select COALESCE(sum(num)*5,0) from ec_record_reward where userid = (select id from ec_user where mobilenumber = #{userid}) and num > 0
+ 	</select>
+ 	
+ 	<select id="getTaskNum" parameterType="java.util.Map" resultType="int">
+ 	select count(1) from ec_user_game_relation where userid = #{mobileNumber} and status = #{status}
+ 	</select>
+ 	
+ 	<select id="getAllGameAmount" parameterType="java.lang.String" resultType="java.math.BigDecimal">
+ 	select COALESCE(sum(policy_deposit),0) from ec_user_game_relation where userid = #{value} and createTime >= '2014-07-05'
+ 	</select>
+ 	
+ 	<select id="getAllRechargeAmount" parameterType="java.lang.String" resultType="java.math.BigDecimal">
+ 	select COALESCE(sum(amount),0) from ec_recharge_record where userid = #{value} and status = '0' and datetime >= '2014-07-05'
+ 	</select>
+ 	
+ 	<select id="getAllInviteAmount" parameterType="java.lang.String" resultType="java.math.BigDecimal">	
+    select COALESCE(sum(benefit),0) from ec_invite_benefit where inviteUserId = #{value} and actiontime >= '2014-07-05'
+ 	</select>
+ 	
+ 	<select id="getAllVipAmount" parameterType="java.lang.String" resultType="java.math.BigDecimal">	
+   select COALESCE(sum(amount),0)  from ec_deal_detail where detailType in (4,10,11) and type=2 and status=0 and  userid = #{value} and createtime >= '2014-07-05'
+ 	</select>
+
+</mapper>

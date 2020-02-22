@@ -1,0 +1,21 @@
+.lp_container {
+	width: 560px;
+	height: 265px;
+	border: 5px solid #8a8a8a;
+	margin:0 auto;
+	margin-top:100px;
+	position:relative;
+	font: 16px/1.5 Tahoma,Helvetica,Arial;
+
+}
+.top{ width:540px; height:35px; line-height:35px; border-bottom:1px solid #d1d1d1; margin:0 auto;}
+.kt_title{ width:180px;}
+.txt1{ font-weight:600;}
+.close_btn{ width:13px; height:15px; line-height:90px; overflow:hidden; background:url(../images/vip/close_btn.png) no-repeat; margin-top:10px; cursor:pointer;}
+.center{ width:510px; height:180px; border:1px solid #d1d1d1; margin:0 auto; margin-top:20px; }
+.hy_list{ width:300px; height:100px; margin:0 auto; margin-top:20px;}
+.hy_list li{ line-height:33px;}
+a.kthy_btn .btn{ width:130px; height:30px; line-height:30px; border:none; margin-top:10px; background:url(../images/vip/tc_kthy_btn.jpg) no-repeat; cursor:pointer; color:#bebebe; padding-left:25px;}
+a.kthy_btn .btn:hover{ color:#fff;}
+.txt{ color:#FD6B6F;}
+

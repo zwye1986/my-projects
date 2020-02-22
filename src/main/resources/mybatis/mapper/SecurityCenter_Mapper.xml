@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="EC_SecurityCenter">
+
+	<resultMap type="securityCenter" id="securityCenterResult"
+		extends="base.BaseEntity.baseEntityResult">
+		<result column="password" property="password" />
+		<result column="mail" property="mail" />
+		<result column="mobile" property="mobile" />
+		<result column="question" property="question" />
+		<result column="answer" property="answer" />
+		<result column="userId" property="userId" />
+		<result column="isAutoRenew" property="isAutoRenew" />
+		<result column="expiryDate" property="expiryDate" />
+		<result column="isOpen" property="isOpen" />
+	</resultMap>
+
+	<select id="getSecurityCenterByUserId" parameterType="java.lang.String"
+		resultMap="securityCenterResult">
+		select id,password, mail, mobile, question, answer, userid, createBy,
+		createTime, modifyBy, modifyTime, orderBy,isAutoRenew,expiryDate,isOpen
+		from ec_security_center
+		where userid = #{userId}
+	</select>
+	
+	<select id="getSecurityCenterById" parameterType="java.lang.String"
+		resultMap="securityCenterResult">
+		select id,password, mail, mobile, question, answer, userid, createBy,
+		createTime, modifyBy, modifyTime, orderBy,isAutoRenew,expiryDate,isOpen
+		from ec_security_center
+		where id = #{id}
+	</select>
+
+	<select id="selectCountSecurityCenterIsOpen" parameterType="java.lang.String" resultType="int">
+		select count(*) from ec_security_center where userid = #{userId} and isOpen = 0
+	</select>
+
+
+	<insert id="addSecurityCenter" parameterType="securityCenter">
+		insert into ec_security_center
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="mail != null">
+				mail,
+			</if>
+			<if test="mobile != null">
+				mobile,
+			</if>
+			<if test="question != null">
+				question,
+			</if>
+			<if test="answer != null">
+				answer,
+			</if>
+			<if test="userId != null">
+				userid,
+			</if>
+			<if test="createBy != null">
+				createBy,
+			</if>
+			<if test="createTime != null">
+				createTime,
+			</if>
+			<if test="modifyBy != null">
+				modifyBy,
+			</if>
+			<if test="modifyTime != null">
+				modifyTime,
+			</if>
+			<if test="orderBy != null">
+				orderBy,
+			</if>
+			<if test="expiryDate != null">
+				expiryDate,
+			</if>
+			<if test="isAutoRenew != null">
+				isAutoRenew,
+			</if>
+			<if test="isOpen != null">
+				isOpen,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id},
+			</if>
+			<if test="password != null">
+				#{password},
+			</if>
+			<if test="mail != null">
+				#{mail},
+			</if>
+			<if test="mobile != null">
+				#{mobile},
+			</if>
+			<if test="question != null">
+				#{question},
+			</if>
+			<if test="answer != null">
+				#{answer},
+			</if>
+			<if test="userId != null">
+				#{userId},
+			</if>
+			<if test="createBy != null">
+				#{createBy},
+			</if>
+			<if test="createTime != null">
+				#{createTime},
+			</if>
+			<if test="modifyBy != null">
+				#{modifyBy},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime},
+			</if>
+			<if test="orderBy != null">
+				#{orderBy},
+			</if>
+			<if test="expiryDate != null">
+				#{expiryDate},
+			</if>
+			<if test="isAutoRenew != null">
+				#{isAutoRenew},
+			</if>
+			<if test="isOpen != null">
+				#{isOpen},
+			</if>
+		</trim>
+	</insert>
+	
+	
+
+	<update id="updateSecurityCenter" parameterType="securityCenter">
+		update ec_security_center
+		<set>
+			<if test="password != null">
+				password = #{password},
+			</if>
+			<if test="mail != null">
+				mail = #{mail},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile},
+			</if>
+			<if test="question != null">
+				question = #{question},
+			</if>
+			<if test="answer != null">
+				answer = #{answer},
+			</if>
+			<if test="userId != null">
+				userid = #{userId},
+			</if>
+			<if test="createBy != null">
+				createBy = #{createBy},
+			</if>
+			<if test="createTime != null">
+				createTime = #{createTime},
+			</if>
+			<if test="modifyBy != null">
+				modifyBy = #{modifyBy},
+			</if>
+			<if test="modifyTime != null">
+				modifyTime = #{modifyTime},
+			</if>
+			<if test="orderBy != null">
+				orderBy = #{orderBy},
+			</if>
+			<if test="expiryDate != null">
+				expiryDate = #{expiryDate},
+			</if>
+			<if test="isAutoRenew != null">
+				isAutoRenew = #{isAutoRenew},
+			</if>
+			<if test="isOpen != null">
+				isOpen = #{isOpen},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateSecurityCenterWithNoPassword" parameterType="securityCenter">
+		update ec_security_center
+		<set>
+			<if test="mail != null">
+				mail = #{mail},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile},
+			</if>
+			<if test="question != null">
+				question = #{question},
+			</if>
+			<if test="answer != null">
+				answer = #{answer},
+			</if>
+			<if test="userId != null">
+				userid = #{userId},
+			</if>
+			<if test="createBy != null">
+				createBy = #{createBy},
+			</if>
+			<if test="createTime != null">
+				createTime = #{createTime},
+			</if>
+			<if test="modifyBy != null">
+				modifyBy = #{modifyBy},
+			</if>
+			<if test="modifyTime != null">
+				modifyTime = #{modifyTime},
+			</if>
+			<if test="orderBy != null">
+				orderBy = #{orderBy},
+			</if>
+			<if test="expiryDate != null">
+				expiryDate = #{expiryDate},
+			</if>
+			<if test="isAutoRenew != null">
+				isAutoRenew = #{isAutoRenew},
+			</if>
+			<if test="isOpen != null">
+				isOpen = #{isOpen},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+</mapper>

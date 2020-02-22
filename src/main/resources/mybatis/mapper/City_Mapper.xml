@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.City">
+
+	<resultMap type="City" id="cityMap">
+		<result column="cityid" property="cityid"></result>
+		<result column="city" property="city"></result>
+		<result column="provinceid" property="provinceid"></result>
+	</resultMap>
+	
+	<select id="findCityListByProvinceid" parameterType="int" resultMap="cityMap" >
+		<![CDATA[ 
+		select * from ec_city where provinceid = #{provinceid}
+		]]>
+	</select>
+	
+	<select id="getCityById" parameterType="int" resultMap="cityMap" >
+		<![CDATA[ 
+		select * from ec_city where cityid = #{cityId}
+		]]>
+	</select>
+	
+</mapper>

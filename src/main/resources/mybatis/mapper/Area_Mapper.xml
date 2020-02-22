@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.Area">
+
+	<resultMap type="Area" id="areaMap">
+		<result column="areaid" property="areaid"></result>
+		<result column="area" property="area"></result>
+		<result column="cityid" property="cityid"></result>
+		<result column="code" property="code"></result>
+	</resultMap>
+	
+	<select id="findAreaListByCityid" parameterType="int" resultMap="areaMap" >
+		<![CDATA[ 
+		select * from ec_area where cityid = #{cityid}
+		]]>
+	</select>
+	
+	<select id="getAreaById" parameterType="int" resultMap="areaMap" >
+		<![CDATA[ 
+		select * from ec_area where areaid = #{id}
+		]]>
+	</select>
+	
+</mapper>

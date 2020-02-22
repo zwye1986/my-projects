@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Game">
+
+	<resultMap type="game" id="gameResult">
+		<result column="id" property="id" />
+		<result column="developer" property="developer" />
+		<result column="type" property="type" />
+		<result column="language" property="language" />
+		<result column="theme" property="theme" />
+		<result column="gameDescrip" property="gameDescrip" />
+		<result column="gameUrl" property="gameUrl" />
+		<result column="playCounts" property="playCounts" />
+		<result column="createTime" property="createTime" />
+		<result column="createBy" property="createBy" />
+		<result column="modifyTime" property="modifyTime" />
+		<result column="modifyBy" property="modifyBy" />
+		<result column="orderBy" property="orderBy" />
+		<result column="category" property="category" />
+		<result column="gamepic_url" property="gamePicUrl" />
+		<result column="gamename" property="gameName" />
+		<result column="stars" property="stars" />
+	</resultMap>
+	
+	<resultMap type="game" id="gameComplexResult">
+		<result column="id" property="id" />
+		<result column="developer" property="developer" />
+		<result column="type" property="type" />
+		<result column="language" property="language" />
+		<result column="theme" property="theme" />
+		<result column="gameDescrip" property="gameDescrip" />
+		<result column="gameUrl" property="gameUrl" />
+		<result column="playCounts" property="playCounts" />
+		<result column="createTime" property="createTime" />
+		<result column="createBy" property="createBy" />
+		<result column="modifyTime" property="modifyTime" />
+		<result column="modifyBy" property="modifyBy" />
+		<result column="orderBy" property="orderBy" />
+		<result column="category" property="category" />
+		<result column="gamepic_url" property="gamePicUrl" />
+		<result column="gamename" property="gameName" />
+		<result column="deposit" property="deposit" />
+		<result column="clicks" property="clicks" />
+		<result column="reward" property="reward" />
+		<result column="punish" property="punish" />
+		<result column="players" property="players" />
+		<result column="typename" property="typeName" />
+		<result column="stars" property="stars" />
+	</resultMap>
+
+	<select id="queryGame" resultType="game">
+		<![CDATA[ 
+		select * from ec_game;
+		]]>
+	</select>
+	
+	
+	<select id="getGameDetail" resultMap="gameComplexResult" parameterType="java.lang.String">
+		<![CDATA[ 
+		SELECT
+	a.*,  c.*, d.*, e.id square,
+	f.id rectangle
+FROM
+	ec_game a
+LEFT JOIN ec_game_policy c ON a.id = c.gameid
+LEFT JOIN ec_game_type d ON a.type = d.id
+LEFT JOIN ec_game_pic e ON a.id = e.gameid
+AND e.type = 1
+LEFT JOIN ec_game_pic f ON a.id = f.gameid
+AND f.type = 2
+WHERE
+	1 = 1
+AND a.id = #{value}
+		]]>
+	
+	</select>
+	
+	<select id="queryOtherGames" resultMap="gameComplexResult" parameterType="java.lang.String">
+		SELECT
+	a.*,  c.*, d.*, e.id square,
+	f.id rectangle
+FROM
+	ec_game a
+LEFT JOIN ec_game_policy c ON a.id = c.gameid
+LEFT JOIN ec_game_type d ON a.type = d.id
+LEFT JOIN ec_game_pic e ON a.id = e.gameid
+AND e.type = 1
+LEFT JOIN ec_game_pic f ON a.id = f.gameid
+AND f.type = 2
+WHERE
+	1 = 1
+AND a.id in (
+select * from (SELECT 
+distinct	(b.gameid)
+FROM
+ec_user_game_relation b,
+(
+SELECT DISTINCT
+a.userid
+FROM
+ec_user_game_relation a
+WHERE
+a.gameid = #{value}
+) a where b.userid=a.userid and b.gameid != #{value}  limit 8 ) f
+) 
+	</select>
+	
+	
+	<select id="queryVipGamesForSimple" resultMap="gameComplexResult" parameterType="java.util.Map">
+	<![CDATA[ 
+	select a.* from ec_game a left join ec_game_type d on a.type = d.id where a.ismember = 1 
+	]]>
+	<if test="typename1 !=null and '' != typename1">
+		<![CDATA[ 
+		  and (d.typename like #{typename1}  or d.typename like #{typename2}) 
+		  ]]>
+		</if>
+			order by a.orderby asc, a.gamename asc
+		<if test="count != null and ''!=count">
+		<![CDATA[ 
+		  limit #{count} 
+		 ]]>
+		</if>
+	
+	</select>
+
+	<select id="queryGames" resultMap="gameComplexResult" parameterType="java.util.Map">
+		<![CDATA[ 	
+SELECT
+	a.*,  c.*, d.*, e.id square,
+	f.id rectangle
+FROM
+	ec_game a
+
+LEFT JOIN ec_game_policy c ON a.id = c.gameid
+LEFT JOIN ec_game_type d ON a.type = d.id
+LEFT JOIN ec_game_pic e ON a.id = e.gameid
+AND e.type = 1
+LEFT JOIN ec_game_pic f ON a.id = f.gameid
+AND f.type = 2
+WHERE
+	1 = 1
+		]]>
+		<if test="ismember !=null and '' != ismember">
+		 and a.ismember = #{ismember} 
+		</if>
+		<if test="typename1 !=null and '' != typename1">
+		<![CDATA[ 
+		  and (d.typename like #{typename1}  or d.typename like #{typename2}) 
+		  ]]>
+		</if>
+		
+		<if test="type !=null and '' != type">
+		<![CDATA[ 
+		  and a.type = #{type}
+		  ]]>
+		</if>
+		
+		<if test="keyword !=null and '' != keyword">
+		<![CDATA[ 
+		  and a.gamename like #{keyword} 
+		  ]]>
+		</if>
+		
+		<if test="beginDeposit !=null and '' != beginDeposit">
+		<![CDATA[ 
+		  and c.deposit >=  #{beginDeposit} 
+		  ]]>
+		</if>
+		
+			<if test="endDeposit !=null and '' != endDeposit">
+		<![CDATA[ 
+		  and c.deposit <=  #{endDeposit} 
+		  ]]>
+		</if>
+		
+		<choose>
+		<when test="sort == 'reward'"> order by c.reward desc, a.gamename asc </when>
+		<when test="sort == 'deposit'"> order by c.deposit desc, a.gamename asc </when>
+		<when test="sort == 'clicks'"> order by c.clicks desc, a.gamename asc </when>
+		<when test="sort == 'clickNum'"> order by a.gamename asc </when>
+		<when test="sort == 'looks'"> order by a.clickNum desc, a.gamename asc </when>
+		<when test="sort2 == 'looks' and sortseq == 'down'"> order by a.clickNum desc, a.gamename asc </when>
+		<when test="sort2 == 'reward' and sortseq == 'down'"> order by c.reward desc, a.gamename asc </when>
+		<when test="sort2 == 'deposit' and sortseq == 'down'"> order by c.deposit desc, a.gamename asc </when>
+		<when test="sort2 == 'clicks' and sortseq == 'down'"> order by c.clicks desc, a.gamename asc </when>
+		<when test="sort2 == 'clickNum' and sortseq == 'down'"> order by  a.gamename asc </when>
+		<when test="sort2 == 'punish' and sortseq == 'down'"> order by c.punish desc, a.gamename asc </when>
+		<when test="sort2 == 'punish' and sortseq == 'up'"> order by c.punish asc, a.gamename asc </when>
+		<when test="sort2 == 'reward' and sortseq == 'up'"> order by c.reward asc, a.gamename asc </when>
+		<when test="sort2 == 'deposit' and sortseq == 'up'"> order by c.deposit asc, a.gamename asc </when>
+		<when test="sort2 == 'clicks' and sortseq == 'up'"> order by c.clicks asc, a.gamename asc </when>
+		<when test="sort2 == 'clickNum' and sortseq == 'up'"> order by  a.gamename asc </when>
+		<otherwise>
+		<![CDATA[
+		order by a.orderby asc, a.gamename asc
+		]]>
+		</otherwise>
+		</choose>
+		
+		
+		
+		<if test="count != null and ''!=count">
+		<![CDATA[ 
+		  limit #{count} 
+		 ]]>
+		</if>
+		<if test="limitCount != null and ''!=limitCount">
+		<![CDATA[ 
+		 limit #{limitIndex},#{limitCount}
+		 ]]>
+		</if>
+	</select>
+	
+	<select id="queryGamesByRand" resultMap="gameComplexResult" parameterType="java.util.Map">
+		<![CDATA[ 
+		
+select a.*,b.*,c.*,d.*,e.id square,f.id rectangle from ec_game a left JOIN (select gameid,count(distinct userid) players from ec_user_game_relation group by gameid) b ON a.id = b.gameid left join ec_game_policy c on a.id = c.gameid left join ec_game_type d on a.type = d.id left join ec_game_pic e on a.id = e.gameid  and e.type = 1 left join ec_game_pic f on a.id = f.gameid  and f.type = 2 where 1=1 
+		]]>
+		
+		<if test="typename1 !=null and '' != typename1">
+		<![CDATA[ 
+		  and (d.typename like #{typename1}  or d.typename like #{typename2}) 
+		  ]]>
+		</if>
+		
+		<if test="keyword !=null and '' != keyword">
+		<![CDATA[ 
+		  and a.gamename like #{keyword} 
+		  ]]>
+		</if>
+		
+		<![CDATA[
+		 ORDER BY rand() 
+		]]>
+		
+		<if test="count != null and ''!=count">
+		<![CDATA[ 
+		  limit #{count} 
+		 ]]>
+		</if>
+		<if test="limitCount != null and ''!=limitCount">
+		<![CDATA[ 
+		 limit #{limitIndex},#{limitCount}
+		 ]]>
+		</if>
+	</select>
+	
+	<select id="queryGameForRank" resultMap="gameComplexResult" parameterType="java.util.Map">
+		<![CDATA[ 
+		select d.*,c.*,e.id square,f.id rectangle,b.typename from  ec_game d  left join ec_game_policy c on d.id = c.gameid left join ec_game_pic e on d.id = e.gameid  and e.type = 1 left join ec_game_pic f on d.id = f.gameid  and f.type = 2 left join ec_game_type b on d.type = b.id where 1=1
+		]]>
+		
+	    <if test="category != null and ''!=category">
+		<![CDATA[   and d.category = #{category} ]]>
+		</if>
+		
+		<![CDATA[
+		order by d.clicknum desc , d.gamename asc
+		]]>
+		
+		<if test="count != null and ''!=count">
+		<![CDATA[ 
+		  limit #{count} 
+		 ]]>
+		</if>
+		<if test="limitCount != null and ''!=limitCount">
+		<![CDATA[ 
+		 limit #{limitIndex},#{limitCount}
+		 ]]>
+		</if>
+	</select>
+	
+	<select id="queryUnionGames" resultMap="gameComplexResult">
+	<![CDATA[ 
+		(select d.*,c.*,e.id square,f.id rectangle,b.typename from  ec_game d  left join ec_game_policy c on d.id = c.gameid left join ec_game_pic e on d.id = e.gameid  and e.type = 1 left join ec_game_pic f on d.id = f.gameid  and f.type = 2 left join ec_game_type b on d.type = b.id where 1=1 and d.type = '6eca5da6-ab82-4421-a069-f60566639e20' limit 4 ) union all 
+(select d.*,c.*,e.id square,f.id rectangle,b.typename from  ec_game d  left join ec_game_policy c on d.id = c.gameid left join ec_game_pic e on d.id = e.gameid  and e.type = 1 left join ec_game_pic f on d.id = f.gameid  and f.type = 2 left join ec_game_type b on d.type = b.id where 1=1 and d.type = '96eb782f-12fe-474a-a8d5-5c88df983c4e' limit 4 ) union all 
+(select d.*,c.*,e.id square,f.id rectangle,b.typename from  ec_game d  left join ec_game_policy c on d.id = c.gameid left join ec_game_pic e on d.id = e.gameid  and e.type = 1 left join ec_game_pic f on d.id = f.gameid  and f.type = 2 left join ec_game_type b on d.type = b.id where 1=1 and d.type = 'de9aa47a-a5ec-486f-bcc8-27d0b18cc3e9' limit 4 ) union all 
+(select d.*,c.*,e.id square,f.id rectangle,b.typename from  ec_game d  left join ec_game_policy c on d.id = c.gameid left join ec_game_pic e on d.id = e.gameid  and e.type = 1 left join ec_game_pic f on d.id = f.gameid  and f.type = 2 left join ec_game_type b on d.type = b.id where 1=1 and d.type = 'eeaa5196-b927-4712-aeec-46df3ee04558' limit 4 )
+	]]>
+	</select>
+	
+	
+	
+	<select id="queryGamesByAdmin" resultMap="gameComplexResult" parameterType="java.util.Map">
+		<![CDATA[ 
+		select a.*,b.*,c.*,d.* from ec_game a left JOIN (select gameid,count(distinct userid) players from ec_user_game_relation group by gameid) b ON a.id = b.gameid left join ec_game_policy c on a.id = c.gameid left join ec_game_type d on a.type = d.id where 1=1 
+		]]>
+		
+		<if test="typename1 !=null and '' != typename1">
+		<![CDATA[ 
+		  and (d.typename like #{typename1}  or d.typename like #{typename2}) 
+		  ]]>
+		</if>
+		
+		<if test="keyword !=null and '' != keyword">
+		<![CDATA[ 
+		  and a.gamename like #{keyword} 
+		   ]]>
+		</if>
+		
+			<choose>
+		<when test="sort == 'reward'"> order by c.reward desc, a.gamename asc </when>
+		<when test="sort == 'deposit'"> order by c.deposit desc, a.gamename asc </when>
+		<when test="sort == 'clicks'"> order by c.clicks desc, a.gamename asc </when>
+		<when test="sort == 'clickNum'"> order by a.clickNum desc, a.gamename asc </when>
+		<when test="sort2 == 'reward' and sortseq == 'down'"> order by c.reward desc, a.gamename asc </when>
+		<when test="sort2 == 'deposit' and sortseq == 'down'"> order by c.deposit desc, a.gamename asc </when>
+		<when test="sort2 == 'clicks' and sortseq == 'down'"> order by c.clicks desc, a.gamename asc </when>
+		<when test="sort2 == 'clickNum' and sortseq == 'down'"> order by a.clickNum desc, a.gamename asc </when>
+		<when test="sort2 == 'punish' and sortseq == 'down'"> order by c.punish desc, a.gamename asc </when>
+		<when test="sort2 == 'reward' and sortseq == 'up'"> order by c.reward asc, a.gamename asc </when>
+		<when test="sort2 == 'deposit' and sortseq == 'up'"> order by c.deposit asc, a.gamename asc </when>
+		<when test="sort2 == 'clicks' and sortseq == 'up'"> order by c.clicks asc, a.gamename asc </when>
+		<when test="sort2 == 'clickNum' and sortseq == 'up'"> order by a.clickNum asc, a.gamename asc </when>
+		<when test="sort2 == 'punish' and sortseq == 'up'"> order by c.punish asc, a.gamename asc </when>
+		<otherwise>
+		<![CDATA[
+		order by a.orderby asc, a.gamename asc
+		]]>
+		</otherwise>
+		</choose>
+		
+	</select>
+	
+	
+	
+	<select id="queryGamesByIdList" resultMap="gameComplexResult" parameterType="java.util.List">
+		<![CDATA[ 
+		select a.*,b.*,c.*,d.*,e.id square,f.id rectangle from ec_game a left JOIN (select gameid,count(distinct userid) players from ec_user_game_relation group by gameid) b ON a.id = b.gameid left join ec_game_policy c on a.id = c.gameid left join ec_game_type d on a.type = d.id left join ec_game_pic e on a.id = e.gameid  and e.type = 1 left join ec_game_pic f on a.id = f.gameid  and f.type = 2 where 1=1 
+		]]>
+		
+		 <foreach item="item" index="index" collection="list"  open=" and a.id in(" separator="," close=")">
+                   #{item} 
+         </foreach>
+	
+		
+		<![CDATA[
+		order by a.orderby asc 
+		]]>
+		
+	
+		<![CDATA[ 
+		  limit 15
+		 ]]>
+	
+	</select>
+	
+	<select id="getGamesCounts" resultType="int" parameterType="java.util.Map">
+		<![CDATA[ 
+		SELECT
+	count(1)
+FROM
+	ec_game a
+
+LEFT JOIN ec_game_policy c ON a.id = c.gameid
+WHERE
+	1 = 1
+		]]>
+		<if test="ismember !=null and '' != ismember">
+		 and a.ismember = #{ismember} 
+		</if>
+		
+			<if test="keyword !=null and '' != keyword">
+			<![CDATA[ 
+		   and a.gamename like #{keyword} 
+		   ]]>
+		</if>
+		
+		<if test="beginDeposit !=null and '' != beginDeposit">
+		<![CDATA[ 
+		  and c.deposit >=  #{beginDeposit} 
+		  ]]>
+		</if>
+		
+			<if test="endDeposit !=null and '' != endDeposit">
+		<![CDATA[ 
+		  and c.deposit <=  #{endDeposit} 
+		  ]]>
+		</if>
+		
+	</select>
+
+	<select id="getGameByName" parameterType="java.lang.String"
+		resultType="game">
+		<![CDATA[ 
+		select * from ec_game where gamename = #{value};
+		]]>
+	</select>
+	
+	<select id="getGameById" parameterType="java.lang.String"
+		resultType="game">
+		<![CDATA[ 
+		select * from ec_game where id = #{value};
+		]]>
+	</select>
+	
+	
+
+
+	<insert id="addGame" parameterType="game">
+	<![CDATA[ 
+		insert into ec_game (
+		id,
+		developer,
+		type,
+		language,
+		theme,
+		gameDescrip,
+		gameUrl,
+		playCounts,
+		createTime,
+		createBy,
+		modifyTime,
+		modifyBy,
+		orderBy,
+		gamepic_url,
+		gamename,
+		category,
+		clicknum,
+		stars,
+		ismember
+		)
+		values (
+		#{id},
+		#{developer},
+		#{type},
+		#{language},
+		#{theme},
+		#{gameDescrip},
+		#{gameUrl},
+		#{playCounts},
+		#{createTime},
+		#{createBy},
+		#{modifyTime},
+		#{modifyBy},
+		#{orderBy},
+		#{gamePicUrl},
+		#{gameName},
+		#{category},
+		#{clickNum},
+		#{stars},
+		#{isMember}
+		)
+		]]>
+	</insert>
+	
+		<update id="updateGame" parameterType="game">
+		<![CDATA[ 
+	update ec_game set type=#{type},gameDescrip=#{gameDescrip},gameUrl=#{gameUrl},gameName=#{gameName},category=#{category},clicknum=#{clickNum},stars=#{stars},ismember = #{isMember} where id = #{id}
+	]]>
+	</update>
+	
+	<delete id="delGameById" parameterType="java.lang.String">
+	<![CDATA[ 
+	delete from ec_game where id = #{value}
+	]]>
+	</delete>
+	
+	<select id="queryGamesByUserList" parameterType="java.util.List" resultMap="gameComplexResult">
+	select a.*,b.*,c.*,d.*,e.id square,f.id rectangle from ec_game a left JOIN (select gameid,count(distinct userid) players from ec_user_game_relation group by gameid) b ON a.id = b.gameid left join ec_game_policy c on a.id = c.gameid left join ec_game_type d on a.type = d.id left join ec_game_pic e on a.id = e.gameid  and e.type = 1 left join ec_game_pic f on a.id = f.gameid  and f.type = 2 where 1=1 and a.id in (
+     select gameid from ec_user_game_relation where userid in
+     <foreach item="item" index="index" collection="list"  open="(" separator="," close=")">
+                   #{item}
+     </foreach>
+     ) limit 15
+	</select>
+	
+	
+	<select id="querySixGamesByReward"  resultMap="gameComplexResult">
+	<![CDATA[
+	select a.*,c.*,d.*,e.id square,f.id rectangle from ec_game a  left join ec_game_policy c on a.id = c.gameid left join ec_game_type d on a.type = d.id left join ec_game_pic e on a.id = e.gameid  and e.type = 1 left join ec_game_pic f on a.id = f.gameid  and f.type = 2 where 1=1 order by c.reward desc,a.gamename asc limit 6
+	]]>
+	</select>
+	
+	<select id="getChristmasGameRest" resultType="int">
+		select rest from ec_christmas_game_rest where id = 1 ;
+	</select>
+	
+	<select id="getChristmasGameRestByString" parameterType="java.lang.String" resultType="int">
+		select rest from ec_christmas_game_rest where id = #{value} ;
+	</select>
+	
+	<select id="updateChristmasGameRest" parameterType="int">
+		update ec_christmas_game_rest set rest = #{rest} where id = 1 ;
+	</select>
+	
+	<select id="updateChristmasGameRestByMap" parameterType="java.util.Map">
+		update ec_christmas_game_rest set rest = #{rest} where id = #{id} ;
+	</select>
+
+</mapper>

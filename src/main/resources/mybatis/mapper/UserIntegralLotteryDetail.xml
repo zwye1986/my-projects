@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="UserIntegralLotteryDetail">
+<insert id="insertUserIntegralLotteryDetail" parameterType="UserIntegralLotteryDetail">
+insert into ec_user_integral_lottery_detail (id,userid,prizeid,prizename,integral,createtime) values (#{id},#{userId},#{prizeId},#{prizeName},#{integral},#{createTime});
+</insert>
+
+<select id="queryUserIntegralLotteryDetail" parameterType="java.util.Map" resultType="UserIntegralLotteryDetail">
+select c.*,b.nickName  from (select a.* from ec_user_integral_lottery_detail a where 1=1  
+<if test="userId != null and ''!=userId">
+and a.userid = #{userId}
+</if>
+<if test="userId == null or ''== userId">
+and a.prizeid!=6
+</if>
+ order by a.createtime desc  
+  <if test="limitCount != null and ''!=limitCount">
+		<![CDATA[ 
+		 limit #{limitIndex},#{limitCount}
+		 ]]>
+	</if>
+<if test="userId == null or ''== userId">
+limit 100
+</if>
+ ) c,ec_user b where c.userid = b.id
+
+
+
+</select>
+
+<select id="getLotteryCount" parameterType="java.util.Map" resultType="int">
+select count(1) from ec_user_integral_lottery_detail a,ec_user b where 1=1 
+<if test="userId != null and ''!=userId">
+and b.id = #{userId}
+</if>
+<if test="userId == null or ''== userId">
+and a.prizeid!=6
+</if>
+ and a.userid = b.id  order by a.createtime desc
+<if test="userId == null or ''== userId">
+limit 100
+</if>
+</select>
+</mapper>

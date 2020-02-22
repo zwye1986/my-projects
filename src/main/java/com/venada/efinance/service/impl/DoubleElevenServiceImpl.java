@@ -1,0 +1,1 @@
+package com.venada.efinance.service.impl;import com.venada.efinance.common.service.impl.BaseServiceImpl;import com.venada.efinance.pojo.DoubleEleven;import com.venada.efinance.service.DoubleElevenService;import org.springframework.stereotype.Service;@Servicepublic class DoubleElevenServiceImpl extends BaseServiceImpl<DoubleEleven> implements		DoubleElevenService {}

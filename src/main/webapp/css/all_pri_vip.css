@@ -1,0 +1,88 @@
+/* CSS Document */
+a.rule_txt2 {
+    color: #2370A9;
+}
+.grid_c2f {
+	width: 1257px;
+	margin: 0 auto;
+}
+.gr_mod_box2 {
+	width: 1255px;
+	margin: 0 auto;
+	
+	margin-top: 20px;
+	
+}
+.wb_priv_top{ width:1257px; height:55px; background:#f3f3f3;}
+.wb_priv_top_tit{ width:200px; height:55px; line-height:130px; overflow:hidden; background:url(../images/vip/wb_priv__top_tit.png) no-repeat;
+}
+.wb_priv_top_vip{ line-height:55px; color:#696969;}
+.sys_kthy_w{ width:980px; height:80px; text-align:center; display:block;}} 
+.sys_kthy a {
+    color: #BEBEBE;
+    margin-top: 15px;
+	display:block;
+	
+}
+a.xufei{ color:#fff;}
+.wb_priv_center{ width:1257px; }
+.tab_box{ width:1257px; margin:0 auto;}
+.lyz_tab_left{float: left; width: 253px; border:1px solid #ccc; }
+.pro_con1111{ float: left; overflow: hidden; width: 253px; }
+.pro_con111 ul{ padding: 0px; width: 253px; list-style-type: none;}
+.pro_con111 ul li a{  display: inline; font-size: 14px; float:left;  width:253px; cursor: pointer; color: #296c96; line-height: 35px; height: 35px; text-align:left; position:relative; }
+.pro_con111 ul li a span{ position:absolute; width:35px; height:35px; }
+.pro_con111 ul li a em{ margin-left:40px;}
+.pro_con111 ul li.hover a{  display: inline; font-weight: bold; font-size: 14px; background:url(../images/job/tab_hover.png) no-repeat;float: left; width:253px; cursor: pointer; color: #296c96; line-height:35px; height:35px; text-align:left; background:#d1d8ed;}
+.vip_title{ height:40px; width:230px; line-height:100px; overflow:hidden; border-bottom:1px solid #ccc; margin:0 auto; margin-bottom:5px; background:url(../images/vip/all_vip_title.png) no-repeat;}
+.all_high_game_title{height:40px; width:230px; line-height:100px; overflow:hidden; border-bottom:1px solid #ccc; margin:0 auto; margin-bottom:5px; background:url(../images/vip/all_high_game_title.png) no-repeat;}
+.lyz_tab_right{ background:url(../images/job/content_right_bg.png) no-repeat; float:left;   width:980px; float:right;}
+.other_jf_title{ width:970px; height:33px; background:#F3F3F3; padding-left:10px; line-height:33px;}
+.other_jf_content{ width:980px; margin-top:10px;border:1px solid #d1d1d1; min-height:435px; height:auto;}
+.other_jf_content_banner{ width:960px; height:135px; margin:10px auto;}
+.other_jf_content_list{ width:800px; margin-left:30px; margin-top:30px;}
+.other_jf_content_list li{ color:#FD6B6F; list-style-image:url(../images/vip/other_jf_content_list_icon.png)}
+
+.level_rule{ margin-left:35px;}
+.level_icon {
+	width: 565px;
+	height: 185px;
+	margin: 20px auto;
+	background: url(../images/vip/level_icon.png) no-repeat;
+}
+.sys_user_icon {
+	width: 565px;
+}
+.sys_user_icon_n {
+	width: 505px;
+	height: 45px;
+	background: url(../images/vip/sys_user_icon_n.png) no-repeat;
+	margin-top: 20px;
+	position: relative;
+}
+.sys_user_icon_n span {
+	position: absolute;
+	right: -70px;
+	top: 20px;
+	font-weight: bold;
+}
+.sys_user_icon_v span {
+	position: absolute;
+	right: -70px;
+	top: 70px;
+	font-weight: bold;
+}
+.sys_user_icon_v {
+	width: 505px;
+	height: 90px;
+	background: url(../images/vip/sys_user_icon_v.png) no-repeat;
+	position: relative;
+}
+.kthy_pwd_w{ width:610px; height:380px; background:#ffdada; margin:0 auto; margin-top:20px;padding-top:40px;}
+.kthy_pwd{ width:500px; height:330px; border:1px solid #ddb6b6; margin:0 auto; }
+.kthy_pwd_no{ font-size:18px; color:#ff4444; float:right; margin-right:15px; margin-top:10px;}
+.kthy_pwd_set{ width:80%; line-height:48px; font-size:14px; font-weight:bold; border-bottom:1px dashed #750000; margin:0 auto; margin-top:20px; color:#750000;}
+.set_pwd{ width:330px; height:190px; border:1px solid #ccc; margin-left:70px; margin-top:35px;}
+.set_pwd label{color:#750000;}
+.set_pwd .txt{ width:249px; height:33px; background:url(../images/vip/input_txt.png) no-repeat; border:none;}
+.kthy_pwd_set pwd{ margin-left:70px; margin-top:20px;}

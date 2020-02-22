@@ -1,0 +1,61 @@
+@charset "utf-8";
+/** @company: 	DreaMore.
+	@author:	Tingyu、听雨、听雨_衷云
+	@E-mail:	zhongyun@dreamore.com
+	@version:	2013.09.04
+	@product:	ProjectsAction		项目
+*/
+
+body {
+	background-color: #f6f6f6;
+}
+.projects_type {
+	background-color: #fff;
+	padding-top: 30px;
+}
+
+.projects_type a {
+	display: inline-block;
+	height: 42px;
+	line-height: 42px;
+	text-align: center;
+}
+.projects_type a.current {
+	font-weight: bold;
+	color: #f16244;
+	background-color: #f6f6f6;
+}
+.projects_type a:hover {
+    color: #f16244;
+}
+.plists {
+	width: 1025px;
+	overflow: hidden;
+	z-index: 1;
+	margin-top: 11px;
+	padding-bottom:40px;
+}
+
+.plists ul li { margin: 16px 16px 0 0;  }
+
+.projectLearn {
+	width: 27px;
+	height: 100px;
+	
+	position: fixed;
+	top: 180px;
+	left: 0;
+	cursor: pointer;
+	z-index: 99;
+	
+	
+}
+.projectLearn a {
+	display: inline-block;
+	width: 27px;
+	height: 100px;
+	
+}
+.projectLearn a:hover {
+	opacity: 0.8;
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.RoleAssResource">
+
+	<resultMap type="RoleAssResource" id="RoleAssResourcMap">
+		<result column="role_id" property="roleId" />
+		<result column="resource_id" property="resourceId" />
+	</resultMap>
+	
+	<insert id="insertRoleAssResorcer" parameterType="RoleAssResource">
+		insert into ec_role_resource (role_id,resource_id) values ( #{roleId},#{resourceId} )
+	</insert>
+
+
+	<delete id="deleteResourceByRoleId" parameterType="String">
+		delete
+		from ec_role_resource where role_id = #{id};
+	</delete>
+	
+	
+	<delete id="deleteResourceByResId" parameterType="String">
+		delete
+		from ec_role_resource where resource_id = #{id};
+	</delete>
+	
+</mapper>

@@ -1,0 +1,1 @@
+package com.venada.efinance.service.impl;import com.venada.efinance.common.service.impl.BaseServiceImpl;import com.venada.efinance.pojo.ProjectUser;import com.venada.efinance.service.ProjectUserService;import org.springframework.stereotype.Service;@Servicepublic class ProjectUserServiceImpl extends BaseServiceImpl<ProjectUser> implements  ProjectUserService{}

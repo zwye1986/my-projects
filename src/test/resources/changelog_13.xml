@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+         
+   <changeSet id="add_proc_ec_christmas_active_yesterday" author="hepei">
+		<sql>
+			DROP VIEW IF EXISTS ec_christmas_active_view_yesterday;
+		</sql>
+		<createView viewName="ec_christmas_active_view_yesterday">
+		<![CDATA[
+		SELECT
+		  SUM(`a`.`policy_deposit`) AS `sum_deposit`,
+		  `b`.`nickName`     AS `nickName`,
+		  `b`.`mobileNumber` AS `mobileNumber`,
+		  MIN(`a`.`createTime`) AS `createTime`
+		FROM (`wowpower`.`ec_user_game_relation` `a`
+		   JOIN `wowpower`.`ec_user` `b`
+		     ON ((`a`.`userid` = `b`.`mobileNumber`)))
+		WHERE ((`a`.`createTime` >= (CURDATE() - INTERVAL 1 DAY))
+		       AND (`a`.`createTime` < CURDATE()))
+		GROUP BY `a`.`userid`;
+
+	  ]]>
+	</createView>
+	
+		<sql>
+			DROP PROCEDURE IF EXISTS proc_ec_christmas_active_yesterday;
+		</sql>
+	
+		<createProcedure>
+		<![CDATA[
+			CREATE PROCEDURE `proc_ec_christmas_active_yesterday`()
+			BEGIN
+				DECLARE _sumdeposit DOUBLE;
+				DECLARE _nickname VARCHAR(255);
+				DECLARE _createtime DATETIME;
+				DECLARE _mobileNumber VARCHAR(20);
+				DECLARE fetchSeqOk BOOLEAN;
+				DECLARE cur1 CURSOR FOR SELECT *
+				FROM ec_christmas_active_view_yesterday ;
+				DECLARE CONTINUE HANDLER FOR NOT FOUND SET
+				fetchSeqOk = TRUE;
+				DELETE FROM  ec_christmas_active  WHERE createtime>=(CURDATE() - INTERVAL 1 DAY) AND createtime<CURDATE();
+				SET fetchSeqOk = FALSE;
+				OPEN cur1;
+				fetchSeqLoop:LOOP
+				FETCH cur1 INTO
+				_sumdeposit,_nickname,_mobileNumber,_createtime;
+				IF fetchSeqOk THEN
+				LEAVE
+				fetchSeqLoop;
+				ELSE
+				INSERT INTO ec_christmas_active(sumdeposit,nickname,createtime,id,ADDTIME,mobileNumber) VALUES
+				(_sumdeposit,_nickname,_createtime,UUID(),(CURDATE() - INTERVAL 1 DAY),_mobileNumber);
+				END IF;
+				END LOOP;
+				CLOSE cur1;
+			end
+			 ]]>
+		</createProcedure>
+		
+		
+		
+		<sql>
+			DROP EVENT IF EXISTS proc_ec_christmas_active_yesterday_event;
+		</sql>
+		<createProcedure>
+			CREATE EVENT `proc_ec_christmas_active_yesterday_event` ON SCHEDULE EVERY
+			1 DAY STARTS '2013-12-25 00:00:30' ENDS '2014-01-02 02:00:00' ON COMPLETION NOT PRESERVE
+			ENABLE DO call proc_ec_christmas_active_yesterday();
+		</createProcedure>
+		
+	</changeSet>
+</databaseChangeLog>

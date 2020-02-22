@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="PrizeDetail">
+
+<insert id="insertPrizeDetail" parameterType="PrizeDetail">
+INSERT INTO ec_prize_detail(mobilenumber,id,prizename,createtime,dotype) VALUES
+			(#{mobileNumber},#{id},#{prizeName},NOW(),#{doType});
+</insert>
+
+<select id="prizeDetailService" parameterType="java.util.Map" resultType="PrizeDetail">
+<![CDATA[
+select a.*,b.nickname from ec_prize_detail a  left join ec_user b on a.mobilenumber = b.mobilenumber where a.prizename != '0'
+]]>
+<if test="doType !=null and '' != doType">
+and a.dotype = #{doType}
+</if>
+<if test="createTime !=null and '' != createTime">
+<![CDATA[
+and a.createtime >= '2013-12-25 00:00:00' and a.createTime <= #{createTime}
+]]>
+ order by a.createtime desc
+</if>
+</select>
+
+
+<select id="getPrizeDetailByType" parameterType="java.util.Map" resultType="PrizeDetail">
+<![CDATA[
+select a.*,b.nickname from ec_prize_detail a  left join ec_user b on a.mobilenumber = b.mobilenumber where a.prizename != '0'
+]]>
+<if test="dotype !=null and '' != dotype">
+and a.dotype in
+ <foreach item="item" index="index" collection="dotype" open="(" separator="," close=")">  
+  #{item}  
+ </foreach>  
+</if>
+<if test="createTime !=null and '' != createTime">
+<![CDATA[
+and a.createtime >= '2013-12-25 00:00:00' and a.createTime <= #{createTime}
+]]>
+ order by a.createtime desc
+</if>
+</select>
+	
+</mapper>

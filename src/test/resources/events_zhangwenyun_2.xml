@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="events_1" author="zhangwenyun">
+	<sql>
+		DROP EVENT IF EXISTS GENERATE_TOP_WEALTH;
+	</sql>
+		<createProcedure >
+			
+			CREATE EVENT GENERATE_TOP_WEALTH ON SCHEDULE EVERY 30 MINUTE ON COMPLETION
+			NOT PRESERVE ENABLE DO begin
+			TRUNCATE TABLE ec_top_wealth;
+			insert into ec_top_wealth
+			
+			SELECT t1.`ID`,t1.`mobileNumber`,t1.`nickName`,
+      CASE
+WHEN t2.`amount` IS NULL THEN
+	t1.`amount` + 0
+ELSE
+	t1.`amount` + t2.`amount`
+END as amount,now()
+
+FROM   (SELECT u.id,
+               u.mobileNumber,
+               u.nickName,
+               w.amount
+        FROM   ec_user u,
+               ec_user_wallet w
+        WHERE  u.id = w.userid
+           AND u. STATUS = 1
+           AND w.amount > 0
+           AND u.mobileNumber != '13951885586'
+           AND u.mobileNumber != '18051999898') t1
+       LEFT JOIN (SELECT g.userid,
+                         SUM(g.policy_deposit) AS amount
+                  FROM   ec_user_game_relation g
+                  WHERE  g.`status` = 1
+                  GROUP  BY g.userid) t2
+              ON t1.`mobileNumber` = t2.`userid` order by amount desc limit 0,100;
+
+			end;
+			
+		</createProcedure>
+	</changeSet>
+</databaseChangeLog>

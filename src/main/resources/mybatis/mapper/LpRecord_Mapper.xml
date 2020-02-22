@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="LpRecord">
+  <select id="queryLpRecord" parameterType="java.util.Map" resultType="LpRecord">
+  <![CDATA[
+  select * from ec_lprecord where 1=1 
+  ]]>
+  <if test="category != null and ''!=category">
+   <![CDATA[
+   and category = #{category}
+  ]]>
+  </if>
+  <if test="userId != null and ''!=userId">
+   <![CDATA[
+   and userId = #{userId}
+  ]]>
+  </if>
+  </select>
+  
+    <select id="getLpRecord" parameterType="java.util.Map" resultType="LpRecord">
+  <![CDATA[
+  select * from ec_lprecord where 1=1 
+  ]]>
+  <if test="category != null and ''!=category">
+   <![CDATA[
+   and category = #{category}
+  ]]>
+  </if>
+  <if test="userId != null and ''!=userId">
+   <![CDATA[
+   and userId = #{userId}
+  ]]>
+  </if>
+  </select>
+
+<insert id="addLpRecord" parameterType="LpRecord">
+ <![CDATA[
+  insert into ec_lprecord values (#{id},#{userId},#{category},#{addTime});
+  ]]>
+</insert>
+	
+</mapper>

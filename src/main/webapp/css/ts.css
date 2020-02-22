@@ -1,0 +1,19 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0px; padding:0px;}
+body {
+
+	color: #3b3a3f;
+}
+img {
+	border: none;
+}
+em{ font-style:normal; width:60px; color:#fff; font-size:16px; margin-left:10px;}
+.ts{ width:321px; height:133px; background:#fff;  border:1px solid #cecece; margin:50px auto;}
+
+.title{ width:321px; height:40px;line-height:40px; background:#3b3a3f;}
+.ts_c{  width:321px; height:60px; text-align:center; margin:0 auto; line-height:60px; font-size:18px;}
+.ts_c img{ float:left; width:36px; height:36px; margin-left:40px; margin-top:15px;}
+.btn{ margin:0 auto; text-align:center; margin-top:-10px;}
+.btn span{ display:inline-block; width:85px; height:45px; background:url(images/admin/btn01.png) no-repeat; text-align:center; line-height:23px; cursor:pointer; margin-right:5px; width:59px; height:22px; background:#4797f1; color:#fff; }
+.btn span:hover{ background:#3b3a3f; }

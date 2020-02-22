@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.TransactionDetails">
+	<resultMap type="TransactionDetails" id="transactionDetailsMap">
+		<result column="userid" property="userid" />
+		<result column="time" property="time" />
+		<result column="description" property="description" />
+		<result column="amount" property="amount" />
+		<result column="dealType" property="dealType" />
+		<result column="type" property="type" />
+		<result column="balance" property="balance" />
+		<result column="status" property="status" />
+		<result column="status" property="status" />
+		<result column="serialNumber" property="serialNumber" />
+		<result column="cashDay" property="cashDay" />
+		<result column="vipCashDay" property="vipCashDay" />
+	</resultMap>
+
+    <select id="queryAllTransactionDetails" parameterType="java.util.Map"
+            resultMap="transactionDetailsMap">
+        select * from (
+        select t1.userid , t1.datetime as time ,t1.description , t1.amount , 7 as
+        dealType, 2 as 'type' , t1.balance,t1.status,t1.orderBy,t1.serialNumber from ec_withdrawal_record
+        t1 where t1.userid=#{userid}
+        union all
+        select t2.userid , t2.datetime as time ,t2.description , t2.amount , 6 as
+        dealType ,1 as 'type' , t2.balance ,t2.status ,t2.orderBy,t2.serialNumber from ec_recharge_record
+        t2 where t2.userid=#{userid}
+        union all
+        select t3.userid , t3.datetime as time ,t3.description, t3.amount ,
+        t3.detailType as dealType , t3.type , t3.balance,t3.status ,t3.orderBy,t3.serialNumber from
+        ec_deal_detail t3 where t3.userid=#{userid}
+        ) as t
+        <trim prefix="where " prefixOverrides="and ">
+            <if test="type != null">
+                and t.type = #{type}
+            </if>
+
+            <if test="dealType != null and dealType == 0 ">
+                and t.dealType not in (6,7)
+            </if>
+
+            <if test="dealType != null and dealType != 0 ">
+                and t.dealType = #{dealType}
+            </if>
+
+            <if test="minAmount != null">
+                <![CDATA[
+			and t.amount >= #{minAmount}
+			]]>
+            </if>
+
+            <if test="maxAmount != null">
+                <![CDATA[
+			and t.amount <= #{maxAmount}
+			]]>
+            </if>
+
+            <if test="keyword != null">
+                and t.description like CONCAT('%','${keyword}','%' )
+            </if>
+
+            <if test="startTime != null">
+                <![CDATA[
+		and time >= #{startTime}
+		]]>
+            </if>
+
+            <if test="endTime != null">
+                <![CDATA[
+		and time <= #{endTime}
+		]]>
+            </if>
+        </trim>
+        order by t.time desc, t.orderBy desc
+        <if test="limitCount != null and ''!=limitCount">
+            <![CDATA[
+		   limit #{limitIndex},#{limitCount}
+		 ]]>
+        </if>
+    </select>
+
+    <select id="getTransactionDetailsCount" resultType="int"
+            parameterType="java.util.Map">
+        select count(*) from (
+        select t1.userid , t1.datetime as time ,t1.description , t1.amount , 7 as
+        dealType, 2 as 'type' , t1.balance,t1.status from ec_withdrawal_record
+        t1 where t1.userid=#{userid}
+        union all
+        select t2.userid , t2.datetime as time ,t2.description , t2.amount , 6 as
+        dealType ,1 as 'type' , t2.balance,t2.status from ec_recharge_record
+        t2 where t2.userid=#{userid}
+        union all
+        select t3.userid , t3.datetime as time ,t3.description, t3.amount ,
+        t3.detailType as dealType , t3.type , t3.balance,t3.status from
+        ec_deal_detail t3 where t3.userid=#{userid}
+        ) as t
+        <trim prefix="where " prefixOverrides="and ">
+            <if test="type != null">
+                and t.type = #{type}
+            </if>
+
+            <if test="dealType != null and dealType == 0 ">
+                and t.dealType not in (6,7)
+            </if>
+
+            <if test="dealType != null and dealType != 0 ">
+                and t.dealType = #{dealType}
+            </if>
+
+            <if test="minAmount != null">
+                <![CDATA[
+			and t.amount >= #{minAmount}
+			]]>
+            </if>
+
+            <if test="maxAmount != null">
+                <![CDATA[
+			and t.amount <= #{maxAmount}
+			]]>
+            </if>
+
+            <if test="keyword != null">
+                and t.description like CONCAT('%','${keyword}','%' )
+            </if>
+
+            <if test="startTime != null">
+                <![CDATA[
+		and t.time > #{startTime}
+		]]>
+            </if>
+
+            <if test="endTime != null">
+                <![CDATA[
+		and t.time < #{endTime}
+		]]>
+            </if>
+        </trim>
+
+    </select>
+
+    <select id="getWithdrawalRecords" parameterType="java.util.Map"
+            resultMap="transactionDetailsMap">
+        select t1.userid , t1.datetime as
+        time ,t1.description , t1.amount , 7 as dealType, 2 as 'type' ,
+        t1.balance,t1.status,t1.serialNumber,t1.cashDay,t1.vipCashDay from ec_withdrawal_record t1 where t1.userid =
+        #{userid} order by t1.datetime desc
+    </select>
+
+    <select id="getWithdrawalRecordsCount" resultType="int"
+            parameterType="java.util.Map">
+        <![CDATA[
+			select count(*) from ec_withdrawal_record w where w.userid = #{userid};
+		]]>
+    </select>
+
+    <select id="queryTransactionDetailsForMobile" resultMap="transactionDetailsMap" parameterType="java.util.Map">
+        select * from (
+        select t1.userid , t1.datetime as time ,t1.description , t1.amount , 7 as
+        dealType, 2 as 'type' , t1.balance,t1.status,t1.orderBy,t1.serialNumber from ec_withdrawal_record
+        t1 , ec_user t where t1.userid=#{userid} and t.password = #{password} and t.id = t1.userid
+        union all
+        select t2.userid , t2.datetime as time ,t2.description , t2.amount , 6 as
+        dealType ,1 as 'type' , t2.balance ,t2.status ,t2.orderBy,t2.serialNumber from ec_recharge_record
+        t2 , ec_user t where t2.userid=#{userid} and t.password = #{password} and t.id = t2.userid
+        union all
+        select t3.userid , t3.datetime as time ,t3.description, t3.amount ,
+        t3.detailType as dealType , t3.type , t3.balance,t3.status ,t3.orderBy,t3.serialNumber from
+        ec_deal_detail t3 , ec_user t where t3.userid=#{userid} and t.password = #{password} and t.id = t3.userid ) t order by t.time desc limit #{begin},#{end}
+    </select>
+
+</mapper>

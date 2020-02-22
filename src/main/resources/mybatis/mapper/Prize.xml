@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Prize">
+
+<select id="queryPirzeList" resultType="Prize">
+<![CDATA[
+select * from ec_prize
+]]>
+</select>
+
+<select id="getPrizeNum" resultType="int">
+<![CDATA[
+select sum(num) from ec_prize
+]]>
+</select>
+
+<delete id="deletePrize" parameterType="int">
+delete from ec_prize where id = #{value}
+</delete>
+
+<update id="updatePrize" parameterType="Prize">
+update ec_prize set num = #{num} where id = #{id}
+</update>
+	
+</mapper>

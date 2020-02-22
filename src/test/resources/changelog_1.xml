@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="coolpos" author="zhangwenyun">
+		<createTable tableName="ec_order" remarks="酷刷订单表">
+			<column name="id" type="bigint(20)" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="goodsName" type="varchar(200)" remarks="商品名称"></column>
+			<column name="num" type="int(11)" remarks="数量"></column>
+			<column name="price" type="double" remarks="单价"></column>
+			<column name="totalPrice" type="double" remarks="总价"></column>
+			<column name="payment" type="double" remarks="应付款"></column>
+			<column name="payTime" type="datetime" remarks="付款时间"></column>
+			<column name="orderTime" type="datetime" remarks="订单时间"></column>
+			<column name="liveProvince" type="varchar(100)" remarks="省份"></column>
+			<column name="liveCity" type="varchar(100)" remarks="城市"></column>
+			<column name="liveArea" type="varchar(100)" remarks="县区"></column>
+			<column name="attentionName" type="varchar(100)" remarks="收件人姓名"></column>
+			<column name="attentionAddress" type="varchar(300)" remarks="详细地址"></column>
+			<column name="postCode" type="varchar(20)" remarks="邮政编码"></column>
+			<column name="mobilePhone" type="varchar(20)" remarks="手机号码"></column>
+			<column name="isNegotiate" type="int(11)" defaultValue="0" remarks="1:面谈0:直接支付">
+				<constraints nullable="false" />
+			</column>
+			<column name="mobileNumberBuy" type="varchar(11)" remarks="购买者用户手机号码"></column>
+			<column name="tradeStatus" type="int(11)" remarks="交易状态:0:未形成订单,1:形成订单,2:交易完成"></column>
+		</createTable>
+	</changeSet>
+</databaseChangeLog>

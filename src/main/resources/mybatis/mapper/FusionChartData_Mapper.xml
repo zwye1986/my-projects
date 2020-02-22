@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="EC_FusionChartData">
+
+	<resultMap type="fusionChartData" id="fusionChartDataResult" >
+		<result column="label" property="label" />
+		<result column="value" property="value" />
+	</resultMap>
+	
+	<!-- 查询指定时间段的充值与提现金额对比 -->
+	<select id="selectRechargeAndWithdrawal" resultMap="fusionChartDataResult" parameterType="java.util.Map">
+		select '充值' as 'label' , sum(t.amount) as 'value' from ec_recharge_record t 
+		 where DATE_FORMAT(t.datetime, '%Y~%m~%d' ) = DATE_FORMAT(#{searchTime},'%Y~%m~%d') 
+		   and t.status = 0
+		union all 
+		select '提现' as 'label' , sum(t2.amount) as 'value' from ec_withdrawal_record t2 
+		 where DATE_FORMAT(t2.datetime, '%Y~%m~%d' ) = DATE_FORMAT(#{searchTime},'%Y~%m~%d') 
+		   <!-- and t2.status = 0 -->
+	</select>
+	
+	<!-- 查询当月每天的充值金额 -->
+	<select id="selectRechargeLine" resultMap="fusionChartDataResult" parameterType="java.util.Map">
+	<!-- t2.datetime >= DATE_ADD(DATE_FORMAT(#{dateTime}, '%Y~%m~%d' ),interval -day(DATE_FORMAT(#{dateTime}, '%Y~%m~%d' ))+1 day)  
+			  and  t2.datetime <= last_day(#{dateTime}) 
+			  and -->
+		<![CDATA[ 
+			select DATE_FORMAT(t2.datetime, '%m-%d' ) as 'label' ,sum(amount ) as 'value'
+			from ec_recharge_record t2
+			where   t2.status = 0 
+			   and  t2.datetime>=DATE_ADD(DATE_ADD(LAST_DAY(#{searchTime}),INTERVAL 1 DAY),INTERVAL -1 MONTH)
+			   and  t2.datetime<=last_day(#{searchTime})
+			group by DATE_FORMAT(t2.datetime, '%Y~%m~%d' )
+		]]>
+	</select>
+	
+	<!-- 查询当月每天的提现金额 -->
+	<!-- t2.datetime >= DATE_ADD(DATE_FORMAT(#{dateTime}, '%Y~%m~%d' ),interval -day(DATE_FORMAT(#{dateTime}, '%Y~%m~%d' ))+1 day)  
+			  and  t2.datetime <= last_day(#{dateTime})
+			  and  -->
+	<select id="selectWithdrawalLine" resultMap="fusionChartDataResult" parameterType="java.util.Map">
+		<![CDATA[ 
+			select DATE_FORMAT(t2.datetime, '%m-%d' ) as 'label' ,sum(amount ) as 'value'
+			from ec_withdrawal_record t2
+			where    t2.datetime>=DATE_ADD(DATE_ADD(LAST_DAY(#{searchTime}),INTERVAL 1 DAY),INTERVAL -1 MONTH)
+			and  t2.datetime<=last_day(#{searchTime})
+			group by DATE_FORMAT(t2.datetime, '%Y~%m~%d' )
+		]]>
+	</select>
+	
+	
+	<!-- 查询当月每天成功的提现金额 -->
+	<!-- t2.datetime >= DATE_ADD(DATE_FORMAT(#{dateTime}, '%Y~%m~%d' ),interval -day(DATE_FORMAT(#{dateTime}, '%Y~%m~%d' ))+1 day)  
+			  and  t2.datetime <= last_day(#{dateTime})
+			  and  -->
+	<select id="selectWithdrawalSuccessLine" resultMap="fusionChartDataResult" parameterType="java.util.Map">
+		<![CDATA[ 
+			select DATE_FORMAT(t2.withdrawal_success_time, '%m-%d' ) as 'label' ,sum(amount ) as 'value'
+			from ec_withdrawal_record t2
+			where t2.status=0 and   t2.withdrawal_success_time>=DATE_ADD(DATE_ADD(LAST_DAY(#{searchTime}),INTERVAL 1 DAY),INTERVAL -1 MONTH)
+			and  t2.withdrawal_success_time<=last_day(#{searchTime})
+			group by DATE_FORMAT(t2.withdrawal_success_time, '%Y~%m~%d' )
+		]]>
+	</select>
+	
+	<!-- 查询当天每刻的用户新增数 -->
+	<select id="selectUserByHour" resultMap="fusionChartDataResult">
+		<![CDATA[ 	
+			select DATE_FORMAT(t2.createTime, '%k' ) as 'label' ,count(id ) as 'value' 
+			from ec_user t2
+			where  DATE_FORMAT(t2.createTime, '%Y~%m~%d' ) = DATE_FORMAT(NOW(), '%Y~%m~%d' ) and t2.status = 1
+			group by DATE_FORMAT(t2.createTime, '%Y~%m~%d %k.00.00' )
+		]]>
+	</select>
+	
+	<!-- 查询当月每天的用户新增数 -->
+	<!-- DATE_FORMAT(t2.createTime, '%Y~%m' ) = DATE_FORMAT(NOW(), '%Y~%m' ) and -->
+	<select id="selectUserByDay" resultMap="fusionChartDataResult">
+		<![CDATA[ 	
+			select DATE_FORMAT(t2.createTime, '%m-%d' ) as 'label' ,count(id ) as 'value' 
+			from ec_user t2
+			where   t2.status = 1
+			and  t2.createTime>=DATE_ADD(DATE_ADD(LAST_DAY(NOW()),INTERVAL 1 DAY),INTERVAL -1 MONTH)
+			and  t2.createTime<=last_day(NOW())
+			group by DATE_FORMAT(t2.createTime, '%Y-%m-%d' )
+		]]>
+	</select>
+	
+	<!-- 预计时间段用户的提现金额 -->
+	<!-- select '' as 'label', sum(b.deposit)+sum(b.reward) as 'value' from ec_user_game_relation a 
+			  left join ec_game_policy b on a.gameid = b.gameid 
+			 where a.invalidtime <= #{endDate}
+			   and a.invalidtime >= #{startDate} -->
+	<select id="estimatedCostByDate" resultMap="fusionChartDataResult" parameterType="java.util.Map">
+		<![CDATA[ 	
+			   	
+			SELECT DATE_FORMAT(DATE_ADD(a.invalidtime,INTERVAL 1 DAY), '%m-%d') AS 'label', SUM(b.deposit)+SUM(a.reward)  AS 'value' FROM ec_user_game_relation a 
+			  LEFT JOIN ec_game_policy b ON a.gameid = b.gameid 
+			 WHERE a.invalidtime  <=  #{endDate}
+			   AND a.invalidtime >=  #{startDate}
+			   GROUP BY  DATE_FORMAT(a.invalidtime, '%Y-%m-%d' ) 
+			   ORDER BY a.invalidtime ASC
+		]]>
+	</select>
+	
+	<!-- 各押金段的领取人数 -->
+	<select id="depostGeter" resultMap="fusionChartDataResult">
+		<![CDATA[ 	
+			select count(1) as 'value', b.deposit as 'label' from ec_user_game_relation a 
+		      left join ec_game_policy b on a.gameid = b.gameid 
+		  group by b.deposit
+		]]>
+	</select>
+	
+	<!-- 性别比例 -->
+	<select id="sexRatio" resultMap="fusionChartDataResult">
+		<![CDATA[ 	
+			select count(*) as 'value' , case when t.gender = 0 then '男' else '女' end  as 'label' from ec_user_detail t
+		  	 where t.gender is not null
+			 group by t.gender 
+		]]>
+	</select>
+	
+	<!-- 收入段统计 -->
+	<select id="incomeCount" resultMap="fusionChartDataResult">
+		<![CDATA[ 	
+			select count(*) as 'value' , t.incomeScope  as 'label' from ec_user_detail t
+		 	 where t.incomeScope is not null
+			 group by t.incomeScope  
+		]]>
+	</select>
+	
+	<!-- 年龄段人数统计 -->
+	<select id="ageRatio" resultMap="fusionChartDataResult">
+		<![CDATA[ 	
+			select '20岁以下' as 'label' , sum(count) as 'value' from
+					 (select year(curdate()) - year(birthday) age ,count(*) count
+					 	 from ec_user_detail 
+					 	 where birthday is not null
+					 	 group by (year(curdate()) - year(birthday) )
+					 ) t where t.age < 20
+					 union 
+					 select '20岁-30岁' as 'label' , sum(count) as 'value' from
+					 (select year(curdate()) - year(birthday) age ,count(*) count
+					 	 from ec_user_detail 
+					 	 where birthday is not null
+					 	 group by (year(curdate()) - year(birthday) )
+					 ) t where t.age >= 20 and t.age < 30
+					 union 
+					 select '30岁-40岁' as 'label' , sum(count) 'value' from
+					 (select year(curdate()) - year(birthday) age ,count(*) count
+					 	 from ec_user_detail 
+					 	 where birthday is not null
+					 	 group by (year(curdate()) - year(birthday) )
+					 ) t where t.age >= 30 and t.age < 40
+					 union 
+					 select '40岁－50岁' as 'label' , sum(count) as 'value' from
+					 (select year(curdate()) - year(birthday) age ,count(*) count
+					 	 from ec_user_detail 
+					 	 where birthday is not null
+					 	 group by (year(curdate()) - year(birthday) )
+					 ) t where t.age >=40 and t.age < 50
+					 union 
+					 select '50岁以上' as 'label' , sum(count) as 'value' from
+					 (select year(curdate()) - year(birthday) age ,count(*) count
+					 	 from ec_user_detail 
+					 	 where birthday is not null
+					 	 group by (year(curdate()) - year(birthday) )
+					 ) t where t.age >= 50
+		]]>
+	</select>
+	
+	<!-- 游戏点击量排行前十 -->
+	<select id="gameCount" resultMap="fusionChartDataResult">
+		<![CDATA[ 	
+			select gamename as 'label' ,clicknum as 'value' from ec_game order by clicknum desc limit 10 
+		]]>
+	</select>
+	
+	<!-- 总资金汇总情况 -->
+	<select id="getAllInfo" resultMap="fusionChartDataResult">
+			SELECT CASE WHEN SUM(t.amount)  IS NULL THEN 0 ELSE    TRUNCATE(SUM(t.amount) ,2)   END  VALUE , '充值金额'  AS label FROM ec_recharge_record  t 
+			<trim prefix="where " prefixOverrides="and ">
+				 and t.status=0 
+				<if test="userid != null">
+				 and t.userid=#{userid}
+				</if>
+				<if test="startTime != null">
+				<![CDATA[ 
+					and t.createTime >= #{startTime}
+					]]>
+				</if>
+				<if test="endTime != null">
+					<![CDATA[ 
+					and t.createTime <= #{endTime}
+					]]>
+				</if>
+		    </trim>
+		 UNION ALL
+		 SELECT CASE WHEN SUM(benefit) IS NULL THEN 0 ELSE    TRUNCATE(SUM(benefit),2)  END   VALUE , '邀请奖励'  AS label  FROM  ec_invite_benefit  t 
+		   <trim prefix="where " prefixOverrides="and ">
+				<if test="userid != null">
+					and t.inviteUserId=#{userid}
+				</if>
+				<if test="startTime != null">
+				<![CDATA[ 
+					and t.actiontime >= #{startTime}
+					]]>
+				</if>
+				<if test="endTime != null">
+					<![CDATA[ 
+					and t.actiontime <= #{endTime}
+					]]>
+				</if>
+		    </trim>
+		 UNION ALL
+		 SELECT CASE WHEN SUM(signbenefit) IS NULL THEN 0 ELSE    TRUNCATE(SUM(signbenefit),2)  END   VALUE , '签到奖励'  AS label  FROM  ec_user_sign t 
+		  <trim prefix="where " prefixOverrides="and ">
+				<if test="mobileNumber != null">
+					and t.mobilePhone=#{mobileNumber}
+				</if>
+				<if test="startTime != null">
+				<![CDATA[ 
+					and t.signdatetime >= #{startTime}
+					]]>
+				</if>
+				<if test="endTime != null">
+					<![CDATA[ 
+					and t.signdatetime <= #{endTime}
+					]]>
+				</if>
+		    </trim>
+		 UNION ALL
+		 SELECT CASE WHEN SUM(reward) IS NULL THEN 0 ELSE    TRUNCATE(SUM(reward),2)  END   VALUE , '已完成任务返利'  AS label   FROM ec_user_game_relation t 
+		  <trim prefix="where " prefixOverrides="and ">
+		         and t.status=2 
+				<if test="mobileNumber != null">
+					and t.userid=#{mobileNumber}
+				</if>
+				<if test="startTime != null">
+				<![CDATA[ 
+					and t.createTime >= #{startTime}
+					]]>
+				</if>
+				<if test="endTime != null">
+					<![CDATA[ 
+					and t.createTime <= #{endTime}
+					]]>
+				</if>
+		    </trim>
+		 UNION ALL
+		 SELECT CASE WHEN SUM(policy_deposit) IS NULL THEN 0 ELSE  TRUNCATE(SUM(policy_deposit),2)  END   VALUE , '已完成任务的押金'  AS label   FROM ec_user_game_relation t 
+		     <trim prefix="where " prefixOverrides="and ">
+		         and t.status=2 
+				<if test="mobileNumber != null">
+					and t.userid=#{mobileNumber}
+				</if>
+				<if test="startTime != null">
+				<![CDATA[ 
+					and t.createTime >= #{startTime}
+					]]>
+				</if>
+				<if test="endTime != null">
+					<![CDATA[ 
+					and t.createTime <= #{endTime}
+					]]>
+				</if>
+		    </trim>
+		 UNION ALL
+		 SELECT CASE WHEN SUM(policy_deposit) IS NULL THEN 0 ELSE  TRUNCATE(SUM(policy_deposit),2)  END   VALUE , '未完成任务的押金'  AS label   FROM ec_user_game_relation t 
+		  <trim prefix="where " prefixOverrides="and ">
+		         and t.status !=2
+				<if test="mobileNumber != null">
+					and t.userid=#{mobileNumber}
+				</if>
+				<if test="startTime != null">
+				<![CDATA[ 
+					and t.createTime >= #{startTime}
+					]]>
+				</if>
+				<if test="endTime != null">
+					<![CDATA[ 
+					and t.createTime <= #{endTime}
+					]]>
+				</if>
+		    </trim>
+		  UNION ALL
+		 SELECT CASE WHEN SUM(amount) IS NULL THEN 0 ELSE  TRUNCATE(SUM(amount),2)  END   VALUE , '用户余额'  AS label   FROM ec_user_wallet t
+		 <trim prefix="where " prefixOverrides="and ">
+				<if test="userid != null">
+					and t.userid=#{userid}
+				</if>
+				
+		    </trim>
+		UNION ALL
+		 SELECT CASE WHEN SUM(amount) IS NULL THEN 0 ELSE    TRUNCATE(SUM(amount),2)  END   VALUE , '提现总金额'  AS label FROM ec_withdrawal_record  t
+		  <trim prefix="where " prefixOverrides="and ">
+		         and  t.status =0
+				<if test="userid != null">
+					and t.userid=#{userid}
+				</if>
+				<if test="startTime != null">
+				<![CDATA[ 
+					and t.datetime >= #{startTime}
+					]]>
+				</if>
+				<if test="endTime != null">
+					<![CDATA[ 
+					and t.datetime <= #{endTime}
+					]]>
+				</if>
+		    </trim>
+		 UNION ALL
+		 SELECT CASE WHEN SUM(amount) IS NULL THEN 0 ELSE    TRUNCATE(SUM(amount),2)  END   VALUE , '会员费用'  AS label FROM ec_deal_detail t
+		  <trim prefix="where " prefixOverrides="and ">
+		        and t.detailType IN(4,10,11) 
+				<if test="userid != null">
+					and t.userid=#{userid}
+				</if>
+				<if test="startTime != null">
+				<![CDATA[ 
+					and t.datetime >= #{startTime}
+					]]>
+				</if>
+				<if test="endTime != null">
+					<![CDATA[ 
+					and t.datetime <= #{endTime}
+					]]>
+				</if>
+		    </trim>
+		 UNION ALL
+		 SELECT CASE WHEN SUM(amount) IS NULL THEN 0 ELSE    TRUNCATE(SUM(amount),2)  END   VALUE , '待处理提现金额'  AS label FROM ec_withdrawal_record t
+		 <trim prefix="where " prefixOverrides="and ">
+		        and t.status=2 
+				<if test="userid != null">
+					and t.userid=#{userid}
+				</if>
+				<if test="startTime != null">
+				<![CDATA[ 
+					and t.datetime >= #{startTime}
+					]]>
+				</if>
+				<if test="endTime != null">
+					<![CDATA[ 
+					and t.datetime <= #{endTime}
+					]]>
+				</if>
+		    </trim>
+		 UNION ALL
+		 SELECT CASE WHEN SUM(reward) IS NULL THEN 0 ELSE    TRUNCATE(SUM(reward),2)  END   VALUE , '未完成任务返利'  AS label   FROM ec_user_game_relation t 
+		   <trim prefix="where " prefixOverrides="and ">
+		        and t.status!=2 
+				<if test="mobileNumber != null">
+					and t.userid=#{mobileNumber}
+				</if>
+				<if test="startTime != null">
+				<![CDATA[ 
+					and t.createTime >= #{startTime}
+					]]>
+				</if>
+				<if test="endTime != null">
+					<![CDATA[ 
+					and t.createTime <= #{endTime}
+					]]>
+				</if>
+		    </trim>
+	</select>
+ 
+   <!-- 总资金/个人资金比对情况 -->
+   <select id="getAllCapitalInfo" resultMap="fusionChartDataResult">
+       SELECT   TRUNCATE(
+  (SELECT   CASE WHEN SUM(t.amount)  IS NULL THEN 0 ELSE TRUNCATE(SUM(t.amount) ,2)   END  VALUE 
+  FROM ec_recharge_record  t 
+  <trim prefix="where " prefixOverrides="and ">
+                 and t.status=0 
+                <if test="userid != null">
+                 and t.userid=#{userid}
+                </if>
+                <if test="startTime != null">
+                <![CDATA[ 
+                    and t.createTime >= #{startTime}
+                    ]]>
+                </if>
+                <if test="endTime != null">
+                    <![CDATA[ 
+                    and t.createTime <= #{endTime}
+                    ]]>
+                </if>
+            </trim>
+ )
+ +
+( SELECT CASE WHEN SUM(benefit) IS NULL THEN 0 ELSE    TRUNCATE(SUM(benefit),2)  END   VALUE  
+  FROM  ec_invite_benefit  t  <trim prefix="where " prefixOverrides="and ">
+                <if test="userid != null">
+                    and t.inviteUserId=#{userid}
+                </if>
+                <if test="startTime != null">
+                <![CDATA[ 
+                    and t.actiontime >= #{startTime}
+                    ]]>
+                </if>
+                <if test="endTime != null">
+                    <![CDATA[ 
+                    and t.actiontime <= #{endTime}
+                    ]]>
+                </if>
+            </trim>
+      ) 
+ +
+ (SELECT CASE WHEN SUM(signbenefit) IS NULL THEN 0 ELSE    TRUNCATE(SUM(signbenefit),2)  END   VALUE  
+  FROM  ec_user_sign t  <trim prefix="where " prefixOverrides="and ">
+                <if test="mobileNumber != null">
+                    and t.mobilePhone=#{mobileNumber}
+                </if>
+                <if test="startTime != null">
+                <![CDATA[ 
+                    and t.signdatetime >= #{startTime}
+                    ]]>
+                </if>
+                <if test="endTime != null">
+                    <![CDATA[ 
+                    and t.signdatetime <= #{endTime}
+                    ]]>
+                </if>
+            </trim>
+   )
+ +
+ (SELECT CASE WHEN SUM(reward) IS NULL THEN 0 ELSE    TRUNCATE(SUM(reward),2)  END   VALUE   
+  FROM ec_user_game_relation t  <trim prefix="where " prefixOverrides="and ">
+                 and t.status=2 
+                <if test="mobileNumber != null">
+                    and t.userid=#{mobileNumber}
+                </if>
+                <if test="startTime != null">
+                <![CDATA[ 
+                    and t.createTime >= #{startTime}
+                    ]]>
+                </if>
+                <if test="endTime != null">
+                    <![CDATA[ 
+                    and t.createTime <= #{endTime}
+                    ]]>
+                </if>
+            </trim>
+  )
+  -
+ (SELECT CASE WHEN SUM(policy_deposit) IS NULL THEN 0 ELSE  TRUNCATE(SUM(policy_deposit),2)  END   VALUE   
+  FROM ec_user_game_relation t  <trim prefix="where " prefixOverrides="and ">
+                 and t.status !=2
+                <if test="mobileNumber != null">
+                    and t.userid=#{mobileNumber}
+                </if>
+                <if test="startTime != null">
+                <![CDATA[ 
+                    and t.createTime >= #{startTime}
+                    ]]>
+                </if>
+                <if test="endTime != null">
+                    <![CDATA[ 
+                    and t.createTime <= #{endTime}
+                    ]]>
+                </if>
+            </trim>
+   )
+ -
+ (SELECT CASE WHEN SUM(amount) IS NULL THEN 0 ELSE    TRUNCATE(SUM(amount),2)  END   VALUE  
+FROM ec_withdrawal_record  t
+ <trim prefix="where " prefixOverrides="and ">
+                 and  t.status =0
+                <if test="userid != null">
+                    and t.userid=#{userid}
+                </if>
+                <if test="startTime != null">
+                <![CDATA[ 
+                    and t.datetime >= #{startTime}
+                    ]]>
+                </if>
+                <if test="endTime != null">
+                    <![CDATA[ 
+                    and t.datetime <= #{endTime}
+                    ]]>
+                </if>
+            </trim>)
+ -
+ (SELECT CASE WHEN SUM(amount) IS NULL THEN 0 ELSE    TRUNCATE(SUM(amount),2)  END   VALUE 
+FROM ec_deal_detail t  <trim prefix="where " prefixOverrides="and ">
+                and t.detailType IN(4,10,11) 
+                <if test="userid != null">
+                    and t.userid=#{userid}
+                </if>
+                <if test="startTime != null">
+                <![CDATA[ 
+                    and t.datetime >= #{startTime}
+                    ]]>
+                </if>
+                <if test="endTime != null">
+                    <![CDATA[ 
+                    and t.datetime <= #{endTime}
+                    ]]>
+                </if>
+            </trim>)
+ -
+ (SELECT CASE WHEN SUM(amount) IS NULL THEN 0 ELSE    TRUNCATE(SUM(amount),2)  END   VALUE  
+FROM ec_withdrawal_record t   
+     <trim prefix="where " prefixOverrides="and ">
+                and t.status=2 
+                <if test="userid != null">
+                    and t.userid=#{userid}
+                </if>
+                <if test="startTime != null">
+                <![CDATA[ 
+                    and t.datetime >= #{startTime}
+                    ]]>
+                </if>
+                <if test="endTime != null">
+                    <![CDATA[ 
+                    and t.datetime <= #{endTime}
+                    ]]>
+                </if>
+            </trim>)
+ +
+(select CASE WHEN SUM(10) IS NULL THEN 0 ELSE    TRUNCATE(SUM(10),2)  END   VALUE  
+FROM ec_lprecord t  <trim prefix="where " prefixOverrides="and ">
+                and t.category=1
+                <if test="userid != null">
+                    and t.userid=#{userid}
+                </if>
+            </trim>
+            ),2)
+VALUE,'资金计算值'  AS label
+ UNION ALL
+		 SELECT CASE WHEN SUM(amount) IS NULL THEN 0 ELSE  TRUNCATE(SUM(amount),2)  END   VALUE , '用户余额'  AS label   FROM ec_user_wallet t
+		 <trim prefix="where " prefixOverrides="and ">
+				<if test="userid != null">
+					and t.userid=#{userid}
+				</if>
+				
+		    </trim>
+   </select>
+ 
+</mapper>

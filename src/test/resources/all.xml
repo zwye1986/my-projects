@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+<!--    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog.xml"/>-->
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_1.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_2.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_3.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_4.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_5.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_6.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_7.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_8.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_9.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_10.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_11.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_12.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_13.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_14.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_15.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_16.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_17.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_18.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_19.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_20.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_21.xml"/>
+<!--    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_22.xml"/>-->
+<!--    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/changelog_22.xml"/>-->
+    <!--<include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_area_data.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_bank.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_bank_branch.xml"/>
+
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_bank_city.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_bank_city_map.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_city_data.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_province_data.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/events_zhangwenyun.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/events_zhangwenyun_1.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/events_zhangwenyun_2.xml"/>
+
+
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/events_zhangwenyun_security_center.xml"/>
+
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/index_zhangwenyun.xml"/>
+&lt;!&ndash;    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/init_data.xml"/>&ndash;&gt;
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/init_userAdmin_data.xml"/>
+    <include relativeToChangelogFile="true" file="/Users/zhangwenyun/Documents/efinance/src/test/resources/yma.xml"/>-->
+
+
+
+</databaseChangeLog>

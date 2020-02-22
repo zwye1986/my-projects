@@ -1,0 +1,147 @@
+/*content*/
+body {
+	width: 100%;
+	background: #f6f6f6;
+}
+#content {
+	margin: 0 auto;
+	position: relative;
+	width: 1257px;
+	z-index: 2;
+}
+.content_top_w {
+	width: 100%;
+	background: url(../images/hd_11/topbg.png) no-repeat #ffcc0f;
+}
+.content_Top {
+	width: 1257px;
+	height: 705px;
+	margin: 0 auto;
+	background: url(../images/hd_11/top_c.png) no-repeat;
+}
+#cntwrapper{ width:100%; background:#ffcc0f; padding-bottom:30px;}
+/*----------------------------content_c-------------------------------------*/
+#content_w {
+	width: 100%;
+	background: #ffcc0f
+}
+.content_top, .content_bottom {
+	width: 1146px;
+	margin: 0 auto;
+}
+.content_top {
+	margin-bottom: 35px;
+}
+.content_title {
+	width: 1146px;
+	height: 42px;
+	line-height: 42px;
+	text-align: left;
+	font-size: 16px;
+	color: #5c2903;
+	padding-left: 20px;
+	background: url(../images/hd_11/titile.png) no-repeat;
+}
+.content_top_c {
+	width: 1144px;
+	min-height: 430px;
+	height: auto;
+	background-color: #fff;
+	border: 1px solid #da9a04;
+}
+.content_top_cl {
+	width: 474px;
+	height: 380px;
+	margin: 20px 40px 20px 55px;
+	
+}
+.cnt_title {
+	width: 28px;
+	height: 375px;
+	background: url(../images/hd_11/list_t.png) no-repeat;
+}
+ul.cnt_list {
+	width: 389px;
+	height: 375px;
+	
+	margin-left: 20px;
+}
+ul.cnt_list li {
+	width: 389px;
+	height: 36px;
+	line-height: 36px;
+	border-bottom: 1px dashed #d1d1d1;
+}
+ul.cnt_list li dt.list_l_f {
+	width: 36px;
+	height: 36px;
+	background: url(../images/hd_11/list.png) no-repeat;
+	color: #fff;
+	font-size: 14px;
+	line-height: 36px;
+	text-align: center;
+}
+ul.cnt_list li dt.list_l {
+	width: 36px;
+	height: 36px;
+	background: url(../images/hd_11/list01.png) no-repeat;
+	color:#5C2903;
+	font-size: 14px;
+	line-height: 36px;
+	text-align: center;
+}
+dd.list_name {
+	width: 90px;
+	color: #555;
+	line-height: 36px;
+	overflow: hidden;
+	text-align: left;
+	white-space: nowrap;
+	margin-right:15px;
+	margin-left:15px;
+	letter-spacing:1px;
+	font-size:14px;
+	 
+	
+}
+dd.list_money {
+	color: #555;
+	line-height: 36px;
+	text-align: left;
+	margin-right:5px;
+	letter-spacing:1px;
+	font-size:14px;
+	
+	
+}
+dd.list_money_l {
+	color: #f16244;
+	line-height: 36px;
+	text-align: left;
+	margin-right:5px;
+	letter-spacing:1px;
+	font-size:14px;
+}
+dd.list_date {
+	color: #555;
+	font: 14px "微软雅黑";
+	line-height: 36px;
+	letter-spacing:1px;
+	font-size:14px;
+}
+.content__top_cr {
+	width: 474px;
+	height: 380px;
+	margin: 20px 40px 20px 30px;
+	
+}
+.content_bottom_c{width: 1144px;
+	min-height:335px;
+	height: auto;
+	background-color: #fff;
+	border: 1px solid #da9a04;}
+	
+.content_bottom_c p{ width:1085px;font:14px"微软雅黑" Verdana, Geneva, sans-serif; letter-spacing:1px; margin-top:20px; margin-left:30px; line-height:36px;}	
+	
+.share{ margin-left:30px; font-size:14px; line-height:48px;}
+.content_top_no{width:1146px; height:475px;background: url(../images/hd_11/no.jpg) no-repeat; margin:0 auto;margin-bottom: 35px; }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet id="ec_bank_init" author="zhangwenyun">
+	<sql>INSERT INTO `ec_bank` (`bankId`, `bankName`, `shortName`)
+VALUES
+	(10001,'中国农业银行','ABC'),
+	(10002,'中国银行','BOC'),
+	(10003,'中国建设银行','CCB'),
+	(10004,'中国邮政储蓄银行','PSBC'),
+	(10005,'交通银行','COMM'),
+	(10006,'招商银行','CMB'),
+	(10007,'上海浦东发展银行','SPDB'),
+	(10008,'兴业银行','CIB'),
+	(10009,'华夏银行','HXBANK'),
+	(10010,'广发银行','GDB'),
+	(10011,'深圳发展银行','SZBANK'),
+	(10012,'中国民生银行','CMBC'),
+	(10013,'中信银行','CITIC'),
+	(10014,'中国光大银行','CEB'),
+	(10015,'恒丰银行','HFBANK'),
+	(10016,'浙商银行','ZSBANK'),
+	(10021,'城市商业银行','CITYBANK'),
+	(10023,'徽商银行','HSBANK'),
+	(10053,'农村信用联社','XYBANK'),
+	(10061,'农村合作银行','HZBANK'),
+	(10062,'农村商业银行','SYBANK');
+	</sql>
+	</changeSet></databaseChangeLog>

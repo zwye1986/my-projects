@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+	<definition name=".baseLayout" template="/WEB-INF/layout/userLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />
+		<put-attribute name="Sidebar" value="/WEB-INF/layout/userleft.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/Footer.jsp" />
+		<put-attribute name="Content" value="" />
+	</definition>
+	
+		<definition name=".noTipsbaseLayout" template="/WEB-INF/layout/userLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />
+		<put-attribute name="Sidebar" value="/WEB-INF/layout/userleft.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Content" value="" />
+	</definition>
+	
+	<definition name=".helpLayout" template="/WEB-INF/layout/helpLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Content" value="" />
+	</definition>
+
+	<definition name=".gameLayout" template="/WEB-INF/layout/gameLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />
+		<put-attribute name="Sidebar" value="/WEB-INF/layout/userleft.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Content" value="" />
+	</definition>
+	
+	<definition name=".xgame" template="/WEB-INF/layout/xGameLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />	
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Sidebar" value="/WEB-INF/jsp/game/left.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/game/xgame.jsp" />
+	</definition>
+	
+	<definition name=".lp" template="/WEB-INF/layout/lpLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />	
+		<put-attribute name="Footer" value="/WEB-INF/layout/Footer.jsp" />
+		<put-attribute name="Sidebar" value="" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/lp/lp.jsp" />
+	</definition>
+	
+	<definition name=".activity" extends=".newIndexLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/activity/newActivity.jsp" />
+	</definition>
+	
+	
+	
+	<definition name=".project" template="/WEB-INF/layout/projectLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />	
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Sidebar" value="" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/project/project.jsp" />
+	</definition>
+	
+	<definition name=".vipIndex" template="/WEB-INF/layout/vipLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/vipHeader.jsp" />	
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Sidebar" value="" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/vip/vip.jsp" />
+	</definition>
+	
+	<definition name=".festival" template="/WEB-INF/layout/festivalLayout.jsp">
+	    <put-attribute name="Content" value="/WEB-INF/jsp/festival/festival.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		
+	</definition>
+	
+	<definition name=".gamePrivilege" template="/WEB-INF/layout/vipLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/vipHeader.jsp" />	
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Sidebar" value="" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/vip/gamePrivilege.jsp" />
+	</definition>
+	
+	<definition name=".growSystem" template="/WEB-INF/layout/vipLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/vipHeader.jsp" />	
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Sidebar" value="" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/vip/growSystem.jsp" />
+	</definition>
+	
+	<definition name=".allPriVip" template="/WEB-INF/layout/vipLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/vipHeader.jsp" />	
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Sidebar" value="" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/vip/allPriVip.jsp" />
+	</definition>
+	
+	<definition name=".giveVip" template="/WEB-INF/layout/vipLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/vipHeader.jsp" />	
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Sidebar" value="" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/vip/giveVip.jsp" />
+	</definition>
+	
+	
+	
+	<definition name=".hyDetail" template="/WEB-INF/layout/vipLayout.jsp">
+		<put-attribute name="Header" value="" />	
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Sidebar" value="" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/vip/hyDetail.jsp" />
+	</definition>
+	
+	<definition name=".vipPrivilege" template="/WEB-INF/layout/vipLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/vipHeader.jsp" />	
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Sidebar" value="" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/vip/vipPrivilege.jsp" />
+	</definition>
+	
+	<definition name=".feslogo" template="/WEB-INF/layout/newIndexLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/newHeader.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/newFooter.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/feslogo.jsp" />
+	</definition>
+	
+	<definition name=".integralLottery" template="/WEB-INF/layout/newIndexLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/newHeader2.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/newFooter.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/integralLottery.jsp" />
+	</definition>
+	
+
+	
+	<definition name=".403" template="/WEB-INF/layout/newIndexLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/newHeader.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/newFooter.jsp" />
+	    <put-attribute name="Content" value="/WEB-INF/jsp/errorPages/error403.jsp" />
+	</definition>
+	
+	<definition name=".404" template="/WEB-INF/layout/newIndexLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/newHeader.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/newFooter.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/errorPages/error404.jsp" />
+	</definition>
+	
+	<definition name=".500" template="/WEB-INF/layout/newIndexLayout.jsp">
+	    <put-attribute name="Header" value="/WEB-INF/layout/newHeader.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/newFooter.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/errorPages/error500.jsp" />
+	</definition>
+	
+	<definition name=".503" template="/WEB-INF/layout/newIndexLayout.jsp">
+	   <put-attribute name="Header" value="/WEB-INF/layout/newHeader.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/newFooter.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/errorPages/error503.jsp" />
+	</definition>
+
+	<definition name=".gameDetailLayout" template="/WEB-INF/layout/gameDetailLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />
+		<put-attribute name="Sidebar" value="/WEB-INF/layout/userleft.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Content" value="" />
+	</definition>
+
+	<definition name=".indexLayout" template="/WEB-INF/layout/indexLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/Footer.jsp" />
+		<put-attribute name="Content" value="" />
+	</definition>
+	
+	<definition name=".newIndexLayout" template="/WEB-INF/layout/newIndexLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/newHeader.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/newFooter.jsp" />
+		<put-attribute name="Content" value="" />
+	</definition>
+	
+	<definition name=".newMobileLayout" template="/WEB-INF/layout/newMobileLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/newMobileHeader.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/newMobileFooter.jsp" />
+		<put-attribute name="Content" value="" />
+	</definition>
+
+	<definition name=".newsDetailLayout" template="/WEB-INF/layout/newsDetailLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Content" value="" />
+		<put-attribute name="Title" value="" />
+		<put-attribute name="FastTrack" value="" />
+		<put-attribute name="GameRank" value="" />
+	</definition>
+	
+	<definition name=".newsDetail"  extends=".newIndexLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/newsDetail/newsDetail.jsp" />
+	</definition>
+
+    <definition name=".announcementLayout" template="/WEB-INF/layout/announcementLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/Footer.jsp" />
+		<put-attribute name="Content" value="" />
+		<put-attribute name="Title" value="" />
+		<put-attribute name="FastTrack" value="" />
+		<put-attribute name="GameRank" value="" />
+	</definition>
+	
+	<definition name=".announcementDetail" extends=".newIndexLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/announcementlist.jsp" />
+	</definition>
+	
+	
+	
+	<definition name=".resetPassword" template="/WEB-INF/layout/resetPasswordLayout.jsp">
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/resetPassword.jsp" />
+	</definition>
+	
+	
+	<definition name=".validateCellMessage" template="/WEB-INF/layout/validateCellMessageLayout.jsp">
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/validateCellMessage.jsp" />
+	</definition>
+	
+	<definition name=".login" extends=".baseSimpleLayout">
+		<put-attribute name="Content" value="/login.jsp" />
+	</definition>
+	
+	<definition name=".regist" template="/WEB-INF/layout/registLayout.jsp">
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/regist.jsp" />
+	</definition>
+	
+		<definition name=".register" template="/WEB-INF/layout/registerLayout.jsp">
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/register.jsp" />
+	</definition>
+	
+	<definition name=".setNewPassword" template="/WEB-INF/layout/setNewPasswordLayout.jsp">
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/setNewPassword.jsp" />
+	</definition>
+	
+	<definition name=".szxmm" template="/WEB-INF/layout/szxmmLayout.jsp">
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/szxmm.jsp" />
+	</definition>
+	
+	<definition name=".agreement" template="/WEB-INF/layout/agreementLayout.jsp">
+		<put-attribute name="Footer" value="/WEB-INF/layout/Footer.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/agreement.jsp" />
+	</definition>
+	
+	<definition name=".index" extends=".indexLayout">
+		<put-attribute name="Content" value="/idx.jsp" />
+	</definition>
+	
+	<definition name=".newIndex" extends=".newIndexLayout">
+		<put-attribute name="Content" value="/newIdx.jsp" />
+	</definition>
+	
+	<definition name=".ios" extends=".newMobileLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/ios.jsp" />
+	</definition>
+
+	<definition name=".recharge/submit" extends=".baseLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/recharge_submit.jsp" />
+	</definition>
+
+	<definition name=".recharge" extends=".baseLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/recharge.jsp" />
+	</definition>
+	
+		<definition name=".exchange" extends=".baseLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/exchange.jsp" />
+	</definition>
+	
+	<!-- <definition name=".signInDeatil" extends=".indexLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/signin/signInDeatil.jsp" />
+	</definition> -->
+	
+   
+	
+	<definition name=".signedDateList" extends=".baseLayout">
+	    <put-attribute name="Content" value="/WEB-INF/jsp/signin/signedList.jsp"/>
+	</definition>
+	
+	<definition name=".myInviteList" extends=".baseLayout">
+	    <put-attribute name="Content" value="/WEB-INF/jsp/invite/myInviteList.jsp"/>
+	</definition>
+	
+	<definition name=".myInvite" extends=".noTipsbaseLayout">
+	    <put-attribute name="Content" value="/WEB-INF/jsp/invite/myInvite.jsp"/>
+	</definition>
+	
+		<definition name=".myInviteUser" extends=".noTipsbaseLayout">
+	    <put-attribute name="Content" value="/WEB-INF/jsp/invite/myInviteUser.jsp"/>
+	</definition>
+	
+	
+
+	<definition name=".withdrawal" extends=".baseLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/withdrawal.jsp" />
+	</definition>
+	
+	<definition name=".newWithdrawal" extends=".newAccountManagerLayout">
+	<put-attribute name="Content" value="/WEB-INF/jsp/newWithdrawal.jsp" />
+	</definition>
+	
+	<definition name=".newUserfeedbackList" extends=".newAccountManagerLayout">
+	<put-attribute name="Content" value="/WEB-INF/jsp/feedback/newFeedbackList.jsp" />
+	</definition>
+	
+	<definition name=".newFeedBack" extends=".newAccountManagerLayout">
+	<put-attribute name="Content" value="/WEB-INF/jsp/user/newFeedBack.jsp" />
+	</definition>
+	
+	<definition name=".newTaskDetail" extends=".newAccountManagerLayout">
+	<put-attribute name="Content" value="/WEB-INF/jsp/newTaskDetail.jsp" />
+	</definition>
+	
+	<definition name=".newGame" extends=".newIndexLayout">
+	<put-attribute name="Content" value="/WEB-INF/jsp/game/newGame.jsp" />
+	</definition>
+	
+	<definition name=".newHelp" extends=".newIndexLayout">
+	<put-attribute name="Content" value="/WEB-INF/jsp/help/newHelp.jsp" />
+	</definition>
+	
+	<definition name=".help_about" extends=".newIndexLayout">
+	<put-attribute name="Content" value="/WEB-INF/jsp/help/help_about.jsp" />
+	</definition>
+	
+	<definition name=".newFeedBackMessage" extends=".newAccountManagerLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/user/newFeedBackMessage.jsp" />
+	</definition>
+	
+	<definition name=".accountSuccess" extends=".newAccountManagerLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/newAccountSuccess.jsp" />
+	</definition>
+
+	<definition name=".accountManager" extends=".accountManagerLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/accountManager.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+	</definition>
+	
+	<definition name=".accountManagerLayout" template="/WEB-INF/layout/accountManagerLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />
+		<put-attribute name="Sidebar" value="/WEB-INF/layout/userleft.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/Footer.jsp" />
+		<put-attribute name="Content" value="" />
+	</definition>
+
+    <definition name=".newAccountManagerLayout" template="/WEB-INF/layout/newAccountManagerLayout.jsp">
+        <put-attribute name="Header" value="/WEB-INF/layout/newHeader.jsp" />
+        <put-attribute name="Sidebar" value="/WEB-INF/layout/newUserleft.jsp" />
+        <put-attribute name="Footer" value="/WEB-INF/layout/newFooter.jsp" />
+        <put-attribute name="Content" value="" />
+    </definition>
+
+    <definition name=".newUserDetail" extends=".newAccountManagerLayout">
+        <put-attribute name="Content" value="/WEB-INF/jsp/account/newUserDetail.jsp" />
+    </definition>
+
+    <definition name=".newBindCard" extends=".newAccountManagerLayout">
+        <put-attribute name="Content" value="/WEB-INF/jsp/account/newBindCard.jsp" />
+    </definition>
+
+    <definition name=".newResetPassword" extends=".newAccountManagerLayout">
+        <put-attribute name="Content" value="/WEB-INF/jsp/account/newResetPassword.jsp" />
+    </definition>
+
+    <definition name=".newUploadPhoto" extends=".newAccountManagerLayout">
+        <put-attribute name="Content" value="/WEB-INF/jsp/account/newUploadPhoto.jsp" />
+    </definition>
+
+    <definition name=".newRechargeList" extends=".newAccountManagerLayout">
+        <put-attribute name="Content" value="/WEB-INF/jsp/account/newRechargeList.jsp" />
+    </definition>
+
+    <definition name=".newDealDetail" extends=".newAccountManagerLayout">
+        <put-attribute name="Content" value="/WEB-INF/jsp/account/newDealDetail.jsp" />
+    </definition>
+
+    <definition name=".newWithDrawal" extends=".newAccountManagerLayout">
+        <put-attribute name="Content" value="/WEB-INF/jsp/account/newWithDrawal.jsp" />
+    </definition>
+
+    <definition name=".newTargetQuery" extends=".newAccountManagerLayout">
+        <put-attribute name="Content" value="/WEB-INF/jsp/account/newTargetQuery.jsp" />
+    </definition>
+    
+	<definition name=".newRecharge" extends=".newAccountManagerLayout">
+        <put-attribute name="Content" value="/WEB-INF/jsp/newRecharge.jsp" />
+    </definition>
+    
+    
+    <definition name=".newMyInvite" extends=".newAccountManagerLayout">
+	    <put-attribute name="Content" value="/WEB-INF/jsp/invite/myInvite.jsp"/>
+	</definition>
+	
+	<definition name=".setMessageRule" extends=".newAccountManagerLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/user/setMessageRule.jsp" />
+	</definition>
+	
+	<definition name=".newSignedDateList" extends=".newAccountManagerLayout">
+	    <put-attribute name="Content" value="/WEB-INF/jsp/signin/newSignedList.jsp"/>
+	</definition>
+	
+	<definition name=".lotteryList" extends=".newAccountManagerLayout">
+	    <put-attribute name="Content" value="/WEB-INF/jsp/lottery/lotteryList.jsp"/>
+	</definition>
+	
+
+	<definition name=".newObtainCreditsList" extends=".newAccountManagerLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/credits/credits.jsp" />
+	</definition>
+	
+	
+	<definition name=".newsecurityCenter" extends=".newAccountManagerLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/user/newsecurityCenter.jsp" />
+	</definition>
+	
+	
+	
+	<definition name=".userManager" extends=".baseLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/userManager.jsp" />
+	</definition>
+
+	<definition name=".orderManager" extends=".indexLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/orderManager.jsp" />
+	</definition>
+	
+	<definition name=".orderDetailPayment" extends=".indexLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/order/orderDetailPayment.jsp" />
+	</definition>
+	
+	<definition name=".orderDetailPaymentSucess" extends=".indexLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/order/orderDetailPaymentSucess.jsp" />
+	</definition>
+	
+	
+	<definition name=".orderList" extends=".baseLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/order/orderList.jsp" />
+	</definition>
+	
+	<definition name=".obtainCreditsList" extends=".baseLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/credits/creditsList.jsp" />
+	</definition>
+	
+	<definition name=".convertCreditsList" extends=".baseLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/credits/convertCreditsList.jsp" />
+	</definition>
+	
+	
+	<definition name=".userfeedbackList" extends=".baseLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/feedback/feedbackList.jsp" />
+	</definition>
+	
+	
+	<definition name=".game" extends=".gameLayout">
+		<put-attribute name="Sidebar" value="" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/game/game.jsp" />
+	</definition>
+
+	<definition name=".gameDetail" extends=".newIndexLayout">
+	<!--  
+		<put-attribute name="Sidebar" value="" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/game/gameDetail.jsp" />
+		-->
+		<put-attribute name="Content" value="/WEB-INF/jsp/game/newGameDetail.jsp" />
+	</definition>
+	
+	<definition name=".help" extends=".helpLayout">
+		<put-attribute name="Sidebar" value="" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/help.jsp" />
+	</definition>
+	
+	<definition name=".video" extends=".helpLayout">
+		<put-attribute name="Sidebar" value="" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/video.jsp" />
+	</definition>
+	
+	<definition name=".process" extends=".newIndexLayout">
+		<put-attribute name="Sidebar" value="" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/process.jsp" />
+	</definition>
+	
+	<definition name=".help_partner" extends=".newIndexLayout">
+		<put-attribute name="Sidebar" value="" />
+<put-attribute name="Content" value="/WEB-INF/jsp/help/help_partner.jsp" />
+	</definition>
+	
+		<definition name=".help_contact" extends=".newIndexLayout">
+		<put-attribute name="Sidebar" value="" />
+<put-attribute name="Content" value="/WEB-INF/jsp/help/help_contact.jsp" />
+	</definition>
+	
+	<definition name=".levelRule" extends=".helpLayout">
+		<put-attribute name="Sidebar" value="" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/levelrules.jsp" />
+	</definition>
+	
+	<definition name=".build" template="/WEB-INF/layout/buildLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/build.jsp" />
+	</definition>
+	
+	<definition name=".feedBack" template="/WEB-INF/layout/feedBackLayoutExtendsBase.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />
+		<put-attribute name="Sidebar" value="/WEB-INF/layout/userleft.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/user/feedBack.jsp" />
+	</definition>
+	
+	<definition name=".feedBackIndex" template="/WEB-INF/layout/feedBackLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/user/feedBackIndex1.jsp" />
+	</definition>
+	
+	<definition name=".feedBackMessage" extends=".feedBack">
+		<put-attribute name="Content" value="/WEB-INF/jsp/user/feedBackMessage.jsp" />
+	</definition>
+	
+	<definition name=".feedBackMessageIndex" template="/WEB-INF/layout/feedBackMessageLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/Footer.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/user/feedBackMessage.jsp" />
+	</definition>
+	
+	<definition name=".moreWealthTop" template="/WEB-INF/layout/xGameLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />	
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Sidebar" value="/WEB-INF/jsp/game/left.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/top/wealthTop.jsp" />
+	</definition>
+	
+	<definition name=".moreIncomeTop" template="/WEB-INF/layout/xGameLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />	
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Sidebar" value="/WEB-INF/jsp/game/left.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/top/incomeTop.jsp" />
+	</definition>
+	
+	<definition name=".moreActiveTop" template="/WEB-INF/layout/xGameLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />	
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Sidebar" value="/WEB-INF/jsp/game/left.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/top/activeTop.jsp" />
+	</definition>
+	
+	<definition name=".moreInviteTop" template="/WEB-INF/layout/xGameLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />	
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Sidebar" value="/WEB-INF/jsp/game/left.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/top/inviteTop.jsp" />
+	</definition>
+	
+	
+	
+	<definition name=".moreLevelTop" template="/WEB-INF/layout/xGameLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />	
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Sidebar" value="/WEB-INF/jsp/game/left.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/top/levelTop.jsp" />
+	</definition>
+	
+	<definition name=".moreInviteUserTop" template="/WEB-INF/layout/xGameLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />	
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Sidebar" value="/WEB-INF/jsp/game/left.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/top/moreInviteUserTop.jsp" />
+	</definition>
+	
+	
+
+	<definition name=".mall" extends=".newIndexLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/mall/newMall.jsp" />
+	</definition>
+	
+	<definition name=".mallDetail" extends=".newIndexLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/mall/newMallDetail.jsp" />
+	</definition>
+	
+	<definition name=".doubleEleven" template="/WEB-INF/layout/doubleElevenLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/doubleEleven.jsp" />
+	</definition>
+	
+	<definition name=".android" extends=".doubleEleven">
+		<put-attribute name="Content" value="/WEB-INF/jsp/androidDetail.jsp" />
+	</definition>
+	
+	<definition name=".androidV2" template="/WEB-INF/layout/festivalLayout.jsp">
+		 <put-attribute name="Content" value="/WEB-INF/jsp/androidDetailV2.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+	</definition>
+	
+	<definition name=".projectDetail" template="/WEB-INF/layout/projectDetailLayout.jsp">
+		<put-attribute name="Header" value="/WEB-INF/layout/Header.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/project/projectDetail.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/FooterWithNoTip.jsp" />
+		<put-attribute name="Bottom" value="/WEB-INF/jsp/project/bottom.jsp" />
+	</definition>
+	
+	<definition name=".myProject" extends=".baseLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/projectList.jsp" />
+	</definition>
+
+    <definition name=".baseSimpleLayout" template="/WEB-INF/layout/baseSimpleLayout.jsp">
+        <put-attribute name="Header" value="/WEB-INF/layout/headerv2.jsp" />
+        <put-attribute name="Content" value="" />
+        <put-attribute name="Footer" value="/WEB-INF/layout/footerv2.jsp" />
+    </definition>
+
+    <definition name=".regist1" extends=".baseSimpleLayout">
+        <put-attribute name="Content" value="/WEB-INF/jsp/regist/regist1.jsp" />
+    </definition>
+    <definition name=".regist2" extends=".baseSimpleLayout">
+        <put-attribute name="Content" value="/WEB-INF/jsp/regist/regist2.jsp" />
+    </definition>
+    <definition name=".regist3" extends=".baseSimpleLayout">
+        <put-attribute name="Content" value="/WEB-INF/jsp/regist/regist3.jsp" />
+    </definition>
+    <definition name=".fillNecessaryInfo" extends=".baseSimpleLayout">
+        <put-attribute name="Content" value="/WEB-INF/jsp/regist/fillNecessaryInfo.jsp" />
+    </definition>
+
+    <definition name=".findPwd" extends=".baseSimpleLayout">
+        <put-attribute name="Content" value="/WEB-INF/jsp/findPwd.jsp" />
+    </definition>
+    
+     <definition name=".signInDeatil" extends=".newIndexLayout">
+		<put-attribute name="Content" value="/WEB-INF/jsp/signin/mod-sign.jsp" />
+	</definition>
+    <definition name=".rank" extends=".newIndexLayout">
+        <put-attribute name="Content" value="/WEB-INF/jsp/rank.jsp" />
+    </definition>
+    <definition name=".agree" extends=".newIndexLayout">
+        <put-attribute name="Content" value="/WEB-INF/jsp/agree.jsp" />
+    </definition>
+    <definition name=".map" extends=".newIndexLayout">
+        <put-attribute name="Content" value="/WEB-INF/jsp/map.jsp" />
+    </definition>
+    
+    <definition name=".newyear" template="/WEB-INF/layout/newIndexLayout.jsp">
+	   <put-attribute name="Header" value="/WEB-INF/layout/newHeader.jsp" />
+		<put-attribute name="Footer" value="/WEB-INF/layout/newFooter.jsp" />
+		<put-attribute name="Content" value="/WEB-INF/jsp/newyear.jsp" />
+	</definition>
+    
+</tiles-definitions>

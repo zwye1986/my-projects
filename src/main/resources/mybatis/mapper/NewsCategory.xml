@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.NewsCategoryMapper">
+<resultMap type="NewsCategory" id="newsCategoryMap">
+<id column="id" property="id" />
+<result column="name" property="name" />
+</resultMap>
+
+
+	<insert id="add" parameterType="NewsCategory">
+	<![CDATA[ 
+		INSERT INTO ec_news_category (name)
+		VALUES(#{name})
+		]]>
+	</insert>
+	
+	<select id="listPageNewsCategory" parameterType="NewsCategory" resultMap="newsCategoryMap">
+	<![CDATA[ 
+		SELECT * FROM ec_news_category
+		]]>
+	</select>
+	            
+	<select id="listAllNewsCategory" parameterType="NewsCategory" resultMap="newsCategoryMap">
+	<![CDATA[ 
+		SELECT * FROM ec_news_category
+		]]>
+	</select>
+	
+	<delete id="delNewsCategory" parameterType="int">
+	<![CDATA[ 
+		delete from ec_news_category where id=#{value}
+		]]>
+	</delete>
+	
+</mapper>

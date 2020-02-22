@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="IntegralLottery">
+<select id="queryIntegralLottery" resultType="IntegralLottery">
+select * from ec_integral_lottery order by id asc
+</select>
+</mapper>

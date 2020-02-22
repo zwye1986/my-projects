@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<changeSet id="modify_proc_charge_security_center_fee_4" author="zhangwenyun2">
+		<sql>
+			DROP PROCEDURE IF EXISTS proc_charge_security_center_fee;
+		</sql>
+	<sql>
+		DROP table IF EXISTS ec_record_reward;
+	</sql>
+		<sql>
+			update ec_deal_detail set type = '2' where type = '0' and serialNumber = 'XTKF';
+		</sql>
+		
+		<!--<createProcedure>
+		<![CDATA[ 
+		CREATE PROCEDURE `proc_charge_security_center_fee`()
+			BEGIN
+				declare iv_userid varchar(128) default '' ; /*用户ID*/
+				declare iv_isAutoRenew int(1) ; /*用户ID*/
+				declare iv_month_cost	DECIMAL ;	/*安全中心月功能费*/
+				DECLARE	iv_user_blance 	DECIMAL ;  /*查询用户余额*/ 
+				DECLARE iv_uuid VARCHAR(128) ;
+				DECLARE cur_security_centers CURSOR FOR SELECT t.userid,t.isAutoRenew from ec_security_center t WHERE t.isOpen = 0  and DATE_FORMAT(t.expiryDate,'%Y~%m~%d') < DATE_FORMAT(NOW(),'%Y~%m~%d');
+				declare CONTINUE HANDLER FOR SQLSTATE '02000' set iv_userid = NULL;
+			
+				SET autocommit=0;
+				
+				SELECT t.paramValue into iv_month_cost FROM ec_system_config t where t.id = 104 ;
+				
+				/*打开游标*/
+			    OPEN cur_security_centers;
+					/*游标向下走一步*/ 
+			        FETCH cur_security_centers INTO iv_userid,iv_isAutoRenew;
+					
+					WHILE ( iv_userid is not null) DO
+					
+						select t.amount into iv_user_blance from ec_user_wallet t where t.userid = iv_userid FOR UPDATE;
+						/*余额不足，关闭安全中心功能*/
+						if  iv_user_blance < iv_month_cost || iv_isAutoRenew = 1 THEN
+							update ec_security_center t set t.isOpen = 1 where t.userid = iv_userid;
+						else/*反之增加用户开启安全中心的时间、等级积分，扣除功能费,增加流水记录*/
+							UPDATE ec_security_center t set t.expiryDate = date_add(now(), interval 1 MONTH) where t.userid = iv_userid;
+							UPDATE ec_user t set t.level = t.level + (iv_month_cost*10) , t.credits = t.credits + (iv_month_cost*10) where t.id = iv_userid;
+							UPDATE ec_user_wallet t set t.amount = t.amount - iv_month_cost where t.userid = iv_userid ;
+							select uuid() INTO iv_uuid ;
+							insert into ec_deal_detail(id,serialNumber,dateTime,status,amount,userid,balance,description,detailType,type)					
+												values(iv_uuid,'XTKF',now(),'0',iv_month_cost,iv_userid,(iv_user_blance-iv_month_cost),'系统自动扣除安全中心月功能费','4','2');
+							
+						end if ;
+						COMMIT;
+						/*游标向下走一步*/ 
+						FETCH cur_security_centers INTO iv_userid,iv_isAutoRenew;
+					END WHILE;	
+				/*关闭游标*/
+				CLOSE cur_security_centers;	
+			END
+			]]>
+		</createProcedure>-->
+
+	</changeSet> 
+	<changeSet id="addSignUp" author="hepei">
+		<createTable tableName="ec_signup">
+			<column name="id" type="varchar(255)">
+			<constraints primaryKey="true"/>
+			</column>
+			<column name="mobileNumber" type="varchar(20)"></column>
+			<column name="liveProvince" type="int(11)">
+			</column>
+			<column name="liveCity" type="int(11)">
+			</column>
+			<column name="liveArea" type="int(11)">
+			</column>
+			<column name="liveaddress" type="varchar(255)">
+			</column>
+			<column name="nickName" type="varchar(64)"></column>
+			<column name="createtime" type="datetime"></column>
+			<column name="question" type="varchar(2000)" defaultValue=""></column>
+			<column name="status" type="int(11)"></column>
+		</createTable>
+	</changeSet>
+	
+   <changeSet id="addActivity" author="xupei">
+   
+   <createTable tableName="ec_record_reward">
+		<column name="userid" type="varchar(255)">
+		
+		</column>
+		<column name="sumamount" type="decimal(10,2)">
+		</column>
+		<column name="reward" type="decimal(10,2)">
+		</column>
+		<column name="num" type="int(11)">
+		</column>
+		<column name="descrip" type="varchar(500)" defaultValue="">
+		</column>
+		<column name="id" type="varchar(255)" defaultValue="">
+		<constraints primaryKey="true"/>
+		</column>
+		</createTable>
+   
+   <sql>
+    update ec_game set id= '2',gamename = '整月存'where id = '42d45e88-9dbe-4089-bb1e-400e05fbef39';
+    update ec_game_policy set gameid = '2' where gameid = '42d45e88-9dbe-4089-bb1e-400e05fbef39';
+    update ec_game_pic set gameid = '2' where gameid = '42d45e88-9dbe-4089-bb1e-400e05fbef39';
+   </sql>
+   
+   <!--
+   <sql>
+	   <![CDATA[
+		CREATE PROCEDURE `PROC_CreateRecordRewardData`()
+        BEGIN
+				declare _sumamount decimal(10,2);
+				declare _mobileNumber varchar(255) ; 
+				declare _userid	varchar(255) ;	
+				DECLARE	_nickName varchar(255); 
+				DECLARE _name VARCHAR(128) ;
+                DECLARE _createTime date ;
+                declare fetchSeqOk boolean;
+				DECLARE cur CURSOR FOR 
+
+                SELECT
+	            sum(a.policy_deposit)deposit,
+	            a.userid mobilenumber,
+                b.id,
+                a.createTime
+                FROM
+	            ec_user_game_relation a left join ec_user b on a.userid = b.mobileNumber
+                WHERE
+	            a.createTime >= STR_TO_DATE(
+		        '2014-04-19 00:00:00',
+		        '%Y-%m-%d %H:%i:%s'
+	            )
+                AND a.createTime <= STR_TO_DATE(
+	            '2014-05-03 23:59:59',
+	            '%Y-%m-%d %H:%i:%s'
+                )
+                group by a.userid;
+
+
+                declare continue handler for NOT FOUND set fetchSeqOk = true;
+                set fetchSeqOk = false;
+				SET autocommit=0;
+				delete from ec_record_reward;
+				/*打开游标*/
+			    OPEN cur;
+                fetchSeqLoop:Loop
+					/*游标向下走一步*/
+			        FETCH cur INTO _sumamount,_mobileNumber,_userid,_createTime;
+                if fetchSeqOk then
+			    leave fetchSeqLoop;
+			    else
+                    if(_sumamount >= 10000 and _sumamount < 50000) then
+                    insert into ec_record_reward (userid,sumamount,reward,num,descrip,id) values (_userid,_sumamount,1,10,"大额充值返不停分期返利",uuid());
+                    elseif (_sumamount >= 50000 and _sumamount < 100000) THEN
+                    insert into ec_record_reward (userid,sumamount,reward,num,descrip,id) values (_userid,_sumamount,5,10,"大额充值返不停分期返利",uuid());
+                    elseif (_sumamount >= 100000 and _sumamount < 500000) THEN
+                    insert into ec_record_reward (userid,sumamount,reward,num,descrip,id) values (_userid,_sumamount,20,10,"大额充值返不停分期返利",uuid());
+                    elseif (_sumamount >= 500000 and _sumamount < 1000000) THEN
+                    insert into ec_record_reward (userid,sumamount,reward,num,descrip,id) values (_userid,_sumamount,150,10,"大额充值返不停分期返利",uuid());
+                    elseif (_sumamount >= 1000000) THEN
+                    insert into ec_record_reward (userid,sumamount,reward,num,descrip,id) values (_userid,_sumamount,300,10,"大额充值返不停分期返利",uuid());
+                    end if;
+                    commit;
+                    end if;
+                    end Loop;			
+                    /*关闭游标*/
+				    CLOSE cur;	
+			END
+]]>
+		</sql>
+		
+		<sql>
+			<![CDATA[
+		CREATE PROCEDURE `PROC_Installments`()
+        begin
+        declare _userid	varchar(255) ;	
+        declare _sumamount decimal(10,2);
+        declare _reward decimal(10,2);
+        declare _num decimal(10,2);
+        declare _descrip VARCHAR(500);
+        declare _id varchar(255);
+        declare serialNumber VARCHAR(255);
+        declare randNumber VARCHAR(255);
+        declare uuidnum VARCHAR(255);
+        declare _balance decimal(10,2);
+        declare fetchSeqOk boolean;
+        DECLARE cur CURSOR FOR select * from ec_record_reward;
+        declare continue handler for NOT FOUND set fetchSeqOk = true;
+        set fetchSeqOk = false;
+        SET autocommit=0;
+        OPEN cur;
+        fetchSeqLoop:Loop
+        FETCH cur INTO _userid,_sumamount,_reward,_num,_descrip,_id;
+        if fetchSeqOk then
+        leave fetchSeqLoop;
+        else
+        select * from ec_user_wallet where userid = _userid for update;
+        select date_format(now(),'%Y%m%d%H%i%s') into serialNumber;
+        select round(rand()*10000) into randNumber;
+        set serialNumber = serialNumber+randNumber;
+        select uuid() into uuidnum;
+        if(_num > 0) then
+        update ec_user_wallet set amount = amount + _reward where userid = _userid;
+        select amount from ec_user_wallet where userid = _userid into _balance;
+        insert into ec_deal_detail
+        (id,serialNumber,datetime,status,amount,balance,userid,description,detailtype,type)values(uuidnum,CONCAT('G',serialNumber),now(),0,_reward,_balance,_userid,_descrip,2,1);
+        UPDATE ec_record_reward set num = num-1 where id = _id;
+        commit;
+        end if;
+        end if;
+        end LOOP;
+        CLOSE cur;	
+        end
+]]>
+		</sql>-->
+		
+		<!--<createProcedure>
+			CREATE EVENT `PROC_Installments_event` ON SCHEDULE EVERY
+			1 DAY STARTS '2013-12-25 2:00:30' ON COMPLETION NOT PRESERVE
+			ENABLE DO call PROC_Installments();
+		</createProcedure>-->
+   
+   
+   <!--<sql>
+	   <![CDATA[
+   DROP PROCEDURE IF EXISTS proc_gameop;
+   CREATE PROCEDURE `proc_gameop`()
+        BEGIN
+
+            declare _createtime datetime;
+			declare _mobilenumber varchar(255);
+			declare _id varchar(255);
+			declare _invalidtime datetime;
+			DECLARE _playnum int;
+			DECLARE _clicks int;
+			DECLARE _deposit int;
+			DECLARE _punish int;
+			DECLARE _reward double;
+            DECLARE _gamename VARCHAR(255);
+            DECLARE _gameid VARCHAR(255);
+			declare fetchSeqOk boolean;
+			DECLARE nowtime datetime;
+			declare serialNumber VARCHAR(255);
+			declare randNumber VARCHAR(255);
+			declare uuidnum VARCHAR(255);
+			declare _userid varchar(255);
+			declare _banance decimal(16,4);
+            declare _ismember int;
+            declare _clickdate datetime;
+            declare i integer;
+            declare _newplaynum integer;
+			declare cur1 CURSOR FOR 
+             
+            select a.createTime,a.userid AS userid,a.id AS id,a.invalidtime AS invalidtime,0 playnum,a.policy_clicks AS clicks,a.policy_deposit AS deposit,a.policy_punish AS punish,a.policy_reward AS reward,f.gamename from ec_user_game_relation a left join ec_game f on a.gameid = f.id where a.status = 1 and a.invalidtime < NOW();
+
+			declare continue handler for NOT FOUND set fetchSeqOk = true;
+			SET autocommit=0;
+            set fetchSeqOk = false;
+			SET nowtime=NOW();
+            insert ec_event_log values(now());
+			open cur1;
+			fetchSeqLoop:Loop
+			FETCH cur1 INTO
+			_createtime,_mobilenumber,_id,_invalidtime,_playnum,_clicks,_deposit,_punish,_reward,_gamename;
+			if fetchSeqOk then
+			leave fetchSeqLoop;
+			else
+          
+
+			
+			select id from ec_user where mobilenumber =_mobilenumber into _userid;
+			select date_format(now(),'%Y%m%d%H%i%s') into serialNumber;
+			select round(rand()*10000) into randNumber;
+			set serialNumber = serialNumber+randNumber;
+			select uuid() into uuidnum;
+
+            /**
+            分期返还
+            **/
+            select gameid from ec_user_game_relation where id = _id  into _gameid;
+            if _gameid = "2" then
+            insert into ec_record_reward (userid,sumamount,reward,num,descrip,id) values (_userid,_deposit,_deposit/10,10,"铁杆用户分期返押金",uuidnum);
+            update ec_user_game_relation set reward = _reward,status = 2 where id = _id;
+         
+           
+            else
+            
+             
+             update ec_user_wallet set amount = amount + _deposit where userid = _userid;
+			/*插入返回用户押金流水记录
+			*/
+
+			insert into ec_deal_detail
+			(id,serialNumber,datetime,status,amount,balance,userid,description,detailtype,type)values(uuidnum,CONCAT('Y',serialNumber),now(),0,_deposit,_banance,_userid,CONCAT('返还用户押金，游戏名称为',_gamename),5,1);
+        
+			update ec_user_game_relation set reward = _reward,status = 2 where id =
+			_id;
+			update ec_user_wallet set amount = amount + _reward where userid = _userid;
+			select amount from ec_user_wallet where userid = _userid into
+			_banance;
+			/*获得返利
+			*/
+            
+           /* set serialNumber = 'G'+serialNumber;*/
+			select uuid() into uuidnum;
+			insert into ec_deal_detail
+			(id,serialNumber,datetime,status,amount,balance,userid,description,detailtype,type)values(uuidnum,CONCAT('G',serialNumber),now(),0,_reward,_banance,_userid,CONCAT('用户获取返利，游戏名称为',_gamename),2,1);
+
+
+
+            end if; 
+            commit;
+			
+			end if;
+            
+			end Loop;
+			close cur1;
+			end
+			]]>
+   </sql>-->
+
+   </changeSet>
+	
+	</databaseChangeLog>

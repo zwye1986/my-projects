@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+         <changeSet id="svip" author="zhangwenyun">
+         	<modifyDataType tableName="ec_system_config" columnName="paramValue" newDataType="varchar(255)"/>
+         	<addColumn tableName="ec_user">
+         		<column name="type" type="int(11)" defaultValue="1" 
+         				remarks="用户类型，区分svip用户和普通用户。1:普通用户；2:svip">
+         		</column>
+         		<column name="fatherid" type="varchar(128)"></column>
+         		<column name="svipRate" type="double(4,4)"></column>
+         		<column name="vipInitPassword" type="varchar(6)"></column>
+         		<column name="myRate" type="double(4,4)"></column>
+         	</addColumn>
+         	<sqlFile path="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_area_new.sql"/>
+         	<sql>
+         		UPDATE `ec_resource` t SET t.`VALUE` = '/manager/1/withDrawalList' WHERE t.`id` = 12;
+         	</sql>
+         	<sql>
+         		INSERT INTO `ec_resource` (`id`, `TYPE`, `VALUE`, `MODEL_NAME`, `PARENT_ID`, `createTime`, `createBy`, `lastUpdateTime`, `lastUpdateBy`)
+VALUES
+	(23, NULL, '/manager/svip/getSubs', 'SVIP管理', 0, '2014-01-03 16:54:15', '13951885586', '2014-01-03 16:56:54', '13951885586');
+         	</sql>
+         	<sql>
+         	INSERT INTO `ec_resource` (`id`, `TYPE`, `VALUE`, `MODEL_NAME`, `PARENT_ID`, `createTime`, `createBy`, `lastUpdateTime`, `lastUpdateBy`)
+VALUES
+	(24, NULL, '/manager/2/withDrawalList', 'svip提现记录查询', 0, '2014-01-05 16:24:34', '13951885586', NULL, NULL);
+         	</sql>
+         	<sql>
+         	INSERT INTO `ec_resource` (`id`, `TYPE`, `VALUE`, `MODEL_NAME`, `PARENT_ID`, `createTime`, `createBy`, `lastUpdateTime`, `lastUpdateBy`)
+VALUES (25,NULL,'/manager/svip/getLoginLog','svip登录情况查询',0,'2014-01-16 13:52:38','13951885586',NULL,NULL);
+         	</sql>
+         	<sql>
+         	INSERT INTO `ec_system_config` (`id`, `paramName`, `paramValue`, `paramDesc`)
+VALUES
+	('111','圣诞专属游戏id','42f5cdcd-ecbe-4638-a46d-1eca35941158',''),
+	('112','新年专属游戏id','cn2014','');
+         	</sql>
+         	<createIndex tableName="ec_user" indexName="idx_ec_user_nickName" unique="true" >
+         		<column name="nickName" type="varchar(50)">
+         		</column>
+         	</createIndex>
+         </changeSet>
+         
+         <changeSet id="exchange_record" author="xupei">
+         <createTable tableName="ec_exchange_record">
+         <column name="id" type="varchar(255)">
+         <constraints primaryKey="true"/>
+         </column>
+         <column name="userid" type="varchar(255)"></column>
+         <column name="exchangecode" type="varchar(255)"></column>
+         <column name="money" type="decimal(16,2)"></column>
+         <column name="createtime" type="datetime"></column>
+         </createTable>
+         
+         <sql>
+			INSERT INTO ec_system_config (id, paramName,paramValue,paramDesc) VALUES ('113','兑换券金额','5','兑换券金额');
+		</sql>
+		
+         </changeSet>
+
+	<changeSet id="addec_exchange_code" author="hepei">
+		<createTable tableName="ec_exchange_code">
+			<column name="id" type="varchar(255)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="exchangecode" type="varchar(255)">
+			    <constraints primaryKey="true" />
+			</column>
+		</createTable>
+	</changeSet>
+         
+         </databaseChangeLog>

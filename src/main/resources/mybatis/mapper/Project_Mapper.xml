@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Project">
+	
+	<select id="queryProjects" parameterType="java.util.Map" resultType="Project" >
+		<![CDATA[ 
+		select * from ec_project_view where 1=1 and status != 1
+		]]>
+		<if test="type != null and ''!= type">
+		 and type = #{type}
+		</if>
+		<if test="keyword !=null and '' != keyword">
+		<![CDATA[ 
+		  and name like #{keyword} 
+		  ]]>
+		</if>
+		<![CDATA[ 
+		order by createtime desc
+		]]>
+		<if test="limitCount != null and ''!=limitCount">
+		<![CDATA[ 
+		 limit #{limitIndex},#{limitCount}
+		 ]]>
+		</if>
+	</select>
+	
+	<select id="queryProjectsForAdmin" parameterType="java.util.Map" resultType="Project" >
+		<![CDATA[ 
+		select * from ec_project where 1=1 and status != 1
+		]]>
+		<if test="type != null and ''!= type">
+		 and type = #{type}
+		</if>
+		<if test="keyword !=null and '' != keyword">
+		<![CDATA[ 
+		  and name like #{keyword} 
+		  ]]>
+		</if>
+		<![CDATA[ 
+		order by createtime desc
+		]]>
+		<if test="limitCount != null and ''!=limitCount">
+		<![CDATA[ 
+		 limit #{limitIndex},#{limitCount}
+		 ]]>
+		</if>
+	</select>
+	
+	<select id="queryProjectsByRandom" resultType="Project" >
+		<![CDATA[ 
+		select * from ec_project_view where 1=1 order by RAND() limit 2
+		]]>
+	</select>
+	
+	<select id="getProjectsCounts" resultType="int" parameterType="java.util.Map">
+		<![CDATA[ 
+		select count(1) from ec_project where 1=1
+		]]>
+		<if test="type != null and ''!= type">
+		 and type = #{type}
+		</if>
+	</select>
+
+<insert id="insertProject" parameterType="Project">
+<![CDATA[
+insert into ec_project (id,name,namedesc,endtime,goalmoney,projectdesc,explanation,type,addr,createTime,days,daysdate,status,missrate,successrate) values (#{id},#{name},#{nameDesc},#{endTime},#{goalMoney},#{projectDesc},#{explanation},#{type},#{addr},#{createTime},#{days},#{daysDate},#{status},#{missRate},#{successRate})
+]]>
+</insert>
+
+<select id="getProjectById" parameterType="java.lang.String" resultType="Project">
+<![CDATA[
+select * from ec_project_view where id = #{value}
+]]>
+</select>
+
+<delete id="delProjectById" parameterType="java.lang.String">
+<![CDATA[
+delete from ec_project where id = #{value}
+]]>
+</delete>
+
+<update id="updateProject" parameterType="Project">
+<![CDATA[
+update ec_project set name = #{name},namedesc = #{nameDesc},endtime = #{endTime},goalmoney =#{goalMoney},projectdesc = #{projectDesc},explanation = #{explanation},type = #{type},addr = #{addr},createTime = #{createTime},days = #{days},projectpic = #{projectPic,jdbcType=BLOB},daysdate = #{daysDate},status = #{status},missrate = #{missRate},successRate = #{successRate} where id = #{id}
+]]>
+</update>
+	
+</mapper>

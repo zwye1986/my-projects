@@ -1,0 +1,138 @@
+#content {
+	width: 1257px;
+	height: 1200px;
+	margin: 0 auto;
+}
+.top_banenr {
+	width: 1257px;
+	height: 342px;
+}
+.top_banenr img {
+	margin-top: 10px;
+}
+.cnt_title {
+	width: 1257px;
+	height: 62px;
+	margin: 0 auto;
+	background: url(../images/lp/lp_t.png) no-repeat;
+	margin-top: 30px;
+}
+.cnt_c {
+	width: 864px;
+	margin: 0 auto;
+	border: 1px solid #b48505;
+	border-top: none;
+	padding: 40px 195px 60px;
+	background-color: #fdfdfd;
+	position: relative;
+}
+.hd_t {
+	width: 95px;
+	height: 38px;
+	background: url(../images/lp/btn01.jpg) no-repeat;
+	color: #2c2c2c;
+	text-align: center;
+	line-height: 38px;
+	font-size: 18px;
+}
+.hd_bg {
+	width: 864px;
+	height: 30px;
+	background: url(../images/lp/t_bg.png) no-repeat;
+	margin: 15px 0;
+}
+.hd_c {
+	width: 864px;
+	margin: 0 auto;
+	color: #444444;
+}
+.hd_c p {
+	text-indent: 2em;
+	letter-spacing: 1px;
+	line-height: 36px;
+	text-align: justify;
+}
+.shareBox {
+	width: 780px;
+	display: block;
+	height: 48px;
+	line-height: 48px;
+	float: left;
+	padding-left: 20px;
+	color: #D9D9D9;
+}
+.shareBox span {
+	display: inline-block;
+	height: 48px;
+	line-height: 48px;
+}
+.hd_l {
+	width: 95px;
+	height: 38px;
+	background: url(../images/lp/btn01.jpg) no-repeat;
+	color: #2c2c2c;
+	text-align: center;
+	line-height: 38px;
+	font-size: 18px;
+	display: inline-block;
+	margin: 20px 0;
+}
+.hd_list {
+	width: 660px;
+	height: 90px;
+	background-color: #f6f6f6;
+	margin: 0 auto;
+	border: 1px solid #b48505;
+	margin-top: 30px;
+	line-height: 90px;
+}
+.hd_list em {
+	color: #f16244;
+	font-size: 24px;
+	margin-left: 40px;
+	float: left;
+}
+.list_l p {
+	float: left;
+	margin-top: 25px;
+	background: url(../images/lp/btn02.png) no-repeat;
+	display: inline-block;
+	width: 120px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 18px;
+	cursor: pointer;
+}
+.list_r {
+	float: right;
+	padding-right: 40px;
+}
+.list_r p {
+	float: right;
+	margin-top: 25px;
+	background: url(../images/lp/btn02.png) no-repeat;
+	display: inline-block;
+	width: 120px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 18px;
+	cursor: pointer;
+}
+.people01 {
+	width: 260px;
+	height: 340px;
+	position: absolute;
+	background: url(../images/lp/people01.png) no-repeat;
+	top:60px;
+	left:-70px;
+}
+.people02 {
+	width: 300px;
+	height: 340px;
+	position: absolute;
+	background: url(../images/lp/people02.png) no-repeat;
+	top:360px;
+	right:-70px;
+}

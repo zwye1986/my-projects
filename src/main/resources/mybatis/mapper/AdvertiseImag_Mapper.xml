@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.AdvertiseImag">
+
+	<resultMap type="AdvertiseImag" id="advertiseImagMap">
+		<result column="id" property="id"></result>
+		<result column="file" property="file"></result>
+		<result column="advertiseId" property="advertiseId"></result>
+	</resultMap>
+	
+	<insert id="saveAdvertiseImag" parameterType="AdvertiseImag">
+	insert into ec_advertising_imag values(#{id},#{file},#{advertiseId});
+	</insert>
+	
+	<select id="getAdvertiseImagById" parameterType="java.lang.String" resultType="AdvertiseImag">
+	select * from ec_advertising_imag where id = #{id};
+	</select>
+	
+	<select id="getAdvertiseImagByAdvertiseId" parameterType="java.lang.String" resultType="AdvertiseImag">
+	select * from ec_advertising_imag where advertiseid = #{advertiseid};
+	</select>
+	
+	<select id="getCountByAdvertiseId" parameterType="java.lang.String" resultType="int">
+	select count(*) from ec_advertising_imag where advertiseId = #{advertiseId};
+	</select>
+	
+	<update id="updateAdvertiseImg" parameterType="AdvertiseImag">
+		update ec_advertising_imag set file = #{file,jdbcType=BLOB} where advertiseId = #{advertiseId}
+	</update>
+	<delete id="deleteAdvertiseImg" parameterType="String">
+	delete from ec_advertising_imag where advertiseId = #{advertiseId}
+	</delete>
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="EC_BankCard" >
+
+	<resultMap type="bankCard" id="bankCardResult">
+		<result column="id" property="id" />
+		<result column="cardNumber" property="cardNumber" />
+		<result column="bankid" property="bankid" />
+		<result column="cardType" property="cardType" />
+		<result column="bindTime" property="bindTime" />
+		<result column="bindUserId" property="bindUserId" />
+		<result column="isDefault" property="isDefault" />
+		<result column="subBank" property="subBank" />
+		<result column="bankProvinceid" property="bankProvinceid" />
+		<result column="bankCityid" property="bankCityid" />
+		<result column="bankName" property="bankName" />
+		<result column="branchBankName" property="branchBankName" />
+		<result column="status" property="status"/>
+	</resultMap>
+
+    <select id="getBankCardByUserId" parameterType="java.util.Map" resultMap="bankCardResult">
+        select * from ec_bankCard where bindUserId = #{userid} and cardNumber = #{cardNumber} and status = 1;
+    </select>
+
+	
+	<select id="getBankCardsByUserId" parameterType="java.lang.String" resultMap="bankCardResult">
+		<![CDATA[ 
+			select b.*,t.bankName,s.name as branchBankName
+			  from ec_bankCard b,ec_bank t,ec_bank_branch s
+			   where b.bindUserId = #{bindUserId} and b.bankId = t.bankid and b.subBank = s.id and b.status = 1
+	 	 ]]>
+	</select>
+	
+	<insert id="saveBankCard" parameterType="bankCard" >
+		<![CDATA[ 
+			insert into ec_bankCard (id,cardNumber,bankid,cardType,bindTime,bindUserId,subBank,bankProvinceid,bankCityid,status) 
+			values 
+			(#{id},#{cardNumber},#{bankid},#{cardType},now(),#{bindUserId},#{subBank},#{bankProvinceid},#{bankCityid},1)
+	 	 ]]>
+	</insert>
+	
+	<select id="getBankCardById" parameterType="java.lang.String" resultMap="bankCardResult">
+		select * from ec_bankCard where id = #{id}
+	</select>
+	
+	<delete id="delUserCardById" parameterType="java.util.Map">
+	<![CDATA[ 
+		update ec_bankCard set status = 0 where id = #{id} and bindUserId = #{userid};
+	]]>
+	</delete>
+
+</mapper>

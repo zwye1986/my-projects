@@ -1,0 +1,68 @@
+/* CSS Document */
+.feedback_C {
+	width: 1040px;
+	border-left: 1px solid #d1d1d1;
+	border-right: 1px solid #d1d1d1;
+}
+.feedback_C h5 {
+	font-size: 20px;
+	margin-left: 20px;
+	line-height: 48px;
+}
+.feedback_C p {
+	color: #f16244;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	letter-spacing: 1px;
+	line-height: 25px;
+	margin: 0 auto;
+	overflow: hidden;
+	padding: 20px 0;
+	text-align: justify;
+	width: 1000px;
+}
+.feedback_Content {
+	padding-left: 20px;
+	display:inline-block;
+}
+.fd{ width:1000px; height:150px; display:inline-block; margin-bottom:15px;}
+.fd_c{ width:915px; height:150px;}
+.yzm {
+	width: 75px;
+	height: 30px;
+	line-height: 30px;
+	color: #fbd0c7;
+	border: 1px solid #d1d1d1;
+	float: left;
+	margin-right: 23px;
+	margin-top: 5px;
+}
+.yzmpic {
+	display: block;
+	width: 92px;
+	height: 35px;
+	margin-top: 5px;
+}
+.ver {
+	width: 1000px;
+	margin-bottom:15px;
+	margin-left:15px;
+}
+.verT {
+	width: 75px;
+	height: 28px;
+	line-height:30px;
+	color: #fbd0c7;
+	border: 1px solid #d1d1d1;
+	float:left;
+}
+.save {
+    background-image: url("../images/user/xgmm_tj.jpg");
+    border:none;
+    cursor: pointer;
+    height: 35px;
+    margin-left: 75px;
+    width: 102px;
+	margin-bottom:10px;
+	
+}

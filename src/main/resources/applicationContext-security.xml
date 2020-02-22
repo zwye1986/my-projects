@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+<!-- 	<INFO /> -->
+
+<!-- 	<global-method-security pre-post-annotations="enabled" /> -->
+
+	<http pattern="/css/**" security="none" />
+	<http pattern="/images/**" security="none" />
+	<http pattern="/gamePic/**" security="none" />
+	<http pattern="/js/**" security="none" />
+	<http pattern="/" security="none" />
+	<http pattern="/weixin/bundlingWeixin" security="none"/>
+	<http pattern="/weixin/signWeixin" security="none"/>
+	<http pattern="/weixin/bundling**" security="none"/>
+	
+	
+	<http pattern="/getcheckcode" security="none" />
+	<http pattern="/inputMobileNumber.html" security="none" />
+	<http pattern="/getValidateCode.html" security="none" />
+    <http pattern="/addFeedBack" security="none"/>
+    <!-- <http pattern="/mall.html" security="none" />
+	<http pattern="/*/mallDetail.html" security="none" /> -->
+	
+
+	<!--	<http use-expressions="true" entry-point-ref="loginUrlEntryPoint">
+	 <intercept-url pattern="/user/manager" access="isAuthenticated()" />
+		<intercept-url pattern="/user/*/manager" access="isAuthenticated()" />
+		<intercept-url pattern="/user/account/**" access="isAuthenticated()" />
+	    <intercept-url pattern="/manager/**" access="hasRole('ROLE_ADMIN')" />
+	    <intercept-url pattern="/order/manager/*" access="isAuthenticated()"/>
+		<form-login default-target-url="/index.html"  always-use-default-target="false"
+					username-parameter="mobileNumber"
+					password-parameter="password"
+					login-processing-url="/userlogin"
+					login-page="/login.html"
+					authentication-failure-url="/login.html"
+					authentication-success-handler-ref="authenticationDispatcher"
+					authentication-failure-handler-ref="wowPowerAuthenticationFailureHandler" />
+
+		<logout logout-success-url="/index.html" delete-cookies="JSESSIONID" />
+
+		<session-management invalid-session-url="/index.html">
+			<concurrency-control max-sessions="1"
+				expired-url="/index.html" />
+		</session-management>
+
+	</http>
+
+	<authentication-manager>
+		<authentication-provider ref="daoAuthenticationProvider" />
+	</authentication-manager>
+  -->
+	<!-- http安全配置 -->
+	<http use-expressions="true" entry-point-ref="loginUrlEntryPoint">
+	    <intercept-url pattern="/user/*/manager" access="isAuthenticated()" />
+		<intercept-url pattern="/user/account/**" access="isAuthenticated()" />
+		<intercept-url pattern="/user/**" access="isAuthenticated()" /> 
+	    <intercept-url pattern="/manager/**" access="isAuthenticated()" /> 
+	     <intercept-url pattern="/user**" access="isAuthenticated()" /> 
+	    <intercept-url pattern="/manager" access="isAuthenticated()" /> 
+	    <intercept-url pattern="/order/manager/*" access="isAuthenticated()"/>
+		<form-login login-page="/login.html" default-target-url="/login.html"
+			authentication-failure-url="/login.html"
+			always-use-default-target="true" 
+			username-parameter="mobileNumber"
+			password-parameter="password"
+			login-processing-url="/userlogin"
+			authentication-success-handler-ref="authenticationDispatcher"
+			authentication-failure-handler-ref="wowPowerAuthenticationFailureHandler" />
+ 			<custom-filter ref="customFilter" before="FILTER_SECURITY_INTERCEPTOR"/>  
+ 		
+		<logout logout-success-url="/index.html" delete-cookies="JSESSIONID" />
+
+		<session-management invalid-session-url="/index.html">
+			<concurrency-control max-sessions="1"
+				expired-url="/index.html" />
+		</session-management>
+	</http>
+
+	 <beans:bean name="customFilter" class="com.venada.efinance.security.WowSecurityFilter">  
+        <!-- 用户拥有的权限 -->    
+        <beans:property name="authenticationManager" ref="authenticationManager" />    
+        <!-- 用户是否拥有所请求资源的权限 -->    
+        <beans:property name="accessDecisionManager" ref="myAccessDecisionManager" />    
+        <!-- 资源与权限对应关系 -->    
+        <beans:property name="securityMetadataSource" ref="mySecurityMetadataSource" />  
+    </beans:bean>  
+      
+      
+      
+       
+    <beans:bean id="myAccessDecisionManager" class="com.venada.efinance.security.WowAccessDecisionManager"></beans:bean>    
+    <beans:bean id="mySecurityMetadataSource" class="com.venada.efinance.security.WowSecurityMetadataSource">    
+    </beans:bean>    
+      
+
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider ref="daoAuthenticationProvider" />
+	</authentication-manager>
+	
+	<!--  -->
+
+	<beans:bean id="daoAuthenticationProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<beans:property name="userDetailsService" ref="wowPowerUserdetailsService"></beans:property>
+		<beans:property name="hideUserNotFoundExceptions"
+			value="false" />
+		<beans:property name="passwordEncoder" ref="md5PasswordEncoder" />
+	</beans:bean>
+
+	<beans:bean id="wowPowerUserdetailsService"
+		class="com.venada.efinance.security.WowPowerUserDetailsService">
+	</beans:bean>
+
+	<beans:bean id="authenticationDispatcher"
+		class="com.venada.efinance.security.LstpAuthenticationSuccessHandler">
+	</beans:bean>
+
+	<beans:bean id="wowPowerAuthenticationFailureHandler"
+		class="com.venada.efinance.security.WowPowerAuthenticationFailureHandler">
+		<beans:property name="redirectUrl" value="/login.html" />
+	</beans:bean>
+
+</beans:beans>

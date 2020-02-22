@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.DealDetail">
+
+
+	<resultMap type="dealDetail" id="dealDetailResult"
+		extends="base.BaseEntity.baseEntityResult">
+		<result column="serialNumber" property="serialNumber" />
+		<result column="dateTime" property="dateTime" />
+		<result column="status" property="status" />
+		<result column="ipAddress" property="ipAddress" />
+		<result column="amount" property="amount" />
+		<result column="balance" property="balance" />
+		<result column="description" property="description" />
+		<result column="userid" property="userId" />
+		<result column="detailType" property="dealType" />
+		<result column="type" property="type" />
+	</resultMap>
+
+	<select id="getDealDetailAmountByUserId" parameterType="String"
+		resultType="java.math.BigDecimal">
+		<![CDATA[ 
+		    select 
+(select sum(amount) from ec_deal_detail where type = '1' and detailtype = '2' 
+and (description<>'铁杆用户分期返押金和返利' or description is null)
+and  userid = #{userid})
++(
+select  CASE WHEN SUM(5) IS NULL THEN 0 ELSE    TRUNCATE(SUM(5),2)  END from ec_deal_detail where type = '1' and detailtype = '2' 
+and description='铁杆用户分期返押金和返利'
+and  userid = #{userid}) amount
+
+
+		]]>
+	</select>
+
+	<insert id="addDealDetail" parameterType="dealDetail">
+		insert into ec_deal_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="serialNumber != null">
+				serialNumber,
+			</if>
+			<if test="dateTime != null">
+				dateTime,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="ipAddress != null">
+				ipAddress,
+			</if>
+			<if test="amount != null">
+				amount,
+			</if>
+			<if test="createBy != null">
+				createBy,
+			</if>
+			<if test="createTime != null">
+				createTime,
+			</if>
+			<if test="modifyBy != null">
+				modifyBy,
+			</if>
+			<if test="modifyTime != null">
+				modifyTime,
+			</if>
+			<if test="orderBy != null">
+				orderBy,
+			</if>
+			<if test="userId != null">
+				userid,
+			</if>
+			<if test="balance != null">
+				balance,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="dealType != null">
+				detailType,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id},
+			</if>
+			<if test="serialNumber != null">
+				#{serialNumber},
+			</if>
+			<if test="dateTime != null">
+				#{dateTime},
+			</if>
+			<if test="status != null">
+				#{status},
+			</if>
+			<if test="ipAddress != null">
+				#{ipAddress},
+			</if>
+			<if test="amount != null">
+				#{amount},
+			</if>
+			<if test="createBy != null">
+				#{createBy},
+			</if>
+			<if test="createTime != null">
+				#{createTime},
+			</if>
+			<if test="modifyBy != null">
+				#{modifyBy},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime},
+			</if>
+			<if test="orderBy != null">
+				#{orderBy},
+			</if>
+			<if test="userId != null">
+				#{userId},
+			</if>
+			<if test="balance != null">
+				#{balance},
+			</if>
+			<if test="description != null">
+				#{description},
+			</if>
+			<if test="dealType != null">
+				#{dealType},
+			</if>
+			<if test="type != null">
+				#{type},
+			</if>
+		</trim>
+	</insert>
+
+	<select id="getUserDealdetailAmountByDetailtype" parameterType="java.util.Map"
+		resultType="java.math.BigDecimal">
+		select sum(amount) from ec_deal_detail where userid =
+		#{userid} and detailType = #{detailType}
+	</select>
+
+
+	<select id="countTotalWithdrawalFeeForSvip" parameterType="String"
+		resultType="java.math.BigDecimal">
+		SELECT CASE WHEN SUM(t1.`amount`) IS NULL THEN 0 ELSE
+		SUM(t1.`amount`) END FROM `ec_deal_detail` t1,
+		`ec_user` t2
+		WHERE t1.`status` = 0 AND t1.`detailType` = 1
+		AND t2.`type` = 2
+		AND ( t2.`id` = #{userid}
+		OR t2.`fatherid` = #{userid})
+		AND t1.`userid` = t2.`id`
+	</select>
+
+</mapper>

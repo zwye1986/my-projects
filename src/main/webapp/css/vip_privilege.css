@@ -1,0 +1,266 @@
+/* CSS Document */
+.grid_c2f {
+	width: 1257px;
+	margin: 0 auto;
+	
+}
+.grid_c2f:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+.mainbar, .sidebar, .extrabar {
+	display: inline;
+	float: left;
+}
+.grid_c2f .mainbar {
+	width: 100%;
+}
+.grid_c2f .mainbar_wrap {
+	margin-right: 246px;
+	min-height: 1px;
+}
+.grid_c2f .sidebar {
+	margin-left: -230px;
+	width: 230px;
+}
+.v_mod_panel_em_con {
+	background: #EDECEC;
+	margin-top: 20px;
+	padding-bottom: 20px;
+}
+.wb_privilege {
+	display: inline;
+	float: left;
+	margin: 15px 0px 0px 20px;
+	width: 230px;
+	height: 260px;
+	background: #fff;
+}
+.wb_privilege_hd {
+	height: 60px;
+	padding-top: 5px;
+	padding-left: 15px;
+}
+.wb_privilege_hd h3 {
+	background: url(../images/vip/wb_privilege_title.png) no-repeat;
+	height: 60px;
+	line-height: 200px;
+	overflow: hidden;
+	width: 230px;
+}
+.wb_privilege_bd {
+	height: 80px;
+	overflow: hidden;
+	padding-right: 10px;
+	padding-left: 10px;
+	color:#8e8e8e;
+}
+.wb_privilege_bd span {
+	font-weight: 700;
+	
+}
+.wb_privilege_control {
+	background-image: url(../images/vip/kthy_btn.png);
+	display: inline-block;
+	height: 65px;
+	line-height: 300px;
+	overflow: hidden;
+	width: 240px;
+	left: -30px;
+	top: 10px;
+	position: relative;
+}
+.privilege_recommend_content {
+	width: 210px;
+	margin-left: 18px;
+	margin-top: 10px;
+}
+.v_mod_slider {
+	width: 730px;
+	height: 260px;
+	overflow: hidden;
+	position: relative;
+	margin-top: 15px;
+}
+/* slider */
+.slider {
+	width: 730px;
+	height: 260px;
+	position: relative;
+	overflow: hidden;
+	float: left;
+}
+.conbox {
+	position: absolute;/*必要元素*/
+}
+.switcher {
+	position: absolute;
+	bottom: 5px;
+	right: 10px;
+	float: right;
+	z-index: 99;
+}
+.switcher a {
+	width: 9px;
+	height: 9px;
+	display: inline-block;
+	background: url(../images/wf_focus_indicator_out.png) no-repeat;
+}
+.switcher a.cur, .switcher a:hover {
+	width: 9px;
+	height: 9px;
+	display: inline-block;
+	background: url(../images/wf_focus_indicator_in.png) no-repeat;
+}
+/* slider1 水平 */
+#slider1 .conbox {
+	width: 9999em;
+}
+#slider1 .conbox div {
+	width: 730px;
+	height: 260px;
+	overflow: hidden;
+	float: left;
+}
+/* slider 水平 */
+#slider .conbox {
+	width: 9999em;
+}
+#slider .conbox div {
+	width: 245px;
+	height: 320px;
+	overflow: hidden;
+	float: left;
+}
+.v_mod_wrap3 {
+}
+.v_mod_wrap3_tit a {
+	display: inline-block;
+	height: 35px;
+	line-height: 90px;
+	overflow: hidden;
+	width: 185px;
+	background: url(../images/vip/sy_title.png) no-repeat;
+	margin-top: 20px;
+}
+.v_mod_wrap3_c {
+	border: 1px solid #d1d1d1;
+	width: 995px;
+	padding-left: 15px;
+	margin-bottom: 10px;
+	display:inline-block;
+	
+	
+}
+
+.qq_mod_tq_list {
+	overflow: hidden;
+	padding-bottom: 20px;
+}
+.qq_mod_tq_item {
+	display: inline;
+	float: left;
+	height: 150px;
+	overflow: hidden;
+	padding: 20px 0 0 24px;
+	width: 212px;
+}
+.qq_mod_tq_photo {
+	margin-bottom: 5px;
+}
+.qq_mod_tq_info {
+	font-size: 12px;
+	color: #8e8e8e;
+	line-height: 16px;
+}
+/*sidebar*/
+.sidebar {
+	display: inline;
+	float: right;
+	width:230px;
+	min-height: 500px;
+	border: 1px solid #fff;
+	margin-top:-900px;
+}
+
+.mod_userinfo_login{ height:290px; margin-top:-20px;}
+.mod_loginBox{ height:80px;}
+.mod_userinfo_login_entry{ width:230px; height:52px; display:block; background:url(../images/vip/login_entry_n.jpg) no-repeat; line-height:120px; overflow:hidden;}
+.mod_userinfo_login_entry:hover{background:url(../images/vip/login_entry_h.jpg) no-repeat;}
+.mod_pri_list{ display:block; margin-left:10px;}
+.mod_pri_list dt{ width:25px; height:25px; display:inline-block; float:left; margin-right:3px; margin-top:7px;}
+.mod_pri_list dl { color:#296c96;line-height:32px; display:block;}
+.c_tx2{
+    color: #8e8e8e;
+	font-size:12px;
+}
+.c_tx3{
+    color: #8e8e8e;
+	font-size:14px;
+}
+.v_mod_userinfo_slogan{margin-left:10px;}
+.android_down_btn{ width:230px; height:100px;}
+.v_mod_wrap2 {
+   
+    padding-top: 8px;
+}
+.v_mod_wrap2_hd {
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+	 margin-top:30px;
+}
+.v_mod_wrap2_hd h3 {
+    font-size: 18px;
+	
+}
+.qq_rank_list { margin-top:10px;}
+.qq_rank_list li { margin:10px auto;}
+.qq_rank_item {
+    height: auto !important;
+    min-height: 50px;
+    padding: 10px 0 10px 72px;
+    position: relative;
+}
+.qq_rank_info {
+    overflow: hidden;
+    width: 158px;
+}
+.qq_rank_info p {
+    margin-bottom: 5px;
+	margin-top:-5px;
+	margin-left:30px;
+	
+}
+.qq_rank_order {
+    
+    color: #FD6B6F;
+    height: 14px;
+    left:-3px;
+    line-height: 14px;
+    position: absolute;
+    text-align: center;
+    top: 4px;
+    width: 14px;
+    z-index: 2;
+}
+.qq_rank_photo {
+	height: 62px;
+	left: 9px;
+	position: absolute;
+	top: 0px;
+	width: 80px;
+	z-index: 1;
+}
+.c_tx4 a{color:#296c96;}
+.qq_user_entry {
+    padding: 10px 0;
+    text-align: center;
+	border-top:1px solid #d1d1d1;
+	border-bottom:1px solid #d1d1d1;
+}

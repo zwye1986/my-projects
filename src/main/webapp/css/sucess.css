@@ -1,0 +1,19 @@
+.recharge_ts {
+	min-height: 700px;
+	height: auto;
+	width: 1040px;
+	border-left: 1px solid #d1d1d1;
+	border-right: 1px solid #d1d1d1;
+	padding-top:100px;
+}
+.recharge_ts_c{ width:984px; height:550px; margin:0 auto; margin-left:40px;}
+.recharge_ts_cl{ height:350px; width:350px;  margin-top:20px;}
+.recharge_ts_cr{height:350px; width:634px;margin-top:20px;background:url(../images/user/sucess_r.png) no-repeat;}
+.recharge_cr_title{ width:520px; height:28px; line-height:28px; color:#ee7c71; font-size:20px; font-weight:bold; line-height:28px; margin-top:70px; margin-left:100px; }
+.recharge_cr_title img{ width:28px; height:28px; float:left; display:inline-block;}
+.recharge_cr_title_time{height:48px; line-height:48px;}
+.recharge_ts_cr ul{ margin-left:30px; margin-top:20px;margin-left:130px; }
+.recharge_ts_cr ul li{ width:500px; line-height:36px;}
+.recharge_ts_cr ul li em{color:#ee7c71;}
+.recharge_ts_cr ul li a{color:#ee7c71;}
+.recharge_ts_cr ul li a:hover{color:#eb6558;}

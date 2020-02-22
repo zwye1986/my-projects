@@ -1,0 +1,177 @@
+@charset "UTF-8";
+/* CSS Document */
+.content{ width:1000px; margin:0 auto; margin-bottom:20px;}
+.game_title{ height:48px; line-height:48px; font-size:18px; position:relative}
+.title{ width:31px; height:37px; position:absolute; background-position:-233px -208px; top:12px; left:90px;}
+.game_c{ width:100%; border:1px solid #ccc; border-top:none;background:#fdfdfd; margin-bottom:15px;}
+.game_cl{ width:790px; height:360px;border-right:1px solid #ccc; border-top:1px solid #349CD8; }
+.game_cl .game_img{ width:210px; height:260px; margin-left:30px; margin-top:45px;}
+.game_cl .game_img a{ display:inline-block;width:210px; height:129px}
+.game_cl .game_img a img{border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px}
+.game_cl .game_img  .game_tit{ width:210px; height:36px; line-height:36px; font-weight:bold; text-align:center; }
+.game_cl dl{ width:490px; margin-top:30px; margin-right:30px;}
+.game_cl dd{ width:100%; height:48px; line-height:48px; border-bottom:1px  dashed #ccc;} 
+.game_cl dd em{color:#349CD8; font-size:18px; margin-left:10px;}
+.game_cl dd em.ye_money{ margin-left:10px;}
+.game_cl dd.total{ position:relative;}
+.game_cl dd .ctr_spinner{ position:absolute; top:10px; left:150px }
+i.spinner_add{ width:15px; height:9px;display:inline-block;cursor:pointer; background:url(../images/common/spinner_add_n.png) no-repeat; cursor:pointer; position:absolute; left:15px; top:5px}
+i.spinner_add:hover{ background:url(../images/common/spinner_add_h.png) no-repeat; }
+i.spinner_plus{ width:15px; height:9px;display:inline-block;cursor:pointer; background:url(../images/common/spinner_plus_n.png) no-repeat; cursor:pointer; position:absolute; top:20px;left:15px }
+i.spinner_plus:hover{ background:url(../images/common/spinner_plus_h.png) no-repeat; }
+.game_cl dt img{border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px}
+.game_img dd.name{ width:210px; height:36px; line-height:36px; font-weight:400 ; text-align:center}
+.game_cr{ width:209px; height:360px; border-top:1px solid #7f7f7f; overflow:hidden}
+.game_cr .players{ width:140px; height:28px; line-height:28px; color:#fff; text-align:center; margin:10px auto 10px; background:#fec53b; border-radius:3px; -moz-border-radius:3px; -webkit-border-radius:3px}
+.game_cr ul{ width:64px; height:290px; margin:0 auto}
+.game_cr ul dd.col_1 {display: inline-block; text-align:center; height:24px; line-height:24px;overflow: hidden;white-space: nowrap;width: 64px;}
+
+.lyz_tab_c{ overflow: hidden; width:100%}
+.lyz_tab_c  ul { margin-top:20px; display:inline-block; width: 120%; overflow: hidden;}
+.lyz_tab_c  ul li{ width:210px; height:129px; text-align:center; float:left; display:inline-block; margin-right:53px;position:relative;overflow:hidden;cursor:pointer; border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px; margin-bottom:10px;}
+ul.itemlist{ display:inline-block; width:470px;overflow:hidden; }
+ul.itemlist li{ width:210px; height:129px; text-align:center; float:left; display:inline-block; margin-right:25px;position:relative;overflow:hidden;cursor:pointer; border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px; margin-bottom:10px;}
+.item1 img{border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px}
+.item1 div{border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px}
+.item1 div{position:absolute;left:0;top:100px;width:100%;height:30px; line-height:10px;text-align:center;background:url(../images/demo02.png) no-repeat;color:#FFF;overflow:hidden;}
+.item1 p{display:none;margin:5px auto 0;width:135px;line-height:20px;text-align:left;text-indent:2em;font-size:12px;}
+.item1 h3{margin:11px 0;height:25px; text-align:center; color:#fff;background:url(../images/demo03.png) no-repeat 0 -8px;}
+.hotlist{ margin-top:3px;}
+.hotlist dl{ width:210px; }
+.hotlist dl dd{ display:block;width:210px; text-align:center; float:left; height:28px; line-height:28px;}
+
+
+.dh-button{ margin-top:15px; margin-left:5px;} 
+.dh-button input {
+    background: #349CD8;
+    border: 0 none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 16px;
+    height: 42px;
+    line-height:42px;
+    margin-left: 60px;
+    text-align: center;
+    width:122px;
+	
+}
+dd.btm_no{ border-bottom:none;}
+textarea, input[type="text"], input[type="password"], .uneditable-input { background-color: #FFFFFF;border: 1px solid #B4B9BD; }
+input.input {border: 1px solid #B4B9BD;height: 18px;line-height: 18px;padding: 7px 5px;width:80px;margin-left:10px; text-align:center; padding-right:35px}
+input:focus {border: 1px solid #349CD8;}
+/*游戏中心*/
+ul.game-rank{ width:102%; overflow:hidden; position:relative;}
+ul.game-rank li{ display:inline-block; width:220px; height:330px; border:1px solid #ccc;float:left; border-radius:0; padding:20px 10px; margin-right:10px; margin-bottom:10px;}
+ ul.game-rank li:hover{box-shadow: 2px 2px 3px #E6E7E5;}
+ul.game-rank li dl{ text-align:left; width:200px;}
+ul.game-rank li dt,ul.game-rank li dd{ line-height:24px; font-size:14px;}
+ul.game-rank li dt{ font-weight:bold}
+ul.game-rank li dd a{ border:none; display:inline-block; height:129px; margin-bottom:30px; float:left; margin-left:-5px;}
+ul.game-rank li dd img{ border-radius:10px;}
+.ml20{ margin-left:15px;}
+dd.gm-img{ margin-top:20px;}
+.save-button input {
+    background:#00A7F5;
+    border: 0 none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 16px;
+    height:38px;
+    line-height:38px;
+    text-align: center;
+    width:210px;
+	cursor:pointer;
+	margin-left:6px;
+	float:left;
+	margin-bottom:20px;
+}
+.save-button input:hover{ background:#0088f1;}
+.refresh{ position:absolute; z-index:99; left:46%; top:46%}
+/*game-top*/
+.game-top{ width:998px; height:245px; background:url(../images/common/game-top-bg.png) no-repeat; margin-bottom:20px; position:relative }
+.game-top-c{ width:555px; height:129px;position:absolute; top:60px; right:50px;}
+.ctr-left{ float:left; margin-right:20px; margin-top:45px; cursor:pointer}
+.ctr-center{ float:left}
+.ctr-right{ float:left; margin-top:45px; cursor:pointer}
+/*tab*/
+/* CSS Document */
+.tab_box {
+	width:100%;
+	display: inline-block;
+	
+}
+
+.pro_con111 ul {
+	height: 40px;
+	border-bottom:none;
+	background: #f0f0f0;
+	list-style-type: none;
+	display: inline-block;
+	border:1px solid #ccc;
+	width:1000px;
+	border-right:none
+	
+	
+}
+.pro_con111 ul li {
+	display: inline-block;
+	font-weight: 400;
+	font-size: 14px;
+	float: left;
+	padding-left:110px;
+	padding-right:111px;
+	cursor: pointer;
+	
+	line-height: 40px;
+	height:40px;
+	border-right: 1px solid #ccc;
+	background: #f0f0f0;
+	text-align: center;
+}
+/**.pro_con111 ul li.last{padding-right:111px;border-right: none;}**/
+.pro_con111 ul li.hover {
+	display: inline-block;
+	font-weight: 400;
+	font-size: 14px;
+	float: left;
+	padding-left:110px;
+	padding-right:111px;
+	cursor: pointer;
+	color: #3c3c3c;
+	line-height:40px;
+	height: 39px;
+	text-align: center;
+	border-top:1px solid #349CD8;
+	
+    background:#fdfdfd;
+   
+}
+.lyz_tab_c {
+	display: inline-block;
+	color: #000;
+	padding-bottom: 10px;
+	width:100%;
+	
+	}
+.clear {
+	clear: both
+}
+.lyz_tab_c li {
+	display: inline-block;
+	float: left;
+	padding: 5px 0;
+}
+.lyz_tab_c li a {
+	border-right: 1px solid #B5B5B5;
+	display: inline;
+	float: left;
+	height: 16px;
+	line-height: 16px;
+	padding: 0 12px;
+	text-decoration: none;
+	white-space: nowrap;
+}
+.lyz_tab_c li a:hover span {
+	text-decoration: underline;
+}
+

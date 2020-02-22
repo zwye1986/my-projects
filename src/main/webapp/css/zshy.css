@@ -1,0 +1,265 @@
+/* CSS Document */
+.title-primary {
+	font-weight: 400;
+	height: 27px;
+	line-height: 27px;
+	padding-top: 3px;
+}
+h5 {
+	font-size: 100%;
+}
+.title-primary em {
+	color: #ff4444;
+	font-size: 22px;
+	margin-right: 5px;
+}
+.selected a.radio-box:link, .selected a.radio-box:visited, .selected a.radio-box:active, .selected a.radio-box:hover {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 2px solid #A5C85B;
+	color: #608908;
+	height: 29px;
+	outline: 0 none;
+	padding: 7px 9px 0;
+}
+input, textarea, .uneditable-input {
+	width: 242px;
+}
+.input-append input, .input-prepend input {
+	font-size: 14px;
+	margin-bottom: 0;
+	vertical-align: top;
+}
+textarea, input[type="text"], input[type="password"], .uneditable-input {
+	background-color: #FFFFFF;
+	border: 1px solid #D4D4D4;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+textarea:focus, input:focus, .uneditable-input:focus {
+	border-color: #4CA1D9;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6);
+	outline: 0 none;
+}
+input[type="radio"]:focus, input[type="checkbox"]:focus {
+	outline: thin dotted #333333;
+	outline-offset: -2px;
+}
+select, textarea, input[type="text"], input[type="password"], .uneditable-input {
+	color: #555555;
+	display: inline-block;
+	font-family: Tahoma, "微软雅黑", "宋体";
+	font-size: 14px;
+	height: 20px;
+	line-height: 20px;
+	padding: 9px 6px;
+}
+a.rule_txt2 {
+	color: #2370A9;
+}
+.grid_c2f {
+	width: 1257px;
+	margin: 0 auto;
+}
+.gr_mod_box2 {
+	width: 1255px;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+.wb_priv_top {
+	width: 1257px;
+	height: 55px;
+	background: #f3f3f3;
+}
+.wb_priv_top_tit {
+	width: 320px;
+	height: 55px;
+	line-height: 130px;
+	overflow: hidden;
+	background: url(../images/vip/zs_wb_priv__top_tit.png) no-repeat;
+}
+.wb_priv_top_vip {
+	line-height: 55px;
+	color: #696969;
+}
+.sys_kthy_w {
+	width: 980px;
+	height: 80px;
+	text-align: center;
+	display: block;
+}
+.sys_kthy a {
+	color: #BEBEBE;
+	display: block;
+}
+a.xufei {
+	color: #bebebe;
+}
+.wb_priv_center {
+	width: 1257px;
+}
+.tab_box {
+	width: 1257px;
+	margin: 0 auto;
+}
+.zs_left {
+	float: left;
+	width: 345px;
+	border: 1px solid #ccc;
+	min-height: 550px;
+	height: auto;
+	margin-bottom: 10px;
+	background: #f9f9f9;
+}
+.pay-info .bu-logo {
+	border-bottom: 1px solid #E3E3E3;
+	border-radius: 5px;
+	clear: both;
+	height: 85px;
+	margin: 0;
+	padding-bottom: 5px;
+	padding-top: 10px;
+	text-align: center;
+}
+.pay-info .price {
+	color: #666666;
+	font-size: 12px;
+	line-height: 24px;
+	padding-top: 5px;
+	text-align: center;
+}
+.wrap-padding {
+	padding: 10px;
+	margin: 0 0 50px;
+}
+.about-info {
+	color: #999999;
+	font-size: 12px;
+	height: 140px;
+}
+.about-info ul li {
+	line-height: 24px;
+	margin-top: 3px;
+	margin-left: 30px;
+	font-size: 14px;
+}
+.vip_title {
+	height: 40px;
+	width: 270px;
+	line-height: 100px;
+	overflow: hidden;
+	border-bottom: 1px solid #ccc;
+	margin: 0 auto;
+	margin-bottom: 5px;
+	background: url(../images/vip/all_vip_title.png) no-repeat;
+}
+.all_high_game_title {
+	height: 40px;
+	width: 270px;
+	line-height: 100px;
+	overflow: hidden;
+	border-bottom: 1px solid #ccc;
+	margin: 0 auto;
+	margin-bottom: 5px;
+	background: url(../images/vip/all_high_game_title.png) no-repeat;
+}
+.zs_right {
+	background: url(../images/job/content_right_bg.png) no-repeat;
+	width: 909px;
+	float: right;
+	border: 1px solid #ccc;
+	min-height: 550px;
+	height: auto;
+	margin-bottom: 10px;
+	border-left: none;
+}
+.zs_right .form-horizontal {
+	width: 500px;
+	height: 465px;
+	margin: 0 auto;
+	margin-top: 40px;
+	padding-top: 20px;
+	margin-left: 250px;
+}
+.control-group {
+	margin-bottom: 0;
+	font-size: 14px;
+	margin-bottom: 12px;
+	height: 48px;
+}
+.form-horizontal .control-label {
+	float: left;
+	margin-left: -12px;
+	padding-right: 12px;
+	padding-top: 6px;
+	text-align: right;
+	width: 23%;
+}
+.form-horizontal .controls {
+	margin-left: 23%;
+}
+selected a.radio-box:link, .selected a.radio-box:visited, .selected a.radio-box:active, .selected a.radio-box:hover {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 2px solid #A5C85B;
+	color: #608908;
+	height: 29px;
+	outline: 0 none;
+	padding: 7px 9px 0;
+}
+a.radio-box:link, a.radio-box:visited {
+	background: none repeat scroll 0 0 #F5F5F5;
+	border: 1px solid #CFCFCF;
+	color: #555555;
+	height: 30px;
+	padding: 8px 10px 0;
+	text-decoration: none;
+}
+a:link, a:visited {
+	outline: 0 none;
+	text-decoration: none;
+}
+.radio-box {
+	display: inline-block;
+	font-size: 14px;
+	margin-right: 9px;
+	outline: 0 none;
+	padding: 0 10px;
+	position: relative;
+	text-decoration: none;
+	vertical-align: middle;
+}
+.selected .radio-box .icon-check {
+	display: block;
+}
+.radio-box .icon-check {
+	bottom: 0;
+	display: none;
+	position: absolute;
+	right: 0;
+}
+.icon-check {
+	background: url(../images/vip/element.png) no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	display: inline-block;
+	font-size: 0;
+	height: 16px;
+	line-height: 16px;
+	vertical-align: middle;
+	width: 16px;
+}
+.btn-primary {
+	height: 45px;
+	width: 185px;
+	margin-right: 5px;
+	background: url(../images/vip/btn-primary.jpg) no-repeat;
+	cursor: pointer;
+	border: none;
+	font-size: 16px;
+	color: #fff;
+	line-height: 15px;
+}
+.form-horizontal .form-actions {
+	margin-left: 23%;
+	padding-top: 10px;
+}
+.form-horizontal .form-actions .btn {
+	margin-right: 10px;
+	border: none;
+}

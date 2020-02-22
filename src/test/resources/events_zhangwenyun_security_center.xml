@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="events_security_center" author="zhangwenyun">
+		<sql>
+			DROP EVENT IF EXISTS EVENTS_SECURITY_CENTER;
+		</sql>
+		<createProcedure>
+			CREATE EVENT EVENTS_SECURITY_CENTER ON SCHEDULE EVERY 1 DAY 
+			STARTS '2013-06-25 00:00:00' ON COMPLETION 
+			NOT PRESERVE ENABLE 
+			DO 
+			call proc_charge_security_center_fee();
+		</createProcedure>
+	</changeSet>
+</databaseChangeLog>

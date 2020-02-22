@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.Order">
+
+	<resultMap type="order" id="orderMap">
+		<result column="id" property="id" />
+		<result column="goodsName" property="goodsName" />
+		<result column="num" property="num" />
+		<result column="price" property="price" />
+		<result column="totalPrice" property="totalPrice" />
+		<result column="payment" property="payment" />
+		<result column="payTime" property="payTime" />
+		<result column="orderTime" property="orderTime" />
+		<result column="attentionName" property="attentionName" />
+		<result column="attentionAddress" property="attentionAddress" />
+		<result column="postCode" property="postCode" />
+		<result column="mobilePhone" property="mobilePhone" />
+		<result column="liveCity" property="liveCity" />
+		<result column="liveProvince" property="liveProvince" />
+		<result column="liveArea" property="liveArea" />
+		<result column="isNegotiate" property="isNegotiate" />
+		<result column="mobileNumberBuy" property="mobileNumberBuy"/>
+		<result column="tradeStatus" property="tradeStatus"/>
+		<result column="dealStatus" property="dealStatus"/>
+		<result column="remark" property="remark"/>
+		<result column="cancel_time" property="cancelTime"/>
+		<result column="serialNumber" property="serialNumber"/>
+	</resultMap>
+	
+	<select id="queryOrderById" resultType="order" parameterType="String">
+	select * from ec_order where id = #{id};
+	</select>
+
+	<select id="queryAllOrder" resultMap="orderMap" parameterType="java.util.Map">
+		select * from ec_order 
+		<trim prefix="where " prefixOverrides="and ">
+		
+				<if test="id != null">
+					and id = #{id}
+				</if>
+				
+				<if test="orderStartTime != null">
+					and orderTime > #{orderStartTime}
+				</if>
+				<if test="orderEndTime != null">
+				<![CDATA[
+					and orderTime < #{orderEndTime} 
+					]]>
+				</if>
+				<if test="tradeStatus != null">
+					and tradeStatus = #{tradeStatus}
+				</if>
+				
+				<if test="dealStatus != null">
+					and dealStatus = #{dealStatus} 
+				</if>
+				
+				<if test="attentionName != null">
+					and attentionName = #{attentionName} 
+				</if>
+				
+				<if test="mobilePhone != null">
+					and mobilePhone = #{mobilePhone} 
+				</if>
+				
+			</trim>
+		order by orderTime desc;
+	</select>
+	
+	<select id="queryAllOrderCount" resultType="int" parameterType="java.util.Map">
+		select count(*) from ec_order 
+		<trim prefix="where " prefixOverrides="and ">
+				<if test="id != null">
+					and id = #{id}
+				</if>
+				<if test="orderStartTime != null">
+					and orderTime > #{orderStartTime}
+				</if>
+				<if test="orderEndTime != null">
+				<![CDATA[
+					and orderTime < #{orderEndTime} 
+					]]>
+				</if>
+				<if test="tradeStatus != null">
+					and tradeStatus = #{tradeStatus}
+				</if>
+				
+				<if test="dealStatus != null">
+					and dealStatus = #{dealStatus} 
+				</if>
+				
+			</trim>
+	</select>
+
+	<select id="queryorder" resultMap="orderMap" >
+		<![CDATA[ 
+		select * from ec_order where 1=1 and mobileNumberBuy=#{user.mobileNumber} 	order by orderTime desc;
+		]]>
+	</select>
+	
+	<select id="queryorderByMobilePhone" resultMap="orderMap" >
+		select * from ec_order where 1=1 and mobileNumberBuy=#{mobileNumber} 	
+		 order by orderTime desc
+		 <if test="limitCount != null and ''!=limitCount">
+		<![CDATA[ 
+		 limit #{limitIndex},#{limitCount}
+		 ]]>
+		</if>
+	</select>
+
+	<insert id="addorder" parameterType="order" useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		insert into ec_order  (goodsName,num,price,totalPrice,payment,payTime,orderTime,attentionName,attentionAddress,
+		postCode,mobilePhone,liveCity,liveProvince,liveArea,isNegotiate,mobileNumberBuy,tradeStatus)
+		values (
+		#{goodsName},
+		#{num},#{price},#{totalPrice},#{payment},null,now(),#{attentionName},#{attentionAddress},#{postCode},#{mobilePhone},
+		#{liveCity},#{liveProvince},#{liveArea},#{isNegotiate},#{mobileNumberBuy},#{tradeStatus}
+		)]]>
+	</insert>
+	
+	<select id="queryorderById" resultMap="orderMap">
+			<![CDATA[ 
+		select * from ec_order where mobileNumberBuy = #{user.mobileNumber} and id=#{Id};
+		]]>
+	</select>
+	
+	
+	<select id="queryorderBySerialNumber" resultMap="orderMap">
+			<![CDATA[ 
+		select * from ec_order where serialNumber = #{serialNumber} 
+		]]>
+	</select>
+	
+	
+	<select id="getOrderDetailsCount" resultType="int"
+		parameterType="java.util.Map">
+		<![CDATA[
+			select count(*) from ec_order w where w.mobileNumberBuy = #{user.mobileNumber};
+		]]>
+	</select>
+	
+	
+	
+	<update id="updateOrderById" parameterType="order">
+	update ec_order
+	<trim  prefixOverrides=",">
+		<set>
+			<if test="tradeStatus != null">tradeStatus=#{tradeStatus},</if>
+			<if test="payTime != null">payTime=#{payTime},</if>
+			<if test="cancelTime != null">cancel_time=#{cancelTime},</if>
+			<if test="serialNumber != null">serialNumber=#{serialNumber}</if>
+		</set>
+		where id=#{id}
+	</trim>
+</update>
+	
+	<delete id="deleteOrderById" parameterType="int">
+		delete from ec_order where id = #{id}
+	</delete>
+	
+	<update id="updateOrder" parameterType="java.util.Map">
+		update ec_order set dealStatus = #{dealStatus} , remark = #{remark} where id = #{id};
+	</update>
+
+</mapper>

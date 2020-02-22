@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="create_user_wallet_exception_table" author="hepei">
+		<createTable tableName="ec_user_wallet_exception">
+			<column name="mobileNumber" type="varchar(20)"></column>
+			<column name="recharge" type="decimal(38,4)"></column>
+			<column name="withdraw" type="decimal(38,4)"></column>
+			<column name="invite" type="decimal(38,4)"></column>
+			<column name="signbenefit" type="decimal(38,4)"></column>
+			<column name="ongoing_task" type="decimal(32,0)"></column>
+			<column name="rebate" type="decimal(38,4) "></column>
+			<column name="fee_deduction" type="decimal(38,4)"></column>
+			<column name="wallet" type="decimal(16,4)"></column>
+			<column name="gapprice" type="decimal(45,4)"></column>
+		</createTable>
+	</changeSet>     
+         
+	<changeSet id="create_user_wallet_exception_produce" author="hepei">
+		<sql>
+			DROP PROCEDURE IF EXISTS proc_insert_ec_user_wallet_exception;
+		</sql>
+
+		<createProcedure>
+		<![CDATA[ 
+			CREATE  PROCEDURE proc_insert_ec_user_wallet_exception()
+			BEGIN
+				truncate table ec_user_wallet_exception;
+
+insert into  ec_user_wallet_exception 
+(SELECT tt.*,tt.recharge + tt.invite + tt.signbenefit + tt.rebate - tt.withdraw  - tt.ongoing_task - tt.fee_deduction - tt.wallet gapprice  FROM (
+
+	SELECT t1.mobileNumber, 
+						t1.amount recharge,                                           
+						CASE WHEN t2.amount IS NULL THEN 0 ELSE t2.amount END withdraw , 
+						CASE WHEN t3.amount IS NULL THEN 0 ELSE t3.amount END invite, 
+						CASE WHEN t4.amount IS NULL THEN 0 ELSE t4.amount END signbenefit,  
+						CASE WHEN t5.amount IS NULL THEN 0 ELSE t5.amount END ongoing_task,  
+						CASE WHEN t6.amount IS NULL THEN 0 ELSE t6.amount END rebate,   
+						CASE WHEN t7.amount IS NULL THEN 0 ELSE t7.amount END fee_deduction,   
+						CASE WHEN t8.amount IS NULL THEN 0 ELSE t8.amount END wallet    
+FROM
+	(
+		SELECT
+			t.`mobileNumber`,
+			SUM(a.`amount`) amount
+		FROM
+			`ec_recharge_record` a,
+			`ec_user` t
+		WHERE
+			a. STATUS = '0'
+		AND t.`id` = a.`userid`
+		GROUP BY
+			a.`userid`
+	) t1
+LEFT JOIN (
+	SELECT
+		t.`mobileNumber`,
+		SUM(b.`amount`) amount
+	FROM
+		`ec_withdrawal_record` b,
+		`ec_user` t
+	WHERE
+		b.`status` = '0'
+	AND t.`id` = b.`userid`
+	GROUP BY
+		b.`userid`
+) t2 ON t1.mobileNumber = t2.mobileNumber
+LEFT JOIN (
+	SELECT
+		t.`mobileNumber`,
+		SUM(c.`benefit`) amount
+	FROM
+		`ec_invite_benefit` c,
+		`ec_user` t
+	WHERE
+		t.id = c.`inviteUserId`
+	GROUP BY
+		c.`inviteUserId`
+) t3 ON t1.mobileNumber = t3.mobileNumber
+LEFT JOIN (
+	SELECT
+		d.`mobilePhone` mobileNumber,
+		SUM(d.`signbenefit`) amount
+	FROM
+		`ec_user_sign` d
+	GROUP BY
+		d.`mobilePhone`
+) t4 ON t1.mobileNumber = t4.mobileNumber
+LEFT JOIN (
+	SELECT
+		e.userid mobileNumber,
+		SUM(e.`policy_deposit`) amount
+	FROM
+		`ec_user_game_relation` e
+	WHERE
+		e.`status` = 1
+	GROUP BY
+		e.`userid`
+) t5 ON t1.mobileNumber = t5.mobileNumber 
+
+LEFT JOIN (
+SELECT
+	t.`mobileNumber`,
+	SUM(f.`amount`) amount
+FROM
+	`ec_deal_detail` f,
+	`ec_user` t
+WHERE
+	f.`userid` = t.id
+AND f.`detailType` = 2
+GROUP BY
+	f.`userid`
+) t6 ON t1.mobileNumber = t6.mobileNumber LEFT JOIN (
+SELECT
+	t.`mobileNumber`,
+	SUM(f.`amount`) amount
+FROM
+	`ec_deal_detail` f,
+	`ec_user` t
+WHERE
+	f.`userid` = t.id
+AND f.`detailType` IN (4, 10, 11)
+GROUP BY
+	f.`userid`
+) t7  ON t1.mobileNumber = t7.mobileNumber LEFT JOIN (
+SELECT
+	t.`mobileNumber`,
+	g.`amount`
+FROM
+	`ec_user_wallet` g,
+	`ec_user` t
+WHERE
+	g.`userid` = t.`id`
+GROUP BY
+	g.`userid`
+) t8 ON t1.mobileNumber = t8.mobileNumber
+
+) tt WHERE tt.recharge + tt.invite + tt.signbenefit + tt.rebate - tt.withdraw  - tt.ongoing_task - tt.fee_deduction != tt.wallet
+		);
+
+			END
+			]]>
+		</createProcedure>
+	
+	</changeSet>
+	<changeSet id="ec_user_wallet_exception_event" author="hepei">
+		<sql>
+			DROP EVENT IF EXISTS ec_user_wallet_exception_event;
+		</sql>
+		<createProcedure>
+			CREATE EVENT `ec_user_wallet_exception_event` ON SCHEDULE EVERY
+			1 HOUR STARTS '2014-07-04 01:00:00' ENDS '2035-07-02 02:00:00' ON COMPLETION NOT PRESERVE
+			ENABLE DO call proc_insert_ec_user_wallet_exception();
+		</createProcedure>
+	</changeSet>
+</databaseChangeLog>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.Advice">
+
+	<resultMap type="Advice" id="AdviceMap">
+<!-- 		extends="base.BaseEntity.baseEntityResult"> -->
+		<result column="name" property="name" />
+		<result column="contact" property="contact" />
+		<result column="advice" property="advice" />
+		<result column="replyContent" property="replyContent"/>
+		<result column="replayStatus" property="replayStatus"/>
+		<result column="replytime" property="replytime"/>
+		<result column="replyer" property="replyer"/>
+		
+	</resultMap>
+
+	<insert id="saveAdvice" parameterType="Advice">
+		insert into ec_user_advice (`id`,`name`,`contact`,`advice`,`createBy`,`createTime`,`modifyBy`,`modifyTime`,`orderBy`) values (#{id},#{name},#{contact},#{advice},#{createBy},now(),#{modifyBy},#{modifyTime},#{orderBy});
+	</insert>
+	
+	<select id="selectFeedBacks" resultMap="AdviceMap">
+		select * from ec_user_advice order by createTime desc;
+	</select>
+	
+	
+	<select id="selectAdvice" resultMap="AdviceMap">
+		select * from ec_user_advice where contact=#{mobilePhone} order by createTime desc;
+	</select>
+	
+	<select id="getAdviceCount" resultType="int">
+		select count(*) from ec_user_advice where contact=#{mobilePhone};
+	</select>
+	
+	
+	
+	<select id="getFeedBackCount" resultType="int">
+		select count(*) from ec_user_advice;
+	</select>
+
+	<update id="updateAdvice" parameterType="Advice" >
+	     update ec_user_advice  t set t.replyContent=#{replyContent},
+	     t.replytime=now(),
+	     t.replayStatus=1,
+	     t.replyer=#{replyer}
+	     where id=#{id}
+	</update>
+	
+	<select id="getAdviceById"  resultMap="AdviceMap" parameterType="String">
+		select * from ec_user_advice t where t.id=#{id}
+	</select>
+	
+	<select id="queryAdvice" resultMap="AdviceMap" parameterType="java.util.Map">
+	select * from ec_user_advice where contact=#{mobilePhone} order by createTime desc 
+		<if test="limitCount != null and ''!=limitCount">
+		<![CDATA[ 
+		  limit #{limitIndex},#{limitCount}
+		 ]]>
+		</if>
+	</select>
+	
+</mapper>

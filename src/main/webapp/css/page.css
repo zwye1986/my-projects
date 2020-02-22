@@ -1,0 +1,93 @@
+@charset "UTF-8";
+/* CSS Document */
+/* page */
+.yPager {
+	clear: both;
+	color: #8A949C;
+	height: 25px;
+	padding: 10px;
+	position: relative;
+	margin-bottom:30px;
+}
+.yPager .inner {
+	float: left;
+	left: 50%;
+	position: relative;
+}
+.yPager a, .yPager span {
+	
+	display: inline-block;
+	height:42px;
+	left: -50%;
+	line-height:42px;
+	margin-left: 8px;
+	overflow: hidden;
+	padding: 0 8px;
+	position: relative;
+}
+.yPager a {
+	font-size:16px;
+	color: #A1ACB4;
+}
+
+.yPager a:hover, .yPager .current {
+	
+	
+	color: #349CD8;
+	font-size:16px;
+	border-bottom:3px solid #349CD8;
+	text-decoration:none;
+	
+}
+.yPager .current:visited {
+	color: #FFFFFF;
+}
+.yPager .disabled {
+	background: none repeat scroll 0 0 #ccc;
+	color: #8A949C;
+	opacity: 0.5;
+}
+.udPager {
+	clear: both;
+	color: #8A949C;
+	height: 25px;
+	padding: 10px;
+	position: relative;
+}
+.udPager .inner {
+	float: right;
+}
+.udPager a, .udPager span {
+	border-radius: 3px;
+	display: inline;
+	float: left;
+	height: 24px;
+	line-height: 24px;
+	margin-left: 10px;
+	overflow: hidden;
+	padding: 0 8px;
+}
+.udPager a {
+	background: none repeat scroll 0 0 #E8ECF0;
+	color: #A1ACB4;
+}
+.udPager a:visited {
+	color: #A1ACB4;
+}
+.udPager a:hover {
+	background: none repeat scroll 0 0 #15456F;
+	color: #FFFFFF;
+}
+.udPager .disabled {
+	background: none repeat scroll 0 0 #ccc;
+	color: #8A949C;
+	opacity: 0.5;
+}
+.prev{ width:92px; height:42px; background:#848484; color:#fff; text-align:center; font-size:18px; position:relative; cursor:pointer;border-top-left-radius:3px;border-bottom-left-radius:3px;}
+em.page_p{ width:12px; height:19px; margin-top:12px; margin-left:-15px; position:absolute;}
+.prev{ display:inline-block; padding-left:15px}
+.next{ width:92px; height:42px; background:#848484; color:#fff; text-align:center; font-size:18px; position:relative; cursor:pointer;border-top-right-radius:3px;border-bottom-right-radius:3px;}
+em.next_p{ width:12px; height:19px; margin-top:12px; position:absolute; }
+.yPager_b{ margin-bottom:25px;}
+.s_prev{ width:26px; height:42px; background:#848484; color:#fff; text-align:center; font-size:18px; position:relative; cursor:pointer;border-top-left-radius:3px;border-bottom-left-radius:3px;}
+.s_next{ width:26px; height:42px; background:#848484; color:#fff; text-align:center; font-size:18px; position:relative; cursor:pointer;border-top-right-radius:3px;border-bottom-right-radius:3px;}

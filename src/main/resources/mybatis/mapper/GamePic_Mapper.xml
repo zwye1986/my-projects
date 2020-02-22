@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="GamePic">
+
+	<resultMap type="gamePic" id="gamePicResult">
+		<result column="id" property="id" />
+		<result column="gameid" property="gameId" />
+		<result column="orderBy" property="orderBy" />
+		<result column="createTime" property="createTime" />	
+		<result column="type" property="type" />
+		<result column="gamepic" property="gamePic" />
+	</resultMap>
+
+
+	<select id="getGamePic" parameterType="java.lang.String" resultMap="gamePicResult">
+	select * from ec_game_pic where id = #{value}
+	</select>
+	
+	<select id="queryGamePic" parameterType="java.util.Map" resultMap="gamePicResult">
+	  select * from ec_game_pic where 1=1 
+	  <if test="gameId != null and ''!=gameId">
+	   and gameId=#{gameId}
+	  </if>
+	   <if test="type != null and ''!=type">
+	   and type=#{type}
+	  </if>
+	</select>
+
+	<insert id="addGamePic" parameterType="gamePic">
+		insert into ec_game_pic (
+		id,
+		gameid,
+		orderby,
+		createTime,
+		type,
+		gamepic
+		)
+		values (
+		#{id},
+		#{gameId},
+		#{orderBy},
+		#{createTime},
+		#{type},
+		#{gamePic,jdbcType=BLOB}
+		)
+	</insert>
+	<delete id="delGamePic" parameterType="java.util.Map">
+	delete from ec_game_pic where 1=1 
+	<if test="gameId != null and ''!=gameId">
+	and gameId = #{gameId} 
+	</if>
+	<if test="type != null and ''!= type" >
+	and type = #{type} 
+	</if>
+	</delete>
+
+</mapper>

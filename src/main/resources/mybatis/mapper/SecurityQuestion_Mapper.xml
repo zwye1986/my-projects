@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="C_SecurityQuestion" >
+
+	<resultMap type="securityQuestion" id="securityQuestionResult" extends="base.BaseEntity.baseEntityResult">
+		<result column="name" property="name" />
+		<result column="isOpen" property="isOpen" />
+	</resultMap>
+	
+	<select id="selectListByCondition" parameterType="java.util.Map" resultMap="securityQuestionResult">
+		<![CDATA[ 
+			select * from ec_security_question 
+	 	 ]]>
+	</select>
+
+
+	<insert id="addSecurityQuestion" parameterType="securityQuestion">
+	<![CDATA[ 
+		insert into ec_security_question (
+		id,
+		name,
+		isOpen,
+		createTime,
+		createBy,
+		modifyTime,
+		modifyBy,
+		orderBy
+		)
+		values (
+		#{id},
+		#{name},
+		#{isOpen},
+		#{createTime},
+		#{createBy},
+		#{modifyTime},
+		#{modifyBy},
+		#{orderBy}
+		)
+		]]>
+	</insert>
+
+	<select id="selectSecurityQuestionById" parameterType="String"
+		resultMap="securityQuestionResult">
+	  <![CDATA[ 
+		select * from ec_security_question where id = #{id}
+	  ]]>
+	</select>
+
+	<delete id="delSecurityQuestionById" parameterType="String">
+	<![CDATA[ 
+	   delete from ec_security_question where id = #{id}
+	   ]]>
+	</delete>
+
+	<update id="updateSecurityQuestion" parameterType="securityQuestion">
+	<![CDATA[ 
+		update ec_security_question set
+			name = #{name},
+			isOpen = #{isOpen},
+			createTime = #{createTime},
+			createBy = #{createBy},
+			modifyTime = #{modifyTime},
+			modifyBy = #{modifyBy} ,
+			orderBy = #{orderBy}
+		where id = #{id}
+		]]>
+	</update>
+
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<changeSet id="initData" author="yma">
+		<sql>
+			INSERT INTO ec_system_config VALUES
+			('101', '注册验证码开关', 'Y',
+			'注册验证码开关；Y=启用，N=不启用');
+			INSERT INTO ec_system_config
+			VALUES
+			('102',
+			'系统短信费用', '0.5', '系统短信费用，单位：纳币');
+			INSERT INTO ec_system_config VALUES
+			('103', '提现的费率', '0.02', '提现的费率，收取百分之二的费率');
+			INSERT INTO
+			ec_system_config VALUES
+			('104', '开启安全中心月功能费用', '10', '开启会员中心功能费用');
+
+			INSERT INTO ec_amount_option VALUES
+			('1', '5');
+			INSERT INTO
+			ec_amount_option VALUES
+			('2', '10');
+			INSERT INTO ec_amount_option
+			VALUES
+			('3', '50');
+		</sql>
+
+		<sql>
+			INSERT INTO `ec_news_category` (`id`, `name`)
+			VALUES
+			(1,'游戏新闻'),
+			(2,'优惠信息'),
+			(3,'活动信息');
+		</sql>
+
+		<sql>
+			INSERT INTO `ec_security_question` (`id`, `name`, `isOpen`,
+			`createBy`, `createTime`, `modifyBy`, `modifyTime`, `orderBy`)
+			VALUES
+			('101', '你母亲的姓名？', '0', NULL, NULL, NULL, NULL, NULL),
+			('102',
+			'您高中班主任的姓名？', '0', NULL, NULL, NULL, NULL, NULL),
+			('103', '您的出生地？',
+			'0', NULL, NULL, NULL, NULL, NULL),
+			('104', '你最好的儿时朋友？', '0', NULL,
+			NULL, NULL, NULL, NULL);
+		</sql>
+	</changeSet>
+	<changeSet id="gameData" author="sunwen">
+		<sqlFile path="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_game_pic.sql" />
+		<sqlFile path="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_game_policy.sql" />
+		<sqlFile path="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_game_recommend.sql" />
+		<sqlFile path="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_game_type.sql" />
+		<sqlFile path="/Users/zhangwenyun/Documents/efinance/src/test/resources/ec_game.sql" />
+		<sql>
+		    update ec_game_policy egp set egp.clicks=30,egp.deposit=100,egp.reward=3,egp.punish=3;
+		</sql>
+	</changeSet>
+</databaseChangeLog>

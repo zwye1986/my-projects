@@ -1,0 +1,1 @@
+package com.venada.efinance.business;import com.venada.efinance.common.exception.BusinessException;import com.venada.efinance.pojo.LoginLog;import com.venada.efinance.pojo.User;public interface LoginBussiness {	//用户登录，计算积分、纪录登录日志	public void setUserCredits(User user,LoginLog loginLog) throws BusinessException;}

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="UserWalletCheck">
+
+	<resultMap type="userWalletCheck" id="userWalletCheckResult" >
+		<result column="mobileNumber" property="mobileNumber" />
+		<result column="recharge" property="recharge" />
+		<result column="invite" property="invite" />
+		<result column="signbenefit" property="signbenefit" />
+		<result column="ongoing_task" property="ongoing_task" />
+		<result column="rebate" property="rebate" />
+		<result column="fee_deduction" property="fee_deduction" />
+		<result column="wallet" property="wallet" />
+		<result column="gapprice" property="gapprice" />
+	</resultMap>
+	
+	<resultMap type="userWalletCheck" id="userWalletCheckMap" extends="userWalletCheckResult">
+	   <collection property="user" ofType="com.venada.efinance.pojo.User.User" select="getUserByUserMobileNumber" column="mobileNumber"/> 
+	</resultMap>
+	
+	<!--  获取user对象  -->  
+    <select id="getUserByUserMobileNumber" parameterType="String" resultMap="com.venada.efinance.pojo.User.userMap">
+	SELECT
+		eu.id,
+		eu.mobileNumber,
+		eu.nickName,
+		eu.name
+		FROM ec_user eu
+	WHERE eu.mobileNumber  = #{mobileNumber}  
+    </select> 
+    
+   <!--  <sql id="Base_Column_List">
+		mobileNumber, recharge, withdraw, invite, signbenefit, ongoing_task,
+		rebate,fee_deduction, wallet,gapprice
+	</sql>
+     -->
+     
+        <select id="getAllUserWalletCheckCount" resultType="int"
+		parameterType="java.util.Map">
+		
+		select count(1) from ec_user_wallet_exception where 1=1
+      <if test="mobileNumber != null" >
+       and mobileNumber = #{mobileNumber}
+      </if>
+	</select>
+	
+     
+    	<select id="getAllUserWalletCheck" resultMap="userWalletCheckMap" parameterType="java.util.Map">
+		<![CDATA[ 
+		select * from ec_user_wallet_exception where 1=1
+ ]]>
+  <if test="mobileNumber != null" >
+       and mobileNumber = #{mobileNumber}
+      </if>
+</select>
+	
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="GameType">
+
+	<resultMap type="gameType" id="gameTypeResult">
+		<result column="id" property="id" />
+		<result column="typename" property="typeName" />
+		<result column="createTime" property="createTime" />
+		<result column="orderBy" property="orderBy" />
+		<result column="category" property="category" />
+	</resultMap>
+
+	<select id="queryAllGameType" resultType="gameType" parameterType="java.util.Map">
+		<![CDATA[ 
+		select * from ec_game_type;
+		]]>
+	</select>
+	
+	<select id="getGameType" parameterType="gameType" resultType="gameType">
+		<![CDATA[ 
+		select * from ec_game_type where typename = #{typeName} and category = #{category};
+		]]>
+	</select>
+
+	<insert id="addGameType"  parameterType="gameType">
+		insert into ec_game_type (
+		id,
+		typename,
+		createTime,
+		orderBy,
+		category
+		)
+		values (
+		#{id},
+		#{typeName},
+		#{createTime},
+		#{orderBy},
+		#{category}
+		)
+	</insert>
+
+</mapper>

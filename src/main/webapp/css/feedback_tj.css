@@ -1,0 +1,87 @@
+/* CSS Document */
+.feedback_C {
+	width: 1040px;
+	border-left: 1px solid #d1d1d1;
+	border-right: 1px solid #d1d1d1;
+}
+.feedback_C h5 {
+	font-size: 20px;
+	margin-left: 20px;
+	line-height: 48px;
+}
+.fd_top {
+	width: 1002px;
+	height: 5px;
+	margin: 0 auto;
+	background: url(../images/feedback/fd_top.png);
+}
+/*fd_center*/
+.fd_center {
+	width: 1000px;
+	
+	background-color: #f6f6f6;
+	border-left: 1px solid #d1d1d1;
+	border-right: 1px solid #d1d1d1;
+	margin: 0 auto;
+}
+.fd_center p {
+	width: 960px;
+	height: 130px;
+	line-height: 130px;
+	display: inline-block;
+	border-bottom: 1px dashed #d1d1d1;
+	margin: 0 auto;
+	margin-left: 20px;
+	text-align: center;
+}
+.fd_center a {
+	color: #444;
+	font-size: 36px;
+	display: inline-block;
+	margin-left: -330px;
+	margin-top: 15px;
+}
+.fd_center dl {
+	width: 570px;
+	height: 100px;
+	display: inline-block;
+	font-size: 18px;
+	margin: 0 auto;
+	margin-left: 195px;
+	margin-top: 25px;
+	line-height: 32px;
+}
+.fd_submit input {
+	width: 125px;
+	height: 45px;
+	background: url(../images/feedback/btn01.jpg) no-repeat;
+	cursor: pointer;
+	border: none;
+	margin: 0 auto;
+	margin-top: 15px;
+	margin-bottom:25px;
+	font-size: 18px;
+	color: #444;
+	margin-left:195px;
+}
+.fd_submit:hover input {
+	width: 125px;
+	height: 45px;
+	background: url(../images/feedback/btn02.jpg) no-repeat;
+	color: #fff;
+}
+/*fd_games*/
+.fd_games{ width:1000px;display:inline-block; margin:0 auto;}
+.fd_games_t{ width:100px; height:55px; line-height:55px; font-size:20px; padding-left:20px; margin-top:10px; }
+.fd_games li{ float:left; display:inline-block; width:210px; height:220px; border:1px solid #d1d1d1; margin-left:38px; position:relative; margin-top:15px; margin-bottom:20px; }
+.fd_games li dt{ display:inline-block; width:210px; height:129px;}
+.fd_games li dt img{ display:inline-block; width:210px; height:129px;}
+.fd_games li dd{ width:110px; height:22px; line-height:22px; display:inline-block; float:left; padding-left:10px; overflow:hidden;  text-overflow:ellipsis;white-space:nowrap;}
+.fd_games li dd input{ width:69px; height:29px; border:none; background:url(../images/feedback/game_btn.png) no-repeat; float:left; position:absolute; left:120px; top:160px; cursor:pointer;}
+.fd_games li dd input:hover{ opacity:0.9; filter:alpha(opacity:30);}
+.fd_bottom {
+	width: 1002px;
+	height: 5px;
+	margin: 0 auto;
+	background: url(../images/feedback/fd_bottom.png);
+}

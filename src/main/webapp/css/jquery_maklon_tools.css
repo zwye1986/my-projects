@@ -1,0 +1,125 @@
+@charset "utf-8";
+#WaittingDiv {
+	width:260px;
+	border:solid 1px #808080;
+	background-color:#f2f2f2;
+	display:none;
+	position:absolute;
+	z-index:9999;
+}
+#WaittingDiv .WaittingTitle {
+	background-image:url(../images/jquery_maklon_panel_title_bg.png);
+	background-repeat:repeat-x;
+	height:25px;
+	clear:both;
+	width:100%;
+	text-align:left;
+	line-height:25px;
+	font-size:12px;
+	vertical-align:middle;
+}
+#WaittingDiv .WaittingContent {
+	width:100%;
+	padding:15px 0px;
+	text-align:center;
+}
+#DialogDiv {
+	width:300px;
+	border:solid 1px #b0b0b0;
+	background-color:#f2f2f2;
+	display:none;
+	position:absolute;
+	z-index:9998;
+}
+#ConfirmDiv {
+	width:300px;
+	border:solid 1px #808080;
+	background-color:#f2f2f2;
+	display:none;
+	position:absolute;
+	z-index:9997;
+}
+#DialogTitle,#ConfirmTitle{
+	background-image:url(../images/jquery_maklon_panel_title_bg.png);
+	background-repeat:repeat-x;
+	height:25px;
+	clear:both;
+	width:100%;
+}
+#DialogTitleText,#ConfirmTitleText{
+	float:left;
+	width:200px;
+	height:25px;
+	line-height:25px;
+	padding-left:20px;
+	vertical-align:middle;
+	font-weight:bold;
+}
+#DialogTitleButton,#ConfirmTitleButton{
+	float:right;
+	padding-right:5px;
+	padding-top:5px;
+	text-align:right;
+	width:25px;
+}
+#DialogContent,#ConfirmContent{
+	text-align:left;
+	padding:10px;
+	clear:both;
+}
+#DialogButtons,#ConfirmButtons{
+	clear:both;
+	height:25px;
+	padding:3px 20px;
+	text-align:right;
+}
+.Dialog_Button {
+	background-color: #f5f5f5;
+	border: 1px solid #666666;
+}
+#PanelDiv {
+	border: solid 2px #fedbd4;
+	background-color:#f5f5f5;
+	position:absolute;
+	display:block;
+	z-index:9996;
+}
+#PanelDivTitleButtons {
+	clear:both;
+	 background:#3b3a3f;
+	height:40px;
+}
+#PanelDivTitle {
+	height:40px;line-height:40px; background:#3b3a3f;
+	padding-left:20px;
+	font-weight:bold;
+	float:left;
+}
+
+#PanelDivTitle em {
+	font-style:normal; width:60px; color:#fff; font-size:16px; margin-left:10px;
+}
+
+#PanelDivButton {
+	width:25px;
+	height:15px;
+	float:right;
+	text-align:right;
+	padding-right:8px;
+	padding-top:6px;
+	cursor:pointer;
+}
+
+#PanelDivButton img {
+	width:22px; height:22px; float:right; margin-top:5px; cursor:pointer;
+}
+.LoaddingDiv {
+	background-image:url(../images/jquery_maklon_loadding1.gif);
+	background-position:left center;
+	background-repeat:no-repeat;
+	line-height:50px;
+	padding-left:50px;
+	clear:both;
+	width:200px;
+	margin:10px auto;
+}

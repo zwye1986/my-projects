@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.LoginLog">
+	<resultMap type="LoginLog" id="loginLogMap">
+		<result column="id" property="id" />
+		<result column="userid" property="userid" />
+		<result column="mobileNumber" property="mobileNumber" />
+		<result column="loginTime" property="loginTime" />
+		<result column="ip" property="ip" />
+		<result column="client" property="client" />
+		<result column="count" property="count" />
+		<result column="lastestTime" property="lastestTime" />
+	</resultMap>
+	<select id="logUserLogin" parameterType="LoginLog">
+		insert into ec_login_log (id,userid,mobileNumber,loginTime,ip,client) values(#{id},#{userid},#{mobileNumber},now(),#{ip},#{client});
+	</select>
+	<select id="queryUserLoginLog" parameterType="String" resultType="int">
+		select count(*) from ec_login_log where userid = #{userid} and year(NOW()) = year(loginTime) and month(NOW()) = month(loginTime) and day(now()) = day(loginTime);
+	</select>
+	
+	<select id="querySvipLoginLog" parameterType="java.util.Map" resultMap="loginLogMap">
+	SELECT t.`userid`,
+       t.`mobileNumber`,
+       count(1) count,
+       max(t.`loginTime`) lastestTime
+FROM   `ec_login_log` t,
+       `ec_user` t1
+WHERE  t1.`mobileNumber` = t.`mobileNumber`
+<if test="type != null">
+AND t1.type = #{type}
+</if>
+   <if test="mobileNumber != null">
+AND t1.`mobileNumber` = #{mobileNumber}
+</if>
+GROUP  BY t.`mobileNumber`;
+	</select>
+	
+	<select id="querySvipLoginLogCount" parameterType="java.util.Map" resultType="int">
+	SELECT  count(distinct(t.mobileNumber))
+FROM   `ec_login_log` t,
+       `ec_user` t1
+WHERE  t1.`mobileNumber` = t.`mobileNumber`
+<if test="type != null">
+AND t1.type = #{type}
+</if>
+   <if test="mobileNumber != null">
+AND t1.`mobileNumber` = #{mobileNumber}
+</if>
+	</select>
+</mapper>

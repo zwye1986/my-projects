@@ -1,0 +1,56 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0px; padding:0px;}
+body {
+
+	color: #3b3a3f;
+}
+img {
+	border: none;
+}
+em {
+	font-style: normal;
+	color: #fff;
+}
+.txt {
+	color: #fff;
+}
+.del{ float:right; height:40px; width:40px; background:url(../images/del.png); cursor:pointer;}
+.tck{ width:363px; position:absolute; background:#fff; right:45%; border:1px solid #cacaca; z-index:2; top:100px; padding-bottom:10px;}
+.tck .tck_t{width:363px; height:40px; background:#3b3a3f; margin-top:0px; float:left; }
+.tck_xx{ width:120px; color:#fff; height:40px; line-height:40px;font-size:16px; float:left; margin-left:20px;}
+
+.tck form {
+    color: #3B3A3F;
+    font-size: 12px;
+    text-align: left;
+    width: 343px;
+}
+
+.kv_item {
+    line-height: 36px;
+    padding-top:10px;
+	clear:both
+}
+
+.news_add_list {
+    color: #3C3C3C;
+    float: left;
+    font-size: 12px;
+    line-height: 36px;
+    margin-right: 5px;
+    text-align: right;
+    width: 85px;
+}
+.news_txt {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CACACA;
+    float: left;
+    height: 28px;
+    line-height: 36px;
+    width: 230px;
+}
+.kv_item select{ margin-top:10px;}
+.btn{ margin:0 auto; text-align:center; margin-top:20px; clear:both; margin-left:30px;}
+.btn span{ display:inline-block; margin-top:10px; margin-bottom:10px; width:85px; height:45px; background:url(images/btn01.png) no-repeat; text-align:center; line-height:23px; cursor:pointer; margin-right:5px; width:59px; height:22px; background:#4797f1; color:#fff; }
+.btn span:hover{ background:#3b3a3f; }

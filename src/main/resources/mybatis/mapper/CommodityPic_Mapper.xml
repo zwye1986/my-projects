@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="CommodityPic">
+
+<select id="queryCommodityPic" resultType="CommodityPic" parameterType="java.util.Map">
+<![CDATA[
+select * from ec_commodity_pic a where 1=1  
+]]>
+        <if test="commodityId !=null and '' != commodityId">
+			<![CDATA[ 
+		   and a.commodityId = #{commodityId} 
+		   ]]>
+		</if>
+</select>
+
+<insert id="addCommodityPic" parameterType="CommodityPic">
+<![CDATA[
+insert into ec_commodity_pic(id,name,commodityid,pic,smallpic,mediumpic,addtime) values(#{id},#{name},#{commodityId},#{pic,jdbcType=BLOB},#{smallPic,jdbcType=BLOB},#{mediumPic,jdbcType=BLOB},#{addTime})
+]]>
+</insert>
+
+<select id="getCommodityPic" resultType="CommodityPic" parameterType="java.lang.String">
+<![CDATA[
+select * from ec_commodity_pic a where id = #{value}
+]]>
+
+</select>
+
+<delete id="delCommodityPic" parameterType="java.lang.String">
+<![CDATA[
+delete from ec_commodity_pic where id=#{value}
+]]>
+</delete>
+
+<delete id="delCommodityPicByCommodityId" parameterType="java.lang.String">
+<![CDATA[
+delete from ec_commodity_pic where commodityid = #{value}
+]]>
+</delete>
+
+<select id="updateCommodityPic" parameterType="java.util.Map">
+<![CDATA[
+update ec_commodity_pic set commodityid = #{id} where 1=1  
+]]>
+<if test="picId !=null and '' != picId">
+			<![CDATA[ 
+		   and id in  ${picId} 
+		   ]]>
+		</if>
+</select>
+	
+</mapper>

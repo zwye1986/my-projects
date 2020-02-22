@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.News">
+
+<resultMap type="News" id="newsMap">
+<id column="id" property="id" />
+<result column="addtime" property="addTime" />
+<result column="content" property="content" />
+<result column="newsref" property="newsRef" />
+<result column="newslink" property="newsLink" />
+<result column="readcount" property="readCount" />
+<result column="newstitle" property="newsTitle" />
+<result column="type" property="type" />
+<result column="name" property="name" />
+<result column="summary" property="summary" />
+<result column="priority" property="priority" />
+<result column="isImp" property="isImp" />
+</resultMap>
+
+	<insert id="addNews" parameterType="News"  useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		INSERT INTO ec_news (addtime,content,newsref,newslink,readcount,newstitle,type,summary,author,priority,isImp)
+		VALUES(#{addTime},#{content},#{newsRef},#{newsLink},#{readCount},#{newsTitle},#{type},#{summary},#{author},#{priority},#{isImp})
+     ]]>
+	</insert>
+	
+	<update id="updateNews" parameterType="News" >
+	 <![CDATA[ 
+	 update ec_news 
+	 	set 
+	 		content = #{content},
+	 		newsref = #{newsRef},
+	 		newslink = #{newsLink},
+	 		newstitle = #{newsTitle},
+	 		type = #{type},
+	 		summary = #{summary},
+	 		author = #{author},
+	 		priority=#{priority},
+	 		isImp = #{isImp}
+	  where id = #{id}
+	   ]]>
+	</update>
+	
+	<select id="listAllNews"  resultMap="newsMap">
+		<![CDATA[ 
+		SELECT
+		a.*,b.name FROM ec_news a,ec_news_category b WHERE a.type =
+		b.id ORDER BY a.priority , a.addtime desc
+		]]>
+	</select>
+	
+	<select id="listOtherNews" parameterType="int" resultMap="newsMap">
+		<![CDATA[ 
+		SELECT
+		a.*,b.name FROM ec_news a,ec_news_category b WHERE a.type =
+		b.id and a.id != #{id}  ORDER BY  a.priority , a.addtime desc limit 0,8
+		]]>
+	</select>
+	
+	<select id="getNewsCount"  resultType="int">
+		<![CDATA[ 
+		SELECT count(*) FROM ec_news a,ec_news_category b WHERE a.type =
+		b.id 
+		]]>
+	</select>
+
+	
+	<delete id="delNews" parameterType="int">
+	<![CDATA[ 
+		delete from ec_news
+		where id=#{value}
+		]]>
+	</delete>
+
+	<select id="getNews" parameterType="int" resultType="News">
+	<![CDATA[ 
+		SELECT a.*,b.name FROM ec_news a,ec_news_category b WHERE
+		a.type = b.id and a.id = #{value}
+		]]>
+	</select>
+
+</mapper>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd"
+	default-lazy-init="true">
+
+	<description>全局配置</description>
+
+	<context:component-scan base-package="com.venada.efinance">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="classpath:jdbc.properties" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- JSR303 Validator定义 <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" 
+		/> -->
+
+	<!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"-->
+		<!--destroy-method="close">-->
+		<!--<property name="driverClassName" value="${jdbc.driver}" />-->
+		<!--<property name="url" value="${jdbc.url}" />-->
+		<!--<property name="username" value="${jdbc.username}" />-->
+		<!--<property name="password" value="${jdbc.password}" />-->
+		<!--<property name="maxActive" value="${dbcp.maxActive}" />-->
+		<!--<property name="maxIdle" value="${dbcp.maxIdle}" />-->
+		<!--<property name="defaultAutoCommit" value="false" />-->
+		<!--<property name="timeBetweenEvictionRunsMillis" value="3600000" />-->
+		<!--<property name="minEvictableIdleTimeMillis" value="3600000" />-->
+	<!--</bean>-->
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://127.0.01:3306/wowpower?serverTimezone=GMT%2B8" />
+        <property name="username" value="root" />
+        <property name="password" value="qsnfjwjrzm$0" />
+        <property name="maxActive" value="60" />
+        <property name="maxIdle" value="2" />
+        <property name="defaultAutoCommit" value="false" />
+        <property name="timeBetweenEvictionRunsMillis" value="3600000" />
+        <property name="minEvictableIdleTimeMillis" value="3600000" />
+    </bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="104857600" />
+		<property name="maxInMemorySize" value="1024000" />
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath*:mybatis/mapper/**/*.xml" />
+		<property name="typeAliasesPackage" value="com.venada.efinance.pojo" />
+	</bean>
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+	
+	<!-- 线程执行器配置，用于任务注册 -->
+	<!--  
+	  <bean id="executor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="10" />
+		<property name="maxPoolSize" value="100" />
+		<property name="queueCapacity" value="500" />
+	</bean>
+
+
+	<bean id="startDataSync" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="com.venada.efinance.controller.PrizeController" />
+	</bean>
+
+	<bean id="startDataSyncBean" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="startDataSync" />
+		</property>
+		<property name="cronExpression">	
+			<value>0 0 01 02 01 ?</value>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="startDataSyncBean" />
+			</list>
+		</property>
+	</bean>
+	-->
+	
+
+	<bean id="md5PasswordEncoder"
+		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+			<bean id="smsService" class="com.venada.efinance.sms.SmsService">
+		<property name="reg" value="101100-WEB-HUAX-244878" />
+		<property name="pwd" value="PISRKQLJ" />
+		<property name="smsUrl" value="http://www.stongnet.com/sdkhttp/sendsms.aspx" />
+		<property name="sourceAdd" value="" />
+	</bean>
+
+    <bean id="holidaysBusiness" name="holidaysBusiness" class="com.venada.efinance.business.impl.HolidaysBussinessImpl">
+
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name = "dataSource" ref="dataSource"/>
+    </bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+</beans>

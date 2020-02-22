@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.venada.efinance.pojo.MessageRule">
+
+	<resultMap type="messageRule" id="messageRuleMap">
+		<result column="id" property="id" />
+		<result column="userid" property="userid" />
+		<result column="mobileNumber" property="mobileNumber" />
+		<result column="createtime" property="createtime" />
+		<result column="startTime" property="startTime" />
+		<result column="endTime" property="endTime" />
+		<result column="switchTag" property="switchTag" />
+	</resultMap>
+	
+	<select id="queryMessageRuleById" resultType="messageRule" parameterType="String">
+	select * from ec_user_message_rule where id = #{id};
+	</select>
+
+    <select id="findMessageRule" resultType="messageRule" parameterType="String">
+	select * from ec_user_message_rule where userid = #{userid};
+	</select>
+
+
+	
+	<insert id="addMessageRule" parameterType="messageRule">
+	<![CDATA[ 
+		insert into ec_user_message_rule
+		  (id,userid,mobileNumber,createtime,startTime,endTime,switchTag)
+		values (#{id},#{userid},#{mobileNumber},#{createtime},#{startTime},${endTime},${switchTag})]]>
+	</insert>
+	
+	
+	
+	
+	<update id="updateMessageRuleById" parameterType="messageRule">
+	update ec_user_message_rule
+	<trim  prefixOverrides=",">
+		<set>
+			<if test="startTime != null">startTime=#{startTime},</if>
+			<if test="endTime != null">endTime=#{endTime},</if>
+			<if test="mobileNumber != null">mobileNumber=#{mobileNumber},</if>
+			<if test="switchTag != null">switchTag=#{switchTag},</if>
+		</set>
+		where id=#{id}
+	</trim>
+</update>
+	
+	<delete id="deleteMessageRuleById" parameterType="String">
+		delete from ec_user_message_rule where id = #{id}
+	</delete>
+
+</mapper>

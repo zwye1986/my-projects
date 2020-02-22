@@ -1,0 +1,153 @@
+@charset "UTF-8";
+/* CSS Document */
+html, body {
+	height: 100%;
+	
+}
+body {
+	font: 12px 'Lucida Sans Unicode', 'Trebuchet MS', Arial, Helvetica;
+	margin: 0;
+	
+	
+	
+}
+/*--------------------*/
+
+
+
+#login {
+	background-color: #fff;
+	
+	height:680px;
+	width:100%;
+	
+	z-index: 0;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	margin:0 auto;
+	
+	
+	
+}
+
+/*--------------------*/
+
+
+.logo{width:100%; height:150px;background:url(../images/weixin/logo_bg.png) repeat-x;}
+h1 {  width:100%; margin:0 auto;overflow:hidden; background:url(../images/weixin/h1_bg.png) no-repeat; margin-top:0px;}
+	
+/*--------------------*/
+
+
+
+fieldset {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	
+}
+/*--------------------*/
+
+
+
+#inputs input[type="text"],#inputs input[type="password"] {
+	background: #fff;
+	padding:30px 0 30px 0px;
+	margin: 0 0 80px 0;
+	width:93%; /* 353 + 2 + 45 = 400 */
+	border: 5px solid #ccc;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size:18px;
+}
+#username {
+	background-position: 5px -2px !important;
+}
+#password {
+	background-position: 5px -52px !important;
+}
+#inputs input:focus {
+	background-color: #fff;
+	border:5px solid  #429acd;
+	outline: none;
+	
+}
+/*--------------------*/
+
+#actions {
+	margin: 25px 0 0 0;
+}
+#submit {
+	background-color: #ffb94b;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#429acd), to(#2372a0));
+	background-image: -webkit-linear-gradient(top, #429acd, #2372a0);
+	background-image: -moz-linear-gradient(top, #429acd, #2372a0);
+	background-image: -ms-linear-gradient(top, #429acd, #2372a0);
+	background-image: -o-linear-gradient(top, #429acd, #2372a0);
+	background-image: linear-gradient(top, #429acd, #2372a0);
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius: 5px;
+	
+	border-width: 1px;
+	border-style: solid;
+	
+	float: left;
+	height:90px;
+	padding: 0;
+	width:93%;
+	cursor: pointer;
+	font: bold 15px Arial, Helvetica;
+	color: #fff;
+	font-size:20px;
+	padding: 0 0 0 15px ;
+}
+#submit:hover, #submit:focus {
+	background-color: #fddb6f;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#2372a0), to(#429acd));
+	background-image: -webkit-linear-gradient(top, #2372a0, #429acd);
+	background-image: -moz-linear-gradient(top, #2372a0, #429acd);
+	background-image: -ms-linear-gradient(top, #2372a0, #429acd);
+	background-image: -o-linear-gradient(top, #2372a0, #429acd);
+	background-image: linear-gradient(top, #2372a0, #429acd);
+}
+#submit:active {
+	outline: none;
+	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+}
+ #submit::-moz-focus-inner {
+ border: none;
+}
+#actions a {
+	color: #3151A2;
+	float: right;
+	line-height: 35px;
+	margin-left: 10px;
+}
+/*--------------------*/
+
+
+
+#back {
+	display: block;
+	text-align: center;
+	position: relative;
+	top: 60px;
+	color: #999;
+}
+.top{ width:100%; height:450px; background:url(../images/weixin/sign_top_bg.png) no-repeat; padding-top:60px; }
+.sign_title{ width:660px; height:300px; margin:0 auto;}
+.yzm{ width:159px; height:50px; display:inline-block; margin-left:10px; float:left; cursor:pointer}
+.center{ position:relative; }
+.sign a{ width:250px; height:270px; float:left; background:url(../images/weixin/sign_n.png) no-repeat;}
+.sign_ed  a{ width:250px; height:270px; float:left;background:url(../images/weixin/sign_h.png) no-repeat;}
+.sign_total{ width:440px; height:270px; float:left; background:url(../images/weixin/sign_r_bg.png) no-repeat; position:relative;}
+.center{width:690px; margin:0 auto; height:220px; margin-top:-40px;}
+.person{ position:absolute;width:210px; height:74px; top:80px; left:80px;}
+.person span{ width:100%; height:50px; line-height:50px; font-size:14px; font-weight:bold; display:block; margin-bottom:20px;}
+ em{ font-style:normal; font-size:26px;   color: #349CD8;}
+ .btm{ position:relative;width:690px; margin:0 auto; height:220px; margin-top:-40px; font-size:14px;  font-weight:bold}
