@@ -48,10 +48,10 @@
 				</li>
 
 				<li><b class="ftx04">*</b>请输入手机号: <input type="text" value="" class="xg_reset" name="mobileNumber" id="mobileNumber" maxlength="11" /></li>
-				<li style="position: relative;"><b class="ftx04">*</b>请输入验证码: 
+				<%--<li style="position: relative;"><b class="ftx04">*</b>请输入验证码:
 					
 					<input type="text" value="" class="xg_reset" id="checkCode" maxlength="4" name="checkCode" />
-				</li>
+				</li>--%>
 			</ul>
 			<p style="margin-left: 140px; margin-top: 30px;">
 				<input id="checkbox" name="checkbox" type="checkbox" checked="checked"><a

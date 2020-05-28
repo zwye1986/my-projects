@@ -45,9 +45,9 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://127.0.01:3306/wowpower?serverTimezone=GMT%2B8" />
-        <property name="username" value="root" />
-        <property name="password" value="qsnfjwjrzm$0" />
+        <property name="url" value="jdbc:mysql://rm-uf6cjzoa3cq57j6r7125010.mysql.rds.aliyuncs.com:3306/test?serverTimezone=GMT%2B8" />
+        <property name="username" value="zyd19860914" />
+        <property name="password" value="Qsnfjwjrzm$0" />
         <property name="maxActive" value="60" />
         <property name="maxIdle" value="2" />
         <property name="defaultAutoCommit" value="false" />
