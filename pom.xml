@@ -80,7 +80,7 @@
 		<jackson.version>1.7.1</jackson.version>
 		<mysql.connector>8.0.19</mysql.connector>
 		<version.tiles>2.2.2</version.tiles>
-		<org.springframework.version>3.1.4.RELEASE</org.springframework.version>
+		<org.springframework.version>3.2.4.RELEASE</org.springframework.version>
 		<mybatis.version>3.2.2</mybatis.version>
 		<mybatis.spring.version>1.2.0</mybatis.spring.version>
 	</properties>
